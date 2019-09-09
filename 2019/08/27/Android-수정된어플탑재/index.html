@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>Android 수정된 어플 탑재방법 | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="Android,App">
+    
+    <meta name="description" content="1. 아래 검색 결과처럼 packages/apps/Setting/의 어플을 수정하면 설정 어플이 수정되어 탑재된다.12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364Searching 525515">
+<meta name="keywords" content="Android,App">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 수정된 어플 탑재방법">
+<meta property="og:url" content="http://jung-max.github.io/2019/08/27/Android-수정된어플탑재/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="1. 아래 검색 결과처럼 packages/apps/Setting/의 어플을 수정하면 설정 어플이 수정되어 탑재된다.12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364Searching 525515">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/Thumbnail/ANDROID.jpg">
+<meta property="og:updated_time" content="2019-09-05T07:25:11.717Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 수정된 어플 탑재방법">
+<meta name="twitter:description" content="1. 아래 검색 결과처럼 packages/apps/Setting/의 어플을 수정하면 설정 어플이 수정되어 탑재된다.12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364Searching 525515">
+<meta name="twitter:image" content="http://jung-max.github.io/images/Thumbnail/ANDROID.jpg">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Kernel/">Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform/">Platform</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GitHub-Pages/">GitHub Pages</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Android/Platform/">Platform</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Android-수정된어플탑재" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Android 수정된 어플 탑재방법
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/08/27/Android-수정된어플탑재/" class="article-date">
+            <time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Android/">Android</a>, <a class="tag-link" href="/tags/App/">App</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h3 id="1-아래-검색-결과처럼-packages-apps-Setting-의-어플을-수정하면-설정-어플이-수정되어-탑재된다"><a href="#1-아래-검색-결과처럼-packages-apps-Setting-의-어플을-수정하면-설정-어플이-수정되어-탑재된다" class="headerlink" title="1. 아래 검색 결과처럼 packages/apps/Setting/의 어플을 수정하면 설정 어플이 수정되어 탑재된다."></a>1. 아래 검색 결과처럼 packages/apps/Setting/의 어플을 수정하면 설정 어플이 수정되어 탑재된다.</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">Searching 525515 files for &quot;ScreenshotSetting&quot;</span><br><span class="line"> </span><br><span class="line">/home/ywjung/Projects/android/fireprime/out/target/common/obj/APPS/Settings_intermediates/proguard_options:</span><br><span class="line">  351  </span><br><span class="line">  352  # view AndroidManifest.xml #generated:2214</span><br><span class="line">  353: -keep class com.android.settings.Settings$ScreenshotSettingsActivity &#123; &lt;init&gt;(...); &#125;</span><br><span class="line">  354  </span><br><span class="line">  355  # view AndroidManifest.xml #generated:954</span><br><span class="line"> </span><br><span class="line">/home/ywjung/Projects/android/fireprime/packages/apps/Settings/AndroidManifest.xml:</span><br><span class="line"> 2212  </span><br><span class="line"> 2213         &lt;!-- SCREENSHOT --&gt;</span><br><span class="line"> 2214:         &lt;activity android:name=&quot;Settings$ScreenshotSettingsActivity&quot;</span><br><span class="line"> 2215                  android:label=&quot;@string/screenshot_manager&quot;</span><br><span class="line"> 2216                  android:taskAffinity=&quot;&quot;&gt;</span><br><span class="line"> ....</span><br><span class="line"> 2222              &lt;/intent-filter&gt;</span><br><span class="line"> 2223              &lt;meta-data android:name=&quot;com.android.settings.FRAGMENT_CLASS&quot;</span><br><span class="line"> 2224:                 android:value=&quot;com.android.settings.ScreenshotSetting&quot; /&gt;</span><br><span class="line"> 2225              &lt;meta-data android:name=&quot;com.android.settings.TOP_LEVEL_HEADER_ID&quot;</span><br><span class="line"> 2226                  android:resource=&quot;@id/screenshot_settings&quot; /&gt;</span><br><span class="line"> </span><br><span class="line">/home/ywjung/Projects/android/fireprime/packages/apps/Settings/res/values/strings.xml:</span><br><span class="line"> 6074       &lt;!--screenshot setting --&gt;</span><br><span class="line"> 6075       &lt;string name=&quot;app_name&quot;&gt;ScreenshotManager&lt;/string&gt;</span><br><span class="line"> 6076:      &lt;string name=&quot;screenshot_manager&quot;&gt;ScreenshotSetting&lt;/string&gt;</span><br><span class="line"> 6077       &lt;string name=&quot;screenshot_delay_title&quot;&gt;Select delay time to capture the screen &lt;/string&gt;</span><br><span class="line"> 6078       &lt;string name=&quot;screenshot_show&quot;&gt;Show the screenshot button in the statusbar&lt;/string&gt;</span><br><span class="line"> </span><br><span class="line">/home/ywjung/Projects/android/fireprime/packages/apps/Settings/res/xml/dashboard_categories.xml:</span><br><span class="line">  179                  android:id=&quot;@+id/screenshot_settings&quot;</span><br><span class="line">  180                  android:title=&quot;@string/screenshot_manager&quot;</span><br><span class="line">  181:                 android:fragment=&quot;com.android.settings.ScreenshotSetting&quot;</span><br><span class="line">  182                  android:icon=&quot;@drawable/capture&quot; /&gt;</span><br><span class="line">  183      &lt;/dashboard-category&gt;</span><br><span class="line"> </span><br><span class="line">/home/ywjung/Projects/android/fireprime/packages/apps/Settings/src/com/android/settings/ScreenshotSetting.java:</span><br><span class="line">   30  import android.os.SystemProperties;</span><br><span class="line">   31  import android.content.res.Resources;</span><br><span class="line">   32: public class ScreenshotSetting extends SettingsPreferenceFragment implements OnPreferenceChangeListener&#123;</span><br><span class="line">   33           /** Called when the activity is first created. */</span><br><span class="line">   34          private static final String KEY_SCREENSHOT_DELAY=&quot;screenshot_delay&quot;;</span><br><span class="line"> </span><br><span class="line">/home/ywjung/Projects/android/fireprime/packages/apps/Settings/src/com/android/settings/Settings.java:</span><br><span class="line">  103      public static class ApnSettingsActivity extends SettingsActivity &#123; /* empty */ &#125;</span><br><span class="line">  104      public static class HdmiSettingsActivity extends SettingsActivity &#123; /* empty */ &#125;</span><br><span class="line">  105:     public static class ScreenshotSettingsActivity extends SettingsActivity &#123; /* empty */ &#125;</span><br><span class="line">  106      public static class UsbConnectSettingsActivity extends SettingsActivity &#123; /* empty */ &#125;</span><br><span class="line">  107  &#125;</span><br><span class="line"> </span><br><span class="line">/home/ywjung/Projects/android/fireprime/packages/apps/Settings/src/com/android/settings/SettingsActivity.java:</span><br><span class="line">  114  import com.android.settings.wifi.p2p.WifiP2pSettings;</span><br><span class="line">  115  import com.android.settings.HdmiSettings;</span><br><span class="line">  116: import com.android.settings.ScreenshotSetting;</span><br><span class="line">  117  import com.android.settings.UsbSetting;</span><br><span class="line">  118  </span><br><span class="line">  ...</span><br><span class="line">  312              ApnSettings.class.getName(),</span><br><span class="line">  313              HdmiSettings.class.getName(),</span><br><span class="line">  314:             ScreenshotSetting.class.getName(),</span><br><span class="line">  315              UsbSetting.class.getName()</span><br><span class="line">  316      &#125;;</span><br><span class="line"> </span><br><span class="line">25 matches across 13 files</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-vendor-rockchip-common-apps-에-추가해준다"><a href="#2-vendor-rockchip-common-apps-에-추가해준다" class="headerlink" title="2. vendor/rockchip/common/apps 에 추가해준다."></a>2. vendor/rockchip/common/apps 에 추가해준다.</h3><p>내가 포함하고자하는 어플을 폴더로 추가하고 MakeFile을 형식에 맞춘다.<br>그 다음 apps.mk를 수정하여 패키지 목록에 추가함으로써, 원하는 어플을 펌웨어에 추가할 수 있다.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2019/08/27/Android-수정된어플탑재/" data-id="ck07b6dxg004h4pjyh2ez9lzd" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "Android 수정된 어플 탑재방법",
+        "image": "http://jung-max.github.io/images/Thumbnail/ANDROID.jpg",
+        "keywords": "Android App",
+        "genre": "Android Platform",
+        "datePublished": "2019-08-27",
+        "dateCreated": "2019-08-27",
+        "dateModified": "2019-09-05",
+        "url": "http://jung-max.github.io/2019/08/27/Android-수정된어플탑재/",
+        "description": "1. 아래 검색 결과처럼 packages/apps/Setting/의 어플을 수정하면 설정 어플이 수정되어 탑재된다.12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364Searching 525515 "
+        "wordCount": 761
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/08/27/Android-Kernel-주요-디렉토리/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            Android Kernel 주요 디렉토리
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/08/27/Android-커스터마이즈/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">Android Platform 커스터마이즈</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Connecting to a GATT Server" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
+                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="title">Connecting to a GATT Server</a></p>
+                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/09/Android-BLE-Finding-Devices/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Finding BLE Devices" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
+                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Finding-Devices/" class="title">Finding BLE Devices</a></p>
+                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/09/Android-Advertising-BLE-Device/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Advertising a BLE Device" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
+                            <p class="item-title"><a href="/2019/09/09/Android-Advertising-BLE-Device/" class="title">Advertising a BLE Device</a></p>
+                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/06/Android-Bluetooth-low-energy/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-Bluetooth-low-energy/01.png)" alt="Bluetooth low energy" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
+                            <p class="item-title"><a href="/2019/09/06/Android-Bluetooth-low-energy/" class="title">Bluetooth low energy</a></p>
+                            <p class="item-date"><time datetime="2019-09-06T02:50:00.000Z" itemprop="datePublished">2019-09-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/02/Android-NDK를-사용해서-kernel드라이버-사용하기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android NDK를 사용해서 kernel드라이버 사용하기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a></p>
+                            <p class="item-title"><a href="/2019/09/02/Android-NDK를-사용해서-kernel드라이버-사용하기/" class="title">Android NDK를 사용해서 kernel드라이버 사용하기</a></p>
+                            <p class="item-date"><time datetime="2019-09-02T07:17:00.000Z" itemprop="datePublished">2019-09-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">36</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Kernel/">Kernel</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform/">Platform</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/App/" style="font-size: 18px;">App</a> <a href="/tags/Architecture/" style="font-size: 12px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 14px;">BLE</a> <a href="/tags/Bluetooth/" style="font-size: 10px;">Bluetooth</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Github-Pages/" style="font-size: 12px;">Github Pages</a> <a href="/tags/Hexo/" style="font-size: 12px;">Hexo</a> <a href="/tags/Kernel/" style="font-size: 16px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 16px;">Linux</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/개발환경/" style="font-size: 12px;">개발환경</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2019 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2019/08/27/Android-수정된어플탑재/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
