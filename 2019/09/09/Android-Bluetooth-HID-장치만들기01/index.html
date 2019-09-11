@@ -13,19 +13,19 @@
         <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
         <meta name="keywords" content="Android,App,Bluetooth,HID">
     
-    <meta name="description" content="개요Android 9(API Level 28, Pie)에서는 휴대 전화를 Bluetooth HID로 사용할 수 있도록 지원하므로 키보드, 마우스 또는 게임 패드로 사용할 수 있습니다.  BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설명하겠습니다. Bluetooth 준비하기가장 먼저 Bluetooth를 설정하">
+    <meta name="description" content="개요Android 9(API Level 28, Pie)에서는 휴대 전화를 Bluetooth HID로 사용할 수 있도록 지원하므로 키보드, 마우스 또는 게임 패드로 사용할 수 있습니다.  BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설명하겠습니다. 해당 소스는 https://github.com/Jung-Max">
 <meta name="keywords" content="Android,App,Bluetooth,HID">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android로 Bluetooth HID 장치(Joystick) 만들기 - 01">
 <meta property="og:url" content="http://jung-max.github.io/2019/09/09/Android-Bluetooth-HID-장치만들기01/index.html">
 <meta property="og:site_name" content="Max&#39;s Blog">
-<meta property="og:description" content="개요Android 9(API Level 28, Pie)에서는 휴대 전화를 Bluetooth HID로 사용할 수 있도록 지원하므로 키보드, 마우스 또는 게임 패드로 사용할 수 있습니다.  BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설명하겠습니다. Bluetooth 준비하기가장 먼저 Bluetooth를 설정하">
+<meta property="og:description" content="개요Android 9(API Level 28, Pie)에서는 휴대 전화를 Bluetooth HID로 사용할 수 있도록 지원하므로 키보드, 마우스 또는 게임 패드로 사용할 수 있습니다.  BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설명하겠습니다. 해당 소스는 https://github.com/Jung-Max">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B001/01.png">
-<meta property="og:updated_time" content="2019-09-11T02:16:57.533Z">
+<meta property="og:updated_time" content="2019-09-11T06:32:33.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android로 Bluetooth HID 장치(Joystick) 만들기 - 01">
-<meta name="twitter:description" content="개요Android 9(API Level 28, Pie)에서는 휴대 전화를 Bluetooth HID로 사용할 수 있도록 지원하므로 키보드, 마우스 또는 게임 패드로 사용할 수 있습니다.  BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설명하겠습니다. Bluetooth 준비하기가장 먼저 Bluetooth를 설정하">
+<meta name="twitter:description" content="개요Android 9(API Level 28, Pie)에서는 휴대 전화를 Bluetooth HID로 사용할 수 있도록 지원하므로 키보드, 마우스 또는 게임 패드로 사용할 수 있습니다.  BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설명하겠습니다. 해당 소스는 https://github.com/Jung-Max">
 <meta name="twitter:image" content="http://jung-max.github.io/images/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B001/01.png">
     
     <link rel="canonical" href="http://jung-max.github.io/2019/09/09/android-bluetooth-hid-장치만들기01/">
@@ -192,6 +192,7 @@ ga('send', 'pageview');
         <div class="article-entry" itemprop="articleBody">
             <h1 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h1><p>Android 9(API Level 28, Pie)에서는 휴대 전화를 Bluetooth HID로 사용할 수 있도록 지원하므로 키보드, 마우스 또는 게임 패드로 사용할 수 있습니다. </p>
 <p>BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설명하겠습니다.</p>
+<p>해당 소스는 <a href="https://github.com/Jung-Max/BleHidJoystick" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/Jung-Max/BleHidJoystick</a>를 참고하시면 됩니다.</p>
 <h1 id="Bluetooth-준비하기"><a href="#Bluetooth-준비하기" class="headerlink" title="Bluetooth 준비하기"></a>Bluetooth 준비하기</h1><p>가장 먼저 Bluetooth를 설정하고 적절한 프로파일을 가져와야 합니다.</p>
 <p>처음으로 블루투스 어댑터를 가져옵니다.</p>
 <p>아직 활성화 되지 않은 경우 블루투스를 활성화 해야합니다.</p>
@@ -201,18 +202,18 @@ ga('send', 'pageview');
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> ArrayList&lt;BluetoothDevice&gt; mDevices = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">btListDevices</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Set&lt;BluetoothDevice&gt; pairedDevices = mBtAdapter.getBondedDevices();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Add devices to adapter</span></span><br><span class="line">    List&lt;String&gt; names = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// add empty</span></span><br><span class="line">    names.add(<span class="string">"(disconnected)"</span>);</span><br><span class="line">    mDevices.add(<span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (BluetoothDevice btDev : pairedDevices) &#123;</span><br><span class="line">        names.add(btDev.getName());</span><br><span class="line">        mDevices.add(btDev);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="BluetoothHidDevice-취득하기"><a href="#BluetoothHidDevice-취득하기" class="headerlink" title="BluetoothHidDevice 취득하기"></a>BluetoothHidDevice 취득하기</h1><p>블루투스 기기의 정보를 취득 후에는 활성화한 HID 서비스와 통신할 수 있도록 프록시(BluetoothHidDevice)를 가져와야 합니다.</p>
-<p>이것은 <a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter#getProfileProxy(android.content.Context,%20android.bluetooth.BluetoothProfile.ServiceListener,%20int)" target="_blank" rel="external nofollow noopener noreferrer">BluetoothAdapter.getProfileProxy()</a>을 사용해서 취득 할 수 있습니다.</p>
+<p>이것은 <a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter#getProfileProxy(android.content.Context,%20android.bluetooth.BluetoothProfile.ServiceListener,%20int)" rel="external nofollow noopener noreferrer" target="_blank">BluetoothAdapter.getProfileProxy()</a>을 사용해서 취득 할 수 있습니다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">mBtAdapter.getProfileProxy(<span class="keyword">this</span>, <span class="keyword">new</span> BluetoothProfile.ServiceListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@SuppressLint</span>(<span class="string">"NewApi"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceConnected</span><span class="params">(<span class="keyword">int</span> profile, BluetoothProfile proxy)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (profile == BluetoothProfile.HID_DEVICE) &#123;</span><br><span class="line">            Log.d(TAG, <span class="string">"Got HID device"</span>);</span><br><span class="line">            mBtHidDevice = (BluetoothHidDevice) proxy;</span><br><span class="line"></span><br><span class="line">            ...</span><br><span class="line"></span><br><span class="line">            mBtHidDevice.registerApp();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceDisconnected</span><span class="params">(<span class="keyword">int</span> profile)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (profile == BluetoothProfile.HID_DEVICE) &#123;</span><br><span class="line">            Log.d(TAG, <span class="string">"Lost HID device"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, BluetoothProfile.HID_DEVICE);</span><br></pre></td></tr></table></figure>
 
 <p>이 호출은 기본적으로 프록시를 요청하고 저장합니다. </p>
-<h1 id="registerApp"><a href="#registerApp" class="headerlink" title="registerApp()"></a>registerApp()</h1><p>Bluetooth HID의 <a href="https://developer.android.com/reference/android/bluetooth/BluetoothHidDevice#registerApp(android.bluetooth.BluetoothHidDeviceAppSdpSettings,%20android.bluetooth.BluetoothHidDeviceAppQosSettings,%20android.bluetooth.BluetoothHidDeviceAppQosSettings,%20java.util.concurrent.Executor,%20android.bluetooth.BluetoothHidDevice.Callback)" target="_blank" rel="external nofollow noopener noreferrer">registerApp()</a>의 파라미터는 아래와 같습니다.</p>
+<h1 id="registerApp"><a href="#registerApp" class="headerlink" title="registerApp()"></a>registerApp()</h1><p>Bluetooth HID의 <a href="https://developer.android.com/reference/android/bluetooth/BluetoothHidDevice#registerApp(android.bluetooth.BluetoothHidDeviceAppSdpSettings,%20android.bluetooth.BluetoothHidDeviceAppQosSettings,%20android.bluetooth.BluetoothHidDeviceAppQosSettings,%20java.util.concurrent.Executor,%20android.bluetooth.BluetoothHidDevice.Callback)" rel="external nofollow noopener noreferrer" target="_blank">registerApp()</a>의 파라미터는 아래와 같습니다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">registerApp</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    BluetoothHidDeviceAppSdpSettings sdp,</span></span></span><br><span class="line"><span class="function"><span class="params">    BluetoothHidDeviceAppQosSettings inQos,</span></span></span><br><span class="line"><span class="function"><span class="params">    BluetoothHidDeviceAppQosSettings outQos,</span></span></span><br><span class="line"><span class="function"><span class="params">    Executor executor,</span></span></span><br><span class="line"><span class="function"><span class="params">    Callback callback)</span></span></span><br><span class="line"><span class="function">```            </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">## sdp</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">[BluetoothHidDeviceAppSdpSettings]<span class="params">(https://developer.android.com/reference/android/bluetooth/BluetoothHidDeviceAppSdpSettings?hl=en)</span>는 Bluetooth HID 장치 응용 프로그램의 <span class="title">SDP</span> <span class="params">(Service Discovery Protocol)</span> 설정을 나타냅니다.</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">[BluetoothHidDevice]<span class="params">(https://developer.android.com/reference/android/bluetooth/BluetoothHidDevice.html)</span> 프레임 워크는 앱 등록 중에 SDP 레코드를 추가하여 Android 장치를 Bluetooth HID 장치로 검색 할 수 있습니다.</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">`BluetoothHidDeviceAppSdpSettings`의 파라미터를 살펴보면 다음과 같습니다.</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">```java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">BluetoothHidDeviceAppSdpSettings</span> <span class="params">(String name, </span></span></span><br><span class="line"><span class="function"><span class="params">                String description, </span></span></span><br><span class="line"><span class="function"><span class="params">                String provider, </span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">byte</span> subclass, </span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">byte</span>[] descriptors)</span></span></span><br></pre></td></tr></table></figure>
 
 <p>name, description, provider은 각자 목적에 맞는 문자열을 넣어주면 됩니다.(50byte 이하로만)</p>
-<p>subclass는 <a href="https://www.usb.org/sites/default/files/documents/hid1_11.pdf" target="_blank" rel="external nofollow noopener noreferrer">HID 스팩문서</a>의 4.2 Subclass를 참고합니다.</p>
+<p>subclass는 <a href="https://www.usb.org/sites/default/files/documents/hid1_11.pdf" rel="external nofollow noopener noreferrer" target="_blank">HID 스팩문서</a>의 4.2 Subclass를 참고합니다.</p>
 <p><img src="/images/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B001/01.png" alt="Subclass"></p>
 <p>subclass는 0 또는 1만 설정할 수 있습니다. 보통은 0으로 설정하게 됩니다.</p>
-<h3 id="HID-descriptors"><a href="#HID-descriptors" class="headerlink" title="HID descriptors"></a>HID descriptors</h3><p>descriptors는 <a href="https://www.usb.org/sites/default/files/documents/hid1_11.pdf" target="_blank" rel="external nofollow noopener noreferrer">HID 스팩문서</a>의 6절을 보면 나와있습니다.</p>
+<h3 id="HID-descriptors"><a href="#HID-descriptors" class="headerlink" title="HID descriptors"></a>HID descriptors</h3><p>descriptors는 <a href="https://www.usb.org/sites/default/files/documents/hid1_11.pdf" rel="external nofollow noopener noreferrer" target="_blank">HID 스팩문서</a>의 6절을 보면 나와있습니다.</p>
 <p>디스크립터는 기본 HID 디스크립터로 구성되며 그 뒤에 다른 디스크립터가 있습니다 (문자 적으로 연결됨).</p>
 <p>아래 테이블은 주 디스크립터의 레이아웃입니다. (추가 디스크립터는 하나만 필요하며 추가 디스크립터의 필드는 선택 사항 임).</p>
 <table>
@@ -259,12 +260,12 @@ ga('send', 'pageview');
 <td>Length of the report descriptor type, in little endian</td>
 </tr>
 </tbody></table>
-<p>HID 디스크립터와 관련된 <a href="https://www.usb.org/document-library/hid-descriptor-tool" target="_blank" rel="external nofollow noopener noreferrer">HID descriptor tool</a>과 <a href="https://eleccelerator.com/tutorial-about-usb-hid-report-descriptors/" target="_blank" rel="external nofollow noopener noreferrer">tutorial about USB HID report descriptors</a>를 참고하면 더 많은 것을 알 수 있습니다.</p>
+<p>HID 디스크립터와 관련된 <a href="https://www.usb.org/document-library/hid-descriptor-tool" rel="external nofollow noopener noreferrer" target="_blank">HID descriptor tool</a>과 <a href="https://eleccelerator.com/tutorial-about-usb-hid-report-descriptors/" rel="external nofollow noopener noreferrer" target="_blank">tutorial about USB HID report descriptors</a>를 참고하면 더 많은 것을 알 수 있습니다.</p>
 <p>최종적으로 4 buttons, 1 X/Y joystick의 descriptor은 아래와 같습니다.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">byte</span>[] descriptor = <span class="keyword">new</span> <span class="keyword">byte</span>[] &#123;</span><br><span class="line">	<span class="comment">// HID descriptor</span></span><br><span class="line">	<span class="number">0x09</span>, <span class="comment">// bLength</span></span><br><span class="line">	<span class="number">0x21</span>, <span class="comment">// bDescriptorType</span></span><br><span class="line">	<span class="number">0x11</span>, <span class="number">0x01</span>, <span class="comment">// bcdHID</span></span><br><span class="line">	<span class="number">0x00</span>, <span class="comment">// bCountryCode</span></span><br><span class="line">	<span class="number">0x01</span>, <span class="comment">// bNumDescriptors</span></span><br><span class="line">	<span class="number">0x22</span>, <span class="comment">// bDescriptorType</span></span><br><span class="line">	<span class="number">0x30</span>, <span class="number">0x00</span>, <span class="comment">// wDescriptorLength (48 in decimal)</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Report descriptor - 4 buttons, 1 X/Y joystick</span></span><br><span class="line">	<span class="number">0x05</span>, <span class="number">0x01</span>,        <span class="comment">// USAGE_PAGE (Generic Desktop)</span></span><br><span class="line">	<span class="number">0x09</span>, <span class="number">0x05</span>,        <span class="comment">// USAGE (Game Pad)</span></span><br><span class="line">	(<span class="keyword">byte</span>) <span class="number">0xa1</span>, <span class="number">0x01</span>, <span class="comment">// COLLECTION (Application)</span></span><br><span class="line">	(<span class="keyword">byte</span>) <span class="number">0xa1</span>, <span class="number">0x00</span>, <span class="comment">//   COLLECTION (Physical)</span></span><br><span class="line">	<span class="number">0x05</span>, <span class="number">0x09</span>,        <span class="comment">//     USAGE_PAGE (Button)</span></span><br><span class="line">	<span class="number">0x19</span>, <span class="number">0x01</span>,        <span class="comment">//     USAGE_MINIMUM (Button 1)</span></span><br><span class="line">	<span class="number">0x29</span>, <span class="number">0x04</span>,        <span class="comment">//     USAGE_MAXIMUM (Button 4)</span></span><br><span class="line">	<span class="number">0x15</span>, <span class="number">0x00</span>,        <span class="comment">//     LOGICAL_MINIMUM (0)</span></span><br><span class="line">	<span class="number">0x25</span>, <span class="number">0x01</span>,        <span class="comment">//     LOGICAL_MAXIMUM (1)</span></span><br><span class="line">	<span class="number">0x75</span>, <span class="number">0x01</span>,        <span class="comment">//     REPORT_SIZE (1)</span></span><br><span class="line">	(<span class="keyword">byte</span>) <span class="number">0x95</span>, <span class="number">0x04</span>, <span class="comment">//     REPORT_COUNT (4)</span></span><br><span class="line">	(<span class="keyword">byte</span>) <span class="number">0x81</span>, <span class="number">0x02</span>, <span class="comment">//     INPUT (Data,Var,Abs)</span></span><br><span class="line">	<span class="number">0x75</span>, <span class="number">0x04</span>,        <span class="comment">//     REPORT_SIZE (4)</span></span><br><span class="line">	(<span class="keyword">byte</span>) <span class="number">0x95</span>, <span class="number">0x01</span>, <span class="comment">//     REPORT_COUNT (1)</span></span><br><span class="line">	(<span class="keyword">byte</span>) <span class="number">0x81</span>, <span class="number">0x03</span>, <span class="comment">//     INPUT (Cnst,Var,Abs)</span></span><br><span class="line">	<span class="number">0x05</span>, <span class="number">0x01</span>,        <span class="comment">//     USAGE_PAGE (Generic Desktop)</span></span><br><span class="line">	<span class="number">0x09</span>, <span class="number">0x30</span>,        <span class="comment">//     USAGE (X)</span></span><br><span class="line">	<span class="number">0x09</span>, <span class="number">0x31</span>,        <span class="comment">//     USAGE (Y)</span></span><br><span class="line">	<span class="number">0x15</span>, (<span class="keyword">byte</span>) <span class="number">0x81</span>, <span class="comment">//     LOGICAL_MINIMUM (-127)</span></span><br><span class="line">	<span class="number">0x25</span>, <span class="number">0x7f</span>,        <span class="comment">//     LOGICAL_MAXIMUM (127)</span></span><br><span class="line">	<span class="number">0x75</span>, <span class="number">0x08</span>,        <span class="comment">//     REPORT_SIZE (8)</span></span><br><span class="line">	(<span class="keyword">byte</span>) <span class="number">0x95</span>, <span class="number">0x02</span>, <span class="comment">//     REPORT_COUNT (2)</span></span><br><span class="line">	(<span class="keyword">byte</span>) <span class="number">0x81</span>, <span class="number">0x02</span>, <span class="comment">//     INPUT (Data,Var,Abs)</span></span><br><span class="line">	(<span class="keyword">byte</span>) <span class="number">0xc0</span>,       <span class="comment">//   END_COLLECTION</span></span><br><span class="line">	(<span class="keyword">byte</span>) <span class="number">0xc0</span>        <span class="comment">// END_COLLECTION</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <h2 id="inQos-outQos"><a href="#inQos-outQos" class="headerlink" title="inQos, outQos"></a>inQos, outQos</h2><p>수신 / 발신시의 QoS 셋팅과 관련된 파라미터 입니다. 기본적으로 null을 사용합니다.</p>
-<p><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHidDeviceAppQosSettings" target="_blank" rel="external nofollow noopener noreferrer">BluetoothHidDeviceAppQosSettings</a>는 Bluetooth HID 장치 응용 프로그램의 QoS(서비스 품질) 설정을 나타냅니다.</p>
+<p><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHidDeviceAppQosSettings" rel="external nofollow noopener noreferrer" target="_blank">BluetoothHidDeviceAppQosSettings</a>는 Bluetooth HID 장치 응용 프로그램의 QoS(서비스 품질) 설정을 나타냅니다.</p>
 <p>BluetoothHidDevice 프레임 워크는 등록 중에 앱의 L2CAP QoS 설정을 업데이트합니다.</p>
 <table>
 <thead>
@@ -306,24 +307,9 @@ ga('send', 'pageview');
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> BluetoothHidDevice.Callback() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onGetReport</span><span class="params">(BluetoothDevice device, <span class="keyword">byte</span> type, <span class="keyword">byte</span> id, <span class="keyword">int</span> bufferSize)</span> </span>&#123;</span><br><span class="line">        Log.v(TAG, <span class="string">"onGetReport: device="</span> + device + <span class="string">" type="</span> + type</span><br><span class="line">                + <span class="string">" id="</span> + id + <span class="string">" bufferSize="</span> + bufferSize);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onConnectionStateChanged</span><span class="params">(BluetoothDevice device, <span class="keyword">final</span> <span class="keyword">int</span> state)</span> </span>&#123;</span><br><span class="line">        Log.v(TAG, <span class="string">"onConnectionStateChanged: device="</span> + device + <span class="string">" state="</span> + state);</span><br><span class="line">        <span class="keyword">if</span> (device.equals(mBtDevice)) &#123;</span><br><span class="line">            runOnUiThread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                    TextView status = findViewById(R.id.status);</span><br><span class="line">                    <span class="keyword">if</span> (state == BluetoothProfile.STATE_DISCONNECTED) &#123;</span><br><span class="line">                        status.setText(R.string.status_disconnected);</span><br><span class="line">                        mBtDevice = <span class="keyword">null</span>;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (state == BluetoothProfile.STATE_CONNECTING) &#123;</span><br><span class="line">                        status.setText(R.string.status_connecting);</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (state == BluetoothProfile.STATE_CONNECTED) &#123;</span><br><span class="line">                        status.setText(R.string.status_connected);</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (state == BluetoothProfile.STATE_DISCONNECTING) &#123;</span><br><span class="line">                        status.setText(R.string.status_disconnecting);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="연결"><a href="#연결" class="headerlink" title="연결"></a>연결</h1><p>최종적으로 앱을 등록하고 장치를 연결할 수 있습니다.</p>
-<pre><code class="java">BluetoothHidDeviceAppSdpSettings sdp = <span class="keyword">new</span> BluetoothHidDeviceAppSdpSettings(
-        <span class="string">"BleHidJoystick"</span>,
-        <span class="string">"Android BLE HID Joystick"</span>,
-        <span class="string">"Android"</span>,
-        (<span class="keyword">byte</span>) <span class="number">0x00</span>,
-        descriptor
-);
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">BluetoothHidDeviceAppSdpSettings sdp = <span class="keyword">new</span> BluetoothHidDeviceAppSdpSettings(</span><br><span class="line">        <span class="string">"BleHidJoystick"</span>,</span><br><span class="line">        <span class="string">"Android BLE HID Joystick"</span>,</span><br><span class="line">        <span class="string">"Android"</span>,</span><br><span class="line">        (<span class="keyword">byte</span>) <span class="number">0x00</span>,</span><br><span class="line">        descriptor</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">mBtHidDevice.registerApp(sdp, <span class="keyword">null</span>, mBluetoothHidDeviceAppQosSettings, </span><br><span class="line">                         Executors.newSingleThreadExecutor(), <span class="keyword">new</span> BluetoothHidDevice.Callback() &#123;</span><br><span class="line">	... <span class="comment">//omitted</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">mBtHidDevice.connect(device);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-mBtHidDevice.registerApp(sdp, <span class="keyword">null</span>, mBluetoothHidDeviceAppQosSettings, 
-                         Executors.newSingleThreadExecutor(), <span class="keyword">new</span> BluetoothHidDevice.Callback() {
-    ... <span class="comment">//omitted</span>
-});
-
-mBtHidDevice.connect(device);
-}
-
-
-</code></pre>
+<p><a href="https://jung-max.github.io/2019/09/11/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B002/">다음 포스트</a>에서는 연결된 장비로 어떻게 input을 보내는지 설명하겠습니다.</p>
 
         </div>
         <footer class="article-footer">
@@ -331,7 +317,7 @@ mBtHidDevice.connect(device);
 
 
 
-    <a data-url="http://jung-max.github.io/2019/09/09/Android-Bluetooth-HID-장치만들기01/" data-id="ck0emxqrv00090pjynb4e6xc4" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2019/09/09/Android-Bluetooth-HID-장치만들기01/" data-id="ck0ey39ai000m11jyrfhakkgk" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -411,8 +397,8 @@ mBtHidDevice.connect(device);
         "url": "http://jung-max.github.io/2019/09/09/Android-Bluetooth-HID-장치만들기01/",
         "description": "개요Android 9(API Level 28, Pie)에서는 휴대 전화를 Bluetooth HID로 사용할 수 있도록 지원하므로 키보드, 마우스 또는 게임 패드로 사용할 수 있습니다. 
 BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설명하겠습니다.
-Bluetooth 준비하기가장 먼저 Bluetooth를 설정하"
-        "wordCount": 2225
+해당 소스는 https://github.com/Jung-Max"
+        "wordCount": 2293
     }
 </script>
 
@@ -463,9 +449,9 @@ Bluetooth 준비하기가장 먼저 Bluetooth를 설정하"
     </a>
     
     
-        <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">오래된</strong>
-        <p class="article-nav-title">Gatt Server 사용하기</p>
+        <p class="article-nav-title">Connecting to a GATT Server</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -490,7 +476,7 @@ Bluetooth 준비하기가장 먼저 Bluetooth를 설정하"
                             <a href="/2019/09/11/Android-Bluetooth-HID-장치만들기02/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/Thumbnail/gamepad.png)" alt="Android로 Bluetooth HID 장치(Joystick) 만들기 - 02" class="thumbnail-image"></span>
     
     
 </a>
@@ -527,30 +513,10 @@ Bluetooth 준비하기가장 먼저 Bluetooth를 설정하"
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="thumbnail">
+                            <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server 사용하기" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="title">Gatt Server 사용하기</a></p>
-                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-Advertising-BLE-Device/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Advertising a BLE Device" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Connecting to a GATT Server" class="thumbnail-image"></span>
     
     
 </a>
@@ -559,7 +525,7 @@ Bluetooth 준비하기가장 먼저 Bluetooth를 설정하"
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-Advertising-BLE-Device/" class="title">Advertising a BLE Device</a></p>
+                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="title">Connecting to a GATT Server</a></p>
                             <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
                         </div>
                     </li>
@@ -580,6 +546,26 @@ Bluetooth 준비하기가장 먼저 Bluetooth를 설정하"
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
                             <p class="item-title"><a href="/2019/09/09/Android-BLE-Finding-Devices/" class="title">Finding BLE Devices</a></p>
+                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Characteristics 읽고쓰기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
+                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="title">Characteristics 읽고쓰기</a></p>
                             <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
                         </div>
                     </li>

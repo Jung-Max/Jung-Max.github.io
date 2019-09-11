@@ -172,7 +172,7 @@ ga('send', 'pageview');
         <a href="/2019/09/11/Android-Bluetooth-HID-장치만들기02/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/Thumbnail/gamepad.png)" alt="Android로 Bluetooth HID 장치(Joystick) 만들기 - 02" class="thumbnail-image"></span>
     
     
         
@@ -203,9 +203,10 @@ ga('send', 'pageview');
 
         <p class="article-excerpt">
             첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다. 
+해당 소스는 https://github.com/Jung-Max/BleHidJoystick를 참고하시면 됩니다.
 이제 제어 입력을 연결된 장치로 전송하기 만하면됩니다. 
 설정하는 것보다 훨씬 간단합니다.
-
+Send reportreport를 보내기위한 관련 API
         </p>
     </div>
 </article>
@@ -253,7 +254,7 @@ ga('send', 'pageview');
         <p class="article-excerpt">
             개요Android 9(API Level 28, Pie)에서는 휴대 전화를 Bluetooth HID로 사용할 수 있도록 지원하므로 키보드, 마우스 또는 게임 패드로 사용할 수 있습니다. 
 BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설명하겠습니다.
-Bluetooth 준비하기가장 먼저 Bluetooth를 설정하
+해당 소스는 https://github.com/Jung-Max
         </p>
     </div>
 </article>
@@ -374,55 +375,6 @@ Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / adve
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/09/Android-Advertising-BLE-Device/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Advertising a BLE Device" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-Advertising-BLE-Device/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a>
-            </div>
-            <div class="date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/09/Android-Advertising-BLE-Device/">Advertising a BLE Device</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            Bluetooth LE Advertising을 사용하여 먼저 연결하지 않고도 데이터 패키지를 근처의 모든 장치에 브로드 캐스트 할 수 있습니다. 
-Advertising 데이터는 31 바이트로 제한됩니다. 
-기기 Advertising은 다른 사용자가 나에게 연결하도록하는 첫 번째 단계입니다.
-모든 장치가 Bluetooth LE Advertising을 지원하는
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
         <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="thumbnail">
     
     
@@ -463,14 +415,10 @@ Advertising 데이터는 31 바이트로 제한됩니다.
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -510,6 +458,59 @@ Advertising 데이터는 31 바이트로 제한됩니다.
         <p class="article-excerpt">
             특성 값이 변경되면 Gatt 서버에 알림을 요청할 수 있습니다.
 12345gatt.setCharacteristicNotification(characteristic, true);BluetoothGattDescriptor descriptor = characteristic.getDescriptor(    UUID.fromString("00002902-0000-1
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/09/09/Android-Advertising-BLE-Device/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Advertising a BLE Device" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-Advertising-BLE-Device/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a>
+            </div>
+            <div class="date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/09/09/Android-Advertising-BLE-Device/">Advertising a BLE Device</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            Bluetooth LE Advertising을 사용하여 먼저 연결하지 않고도 데이터 패키지를 근처의 모든 장치에 브로드 캐스트 할 수 있습니다. 
+Advertising 데이터는 31 바이트로 제한됩니다. 
+기기 Advertising은 다른 사용자가 나에게 연결하도록하는 첫 번째 단계입니다.
+모든 장치가 Bluetooth LE Advertising을 지원하는
         </p>
     </div>
 </article>
@@ -712,7 +713,7 @@ Advertising 데이터는 31 바이트로 제한됩니다.
                             <a href="/2019/09/11/Android-Bluetooth-HID-장치만들기02/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/Thumbnail/gamepad.png)" alt="Android로 Bluetooth HID 장치(Joystick) 만들기 - 02" class="thumbnail-image"></span>
     
     
 </a>
@@ -749,30 +750,10 @@ Advertising 데이터는 31 바이트로 제한됩니다.
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="thumbnail">
+                            <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server 사용하기" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="title">Gatt Server 사용하기</a></p>
-                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-Advertising-BLE-Device/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Advertising a BLE Device" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Connecting to a GATT Server" class="thumbnail-image"></span>
     
     
 </a>
@@ -781,7 +762,7 @@ Advertising 데이터는 31 바이트로 제한됩니다.
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-Advertising-BLE-Device/" class="title">Advertising a BLE Device</a></p>
+                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="title">Connecting to a GATT Server</a></p>
                             <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
                         </div>
                     </li>
@@ -802,6 +783,26 @@ Advertising 데이터는 31 바이트로 제한됩니다.
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
                             <p class="item-title"><a href="/2019/09/09/Android-BLE-Finding-Devices/" class="title">Finding BLE Devices</a></p>
+                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Characteristics 읽고쓰기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
+                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="title">Characteristics 읽고쓰기</a></p>
                             <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
                         </div>
                     </li>

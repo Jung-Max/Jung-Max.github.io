@@ -206,18 +206,18 @@ ga('send', 'pageview');
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> BootAnimation::android()</span><br><span class="line">&#123;</span><br><span class="line">    initTexture(&amp;mAndroid[<span class="number">0</span>], mAssets, <span class="string">"images/android-logo-mask.png"</span>); <span class="comment">// texture_object_mask</span></span><br><span class="line">    initTexture(&amp;mAndroid[<span class="number">1</span>], mAssets, <span class="string">"images/android-logo-shine.png"</span>);</span><br><span class="line">    mBMPWidth = mTexWidth = mBMPHeight = mTexHeight = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
 
 <p><code>frameworks/base/core/res/assets/images/android-logo-mask.png</code>를 배경 사진으로, <code>frameworks/base/core/res/assets/images/android-logo-shine.png</code>를 움직이는 효과로 쓰고 있다. (배경 사진의 투명 부위에 효과가 슬라이드되어, 움직이는 것으로 보임)</p>
-<h3 id="2-애니메이션-수정"><a href="#2-애니메이션-수정" class="headerlink" title="2. 애니메이션 수정"></a>2. 애니메이션 수정</h3><p>(출처: <a href="http://dplex.egloos.com/v/4267974" target="_blank" rel="external nofollow noopener noreferrer">http://dplex.egloos.com/v/4267974</a>)<br>(참고: <a href="http://w51014.tistory.com/5" target="_blank" rel="external nofollow noopener noreferrer">http://w51014.tistory.com/5</a>)<br><code>FirePrime</code>은 기본형 이미지 방식이기 때문에, 새로 작성하여야 한다. (<code>bootanimation.zip</code>을 제작)</p>
+<h3 id="2-애니메이션-수정"><a href="#2-애니메이션-수정" class="headerlink" title="2. 애니메이션 수정"></a>2. 애니메이션 수정</h3><p>(출처: <a href="http://dplex.egloos.com/v/4267974" rel="external nofollow noopener noreferrer" target="_blank">http://dplex.egloos.com/v/4267974</a>)<br>(참고: <a href="http://w51014.tistory.com/5" rel="external nofollow noopener noreferrer" target="_blank">http://w51014.tistory.com/5</a>)<br><code>FirePrime</code>은 기본형 이미지 방식이기 때문에, 새로 작성하여야 한다. (<code>bootanimation.zip</code>을 제작)</p>
 <p><code>/frameworks/base/cmds/bootanimation/bootanimation.cpp</code>에 보면 아래와 같이 정의 돼 있다.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> USER_BOOTANIMATION_FILE <span class="meta-string">"/data/local/bootanimation.zip"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SYSTEM_BOOTANIMATION_FILE <span class="meta-string">"/system/media/bootanimation.zip"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SYSTEM_ENCRYPTED_BOOTANIMATION_FILE <span class="meta-string">"/system/media/bootanimation-encrypted.zip"</span></span></span><br></pre></td></tr></table></figure>
 
 <p>동일 파일의 함수 <code>readyToRun()</code>를 보면, 부트 애니메이션 파일 확인 순서를 알 수 있다.</p>
 <p><code>bootanimation.zip</code> 파일을 <code>/out/target/product/rk312x/system/media/</code>에 복사</p>
-<h4 id="bootanimation-zip-설명"><a href="#bootanimation-zip-설명" class="headerlink" title="[bootanimation.zip 설명]"></a>[bootanimation.zip 설명]</h4><p>(참고: <a href="https://forum.xda-developers.com/showthread.php?t=2756198" target="_blank" rel="external nofollow noopener noreferrer">https://forum.xda-developers.com/showthread.php?t=2756198</a>)<br><code>desc.txt</code> 파일과 이미지 파일이 들어있는 part0 폴더를 크기 압축 없이(옵션) 압축</p>
+<h4 id="bootanimation-zip-설명"><a href="#bootanimation-zip-설명" class="headerlink" title="[bootanimation.zip 설명]"></a>[bootanimation.zip 설명]</h4><p>(참고: <a href="https://forum.xda-developers.com/showthread.php?t=2756198" rel="external nofollow noopener noreferrer" target="_blank">https://forum.xda-developers.com/showthread.php?t=2756198</a>)<br><code>desc.txt</code> 파일과 이미지 파일이 들어있는 part0 폴더를 크기 압축 없이(옵션) 압축</p>
 <h4 id="desc-txt-파일-설명"><a href="#desc-txt-파일-설명" class="headerlink" title="[desc.txt 파일 설명]"></a>[desc.txt 파일 설명]</h4><p>800 480 23 –&gt; &lt;가로&gt; &lt;세로&gt; &lt;초당 프레임 수&gt;<br>p 10 10 part0 –&gt; </p><p> &lt;재생횟수&gt; &lt;재생 후 딜레이&gt; &lt;재생할 폴더명&gt;</p>
 <p>HDPI = 480x800<br>XHDPI = 720x1280<br>XXHDPI = 1080x1920</p>
 <p>딜레이: 50은 0.5초</p>
-<h5 id="샘플"><a href="#샘플" class="headerlink" title="[샘플]"></a>[샘플]<br></h5><p>(출처: <a href="https://forum.xda-developers.com/google-nexus-5/themes-apps/android-l-bootanimation-60fps-t2898727" target="_blank" rel="external nofollow noopener noreferrer">https://forum.xda-developers.com/google-nexus-5/themes-apps/android-l-bootanimation-60fps-t2898727</a>)<br><br><a href="https://forum.xda-developers.com/attachment.php?attachmentid=3038450&d=1417205766" target="_blank" rel="external nofollow noopener noreferrer">bootanimation60fps1080p.zip</a><br><br><a href="https://forum.xda-developers.com/attachment.php?attachmentid=3041551&d=1417375009" target="_blank" rel="external nofollow noopener noreferrer">bootanimation60fps1080pbig.zip</a><br></p>
-<h5 id="샘플2"><a href="#샘플2" class="headerlink" title="[샘플2]"></a>[샘플2]<br></h5><p>(출처: <a href="https://forum.xda-developers.com/nexus-6/themes-apps/bootanimation-nexus-6-boot-animation-t3111805" target="_blank" rel="external nofollow noopener noreferrer">https://forum.xda-developers.com/nexus-6/themes-apps/bootanimation-nexus-6-boot-animation-t3111805</a>)<br></p>
+<h5 id="샘플"><a href="#샘플" class="headerlink" title="[샘플]"></a>[샘플]<br></h5><p>(출처: <a href="https://forum.xda-developers.com/google-nexus-5/themes-apps/android-l-bootanimation-60fps-t2898727" rel="external nofollow noopener noreferrer" target="_blank">https://forum.xda-developers.com/google-nexus-5/themes-apps/android-l-bootanimation-60fps-t2898727</a>)<br><br><a href="https://forum.xda-developers.com/attachment.php?attachmentid=3038450&d=1417205766" rel="external nofollow noopener noreferrer" target="_blank">bootanimation60fps1080p.zip</a><br><br><a href="https://forum.xda-developers.com/attachment.php?attachmentid=3041551&d=1417375009" rel="external nofollow noopener noreferrer" target="_blank">bootanimation60fps1080pbig.zip</a><br></p>
+<h5 id="샘플2"><a href="#샘플2" class="headerlink" title="[샘플2]"></a>[샘플2]<br></h5><p>(출처: <a href="https://forum.xda-developers.com/nexus-6/themes-apps/bootanimation-nexus-6-boot-animation-t3111805" rel="external nofollow noopener noreferrer" target="_blank">https://forum.xda-developers.com/nexus-6/themes-apps/bootanimation-nexus-6-boot-animation-t3111805</a>)<br></p>
 
         </div>
         <footer class="article-footer">
@@ -225,7 +225,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2019/08/27/Android-부트로그/" data-id="ck07b6dxe004f4pjyosxe7s4t" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2019/08/27/Android-부트로그/" data-id="ck0ey39be002o11jyjjg0lvux" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -307,7 +307,7 @@ ga('send', 'pageview');
 이미지를 교체하는 방법kernel/arch/arm/Makefile에 보면
 
 12345LOGO := $(notdir $(wildcard $(srctree)/logo.bmp))LOGO_KERNEL := $(notdir $(wildcard $(srctree)/logo_kernel.bmp))%.img: %.dtb kernel.img"
-        "wordCount": 388
+        "wordCount": 409
     }
 </script>
 
@@ -347,20 +347,20 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2019/08/27/Android-홈런쳐App/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2019/08/27/Android-Platform-개발환경/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">새로운</strong>
         <p class="article-nav-title">
         
-            Android 홈 런쳐 App 작성 방법
+            Android Platform 개발환경 구축
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2019/08/27/Android-수정된어플탑재/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2019/08/27/Android-기반-Kernel/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">오래된</strong>
-        <p class="article-nav-title">Android 수정된 어플 탑재방법</p>
+        <p class="article-nav-title">Android 기반 커널</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -385,7 +385,7 @@ ga('send', 'pageview');
                             <a href="/2019/09/11/Android-Bluetooth-HID-장치만들기02/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/Thumbnail/gamepad.png)" alt="Android로 Bluetooth HID 장치(Joystick) 만들기 - 02" class="thumbnail-image"></span>
     
     
 </a>
@@ -422,30 +422,10 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="thumbnail">
+                            <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server 사용하기" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="title">Gatt Server 사용하기</a></p>
-                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-Advertising-BLE-Device/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Advertising a BLE Device" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Connecting to a GATT Server" class="thumbnail-image"></span>
     
     
 </a>
@@ -454,7 +434,7 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-Advertising-BLE-Device/" class="title">Advertising a BLE Device</a></p>
+                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="title">Connecting to a GATT Server</a></p>
                             <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
                         </div>
                     </li>
@@ -475,6 +455,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
                             <p class="item-title"><a href="/2019/09/09/Android-BLE-Finding-Devices/" class="title">Finding BLE Devices</a></p>
+                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Characteristics 읽고쓰기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
+                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="title">Characteristics 읽고쓰기</a></p>
                             <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
                         </div>
                     </li>
