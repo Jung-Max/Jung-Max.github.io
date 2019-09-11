@@ -84,7 +84,7 @@ ga('send', 'pageview');
                                     <a class="main-nav-list-link" href="/">홈</a>
                                 </li>
                             
-                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Kernel/">Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform/">Platform</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GitHub-Pages/">GitHub Pages</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a></li></ul></li></ul>
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Kernel/">Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform/">Platform</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GitHub-Pages/">GitHub Pages</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a></li></ul></li></ul>
                                     
                                 <li class="main-nav-list-item" >
                                     <a class="main-nav-list-link" href="https://about.me/jung-max">About</a>
@@ -167,17 +167,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/" class="thumbnail">
+        <a href="/2019/09/11/Android-Bluetooth-HID-장치만들기02/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server로 부터 알림 받기" class="thumbnail-image"></span>
+        <span class="thumbnail-image thumbnail-none"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-GattServer로부터-알림받기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://jung-max.github.io/2019/09/11/Android-Bluetooth-HID-장치만들기02/">0</span>
     
 </span>
 
@@ -188,20 +188,22 @@ ga('send', 'pageview');
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a>
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/HID/">HID</a>
             </div>
-            <div class="date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></div>
+            <div class="date"><time datetime="2019-09-11T02:02:00.000Z" itemprop="datePublished">2019-09-11</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/">Gatt Server로 부터 알림 받기</a>
+        <a href="/2019/09/11/Android-Bluetooth-HID-장치만들기02/">Android로 Bluetooth HID 장치(Joystick) 만들기 - 02</a>
         </h1>
     
 
         <p class="article-excerpt">
-            특성 값이 변경되면 Gatt 서버에 알림을 요청할 수 있습니다.
-12345gatt.setCharacteristicNotification(characteristic, true);BluetoothGattDescriptor descriptor = characteristic.getDescriptor(    UUID.fromString("00002902-0000-1
+            첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다. 
+이제 제어 입력을 연결된 장치로 전송하기 만하면됩니다. 
+설정하는 것보다 훨씬 간단합니다.
+
         </p>
     </div>
 </article>
@@ -210,6 +212,58 @@ ga('send', 'pageview');
     
     
     
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/09/09/Android-Bluetooth-HID-장치만들기01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B001/01.png)" alt="Android로 Bluetooth HID 장치(Joystick) 만들기 - 01" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://jung-max.github.io/2019/09/09/Android-Bluetooth-HID-장치만들기01/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/HID/">HID</a>
+            </div>
+            <div class="date"><time datetime="2019-09-09T04:39:00.000Z" itemprop="datePublished">2019-09-09</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/09/09/Android-Bluetooth-HID-장치만들기01/">Android로 Bluetooth HID 장치(Joystick) 만들기 - 01</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            개요Android 9(API Level 28, Pie)에서는 휴대 전화를 Bluetooth HID로 사용할 수 있도록 지원하므로 키보드, 마우스 또는 게임 패드로 사용할 수 있습니다. 
+BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설명하겠습니다.
+Bluetooth 준비하기가장 먼저 Bluetooth를 설정하
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -254,14 +308,10 @@ ga('send', 'pageview');
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -307,10 +357,14 @@ Advertising 데이터는 31 바이트로 제한됩니다.
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -357,14 +411,10 @@ Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / adve
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -411,10 +461,14 @@ Context 객체, BLE 장치에 자동으로 연결할지 여부를 나타내는 �
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -455,6 +509,53 @@ Context 객체, BLE 장치에 자동으로 연결할지 여부를 나타내는 �
             Gatt 서버에 연결되면 서버의 Characteristics을 읽고 읽음으로써 Gatt 서버와 상호 작용하게됩니다.
 이렇게하려면 먼저이 서버에서 사용할 수 있는 서비스와 각 서비스에서 사용할 수 있는 Characteristics을 찾아야합니다.
 1234567891011121314151617181920212223 @Override public void onC
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server로 부터 알림 받기" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-GattServer로부터-알림받기/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a>
+            </div>
+            <div class="date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/">Gatt Server로 부터 알림 받기</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            특성 값이 변경되면 Gatt 서버에 알림을 요청할 수 있습니다.
+12345gatt.setCharacteristicNotification(characteristic, true);BluetoothGattDescriptor descriptor = characteristic.getDescriptor(    UUID.fromString("00002902-0000-1
         </p>
     </div>
 </article>
@@ -564,107 +665,6 @@ evdev란 범용 입력 이벤트 드라이버를 뜻한다.
         </div>
     
 
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/09/02/Android-NDK를-사용해서-kernel드라이버-사용하기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android NDK를 사용해서 kernel드라이버 사용하기" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://jung-max.github.io/2019/09/02/Android-NDK를-사용해서-kernel드라이버-사용하기/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
-            </div>
-            <div class="date"><time datetime="2019-09-02T07:17:00.000Z" itemprop="datePublished">2019-09-02</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/02/Android-NDK를-사용해서-kernel드라이버-사용하기/">Android NDK를 사용해서 kernel드라이버 사용하기</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            kernel의 드라이버를 쓰기 위해서는 driver 장치 파일의 write 권한이 있어야 한다.기본적으로 장치 파일의 write 권한은 플랫폼 소스에서 부팅시 *.rc파일을 수정해서 변경 가능하다.
-여기서는 앱에서 write 권한을 취득하는 것부터 시작한다.
-앱이 파일의 접근 권한을 변경하기 위해서는 su권한이 있어야 한다.
-12345678910111213
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://jung-max.github.io/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
-            </div>
-            <div class="date"><time datetime="2019-09-02T02:42:00.000Z" itemprop="datePublished">2019-09-02</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/">bluetooth로 받은 byte 데이터 분석하기</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            bluetooth로 받은 데이터는 기본적으로 byte형태이다.
-String 데이터를 받았다면 String 형으로 변형이 필요하다.
-12345678910111213141516BufferedInputStream in = null;in = new BufferedInputStream(socket.getInputStream());byte[] buffer = new 
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
 
     </div></section>
 
@@ -709,10 +709,10 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/" class="thumbnail">
+                            <a href="/2019/09/11/Android-Bluetooth-HID-장치만들기02/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server로 부터 알림 받기" class="thumbnail-image"></span>
+        <span class="thumbnail-image thumbnail-none"></span>
     
     
 </a>
@@ -720,9 +720,29 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/" class="title">Gatt Server로 부터 알림 받기</a></p>
-                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/HID/">HID</a></p>
+                            <p class="item-title"><a href="/2019/09/11/Android-Bluetooth-HID-장치만들기02/" class="title">Android로 Bluetooth HID 장치(Joystick) 만들기 - 02</a></p>
+                            <p class="item-date"><time datetime="2019-09-11T02:02:00.000Z" itemprop="datePublished">2019-09-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/09/Android-Bluetooth-HID-장치만들기01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B001/01.png)" alt="Android로 Bluetooth HID 장치(Joystick) 만들기 - 01" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/HID/">HID</a></p>
+                            <p class="item-title"><a href="/2019/09/09/Android-Bluetooth-HID-장치만들기01/" class="title">Android로 Bluetooth HID 장치(Joystick) 만들기 - 01</a></p>
+                            <p class="item-date"><time datetime="2019-09-09T04:39:00.000Z" itemprop="datePublished">2019-09-09</time></p>
                         </div>
                     </li>
                 
@@ -786,26 +806,6 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Connecting to a GATT Server" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="title">Connecting to a GATT Server</a></p>
-                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -815,7 +815,7 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">카테고리</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">39</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Kernel/">Kernel</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform/">Platform</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">41</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Kernel/">Kernel</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform/">Platform</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -825,7 +825,7 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">아카이브</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
         </div>
     </div>
 
@@ -835,7 +835,7 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">태그</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">39</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">41</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -845,7 +845,7 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">태그 클라우드</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/App/" style="font-size: 18px;">App</a> <a href="/tags/Architecture/" style="font-size: 12px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 14px;">BLE</a> <a href="/tags/Bluetooth/" style="font-size: 10px;">Bluetooth</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Github-Pages/" style="font-size: 12px;">Github Pages</a> <a href="/tags/Hexo/" style="font-size: 12px;">Hexo</a> <a href="/tags/Kernel/" style="font-size: 16px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 16px;">Linux</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/개발환경/" style="font-size: 12px;">개발환경</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/App/" style="font-size: 18.33px;">App</a> <a href="/tags/Architecture/" style="font-size: 11.67px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 15px;">BLE</a> <a href="/tags/Bluetooth/" style="font-size: 13.33px;">Bluetooth</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Github-Pages/" style="font-size: 11.67px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.67px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.67px;">Hexo</a> <a href="/tags/Kernel/" style="font-size: 16.67px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/개발환경/" style="font-size: 11.67px;">개발환경</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
         </div>
     </div>
 
