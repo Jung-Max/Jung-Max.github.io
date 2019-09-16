@@ -22,7 +22,7 @@
 <meta property="og:description" content="개요Android 9(API Level 28, Pie)에서는 휴대 전화를 Bluetooth HID로 사용할 수 있도록 지원하므로 키보드, 마우스 또는 게임 패드로 사용할 수 있습니다.  BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설명하겠습니다. 해당 소스는 https://github.com/Jung-Max">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B001/01.png">
-<meta property="og:updated_time" content="2019-09-16T04:23:25.308Z">
+<meta property="og:updated_time" content="2019-09-16T06:43:06.920Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android로 Bluetooth HID 장치(Joystick) 만들기 - 01">
 <meta name="twitter:description" content="개요Android 9(API Level 28, Pie)에서는 휴대 전화를 Bluetooth HID로 사용할 수 있도록 지원하므로 키보드, 마우스 또는 게임 패드로 사용할 수 있습니다.  BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설명하겠습니다. 해당 소스는 https://github.com/Jung-Max">
@@ -92,7 +92,7 @@ ga('send', 'pageview');
                                     <a class="main-nav-list-link" href="/">홈</a>
                                 </li>
                             
-                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/">Android Platform</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/Architecture/">Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/JNI/">JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/Kernel/">Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/boot/">boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GitHub-Pages/">GitHub Pages</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a></li></ul></li></ul>
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/">Android Platform</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/Architecture/">Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/JNI/">JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/Kernel/">Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/SEAndroid/">SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/boot/">boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GitHub-Pages/">GitHub Pages</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a></li></ul></li></ul>
                                     
                                 <li class="main-nav-list-item">
                                     <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
@@ -208,7 +208,12 @@ ga('send', 'pageview');
 
 <p>이 호출은 기본적으로 프록시를 요청하고 저장합니다. </p>
 <h1 id="registerApp"><a href="#registerApp" class="headerlink" title="registerApp()"></a>registerApp()</h1><p>Bluetooth HID의 <a href="https://developer.android.com/reference/android/bluetooth/BluetoothHidDevice#registerApp(android.bluetooth.BluetoothHidDeviceAppSdpSettings,%20android.bluetooth.BluetoothHidDeviceAppQosSettings,%20android.bluetooth.BluetoothHidDeviceAppQosSettings,%20java.util.concurrent.Executor,%20android.bluetooth.BluetoothHidDevice.Callback)" rel="external nofollow noopener noreferrer" target="_blank">registerApp()</a>의 파라미터는 아래와 같습니다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">registerApp</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    BluetoothHidDeviceAppSdpSettings sdp,</span></span></span><br><span class="line"><span class="function"><span class="params">    BluetoothHidDeviceAppQosSettings inQos,</span></span></span><br><span class="line"><span class="function"><span class="params">    BluetoothHidDeviceAppQosSettings outQos,</span></span></span><br><span class="line"><span class="function"><span class="params">    Executor executor,</span></span></span><br><span class="line"><span class="function"><span class="params">    Callback callback)</span></span></span><br><span class="line"><span class="function">```            </span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">## sdp</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">[BluetoothHidDeviceAppSdpSettings]<span class="params">(https://developer.android.com/reference/android/bluetooth/BluetoothHidDeviceAppSdpSettings?hl=en)</span>는 Bluetooth HID 장치 응용 프로그램의 <span class="title">SDP</span> <span class="params">(Service Discovery Protocol)</span> 설정을 나타냅니다.</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">[BluetoothHidDevice]<span class="params">(https://developer.android.com/reference/android/bluetooth/BluetoothHidDevice.html)</span> 프레임 워크는 앱 등록 중에 SDP 레코드를 추가하여 Android 장치를 Bluetooth HID 장치로 검색 할 수 있습니다.</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">`BluetoothHidDeviceAppSdpSettings`의 파라미터를 살펴보면 다음과 같습니다.</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">```java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">BluetoothHidDeviceAppSdpSettings</span> <span class="params">(String name, </span></span></span><br><span class="line"><span class="function"><span class="params">                String description, </span></span></span><br><span class="line"><span class="function"><span class="params">                String provider, </span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">byte</span> subclass, </span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">byte</span>[] descriptors)</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">registerApp</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    BluetoothHidDeviceAppSdpSettings sdp,</span></span></span><br><span class="line"><span class="function"><span class="params">    BluetoothHidDeviceAppQosSettings inQos,</span></span></span><br><span class="line"><span class="function"><span class="params">    BluetoothHidDeviceAppQosSettings outQos,</span></span></span><br><span class="line"><span class="function"><span class="params">    Executor executor,</span></span></span><br><span class="line"><span class="function"><span class="params">    Callback callback)</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="sdp"><a href="#sdp" class="headerlink" title="sdp"></a>sdp</h2><p><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHidDeviceAppSdpSettings?hl=en" rel="external nofollow noopener noreferrer" target="_blank">BluetoothHidDeviceAppSdpSettings</a>는 Bluetooth HID 장치 응용 프로그램의 SDP (Service Discovery Protocol) 설정을 나타냅니다.</p>
+<p><a href="https://developer.android.com/reference/android/bluetooth/BluetoothHidDevice.html" rel="external nofollow noopener noreferrer" target="_blank">BluetoothHidDevice</a> 프레임 워크는 앱 등록 중에 SDP 레코드를 추가하여 Android 장치를 Bluetooth HID 장치로 검색 할 수 있습니다.</p>
+<p><code>BluetoothHidDeviceAppSdpSettings</code>의 파라미터를 살펴보면 다음과 같습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">BluetoothHidDeviceAppSdpSettings</span> <span class="params">(String name, </span></span></span><br><span class="line"><span class="function"><span class="params">                String description, </span></span></span><br><span class="line"><span class="function"><span class="params">                String provider, </span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">byte</span> subclass, </span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">byte</span>[] descriptors)</span></span></span><br></pre></td></tr></table></figure>
 
 <p>name, description, provider은 각자 목적에 맞는 문자열을 넣어주면 됩니다.(50byte 이하로만)</p>
 <p>subclass는 <a href="https://www.usb.org/sites/default/files/documents/hid1_11.pdf" rel="external nofollow noopener noreferrer" target="_blank">HID 스팩문서</a>의 4.2 Subclass를 참고합니다.</p>
@@ -318,7 +323,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2019/09/09/Android-Bluetooth-HID-장치만들기01/" data-id="ck0m1homv000j0pjyb1pfqbt2" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2019/09/09/Android-Bluetooth-HID-장치만들기01/" data-id="ck0m48t79004c0pjyulg3cmhd" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -399,7 +404,7 @@ ga('send', 'pageview');
         "description": "개요Android 9(API Level 28, Pie)에서는 휴대 전화를 Bluetooth HID로 사용할 수 있도록 지원하므로 키보드, 마우스 또는 게임 패드로 사용할 수 있습니다. 
 BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설명하겠습니다.
 해당 소스는 https://github.com/Jung-Max"
-        "wordCount": 2302
+        "wordCount": 2272
     }
 </script>
 
@@ -450,9 +455,9 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
     </a>
     
     
-        <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">오래된</strong>
-        <p class="article-nav-title">Gatt Server로 부터 알림 받기</p>
+        <p class="article-nav-title">Connecting to a GATT Server</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -470,6 +475,26 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
         <h3 class="widget-title">최근 글</h3>
         <div class="widget">
             <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/16/Android-SEAndroid적용/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/01.png)" alt="SEAndroid 적용" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/SEAndroid/">SEAndroid</a></p>
+                            <p class="item-title"><a href="/2019/09/16/Android-SEAndroid적용/" class="title">SEAndroid 적용</a></p>
+                            <p class="item-date"><time datetime="2019-09-16T06:40:00.000Z" itemprop="datePublished">2019-09-16</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -551,26 +576,6 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server로 부터 알림 받기" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/" class="title">Gatt Server로 부터 알림 받기</a></p>
-                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -580,7 +585,7 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">카테고리</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/">Android Platform</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/Architecture/">Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/JNI/">JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/Kernel/">Kernel</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/boot/">boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/">Android Platform</a><span class="category-list-count">17</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/Architecture/">Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/JNI/">JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/Kernel/">Kernel</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/SEAndroid/">SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/boot/">boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -590,7 +595,7 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">아카이브</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
         </div>
     </div>
 
@@ -600,7 +605,7 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">태그</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">30</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -610,7 +615,7 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">태그 클라우드</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.5px;">Android Platform</a> <a href="/tags/App/" style="font-size: 18.75px;">App</a> <a href="/tags/Architecture/" style="font-size: 11.25px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 15px;">BLE</a> <a href="/tags/Bluetooth/" style="font-size: 13.75px;">Bluetooth</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Github-Pages/" style="font-size: 11.25px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 12.5px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.25px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Kernel/" style="font-size: 16.25px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 16.25px;">Linux</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/개발환경/" style="font-size: 11.25px;">개발환경</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.5px;">Android Platform</a> <a href="/tags/App/" style="font-size: 18.75px;">App</a> <a href="/tags/Architecture/" style="font-size: 11.25px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 15px;">BLE</a> <a href="/tags/Bluetooth/" style="font-size: 13.75px;">Bluetooth</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Github-Pages/" style="font-size: 11.25px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 12.5px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.25px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Kernel/" style="font-size: 16.25px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 16.25px;">Linux</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/개발환경/" style="font-size: 11.25px;">개발환경</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
         </div>
     </div>
 
