@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>http://jung-max.github.io/tags/Architecture/</loc>
+        <lastmod>2019-09-16T06:40:21.875Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/Android/</loc>
+        <lastmod>2019-09-16T06:40:21.875Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/tags/Linux/</loc>
         <lastmod>2019-09-16T06:26:38.660Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -45,13 +59,6 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/tags/Android/</loc>
-        <lastmod>2019-09-16T06:25:27.231Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/tags/GPIO/</loc>
         <lastmod>2019-09-16T06:24:14.040Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -61,13 +68,6 @@
     <url>
         <loc>http://jung-max.github.io/tags/JNI/</loc>
         <lastmod>2019-09-16T06:21:09.685Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/Architecture/</loc>
-        <lastmod>2019-09-16T06:19:14.962Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

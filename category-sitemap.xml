@@ -8,6 +8,20 @@
     </url>
 
     <url>
+        <loc>http://jung-max.github.io/categories/Android-Platform/Architecture/</loc>
+        <lastmod>2019-09-16T06:40:21.875Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android-Platform/</loc>
+        <lastmod>2019-09-16T06:40:21.875Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/categories/Android-Platform/boot/</loc>
         <lastmod>2019-09-16T06:26:38.660Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -16,13 +30,6 @@
 
     <url>
         <loc>http://jung-max.github.io/categories/Android-Platform/Kernel/</loc>
-        <lastmod>2019-09-16T06:26:38.660Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/Android-Platform/</loc>
         <lastmod>2019-09-16T06:26:38.660Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -59,13 +66,6 @@
     <url>
         <loc>http://jung-max.github.io/categories/Android-Platform/JNI/</loc>
         <lastmod>2019-09-16T06:21:09.685Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/Android-Platform/Architecture/</loc>
-        <lastmod>2019-09-16T06:19:14.962Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
