@@ -22,7 +22,7 @@
 <meta property="og:description" content="GPIO indexROCK64의 핀은 아래와 같이 구성되어있습니다.GPIO의 이름은 bank, pad, number로 이루어져 있습니다. GPIO(bank)_(pad)(number) 예를 들어 Pi-2 Bus의 16번 핀의 이름은 GPIO3_A5입니다. 이 핀의 bank는 ‘3’ / pad는 ‘A’ / number는 ‘5’입니다. 여기서 index를 구하는">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/Android-GIPO-%EC%A0%9C%EC%96%B4-ROCK64/01.png">
-<meta property="og:updated_time" content="2019-09-05T07:25:11.678Z">
+<meta property="og:updated_time" content="2019-09-16T06:24:14.040Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android에서 GPIO제어(ROCK64 보드)">
 <meta name="twitter:description" content="GPIO indexROCK64의 핀은 아래와 같이 구성되어있습니다.GPIO의 이름은 bank, pad, number로 이루어져 있습니다. GPIO(bank)_(pad)(number) 예를 들어 Pi-2 Bus의 16번 핀의 이름은 GPIO3_A5입니다. 이 핀의 bank는 ‘3’ / pad는 ‘A’ / number는 ‘5’입니다. 여기서 index를 구하는">
@@ -92,7 +92,7 @@ ga('send', 'pageview');
                                     <a class="main-nav-list-link" href="/">홈</a>
                                 </li>
                             
-                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/">Android Platform</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/Architecture/">Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/Kernel/">Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/boot/">boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GitHub-Pages/">GitHub Pages</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a></li></ul></li></ul>
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/">Android Platform</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/Architecture/">Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/JNI/">JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/Kernel/">Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/boot/">boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GitHub-Pages/">GitHub Pages</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a></li></ul></li></ul>
                                     
                                 <li class="main-nav-list-item">
                                     <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
@@ -201,29 +201,31 @@ ga('send', 'pageview');
 <h1 id="adb로-GPIO-컨트롤"><a href="#adb로-GPIO-컨트롤" class="headerlink" title="adb로 GPIO 컨트롤"></a>adb로 GPIO 컨트롤</h1><p>ROCK64에서 GPIO 컨트롤은 파일을 write해서 제어할 수 있습니다.<br>기본적으로 adb에서 컨르롤 하기 위해서는 root권한이 필요합니다.<br><code>adb root</code><br>위 명령어로 root의 권한을 획득합니다.<br>그 후 shell로 접근하면 root의 권한을 획득한 것을 볼 수 있습니다.<br><br><img src="/images/Android-GIPO-%EC%A0%9C%EC%96%B4-ROCK64/05.png" alt="adb shell"><br></p>
 <p>serial로 접근시 root 권한은 <code>su</code>로 획득할 수 있습니다.</p>
 <ul>
-<li>처음엔 gpio export가 필요합니다. 여기서 GPIO3_A5(index 101)를 export시킬려면 다음과 같습니다.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roc_rk3328_cc_box:/ # echo 101 &gt; /sys/class/gpio/export</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>처음엔 gpio export가 필요합니다. 여기서 GPIO3_A5(index 101)를 export시킬려면 다음과 같습니다.</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roc_rk3328_cc_box:/ # echo 101 &gt; /sys/class/gpio/export</span><br></pre></td></tr></table></figure>
+
 <p>export를 하면 <code>/sys/class/gpio/gpio101</code>폴더가 생성됩니다.</p>
 <ul>
-<li><p>그 후 in/out을 설정합니다.</p>
+<li>그 후 in/out을 설정합니다.</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roc_rk3328_cc_box:/ # echo out &gt; /sys/class/gpio/gpio101/direction</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>그 후 value의 값을 조정하여 gpio를 제어한다.</p>
+
+<ul>
+<li>그 후 value의 값을 조정하여 gpio를 제어한다.</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">roc_rk3328_cc_box:/ # echo 1 &gt; /sys/class/gpio/gpio101/value</span><br><span class="line">roc_rk3328_cc_box:/ # echo 0 &gt; /sys/class/gpio/gpio101/value</span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
 <h1 id="adroid-App을-통한-제어"><a href="#adroid-App을-통한-제어" class="headerlink" title="adroid App을 통한 제어"></a>adroid App을 통한 제어</h1><ul>
-<li><p>app에서 shell 명령어 실행을 실행하려면 아래와 같이 동작한다.</p>
+<li>app에서 shell 명령어 실행을 실행하려면 아래와 같이 동작한다.</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Runtime.getRuntime().exec(<span class="string">"명령문"</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>파일 쓰기 권한을 얻기 위해선 아래와 같이 한다.</p>
+
+<ul>
+<li>파일 쓰기 권한을 얻기 위해선 아래와 같이 한다.</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Process process = <span class="keyword">null</span>;</span><br><span class="line">DataOutputStream dataOutputStream = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    process = Runtime.getRuntime().exec(<span class="string">"su"</span>);</span><br><span class="line">    dataOutputStream = <span class="keyword">new</span> DataOutputStream(process.getOutputStream());</span><br><span class="line">    dataOutputStream.writeBytes(<span class="string">"chmod 777 /sys/class/gpio/export\n"</span>);</span><br><span class="line">    dataOutputStream.writeBytes(<span class="string">"exit\n"</span>);</span><br><span class="line">    dataOutputStream.flush();</span><br><span class="line">    process.waitFor();</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (dataOutputStream != <span class="keyword">null</span>) &#123;</span><br><span class="line">            dataOutputStream.close();</span><br><span class="line">        &#125;</span><br><span class="line">        process.destroy();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
 <p>앞서 말한것과 같이 gpio를 제어하기 위해서는 value값을 수정해야 한다.<br>App에서 수정은 NDK를 이용해 수정을 한다.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">JNIEXPORT <span class="keyword">void</span> JNICALL Java_ckbs_ywjung_gpiotest_MainActivity_gpiorelay</span><br><span class="line">  (JNIEnv *env, jobject thiz,jint out)</span><br><span class="line">&#123;</span><br><span class="line">    	<span class="keyword">int</span> fd, len;</span><br><span class="line">    	<span class="keyword">char</span> buf[<span class="number">60</span>];</span><br><span class="line"></span><br><span class="line">    	len = <span class="built_in">snprintf</span>(buf, <span class="keyword">sizeof</span>(buf), <span class="string">"/sys/class/gpio/gpio101/value"</span>);</span><br><span class="line"></span><br><span class="line">    	fd = open(buf, O_WRONLY);</span><br><span class="line">    	<span class="keyword">if</span> (fd &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    		<span class="keyword">return</span> ;</span><br><span class="line">    	&#125;</span><br><span class="line"></span><br><span class="line">    	<span class="keyword">if</span> (out)&#123; write(fd, <span class="string">"1"</span>, <span class="number">1</span>); &#125;</span><br><span class="line">       	<span class="keyword">else</span> &#123;	write(fd, <span class="string">"0"</span>, <span class="number">1</span>); &#125;</span><br><span class="line"></span><br><span class="line">    	close(fd);</span><br><span class="line"></span><br><span class="line">    LOGD(<span class="string">"GPIO_1 %d "</span>,out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -234,7 +236,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2019/08/27/Android-GIPO-제어-ROCK64/" data-id="ck0lwlq2m00130pjyagkaokhi" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2019/08/27/Android-GIPO-제어-ROCK64/" data-id="ck0m10980000o0pjykfvw88w4" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -310,7 +312,7 @@ ga('send', 'pageview');
         "genre": "Android App",
         "datePublished": "2019-08-27",
         "dateCreated": "2019-08-27",
-        "dateModified": "2019-09-05",
+        "dateModified": "2019-09-16",
         "url": "http://jung-max.github.io/2019/08/27/Android-GIPO-제어-ROCK64/",
         "description": "GPIO indexROCK64의 핀은 아래와 같이 구성되어있습니다.GPIO의 이름은 bank, pad, number로 이루어져 있습니다.
 GPIO(bank)_(pad)(number)
@@ -357,20 +359,20 @@ GPIO(bank)_(pad)(number)
         
 <nav id="article-nav">
     
-        <a href="/2019/08/27/Android-SystemApp/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2019/08/27/Android-수정된어플탑재/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">새로운</strong>
         <p class="article-nav-title">
         
-            Android System App
+            Android 수정된 어플 탑재방법
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2019/08/27/Android-Bluetooth/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2019/08/27/Android-Kernel-Message/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">오래된</strong>
-        <p class="article-nav-title">Android-Bluetooth</p>
+        <p class="article-nav-title">Android Kernel Message</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -388,6 +390,26 @@ GPIO(bank)_(pad)(number)
         <h3 class="widget-title">최근 글</h3>
         <div class="widget">
             <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/16/Android-JNI-동작구조/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-JNI-%EB%8F%99%EC%9E%91%EA%B5%AC%EC%A1%B0/01.jpg)" alt="JNI 동작 구조" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/JNI/">JNI</a></p>
+                            <p class="item-title"><a href="/2019/09/16/Android-JNI-동작구조/" class="title">JNI 동작 구조</a></p>
+                            <p class="item-date"><time datetime="2019-09-16T04:48:00.000Z" itemprop="datePublished">2019-09-16</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -452,26 +474,6 @@ GPIO(bank)_(pad)(number)
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Connecting to a GATT Server" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="title">Connecting to a GATT Server</a></p>
-                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="thumbnail">
     
     
@@ -498,7 +500,7 @@ GPIO(bank)_(pad)(number)
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">카테고리</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/">Android Platform</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/Architecture/">Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/Kernel/">Kernel</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/boot/">boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/">Android Platform</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/Architecture/">Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/JNI/">JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/Kernel/">Kernel</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/boot/">boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -508,7 +510,7 @@ GPIO(bank)_(pad)(number)
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">아카이브</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
         </div>
     </div>
 
@@ -518,7 +520,7 @@ GPIO(bank)_(pad)(number)
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">태그</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -528,7 +530,7 @@ GPIO(bank)_(pad)(number)
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">태그 클라우드</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.5px;">Android Platform</a> <a href="/tags/App/" style="font-size: 18.75px;">App</a> <a href="/tags/Architecture/" style="font-size: 11.25px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 15px;">BLE</a> <a href="/tags/Bluetooth/" style="font-size: 13.75px;">Bluetooth</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Github-Pages/" style="font-size: 11.25px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 12.5px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.25px;">Hexo</a> <a href="/tags/Kernel/" style="font-size: 16.25px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 16.25px;">Linux</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/개발환경/" style="font-size: 11.25px;">개발환경</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.5px;">Android Platform</a> <a href="/tags/App/" style="font-size: 18.75px;">App</a> <a href="/tags/Architecture/" style="font-size: 11.25px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 15px;">BLE</a> <a href="/tags/Bluetooth/" style="font-size: 13.75px;">Bluetooth</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Github-Pages/" style="font-size: 11.25px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 12.5px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.25px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Kernel/" style="font-size: 16.25px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 16.25px;">Linux</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/개발환경/" style="font-size: 11.25px;">개발환경</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
         </div>
     </div>
 

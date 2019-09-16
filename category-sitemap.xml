@@ -8,36 +8,71 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/categories/Android/HID/</loc>
-        <lastmod>2019-09-16T04:23:25.308Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/Android/</loc>
-        <lastmod>2019-09-16T04:23:25.308Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/categories/Android-Platform/boot/</loc>
-        <lastmod>2019-09-16T04:00:41.795Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/Android-Platform/</loc>
-        <lastmod>2019-09-16T04:00:41.795Z</lastmod>
+        <lastmod>2019-09-16T06:26:38.660Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jung-max.github.io/categories/Android-Platform/Kernel/</loc>
-        <lastmod>2019-09-16T03:59:58.262Z</lastmod>
+        <lastmod>2019-09-16T06:26:38.660Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android-Platform/</loc>
+        <lastmod>2019-09-16T06:26:38.660Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/GitHub-Pages/Hexo/</loc>
+        <lastmod>2019-09-16T06:26:10.814Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/GitHub-Pages/</loc>
+        <lastmod>2019-09-16T06:26:10.814Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android/App/</loc>
+        <lastmod>2019-09-16T06:25:27.231Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android/</loc>
+        <lastmod>2019-09-16T06:25:27.231Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android-Platform/JNI/</loc>
+        <lastmod>2019-09-16T06:21:09.685Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android-Platform/Architecture/</loc>
+        <lastmod>2019-09-16T06:19:14.962Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android/HID/</loc>
+        <lastmod>2019-09-16T04:23:25.308Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -50,36 +85,8 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/categories/Android-Platform/Architecture/</loc>
-        <lastmod>2019-09-16T03:59:28.372Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/categories/Android/BLE/</loc>
         <lastmod>2019-09-09T01:03:00.835Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/GitHub-Pages/Hexo/</loc>
-        <lastmod>2019-09-05T07:25:11.719Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/GitHub-Pages/</loc>
-        <lastmod>2019-09-05T07:25:11.719Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/Android/App/</loc>
-        <lastmod>2019-09-05T07:25:11.719Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
