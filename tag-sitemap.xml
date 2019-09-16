@@ -3,6 +3,69 @@
 
 
     <url>
+        <loc>http://jung-max.github.io/tags/Android-Platform/</loc>
+        <lastmod>2019-09-16T04:00:41.795Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/App/</loc>
+        <lastmod>2019-09-16T04:00:17.453Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/boot/</loc>
+        <lastmod>2019-09-16T04:00:00.617Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/Linux/</loc>
+        <lastmod>2019-09-16T03:59:58.262Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/Kernel/</loc>
+        <lastmod>2019-09-16T03:59:58.262Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/Architecture/</loc>
+        <lastmod>2019-09-16T03:59:28.372Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/</loc>
+        <lastmod>2019-09-16T03:59:28.372Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/Android/</loc>
+        <lastmod>2019-09-16T03:59:28.372Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/%EB%B6%80%EB%B6%84%EB%B9%8C%EB%93%9C/</loc>
+        <lastmod>2019-09-16T03:59:03.234Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/tags/HID/</loc>
         <lastmod>2019-09-16T03:55:49.422Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -11,20 +74,6 @@
 
     <url>
         <loc>http://jung-max.github.io/tags/Bluetooth/</loc>
-        <lastmod>2019-09-16T03:55:49.422Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/App/</loc>
-        <lastmod>2019-09-16T03:55:49.422Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/Android/</loc>
         <lastmod>2019-09-16T03:55:49.422Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -47,48 +96,6 @@
     <url>
         <loc>http://jung-max.github.io/tags/Github-Pages/</loc>
         <lastmod>2019-09-05T07:25:11.719Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/boot/</loc>
-        <lastmod>2019-09-05T07:25:11.715Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/Linux/</loc>
-        <lastmod>2019-09-05T07:25:11.714Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/Kernel/</loc>
-        <lastmod>2019-09-05T07:25:11.714Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/%EB%B6%80%EB%B6%84%EB%B9%8C%EB%93%9C/</loc>
-        <lastmod>2019-09-05T07:25:11.699Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/</loc>
-        <lastmod>2019-09-05T07:25:11.698Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/Architecture/</loc>
-        <lastmod>2019-09-05T07:25:11.696Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
