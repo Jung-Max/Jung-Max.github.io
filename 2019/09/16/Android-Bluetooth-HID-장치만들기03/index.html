@@ -13,19 +13,19 @@
         <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
         <meta name="keywords" content="Android,App,Bluetooth,HID">
     
-    <meta name="description" content="들어가면서첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다.  두번째 포스트에서는 제어 입력을 연결된 장치로 전송하는 법을 살펴보았습니다. 이번 포스트에서는 조이스틱의 UI를 구성하는 법에 대해서 살펴보겠습니다. 조이스틱 앱에서 특이한 UI 구성으로는 크게 2가지가 있습니다. 하나는 조이스틱(방향) UI이고 또">
+    <meta name="description" content="들어가면서첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다.  두번째 포스트에서는 제어 입력을 연결된 장치로 전송하는 법을 살펴보았습니다. 해당 소스는 https://github.com/Jung-Max/BleHidJoystick를 참고하시면 됩니다. 앱 다운로드는 https://play.google.com/st">
 <meta name="keywords" content="Android,App,Bluetooth,HID">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android로 Bluetooth HID 장치(Joystick) 만들기 - 03">
 <meta property="og:url" content="http://jung-max.github.io/2019/09/16/Android-Bluetooth-HID-장치만들기03/index.html">
 <meta property="og:site_name" content="Max&#39;s Blog">
-<meta property="og:description" content="들어가면서첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다.  두번째 포스트에서는 제어 입력을 연결된 장치로 전송하는 법을 살펴보았습니다. 이번 포스트에서는 조이스틱의 UI를 구성하는 법에 대해서 살펴보겠습니다. 조이스틱 앱에서 특이한 UI 구성으로는 크게 2가지가 있습니다. 하나는 조이스틱(방향) UI이고 또">
+<meta property="og:description" content="들어가면서첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다.  두번째 포스트에서는 제어 입력을 연결된 장치로 전송하는 법을 살펴보았습니다. 해당 소스는 https://github.com/Jung-Max/BleHidJoystick를 참고하시면 됩니다. 앱 다운로드는 https://play.google.com/st">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B003/01.png">
-<meta property="og:updated_time" content="2019-09-16T03:55:49.422Z">
+<meta property="og:updated_time" content="2019-09-16T04:23:11.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android로 Bluetooth HID 장치(Joystick) 만들기 - 03">
-<meta name="twitter:description" content="들어가면서첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다.  두번째 포스트에서는 제어 입력을 연결된 장치로 전송하는 법을 살펴보았습니다. 이번 포스트에서는 조이스틱의 UI를 구성하는 법에 대해서 살펴보겠습니다. 조이스틱 앱에서 특이한 UI 구성으로는 크게 2가지가 있습니다. 하나는 조이스틱(방향) UI이고 또">
+<meta name="twitter:description" content="들어가면서첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다.  두번째 포스트에서는 제어 입력을 연결된 장치로 전송하는 법을 살펴보았습니다. 해당 소스는 https://github.com/Jung-Max/BleHidJoystick를 참고하시면 됩니다. 앱 다운로드는 https://play.google.com/st">
 <meta name="twitter:image" content="http://jung-max.github.io/images/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B003/01.png">
     
     <link rel="canonical" href="http://jung-max.github.io/2019/09/16/android-bluetooth-hid-장치만들기03/">
@@ -192,6 +192,8 @@ ga('send', 'pageview');
         <div class="article-entry" itemprop="articleBody">
             <h1 id="들어가면서"><a href="#들어가면서" class="headerlink" title="들어가면서"></a>들어가면서</h1><p><a href="https://jung-max.github.io/2019/09/09/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B001/">첫번째 포스트</a>에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다. </p>
 <p><a href="https://jung-max.github.io/2019/09/11/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B002/">두번째 포스트</a>에서는 제어 입력을 연결된 장치로 전송하는 법을 살펴보았습니다.</p>
+<p>해당 소스는 <a href="https://github.com/Jung-Max/BleHidJoystick" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/Jung-Max/BleHidJoystick</a>를 참고하시면 됩니다.</p>
+<p>앱 다운로드는 <a href="https://play.google.com/store/apps/details?id=com.ckbs.blehidjoystick" rel="external nofollow noopener noreferrer" target="_blank">https://play.google.com/store/apps/details?id=com.ckbs.blehidjoystick</a>를 참고하세요.</p>
 <p>이번 포스트에서는 조이스틱의 UI를 구성하는 법에 대해서 살펴보겠습니다.</p>
 <p>조이스틱 앱에서 특이한 UI 구성으로는 크게 2가지가 있습니다.</p>
 <p>하나는 조이스틱(방향) UI이고 또 하나는 버튼 UI 입니다.</p>
@@ -240,7 +242,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2019/09/16/Android-Bluetooth-HID-장치만들기03/" data-id="ck0lvtdyq000n0pjycm0tfteh" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2019/09/16/Android-Bluetooth-HID-장치만들기03/" data-id="ck0lwlq2j000v0pjy41opmb16" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -320,10 +322,9 @@ ga('send', 'pageview');
         "url": "http://jung-max.github.io/2019/09/16/Android-Bluetooth-HID-장치만들기03/",
         "description": "들어가면서첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다. 
 두번째 포스트에서는 제어 입력을 연결된 장치로 전송하는 법을 살펴보았습니다.
-이번 포스트에서는 조이스틱의 UI를 구성하는 법에 대해서 살펴보겠습니다.
-조이스틱 앱에서 특이한 UI 구성으로는 크게 2가지가 있습니다.
-하나는 조이스틱(방향) UI이고 또"
-        "wordCount": 612
+해당 소스는 https://github.com/Jung-Max/BleHidJoystick를 참고하시면 됩니다.
+앱 다운로드는 https://play.google.com/st"
+        "wordCount": 631
     }
 </script>
 
@@ -448,26 +449,6 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Characteristics 읽고쓰기" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="title">Characteristics 읽고쓰기</a></p>
-                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="thumbnail">
     
     
@@ -481,6 +462,26 @@ ga('send', 'pageview');
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
                             <p class="item-title"><a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="title">Connecting to a GATT Server</a></p>
+                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server 사용하기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
+                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="title">Gatt Server 사용하기</a></p>
                             <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
                         </div>
                     </li>

@@ -13,19 +13,19 @@
         <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
         <meta name="keywords" content="Android,App,Bluetooth,HID">
     
-    <meta name="description" content="첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다.  해당 소스는 https://github.com/Jung-Max/BleHidJoystick를 참고하시면 됩니다. 이제 제어 입력을 연결된 장치로 전송하기 만하면됩니다.  설정하는 것보다 훨씬 간단합니다. Send reportreport를 보내기위한 관련 API">
+    <meta name="description" content="첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다.  해당 소스는 https://github.com/Jung-Max/BleHidJoystick를 참고하시면 됩니다. 앱 다운로드는 https://play.google.com/store/apps/details?id=com.ckbs.blehidjoystick를 참고하">
 <meta name="keywords" content="Android,App,Bluetooth,HID">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android로 Bluetooth HID 장치(Joystick) 만들기 - 02">
 <meta property="og:url" content="http://jung-max.github.io/2019/09/11/Android-Bluetooth-HID-장치만들기02/index.html">
 <meta property="og:site_name" content="Max&#39;s Blog">
-<meta property="og:description" content="첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다.  해당 소스는 https://github.com/Jung-Max/BleHidJoystick를 참고하시면 됩니다. 이제 제어 입력을 연결된 장치로 전송하기 만하면됩니다.  설정하는 것보다 훨씬 간단합니다. Send reportreport를 보내기위한 관련 API">
+<meta property="og:description" content="첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다.  해당 소스는 https://github.com/Jung-Max/BleHidJoystick를 참고하시면 됩니다. 앱 다운로드는 https://play.google.com/store/apps/details?id=com.ckbs.blehidjoystick를 참고하">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/Thumbnail/gamepad.png">
-<meta property="og:updated_time" content="2019-09-16T03:52:37.364Z">
+<meta property="og:updated_time" content="2019-09-16T04:23:14.496Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android로 Bluetooth HID 장치(Joystick) 만들기 - 02">
-<meta name="twitter:description" content="첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다.  해당 소스는 https://github.com/Jung-Max/BleHidJoystick를 참고하시면 됩니다. 이제 제어 입력을 연결된 장치로 전송하기 만하면됩니다.  설정하는 것보다 훨씬 간단합니다. Send reportreport를 보내기위한 관련 API">
+<meta name="twitter:description" content="첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다.  해당 소스는 https://github.com/Jung-Max/BleHidJoystick를 참고하시면 됩니다. 앱 다운로드는 https://play.google.com/store/apps/details?id=com.ckbs.blehidjoystick를 참고하">
 <meta name="twitter:image" content="http://jung-max.github.io/images/Thumbnail/gamepad.png">
     
     <link rel="canonical" href="http://jung-max.github.io/2019/09/11/android-bluetooth-hid-장치만들기02/">
@@ -192,6 +192,7 @@ ga('send', 'pageview');
         <div class="article-entry" itemprop="articleBody">
             <p><a href="https://jung-max.github.io/2019/09/09/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B001/">첫번째 포스트</a>에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다. </p>
 <p>해당 소스는 <a href="https://github.com/Jung-Max/BleHidJoystick" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/Jung-Max/BleHidJoystick</a>를 참고하시면 됩니다.</p>
+<p>앱 다운로드는 <a href="https://play.google.com/store/apps/details?id=com.ckbs.blehidjoystick" rel="external nofollow noopener noreferrer" target="_blank">https://play.google.com/store/apps/details?id=com.ckbs.blehidjoystick</a>를 참고하세요.</p>
 <p>이제 제어 입력을 연결된 장치로 전송하기 만하면됩니다. </p>
 <p>설정하는 것보다 훨씬 간단합니다.</p>
 <h1 id="Send-report"><a href="#Send-report" class="headerlink" title="Send report"></a>Send report</h1><p>report를 보내기위한 관련 API는 <code>BluetoothHidDevice.sendReport</code>입니다.</p>
@@ -232,7 +233,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2019/09/11/Android-Bluetooth-HID-장치만들기02/" data-id="ck0lvtdys000p0pjyi1y723y6" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2019/09/11/Android-Bluetooth-HID-장치만들기02/" data-id="ck0lwlq2g000o0pjyphomgip3" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -312,10 +313,8 @@ ga('send', 'pageview');
         "url": "http://jung-max.github.io/2019/09/11/Android-Bluetooth-HID-장치만들기02/",
         "description": "첫번째 포스트에서 우리는 Bluetoooth HID 장치를 구현하기 위해 모든 것을 설정했습니다. 
 해당 소스는 https://github.com/Jung-Max/BleHidJoystick를 참고하시면 됩니다.
-이제 제어 입력을 연결된 장치로 전송하기 만하면됩니다. 
-설정하는 것보다 훨씬 간단합니다.
-Send reportreport를 보내기위한 관련 API"
-        "wordCount": 1047
+앱 다운로드는 https://play.google.com/store/apps/details?id=com.ckbs.blehidjoystick를 참고하"
+        "wordCount": 1056
     }
 </script>
 
@@ -450,26 +449,6 @@ Send reportreport를 보내기위한 관련 API"
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Characteristics 읽고쓰기" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="title">Characteristics 읽고쓰기</a></p>
-                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="thumbnail">
     
     
@@ -483,6 +462,26 @@ Send reportreport를 보내기위한 관련 API"
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
                             <p class="item-title"><a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="title">Connecting to a GATT Server</a></p>
+                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server 사용하기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
+                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="title">Gatt Server 사용하기</a></p>
                             <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
                         </div>
                     </li>

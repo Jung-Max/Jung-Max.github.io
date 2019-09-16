@@ -169,58 +169,6 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/30/Android-bluetooth로-string데이터-보내기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Android-bluetooth%EB%A1%9C-string%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%B4%EB%82%B4%EA%B8%B0/01.png)" alt="bluetooth로 string 데이터 보내기" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-bluetooth로-string데이터-보내기/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
-            </div>
-            <div class="date"><time datetime="2019-08-30T08:00:00.000Z" itemprop="datePublished">2019-08-30</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-bluetooth로-string데이터-보내기/">bluetooth로 string 데이터 보내기</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-Bluetooth에 string값을 보내기 위해서는 메세지에 스트링 값을 담아 보내고
-받은 메세지의 string을 byte화 해서 송신을 하면 된다.
-//string값 메세지로 writeHandler에게 전달
-static public void Mouse_left() {
-    Message msg = new Message();
-    msg.obj = "
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
         <a href="/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/" class="thumbnail">
     
     
@@ -264,29 +212,25 @@ int값을 byte화 하기 위해선 변환이 필요하다.
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
     
-        <div class="article-row">
-    
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/29/Github-Pages-Hexo-Theme/" class="thumbnail">
+        <a href="/2019/08/30/Android-App구동시-시작화면을-나오게-하자/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/github-pages.jpg)" alt="Github pages Hexo 테마 적용하기(hueman)" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="App 구동시 시작화면을 나오게 하자" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Github-Pages-Hexo-Theme/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-App구동시-시작화면을-나오게-하자/">0</span>
     
 </span>
 
@@ -297,32 +241,32 @@ int값을 byte화 하기 위해선 변환이 필요하다.
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/GitHub-Pages/">GitHub Pages</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a>
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
             </div>
-            <div class="date"><time datetime="2019-08-29T02:17:13.000Z" itemprop="datePublished">2019-08-29</time></div>
+            <div class="date"><time datetime="2019-08-30T08:00:00.000Z" itemprop="datePublished">2019-08-30</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Github-Pages-Hexo-Theme/">Github pages Hexo 테마 적용하기(hueman)</a>
+        <a href="/2019/08/30/Android-App구동시-시작화면을-나오게-하자/">App 구동시 시작화면을 나오게 하자</a>
         </h1>
     
 
         <p class="article-excerpt">
-            테마(Theme) 적용하기https://hexo.io/themes/ 에 접속해서 Hexo에서 사용할 수 있는 여러가지 Theme를 확인하고 선택할 수 있다.여기서는 hueman을 예로 든다.
-
-blog의 root 폴더에서 themes/hueman 폴더로 이동한다.
-아래 명령을 통해 다운받는다.
-
-1$ git clone https://github.com/pp
+            MainActivity 이외의 Activity를 새로 만든다.(여기서는 가칭 IndexActivity)
+12345678910111213141516171819202122public class IndexActivity extends AppCompatActivity &#123;    @Override    protected void onCreate(Bundle 
         </p>
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -368,6 +312,57 @@ Github에 가입한다.https://github.com/
 New Repository, Repository 이름은 USERNAME.github.io
 USERNAME 은 Github의 가입시에 사용자의 username을 입력한다
 Public / Private 중 Publ
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/29/Github-Pages-Hexo-Theme/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/github-pages.jpg)" alt="Github pages Hexo 테마 적용하기(hueman)" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Github-Pages-Hexo-Theme/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/GitHub-Pages/">GitHub Pages</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a>
+            </div>
+            <div class="date"><time datetime="2019-08-29T02:17:13.000Z" itemprop="datePublished">2019-08-29</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/29/Github-Pages-Hexo-Theme/">Github pages Hexo 테마 적용하기(hueman)</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            테마(Theme) 적용하기https://hexo.io/themes/ 에 접속해서 Hexo에서 사용할 수 있는 여러가지 Theme를 확인하고 선택할 수 있다.여기서는 hueman을 예로 든다.
+
+blog의 root 폴더에서 themes/hueman 폴더로 이동한다.
+아래 명령을 통해 다운받는다.
+
+1$ git clone https://github.com/pp
         </p>
     </div>
 </article>
@@ -561,6 +556,61 @@ m
         <article class="article article-summary">
     <div class="article-summary-inner">
         
+        <a href="/2019/08/27/Android-Platform-개발환경/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-Platform-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/01.png)" alt="Android Platform 개발환경 구축" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-개발환경/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a>
+            </div>
+            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/27/Android-Platform-개발환경/">Android Platform 개발환경 구축</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            기본 Image 구성
+Android 개발 툴SDK(Software Development Kit)
+Android Application을 만들기 위한 개발 환경 및 Tool을 제공
+JAVA 기반의 Application 개발 시 사용
+Windows, Linux, MAC등에 구성가능
+Android studio에 연결 가능PDK(Platform Development
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
         <a href="/2019/08/27/Android-Kernel-Message/" class="thumbnail">
     
     
@@ -606,14 +656,10 @@ logcat은 init가 구동하기 때문에 init는 printk()를 사용.
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -654,57 +700,6 @@ logcat은 init가 구동하기 때문에 init는 printk()를 사용.
             Android NDK 개발 환경 구축Android 앱에서 C나 C++코드를 사용하기 위하여 Android NDK를 써야 한다.아래는 Android NDK의 개발 환경 구성 방법을 설명한다.
 크게 아래의 세가지를 설치할 것이며, Linux 64bit에서 진행했다.
 IDE 다운로드 : Android StudioSDK 다운로드 : Android Studio에 포
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/27/Android-기반-Kernel/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android 기반 커널" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-기반-Kernel/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
-            </div>
-            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-기반-Kernel/">Android 기반 커널</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            개요
-Hardware System을 관리할 뿐 아니라 응용 소프트웨어를 실행하기 위한 기능과 서비스를 제공하는 System Software이다.
-실행되는 응용 프로그램들이 Memory, CPU, I/O장치 등의 자원들을 사용할 수 있도록 만들어 주고 공통적으로 사용할 수 있는 Service를 제공한다.
-
-Process 관리
-Process 생성, 제거, Pr
         </p>
     </div>
 </article>
@@ -816,26 +811,6 @@ Process 생성, 제거, Pr
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Characteristics 읽고쓰기" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="title">Characteristics 읽고쓰기</a></p>
-                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="thumbnail">
     
     
@@ -849,6 +824,26 @@ Process 생성, 제거, Pr
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
                             <p class="item-title"><a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="title">Connecting to a GATT Server</a></p>
+                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server 사용하기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
+                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="title">Gatt Server 사용하기</a></p>
                             <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
                         </div>
                     </li>

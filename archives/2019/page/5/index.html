@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-Platform-Architecture/" class="thumbnail">
+        <a href="/2019/08/27/Android-홈런쳐App/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Platform-Architecture/01.png)" alt="Android Platform Architecture" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-%ED%99%88%EB%9F%B0%EC%B3%90App/01.png)" alt="Android 홈 런쳐 App 작성 방법" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-Architecture/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-홈런쳐App/">0</span>
     
 </span>
 
@@ -190,22 +190,21 @@ ga('send', 'pageview');
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Architecture/">Architecture</a>
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Platform-Architecture/">Android Platform Architecture</a>
+        <a href="/2019/08/27/Android-홈런쳐App/">Android 홈 런쳐 App 작성 방법</a>
         </h1>
     
 
         <p class="article-excerpt">
-            개요
-Open Source기반 Embedded System
-대표적인 Open Source기반 Emebedded System인 Embedded Linux와 Android 비교시 Kernel은 동일하고 응용프로그램 영역이 다름
-OpenSource 기반이기 때문에 Framework source가 공개되어 있어 수정/추가가 가능하나 제조사에서 제공되는 S/W(Bi
+            속성 설정 방법-&gt;앱의 AndroidManifest.xml을 열어서 intent-filter에 아래와 같이 추가해주면,안드로이드의 홈 버튼을 눌렀을 때 호출될, 런쳐 중 하나로 선택할 수 있다.
+-&gt;Launcher App의 외관 style 코드인 styles.xml를 아래와 같이 수정하여, 상태바를 투명하게 만들 수 있다.
+-&gt;MainAct
         </p>
     </div>
 </article>
@@ -218,17 +217,17 @@ OpenSource 기반이기 때문에 Framework source가 공개되어 있어 수정
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-부트로그/" class="thumbnail">
+        <a href="/2019/08/27/Android-SystemApp/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android 부트로그 수정" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android System App" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-부트로그/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-SystemApp/">0</span>
     
 </span>
 
@@ -239,22 +238,20 @@ OpenSource 기반이기 때문에 Framework source가 공개되어 있어 수정
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-부트로그/">Android 부트로그 수정</a>
+        <a href="/2019/08/27/Android-SystemApp/">Android System App</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Linux 커널 부트 로고 변경
-이미지를 교체하는 방법kernel/arch/arm/Makefile에 보면
-
-12345LOGO := $(notdir $(wildcard $(srctree)/logo.bmp))LOGO_KERNEL := $(notdir $(wildcard $(srctree)/logo_kernel.bmp))%.img: %.dtb kernel.img
+            System app 권한 추가.AndroidManifest.xml에 sharedUserId 추가.
+123&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"    package="ckbs.ywjung.btremocon"    android:sharedUserId="android.ui
         </p>
     </div>
 </article>
@@ -271,17 +268,17 @@ OpenSource 기반이기 때문에 Framework source가 공개되어 있어 수정
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-Kernel-System-Memory-Model/" class="thumbnail">
+        <a href="/2019/08/27/Android-GIPO-제어-ROCK64/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Kernel-System-Memory-Model/01.png)" alt="Android Kernel System Memory Model" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-GIPO-%EC%A0%9C%EC%96%B4-ROCK64/01.png)" alt="Android에서 GPIO제어(ROCK64 보드)" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Kernel-System-Memory-Model/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-GIPO-제어-ROCK64/">0</span>
     
 </span>
 
@@ -292,25 +289,23 @@ OpenSource 기반이기 때문에 Framework source가 공개되어 있어 수정
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Kernel-System-Memory-Model/">Android Kernel System Memory Model</a>
+        <a href="/2019/08/27/Android-GIPO-제어-ROCK64/">Android에서 GPIO제어(ROCK64 보드)</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Android System Memory Model
-Linux/Android에서는 가상 메모리를 각 Process 마다 4GB씩 할당 받는다.(32bit 기준)
-Process의 각 유저 영역은 물리 메모리에 독립적으로 지정된다.
-Kernel 영역은 물리 메모리에서 공유된다.
-
-공유 가능 영역
-공유 가능 영역은 Kernel 공간이기 때문에 Android에서는 
+            GPIO indexROCK64의 핀은 아래와 같이 구성되어있습니다.GPIO의 이름은 bank, pad, number로 이루어져 있습니다.
+GPIO(bank)_(pad)(number)
+예를 들어 Pi-2 Bus의 16번 핀의 이름은 GPIO3_A5입니다.
+이 핀의 bank는 ‘3’ / pad는 ‘A’ / number는 ‘5’입니다.
+여기서 index를 구하는
         </p>
     </div>
 </article>
@@ -477,26 +472,6 @@ Kernel 영역은 물리 메모리에서 공유된다.
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Characteristics 읽고쓰기" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="title">Characteristics 읽고쓰기</a></p>
-                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
                             <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="thumbnail">
     
     
@@ -510,6 +485,26 @@ Kernel 영역은 물리 메모리에서 공유된다.
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
                             <p class="item-title"><a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="title">Connecting to a GATT Server</a></p>
+                            <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server 사용하기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a></p>
+                            <p class="item-title"><a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="title">Gatt Server 사용하기</a></p>
                             <p class="item-date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></p>
                         </div>
                     </li>
