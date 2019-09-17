@@ -320,17 +320,17 @@ evdev란 범용 입력 이벤트 드라이버를 뜻한다.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/29/Android-Kernel_Module/" class="thumbnail">
+        <a href="/2019/08/29/Android-Kernel-빌드-옵션/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Kernel_Module/01.jpg)" alt="Android Kernel Moduel" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/01.png)" alt="Android Kernel 빌드 옵션" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel_Module/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-빌드-옵션/">0</span>
     
 </span>
 
@@ -348,20 +348,23 @@ evdev란 범용 입력 이벤트 드라이버를 뜻한다.
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Android-Kernel_Module/">Android Kernel Moduel</a>
+        <a href="/2019/08/29/Android-Kernel-빌드-옵션/">Android Kernel 빌드 옵션</a>
         </h1>
     
 
         <p class="article-excerpt">
-            
-Kconfig
-Tree 구조로 된 configuration option들의 집합이며 모든 menu entry들은 자신만의 종속성을 가지고 있다.
-child entry는 parent entry가 보기 가능할 때만 보여진다. → 종속성
+            make config
 
+텍스트 기반 설정 방식
+모든 옵션을 하나씩 보여주고 yes, no, module 중에 하나의 옵션을 선택 → 많이 불편함
 
-Menu entry들은 config option을 정의하고 있다.
-Menu attribute
-모든 config optio
+make menuconfig
+
+텍스트 메뉴 방식
+ncurses에 기한반 GUI툴
+화살표와 스페이스 바를 이용하여 옵션 설정
+편리하고 가장 많이 사용 → 실제로 거의 이 모드를 사용한다.
+설정 이후 저장하게 되면 
         </p>
     </div>
 </article>
@@ -440,17 +443,17 @@ m
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/29/Android-Kernel-빌드-옵션/" class="thumbnail">
+        <a href="/2019/08/29/Android-Kernel_Module/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/01.png)" alt="Android Kernel 빌드 옵션" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Kernel_Module/01.jpg)" alt="Android Kernel Moduel" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-빌드-옵션/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel_Module/">0</span>
     
 </span>
 
@@ -468,23 +471,20 @@ m
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Android-Kernel-빌드-옵션/">Android Kernel 빌드 옵션</a>
+        <a href="/2019/08/29/Android-Kernel_Module/">Android Kernel Moduel</a>
         </h1>
     
 
         <p class="article-excerpt">
-            make config
+            
+Kconfig
+Tree 구조로 된 configuration option들의 집합이며 모든 menu entry들은 자신만의 종속성을 가지고 있다.
+child entry는 parent entry가 보기 가능할 때만 보여진다. → 종속성
 
-텍스트 기반 설정 방식
-모든 옵션을 하나씩 보여주고 yes, no, module 중에 하나의 옵션을 선택 → 많이 불편함
 
-make menuconfig
-
-텍스트 메뉴 방식
-ncurses에 기한반 GUI툴
-화살표와 스페이스 바를 이용하여 옵션 설정
-편리하고 가장 많이 사용 → 실제로 거의 이 모드를 사용한다.
-설정 이후 저장하게 되면 
+Menu entry들은 config option을 정의하고 있다.
+Menu attribute
+모든 config optio
         </p>
     </div>
 </article>
@@ -497,6 +497,55 @@ ncurses에 기한반 GUI툴
     
     
         <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/27/Android-커스터마이즈/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/Android_platform.png)" alt="Android Platform 커스터마이즈" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-커스터마이즈/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
+            </div>
+            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/27/Android-커스터마이즈/">Android Platform 커스터마이즈</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            안드로이드의 기본 설정값 및 기본 동작은 아래에서 설명할 파일들을 수정하여 변경할 수 있다.
+1. 안드로이드 기본 설정값1frameworks/base/packages/SettingsProvider/res/values/defaults.xml
+
+안드로이드 시스템 설정의 초기 값을 정할 수 있다. 이 중에는 기기 사용자가 설정에서 변경할 수 없는 것도 있다.시스
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -537,58 +586,6 @@ ncurses에 기한반 GUI툴
             Android platform architecture overview1. 개요이번 시간은 안드로이드의 구조에 대해서 알아보고 애플리케이션이 어떻게 구동되는지 추론해보는 시간을 가져보겠습니다.
 제목은 안드로이드 플랫폼 아키텍쳐라고 정했습니다. 
 여기서 플랫폼은 컴퓨터 시스템의 기본이 되는 특정 프로세서 모델과 하나의 컴퓨터 시스템을 바탕으로 하는 운영체제를 
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/27/Android-Kernel-System-Memory-Model/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Android-Kernel-System-Memory-Model/01.png)" alt="Android Kernel System Memory Model" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Kernel-System-Memory-Model/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
-            </div>
-            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Kernel-System-Memory-Model/">Android Kernel System Memory Model</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            Android System Memory Model
-Linux/Android에서는 가상 메모리를 각 Process 마다 4GB씩 할당 받는다.(32bit 기준)
-Process의 각 유저 영역은 물리 메모리에 독립적으로 지정된다.
-Kernel 영역은 물리 메모리에서 공유된다.
-
-공유 가능 영역
-공유 가능 영역은 Kernel 공간이기 때문에 Android에서는 
         </p>
     </div>
 </article>
@@ -658,17 +655,17 @@ logcat은 init가 구동하기 때문에 init는 printk()를 사용.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-Platform-부분빌드방법/" class="thumbnail">
+        <a href="/2019/08/27/Android-기반-Kernel/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/Android_platform.png)" alt="Android Platform 부분 빌드 방법" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android 기반 커널" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-부분빌드방법/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-기반-Kernel/">0</span>
     
 </span>
 
@@ -679,22 +676,24 @@ logcat은 init가 구동하기 때문에 init는 printk()를 사용.
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a>
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Platform-부분빌드방법/">Android Platform 부분 빌드 방법</a>
+        <a href="/2019/08/27/Android-기반-Kernel/">Android 기반 커널</a>
         </h1>
     
 
         <p class="article-excerpt">
-            
-안드로이드 빌드의 시작은 source build/envsetup.sh의 명령어로 안드로이드 환경을 구성하는 것이다.현재 rk3328의 환경설정을 보면FFTools\build.sh에 다음과 같이 되어있다.
+            개요
+Hardware System을 관리할 뿐 아니라 응용 소프트웨어를 실행하기 위한 기능과 서비스를 제공하는 System Software이다.
+실행되는 응용 프로그램들이 Memory, CPU, I/O장치 등의 자원들을 사용할 수 있도록 만들어 주고 공통적으로 사용할 수 있는 Service를 제공한다.
 
-12345export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64export PATH=$JAVA_HOME/bin:$P
+Process 관리
+Process 생성, 제거, Pr
         </p>
     </div>
 </article>
@@ -743,6 +742,26 @@ logcat은 init가 구동하기 때문에 init는 printk()를 사용.
         <h3 class="widget-title">최근 글</h3>
         <div class="widget">
             <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/17/Github-Pages-Hexo-검색엔진최적화/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/github-pages.jpg)" alt="Github Pages Hexo 검색엔진최적화(SEO)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/GitHub-Pages/">GitHub Pages</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a></p>
+                            <p class="item-title"><a href="/2019/09/17/Github-Pages-Hexo-검색엔진최적화/" class="title">Github Pages Hexo 검색엔진최적화(SEO)</a></p>
+                            <p class="item-date"><time datetime="2019-09-17T05:44:00.000Z" itemprop="datePublished">2019-09-17</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -824,26 +843,6 @@ logcat은 init가 구동하기 때문에 init는 printk()를 사용.
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-Bluetooth-HID-장치만들기01/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B001/01.png)" alt="Android로 Bluetooth HID 장치(Joystick) 만들기 - 01" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/HID/">HID</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-Bluetooth-HID-장치만들기01/" class="title">Android로 Bluetooth HID 장치(Joystick) 만들기 - 01</a></p>
-                            <p class="item-date"><time datetime="2019-09-09T04:39:00.000Z" itemprop="datePublished">2019-09-09</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -863,7 +862,7 @@ logcat은 init가 구동하기 때문에 init는 printk()를 사용.
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">아카이브</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">29</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
         </div>
     </div>
 

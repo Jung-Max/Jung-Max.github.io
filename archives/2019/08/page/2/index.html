@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/29/Android-Kernel-compile/" class="thumbnail">
+        <a href="/2019/08/29/Android-Kernel_Module/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Kernel-compile/01.png)" alt="Android Kernel compile" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Kernel_Module/01.jpg)" alt="Android Kernel Moduel" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-compile/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel_Module/">0</span>
     
 </span>
 
@@ -197,235 +197,20 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Android-Kernel-compile/">Android Kernel compile</a>
+        <a href="/2019/08/29/Android-Kernel_Module/">Android Kernel Moduel</a>
         </h1>
     
 
         <p class="article-excerpt">
             
-make
-아래 설명될 이미지를 모두 만든다.
-
-make image
-compress되지 않은 Kernel 이미지
-arch/arm/boot/image에서 찾을 수 있음
-
-make zImage
-compress된 kernel 이미지
-arch/arm/boot/zImage에 존재
-
-make clean
-object 파일을 지우기 위한 명령어
-
-make module
-m
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/29/Android-Kernel-빌드-옵션/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/01.png)" alt="Android Kernel 빌드 옵션" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-빌드-옵션/">0</span>
-    
-</span>
+Kconfig
+Tree 구조로 된 configuration option들의 집합이며 모든 menu entry들은 자신만의 종속성을 가지고 있다.
+child entry는 parent entry가 보기 가능할 때만 보여진다. → 종속성
 
 
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
-            </div>
-            <div class="date"><time datetime="2019-08-29T01:54:13.000Z" itemprop="datePublished">2019-08-29</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Android-Kernel-빌드-옵션/">Android Kernel 빌드 옵션</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            make config
-
-텍스트 기반 설정 방식
-모든 옵션을 하나씩 보여주고 yes, no, module 중에 하나의 옵션을 선택 → 많이 불편함
-
-make menuconfig
-
-텍스트 메뉴 방식
-ncurses에 기한반 GUI툴
-화살표와 스페이스 바를 이용하여 옵션 설정
-편리하고 가장 많이 사용 → 실제로 거의 이 모드를 사용한다.
-설정 이후 저장하게 되면 
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/27/Android-수정된어플탑재/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android 수정된 어플 탑재방법" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-수정된어플탑재/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
-            </div>
-            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-수정된어플탑재/">Android 수정된 어플 탑재방법</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            1. 아래 검색 결과처럼 packages/apps/Setting/의 어플을 수정하면 설정 어플이 수정되어 탑재된다.12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364Searching 525515 
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/27/Android-Platform-부분빌드방법/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/Android_platform.png)" alt="Android Platform 부분 빌드 방법" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-부분빌드방법/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a>
-            </div>
-            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Platform-부분빌드방법/">Android Platform 부분 빌드 방법</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-안드로이드 빌드의 시작은 source build/envsetup.sh의 명령어로 안드로이드 환경을 구성하는 것이다.현재 rk3328의 환경설정을 보면FFTools\build.sh에 다음과 같이 되어있다.
-
-12345export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64export PATH=$JAVA_HOME/bin:$P
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/27/Android-SystemApp/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android System App" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-SystemApp/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
-            </div>
-            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-SystemApp/">Android System App</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            System app 권한 추가.AndroidManifest.xml에 sharedUserId 추가.
-123&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"    package="ckbs.ywjung.btremocon"    android:sharedUserId="android.ui
+Menu entry들은 config option을 정의하고 있다.
+Menu attribute
+모든 config optio
         </p>
     </div>
 </article>
@@ -477,6 +262,221 @@ Hardware System을 관리할 뿐 아니라 응용 소프트웨어를 실행하�
 
 Process 관리
 Process 생성, 제거, Pr
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/27/Android-부트로그/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android 부트로그 수정" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-부트로그/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
+            </div>
+            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/27/Android-부트로그/">Android 부트로그 수정</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            Linux 커널 부트 로고 변경
+이미지를 교체하는 방법kernel/arch/arm/Makefile에 보면
+
+12345LOGO := $(notdir $(wildcard $(srctree)/logo.bmp))LOGO_KERNEL := $(notdir $(wildcard $(srctree)/logo_kernel.bmp))%.img: %.dtb kernel.img
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/27/Android-Platform-Architecture-overview/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-Platform-Architecture-overview/01.png)" alt="Android Platform Architecture overview" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-Architecture-overview/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Architecture/">Architecture</a>
+            </div>
+            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/27/Android-Platform-Architecture-overview/">Android Platform Architecture overview</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            Android platform architecture overview1. 개요이번 시간은 안드로이드의 구조에 대해서 알아보고 애플리케이션이 어떻게 구동되는지 추론해보는 시간을 가져보겠습니다.
+제목은 안드로이드 플랫폼 아키텍쳐라고 정했습니다. 
+여기서 플랫폼은 컴퓨터 시스템의 기본이 되는 특정 프로세서 모델과 하나의 컴퓨터 시스템을 바탕으로 하는 운영체제를 
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/27/Android-커스터마이즈/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/Android_platform.png)" alt="Android Platform 커스터마이즈" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-커스터마이즈/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
+            </div>
+            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/27/Android-커스터마이즈/">Android Platform 커스터마이즈</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            안드로이드의 기본 설정값 및 기본 동작은 아래에서 설명할 파일들을 수정하여 변경할 수 있다.
+1. 안드로이드 기본 설정값1frameworks/base/packages/SettingsProvider/res/values/defaults.xml
+
+안드로이드 시스템 설정의 초기 값을 정할 수 있다. 이 중에는 기기 사용자가 설정에서 변경할 수 없는 것도 있다.시스
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/27/Android-앱분해/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-%EC%95%B1%EB%B6%84%ED%95%B4/01.png)" alt="Android Apk 분해 방법" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-앱분해/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            </div>
+            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/27/Android-앱분해/">Android Apk 분해 방법</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            Android 앱 분해 방법
+APK를 다운받는다.
+https://apkpure.com/
+앱 추출 프로그램
+
+
+
+하기 사이트를 접속한다.
+http://www.javadecompilers.com/apk
+
+
+
+아래 메뉴에서 apk를 업로드 하고 apk 분해된 것을 다운받는다.
+
+
+
         </p>
     </div>
 </article>
@@ -545,17 +545,17 @@ Kernel 영역은 물리 메모리에서 공유된다.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-부트로그/" class="thumbnail">
+        <a href="/2019/08/27/Android-Platform-부분빌드방법/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android 부트로그 수정" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/Android_platform.png)" alt="Android Platform 부분 빌드 방법" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-부트로그/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-부분빌드방법/">0</span>
     
 </span>
 
@@ -566,22 +566,22 @@ Kernel 영역은 물리 메모리에서 공유된다.
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-부트로그/">Android 부트로그 수정</a>
+        <a href="/2019/08/27/Android-Platform-부분빌드방법/">Android Platform 부분 빌드 방법</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Linux 커널 부트 로고 변경
-이미지를 교체하는 방법kernel/arch/arm/Makefile에 보면
+            
+안드로이드 빌드의 시작은 source build/envsetup.sh의 명령어로 안드로이드 환경을 구성하는 것이다.현재 rk3328의 환경설정을 보면FFTools\build.sh에 다음과 같이 되어있다.
 
-12345LOGO := $(notdir $(wildcard $(srctree)/logo.bmp))LOGO_KERNEL := $(notdir $(wildcard $(srctree)/logo_kernel.bmp))%.img: %.dtb kernel.img
+12345export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64export PATH=$JAVA_HOME/bin:$P
         </p>
     </div>
 </article>
@@ -598,17 +598,17 @@ Kernel 영역은 물리 메모리에서 공유된다.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-커스터마이즈/" class="thumbnail">
+        <a href="/2019/08/27/Android-수정된어플탑재/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/Android_platform.png)" alt="Android Platform 커스터마이즈" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android 수정된 어플 탑재방법" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-커스터마이즈/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-수정된어플탑재/">0</span>
     
 </span>
 
@@ -626,15 +626,12 @@ Kernel 영역은 물리 메모리에서 공유된다.
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-커스터마이즈/">Android Platform 커스터마이즈</a>
+        <a href="/2019/08/27/Android-수정된어플탑재/">Android 수정된 어플 탑재방법</a>
         </h1>
     
 
         <p class="article-excerpt">
-            안드로이드의 기본 설정값 및 기본 동작은 아래에서 설명할 파일들을 수정하여 변경할 수 있다.
-1. 안드로이드 기본 설정값1frameworks/base/packages/SettingsProvider/res/values/defaults.xml
-
-안드로이드 시스템 설정의 초기 값을 정할 수 있다. 이 중에는 기기 사용자가 설정에서 변경할 수 없는 것도 있다.시스
+            1. 아래 검색 결과처럼 packages/apps/Setting/의 어플을 수정하면 설정 어플이 수정되어 탑재된다.12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364Searching 525515 
         </p>
     </div>
 </article>
@@ -647,17 +644,17 @@ Kernel 영역은 물리 메모리에서 공유된다.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-Platform-Architecture-overview/" class="thumbnail">
+        <a href="/2019/08/27/Android-Kernel-Message/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Platform-Architecture-overview/01.png)" alt="Android Platform Architecture overview" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android Kernel Message" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-Architecture-overview/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Kernel-Message/">0</span>
     
 </span>
 
@@ -668,21 +665,26 @@ Kernel 영역은 물리 메모리에서 공유된다.
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Architecture/">Architecture</a>
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Platform-Architecture-overview/">Android Platform Architecture overview</a>
+        <a href="/2019/08/27/Android-Kernel-Message/">Android Kernel Message</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Android platform architecture overview1. 개요이번 시간은 안드로이드의 구조에 대해서 알아보고 애플리케이션이 어떻게 구동되는지 추론해보는 시간을 가져보겠습니다.
-제목은 안드로이드 플랫폼 아키텍쳐라고 정했습니다. 
-여기서 플랫폼은 컴퓨터 시스템의 기본이 되는 특정 프로세서 모델과 하나의 컴퓨터 시스템을 바탕으로 하는 운영체제를 
+            printk()
+메시지 기록 관리를 위한 로그 레벨의 지정이 가능하다.
+kernel뿐만 아니라 응용프로그램의 init process도 printk()를 사용한다.
+logcat은 init가 구동하기 때문에 init는 printk()를 사용.
+
+
+원형 큐 구조의 관리, 출력 디바이스의 다중 지정이 가능하다.
+콘솔에서 확인하거나 dmesg 명령을 사용해서 로그파
         </p>
     </div>
 </article>
@@ -730,6 +732,26 @@ Kernel 영역은 물리 메모리에서 공유된다.
         <h3 class="widget-title">최근 글</h3>
         <div class="widget">
             <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/09/17/Github-Pages-Hexo-검색엔진최적화/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/github-pages.jpg)" alt="Github Pages Hexo 검색엔진최적화(SEO)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/GitHub-Pages/">GitHub Pages</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a></p>
+                            <p class="item-title"><a href="/2019/09/17/Github-Pages-Hexo-검색엔진최적화/" class="title">Github Pages Hexo 검색엔진최적화(SEO)</a></p>
+                            <p class="item-date"><time datetime="2019-09-17T05:44:00.000Z" itemprop="datePublished">2019-09-17</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -811,26 +833,6 @@ Kernel 영역은 물리 메모리에서 공유된다.
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/09/09/Android-Bluetooth-HID-장치만들기01/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B001/01.png)" alt="Android로 Bluetooth HID 장치(Joystick) 만들기 - 01" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/HID/">HID</a></p>
-                            <p class="item-title"><a href="/2019/09/09/Android-Bluetooth-HID-장치만들기01/" class="title">Android로 Bluetooth HID 장치(Joystick) 만들기 - 01</a></p>
-                            <p class="item-date"><time datetime="2019-09-09T04:39:00.000Z" itemprop="datePublished">2019-09-09</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -850,7 +852,7 @@ Kernel 영역은 물리 메모리에서 공유된다.
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">아카이브</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">29</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
         </div>
     </div>
 
