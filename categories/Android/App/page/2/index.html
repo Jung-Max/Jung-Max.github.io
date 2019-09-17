@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/30/Android-AlertDialog-seekbar-사용-방법/" class="thumbnail">
+        <a href="/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-AlertDialog-seekbar-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95/01.png)" alt="AlertDialog seekbar 사용 방법" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Mouse-x,y%EC%B6%95-%EC%9D%B4%EB%8F%99%EC%9D%84-%ED%8C%A8%ED%82%B7%ED%99%94%ED%95%B4%EC%84%9C-bluetooth%EB%A1%9C-%EB%B3%B4%EB%82%B4%EA%B8%B0/01.png)" alt="Mouse x,y축 이동을 패킷화 해서 bluetooth로 보내기" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-AlertDialog-seekbar-사용-방법/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/">0</span>
     
 </span>
 
@@ -197,16 +197,17 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-AlertDialog-seekbar-사용-방법/">AlertDialog seekbar 사용 방법</a>
+        <a href="/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/">Mouse x,y축 이동을 패킷화 해서 bluetooth로 보내기</a>
         </h1>
     
 
         <p class="article-excerpt">
-            
-Fragment에서 AlertDialog+seekbar 사용seebar를 위한 코드는 MainActivity에 구현한다.
-해당 함수의 파라미터로 Fragment의 값을 받는다.
-파라미터로 받은 Fragment의 값에서 Context를 취득한다.
-123public static void dlp_li_act(RemoconFragment a) &#123;    
+            Bluetooth 통신시 기본적으로 소켓에는 byte[]형식으로 데이터가 담긴다.
+mouse의 x,y 값을 보내기 위해서는 8byte가 필요하다(int *2)
+mouse의 이동값인 것을 나타내기 위한 1byte가 필요하다.
+
+int값을 byte화 하기 위해선 변환이 필요하다.
+1234567891011public static byte[] intTobyte(i
         </p>
     </div>
 </article>
@@ -215,57 +216,6 @@ Fragment에서 AlertDialog+seekbar 사용seebar를 위한 코드는 MainActivity
     
     
     
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/27/Android-SystemApp/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android System App" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-SystemApp/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
-            </div>
-            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-SystemApp/">Android System App</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            System app 권한 추가.AndroidManifest.xml에 sharedUserId 추가.
-123&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"    package="ckbs.ywjung.btremocon"    android:sharedUserId="android.ui
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -312,10 +262,14 @@ GPIO(bank)_(pad)(number)
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -360,14 +314,10 @@ GPIO(bank)_(pad)(number)
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -421,6 +371,57 @@ http://www.javadecompilers.com/apk
 
 
 
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/27/Android-SystemApp/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android System App" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-SystemApp/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            </div>
+            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/27/Android-SystemApp/">Android System App</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            System app 권한 추가.AndroidManifest.xml에 sharedUserId 추가.
+123&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"    package="ckbs.ywjung.btremocon"    android:sharedUserId="android.ui
         </p>
     </div>
 </article>

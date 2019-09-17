@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-Kernel-Message/" class="thumbnail">
+        <a href="/2019/08/27/Android-커스터마이즈/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android Kernel Message" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/Android_platform.png)" alt="Android Platform 커스터마이즈" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Kernel-Message/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-커스터마이즈/">0</span>
     
 </span>
 
@@ -190,26 +190,22 @@ ga('send', 'pageview');
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Kernel-Message/">Android Kernel Message</a>
+        <a href="/2019/08/27/Android-커스터마이즈/">Android Platform 커스터마이즈</a>
         </h1>
     
 
         <p class="article-excerpt">
-            printk()
-메시지 기록 관리를 위한 로그 레벨의 지정이 가능하다.
-kernel뿐만 아니라 응용프로그램의 init process도 printk()를 사용한다.
-logcat은 init가 구동하기 때문에 init는 printk()를 사용.
+            안드로이드의 기본 설정값 및 기본 동작은 아래에서 설명할 파일들을 수정하여 변경할 수 있다.
+1. 안드로이드 기본 설정값1frameworks/base/packages/SettingsProvider/res/values/defaults.xml
 
-
-원형 큐 구조의 관리, 출력 디바이스의 다중 지정이 가능하다.
-콘솔에서 확인하거나 dmesg 명령을 사용해서 로그파
+안드로이드 시스템 설정의 초기 값을 정할 수 있다. 이 중에는 기기 사용자가 설정에서 변경할 수 없는 것도 있다.시스
         </p>
     </div>
 </article>
@@ -218,61 +214,6 @@ logcat은 init가 구동하기 때문에 init는 printk()를 사용.
     
     
     
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/27/Android-기반-Kernel/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android 기반 커널" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-기반-Kernel/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
-            </div>
-            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-기반-Kernel/">Android 기반 커널</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            개요
-Hardware System을 관리할 뿐 아니라 응용 소프트웨어를 실행하기 위한 기능과 서비스를 제공하는 System Software이다.
-실행되는 응용 프로그램들이 Memory, CPU, I/O장치 등의 자원들을 사용할 수 있도록 만들어 주고 공통적으로 사용할 수 있는 Service를 제공한다.
-
-Process 관리
-Process 생성, 제거, Pr
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -317,25 +258,29 @@ Process 생성, 제거, Pr
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
     
+        <div class="article-row">
+    
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-Platform-Architecture/" class="thumbnail">
+        <a href="/2019/08/27/Android-Platform-개발환경/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Platform-Architecture/01.png)" alt="Android Platform Architecture" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Platform-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/01.png)" alt="Android Platform 개발환경 구축" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-Architecture/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-개발환경/">0</span>
     
 </span>
 
@@ -346,22 +291,76 @@ Process 생성, 제거, Pr
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Architecture/">Architecture</a>
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Platform-Architecture/">Android Platform Architecture</a>
+        <a href="/2019/08/27/Android-Platform-개발환경/">Android Platform 개발환경 구축</a>
         </h1>
     
 
         <p class="article-excerpt">
-            개요
-Open Source기반 Embedded System
-대표적인 Open Source기반 Emebedded System인 Embedded Linux와 Android 비교시 Kernel은 동일하고 응용프로그램 영역이 다름
-OpenSource 기반이기 때문에 Framework source가 공개되어 있어 수정/추가가 가능하나 제조사에서 제공되는 S/W(Bi
+            기본 Image 구성
+Android 개발 툴SDK(Software Development Kit)
+Android Application을 만들기 위한 개발 환경 및 Tool을 제공
+JAVA 기반의 Application 개발 시 사용
+Windows, Linux, MAC등에 구성가능
+Android studio에 연결 가능PDK(Platform Development
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/27/Android-Kernel-System-Memory-Model/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-Kernel-System-Memory-Model/01.png)" alt="Android Kernel System Memory Model" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Kernel-System-Memory-Model/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
+            </div>
+            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/27/Android-Kernel-System-Memory-Model/">Android Kernel System Memory Model</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            Android System Memory Model
+Linux/Android에서는 가상 메모리를 각 Process 마다 4GB씩 할당 받는다.(32bit 기준)
+Process의 각 유저 영역은 물리 메모리에 독립적으로 지정된다.
+Kernel 영역은 물리 메모리에서 공유된다.
+
+공유 가능 영역
+공유 가능 영역은 Kernel 공간이기 때문에 Android에서는 
         </p>
     </div>
 </article>
@@ -378,17 +377,17 @@ OpenSource 기반이기 때문에 Framework source가 공개되어 있어 수정
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-NDK/" class="thumbnail">
+        <a href="/2019/08/27/Android-앱분해/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-NDK/01.png)" alt="Android NDK 개발환경 구축" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-%EC%95%B1%EB%B6%84%ED%95%B4/01.png)" alt="Android Apk 분해 방법" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-NDK/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-앱분해/">0</span>
     
 </span>
 
@@ -399,21 +398,34 @@ OpenSource 기반이기 때문에 Framework source가 공개되어 있어 수정
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/개발환경/">개발환경</a>
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-NDK/">Android NDK 개발환경 구축</a>
+        <a href="/2019/08/27/Android-앱분해/">Android Apk 분해 방법</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Android NDK 개발 환경 구축Android 앱에서 C나 C++코드를 사용하기 위하여 Android NDK를 써야 한다.아래는 Android NDK의 개발 환경 구성 방법을 설명한다.
-크게 아래의 세가지를 설치할 것이며, Linux 64bit에서 진행했다.
-IDE 다운로드 : Android StudioSDK 다운로드 : Android Studio에 포
+            Android 앱 분해 방법
+APK를 다운받는다.
+https://apkpure.com/
+앱 추출 프로그램
+
+
+
+하기 사이트를 접속한다.
+http://www.javadecompilers.com/apk
+
+
+
+아래 메뉴에서 apk를 업로드 하고 apk 분해된 것을 다운받는다.
+
+
+
         </p>
     </div>
 </article>
@@ -480,17 +492,17 @@ GPIO(bank)_(pad)(number)
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-앱분해/" class="thumbnail">
+        <a href="/2019/08/27/Android-수정된어플탑재/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-%EC%95%B1%EB%B6%84%ED%95%B4/01.png)" alt="Android Apk 분해 방법" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android 수정된 어플 탑재방법" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-앱분해/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-수정된어플탑재/">0</span>
     
 </span>
 
@@ -501,34 +513,19 @@ GPIO(bank)_(pad)(number)
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-앱분해/">Android Apk 분해 방법</a>
+        <a href="/2019/08/27/Android-수정된어플탑재/">Android 수정된 어플 탑재방법</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Android 앱 분해 방법
-APK를 다운받는다.
-https://apkpure.com/
-앱 추출 프로그램
-
-
-
-하기 사이트를 접속한다.
-http://www.javadecompilers.com/apk
-
-
-
-아래 메뉴에서 apk를 업로드 하고 apk 분해된 것을 다운받는다.
-
-
-
+            1. 아래 검색 결과처럼 packages/apps/Setting/의 어플을 수정하면 설정 어플이 수정되어 탑재된다.12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364Searching 525515 
         </p>
     </div>
 </article>
