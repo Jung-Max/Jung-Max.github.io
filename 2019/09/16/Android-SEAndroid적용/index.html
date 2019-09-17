@@ -22,7 +22,7 @@
 <meta property="og:description" content="SEAndroid(Security Enhancements for Android)SEAndroid는 Android를 지원하기 위해 SELinux를 확장/개선한 보안기능이며 권한이 있는 시스템관리자만 변경할 수 있도록 지원해 줍니다. SELinux(Security-Enhanced Linux)란 Open Source인 Linux에 추가된 MAC(Mandatory">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/01.png">
-<meta property="og:updated_time" content="2019-09-16T07:56:58.955Z">
+<meta property="og:updated_time" content="2019-09-17T08:25:05.417Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SEAndroid 적용">
 <meta name="twitter:description" content="SEAndroid(Security Enhancements for Android)SEAndroid는 Android를 지원하기 위해 SELinux를 확장/개선한 보안기능이며 권한이 있는 시스템관리자만 변경할 수 있도록 지원해 줍니다. SELinux(Security-Enhanced Linux)란 Open Source인 Linux에 추가된 MAC(Mandatory">
@@ -205,6 +205,29 @@ ga('send', 'pageview');
 </ul>
 <p>같은 경로에 있는 file_contexts 파일에도 항목을 추가해야 합니다.</p>
 <p><img src="/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/02.png" alt="보안정책이 있을때 Service 실행"></p>
+<h2 id="Binder-기반-Service-Service-Manager에-등록-가능"><a href="#Binder-기반-Service-Service-Manager에-등록-가능" class="headerlink" title="Binder 기반 Service(Service Manager에 등록 가능)"></a>Binder 기반 Service(Service Manager에 등록 가능)</h2><p>실행되는 Service가 Binder기반의 Service인 경우 xxx.te 파일에 추가적인 항목이 더 들어가야 합니다.</p>
+<ul>
+<li>~Android 6.x는 <code>external/sepolicy</code> 또는 <code>device/.../sepolicy</code>에 <code>service.te</code>에도 항목 추가가 필요합니다.</li>
+<li>Android 7.x~는 <code>system/sepolicy</code>에 <code>service.te</code>에도 항목 추가가 필요합니다.</li>
+</ul>
+<p><img src="/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/03.png" alt="Binder 기반 Service 실행"></p>
+<h2 id="Property를-사용한-Service제어"><a href="#Property를-사용한-Service제어" class="headerlink" title="Property를 사용한 Service제어"></a>Property를 사용한 Service제어</h2><p>Booting시 실행이 안되는 Service의 경우 Property를 사용하여 제어(Start/Stop 등)하는 것이 가능합니다.</p>
+<p>Default값을 사용할 수도 있지만 property 값을 새로 지정해서 사용하는 것도 가능합니다.</p>
+<p>보안정책(Security Policy)관련 설정이 없는 경우에는 실행이 불가능 합니다.</p>
+<p><img src="/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/04.png" alt="Property를 사용한 Service제어 보안라벨 필요"></p>
+<p>Property를 사용한 Service제어에 관련된 보안 정책(Security Policy)관련 설정 파일은 다음과 같습니다.</p>
+<ul>
+<li>~Android 6.x는 <code>external/sepolicy</code> 또는 <code>device/.../sepolicy</code>에 <code>xxx.te</code></li>
+<li>Android 7.x~는 <code>system/sepolicy</code>에 <code>service.te</code>에 <code>xxx.te</code></li>
+</ul>
+<p>수정이 필요한 <code>xxx.te</code>는 surfaceflinger의 예를 들어보면</p>
+<ul>
+<li>surfaceflinger.te</li>
+<li>property_contexts</li>
+<li>property.te</li>
+</ul>
+<p>가 수정이 필요합니다.</p>
+<p><img src="/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/05.png" alt="Property를 사용한 Service제어 보안라벨 설정"></p>
 
         </div>
         <footer class="article-footer">
@@ -212,7 +235,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2019/09/16/Android-SEAndroid적용/" data-id="ck0newy5900264cjy9wchceso" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2019/09/16/Android-SEAndroid적용/" data-id="ck0nkog4y002f0pjynky7dopo" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -288,11 +311,11 @@ ga('send', 'pageview');
         "genre": "Android Platform SEAndroid",
         "datePublished": "2019-09-16",
         "dateCreated": "2019-09-16",
-        "dateModified": "2019-09-16",
+        "dateModified": "2019-09-17",
         "url": "http://jung-max.github.io/2019/09/16/Android-SEAndroid적용/",
         "description": "SEAndroid(Security Enhancements for Android)SEAndroid는 Android를 지원하기 위해 SELinux를 확장/개선한 보안기능이며 권한이 있는 시스템관리자만 변경할 수 있도록 지원해 줍니다.
 SELinux(Security-Enhanced Linux)란 Open Source인 Linux에 추가된 MAC(Mandatory"
-        "wordCount": 128
+        "wordCount": 245
     }
 </script>
 
@@ -370,7 +393,7 @@ SELinux(Security-Enhanced Linux)란 Open Source인 Linux에 추가된 MAC(Mandat
                             <a href="/2019/09/17/Github-Pages-Hexo-검색엔진최적화/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/github-pages.jpg)" alt="Github Pages Hexo 검색엔진최적화(SEO)" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Github-Pages-Hexo-%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84%EC%B5%9C%EC%A0%81%ED%99%94/01.png)" alt="Github Pages Hexo 검색엔진최적화(SEO)" class="thumbnail-image"></span>
     
     
 </a>
