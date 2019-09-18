@@ -21,12 +21,12 @@
 <meta property="og:site_name" content="Max&#39;s Blog">
 <meta property="og:description" content="SEAndroid(Security Enhancements for Android)SEAndroid는 Android를 지원하기 위해 SELinux를 확장/개선한 보안기능이며 권한이 있는 시스템관리자만 변경할 수 있도록 지원해 줍니다. SELinux(Security-Enhanced Linux)란 Open Source인 Linux에 추가된 MAC(Mandatory">
 <meta property="og:locale" content="ko">
-<meta property="og:image" content="http://jung-max.github.io/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/01.png">
-<meta property="og:updated_time" content="2019-09-17T08:25:05.417Z">
+<meta property="og:image" content="http://jung-max.github.io/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/06.png">
+<meta property="og:updated_time" content="2019-09-18T01:43:28.788Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SEAndroid 적용">
 <meta name="twitter:description" content="SEAndroid(Security Enhancements for Android)SEAndroid는 Android를 지원하기 위해 SELinux를 확장/개선한 보안기능이며 권한이 있는 시스템관리자만 변경할 수 있도록 지원해 줍니다. SELinux(Security-Enhanced Linux)란 Open Source인 Linux에 추가된 MAC(Mandatory">
-<meta name="twitter:image" content="http://jung-max.github.io/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/01.png">
+<meta name="twitter:image" content="http://jung-max.github.io/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/06.png">
     
     <link rel="canonical" href="http://jung-max.github.io/2019/09/16/android-seandroid적용/">
 
@@ -194,7 +194,15 @@ ga('send', 'pageview');
 <p>SELinux(Security-Enhanced Linux)란 Open Source인 Linux에 추가된 MAC(Mandatory Access Control)을 의미합니다.</p>
 <p>Access Control관련 보안 정책(Security Policy)을 포함합니다.</p>
 <p>보안정책에 맞춰 Android Module을 추가해야 하며 관련 파일이 없거나 잘못 작성된 경우 Booting시 실행이 안되거나 다른 Module로 접근이 안되거나 기능을 사용하지 못하게 됩니다.</p>
-<h2 id="Service-실행"><a href="#Service-실행" class="headerlink" title="Service 실행"></a>Service 실행</h2><p>SEAndroid는 Android 4.4부터 추가된 보안 관련 Module이며 버전이 올라갈수록 보안관련 정책이 엄격해지고 있습니다.</p>
+<p><img src="/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/06.png" alt="SEAndroid 보안라벨 흐름"></p>
+<p>SEAndroid의 보안라벨의 흐름은 크게 5가지로 구분됩니다.</p>
+<p>첫째는 Service 실행을 위한 보안라벨입니다.</p>
+<p>둘째는 Binder기반 서비스의 경우 Service Manager에 등록을 허락받기 위한 보안라벨입니다.</p>
+<p>셋째는 Booting시 Property 실행을 위한 보안라벨입니다.</p>
+<p>넷째는 Device driver 사용 허락을 위한 보안라벨입니다.</p>
+<p>마지막으로 Untrusted application(등록되지 않은 앱)에 관련된 보안라벨 설정입니다.</p>
+<p>아래에서 하나씩 각 설정에 관련되서 살펴보겠습니다.</p>
+<h2 id="①Service-실행"><a href="#①Service-실행" class="headerlink" title="①Service 실행"></a>①Service 실행</h2><p>SEAndroid는 Android 4.4부터 추가된 보안 관련 Module이며 버전이 올라갈수록 보안관련 정책이 엄격해지고 있습니다.</p>
 <p>Android 6.x(Marshmallow)이후에 추가되는 Service의 경우 관련파일이 없거나 잘못 작성된 경우 Booting시 실행이 안됩니다.</p>
 <p><img src="/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/01.png" alt="보안정책이 없을때 Service 실행"></p>
 <ul>
@@ -205,13 +213,16 @@ ga('send', 'pageview');
 </ul>
 <p>같은 경로에 있는 file_contexts 파일에도 항목을 추가해야 합니다.</p>
 <p><img src="/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/02.png" alt="보안정책이 있을때 Service 실행"></p>
-<h2 id="Binder-기반-Service-Service-Manager에-등록-가능"><a href="#Binder-기반-Service-Service-Manager에-등록-가능" class="headerlink" title="Binder 기반 Service(Service Manager에 등록 가능)"></a>Binder 기반 Service(Service Manager에 등록 가능)</h2><p>실행되는 Service가 Binder기반의 Service인 경우 xxx.te 파일에 추가적인 항목이 더 들어가야 합니다.</p>
+<p><strong>서비스 실행을 위해서는 서비스 관련 보안라벨(그림에서는 devtest.te)와 file_contexts에 관련 내용 추가가 필요합니다.</strong></p>
+<h2 id="②Binder-기반-Service-Service-Manager에-등록-가능"><a href="#②Binder-기반-Service-Service-Manager에-등록-가능" class="headerlink" title="②Binder 기반 Service(Service Manager에 등록 가능)"></a>②Binder 기반 Service(Service Manager에 등록 가능)</h2><p>실행되는 Service가 Binder기반의 Service인 경우 xxx.te 파일에 추가적인 항목이 더 들어가야 합니다.</p>
 <ul>
 <li>~Android 6.x는 <code>external/sepolicy</code> 또는 <code>device/.../sepolicy</code>에 <code>service.te</code>에도 항목 추가가 필요합니다.</li>
 <li>Android 7.x~는 <code>system/sepolicy</code>에 <code>service.te</code>에도 항목 추가가 필요합니다.</li>
 </ul>
 <p><img src="/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/03.png" alt="Binder 기반 Service 실행"></p>
-<h2 id="Property를-사용한-Service제어"><a href="#Property를-사용한-Service제어" class="headerlink" title="Property를 사용한 Service제어"></a>Property를 사용한 Service제어</h2><p>Booting시 실행이 안되는 Service의 경우 Property를 사용하여 제어(Start/Stop 등)하는 것이 가능합니다.</p>
+<p><strong>Binder 기반서비스 실행을 위해서는 Service Manger에 등록이 필요합니다.</strong></p>
+<p><strong>이를 위해서 서비스 관련 보안라벨(그림에서는 devtest.te)와 서비스 매니저 관련 보안라벨(servicervice_contextsce.te), file_contexts에 관련 내용 추가가 필요합니다.</strong></p>
+<h2 id="③Property를-사용한-Service제어"><a href="#③Property를-사용한-Service제어" class="headerlink" title="③Property를 사용한 Service제어"></a>③Property를 사용한 Service제어</h2><p>Booting시 실행이 안되는 Service의 경우 Property를 사용하여 제어(Start/Stop 등)하는 것이 가능합니다.</p>
 <p>Default값을 사용할 수도 있지만 property 값을 새로 지정해서 사용하는 것도 가능합니다.</p>
 <p>보안정책(Security Policy)관련 설정이 없는 경우에는 실행이 불가능 합니다.</p>
 <p><img src="/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/04.png" alt="Property를 사용한 Service제어 보안라벨 필요"></p>
@@ -228,6 +239,34 @@ ga('send', 'pageview');
 </ul>
 <p>가 수정이 필요합니다.</p>
 <p><img src="/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/05.png" alt="Property를 사용한 Service제어 보안라벨 설정"></p>
+<p><strong>Property를 사용한 Service제어 실행을 위해서는 서비스 관련 보안라벨(그림에서는 surfaceflinger.te)와 property 관련 보안라벨(property.te), property_contexts에 관련 내용 추가가 필요합니다.</strong></p>
+<h2 id="④Device-Driver-사용"><a href="#④Device-Driver-사용" class="headerlink" title="④Device Driver 사용"></a>④Device Driver 사용</h2><p>SEAndroid가 설정된 경우 Device Driver를 사용하기 위해서는 보안라벨을 사용해 허락을 받는 것이 필요합니다.</p>
+<p>먼저 device driver를 접근하기 위한 흐름은 아래와 그림과 같습니다.</p>
+<p><img src="/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/07.png" alt="device driver를 접근하기 위한 흐름"></p>
+<p>먼저 APP(devtest_server)에서 HAL module에 장치 제어를 요청합니다. HAL module은 systemCall을 사용해서 Device Driver(Kernel)에 접근합니다.</p>
+<p>이때 장치파일(/dev/test_dev)을 사용해 드라이버를 접근하기 위해서는 보안라벨의 허락이 필요합니다.</p>
+<p>Device Driver와 관련된 보안라벨 관련 파일은 아래와 같습니다.</p>
+<ul>
+<li>~Android 6.x는 <code>external/sepolicy</code> 또는 <code>device/.../sepolicy</code></li>
+<li>Android 7.x~는 <code>system/sepolicy</code></li>
+</ul>
+<p><img src="/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/08.png" alt="device driver를 접근하기 위한 보안라벨 수정"></p>
+<p><strong>Device driver의 보안라벨을 수정하기 위해선 아래의 3개 파일을 수정해야합니다.</strong></p>
+<ul>
+<li>service와 관련된 보안라벨(그림에서 devtest.te)</li>
+<li>device driver 관련 보안라벨(device.te)</li>
+<li>file_contexts파일</li>
+</ul>
+<h2 id="⑤Untrusted-application-사용"><a href="#⑤Untrusted-application-사용" class="headerlink" title="⑤Untrusted application 사용"></a>⑤Untrusted application 사용</h2><p>Untrusted application이란 보안라벨을 적용받지 않은 서비스나 앱을 통칭합니다.</p>
+<p>보통 다운받은 APP등은 모두 Untrusted application에 속합니다.</p>
+<p>기본적으로 Untrusted application 관련 보안라벨 파일은 다음과 같습니다.</p>
+<ul>
+<li>~Android 6.x는 <code>external/sepolicy/untrusted_app.te</code> </li>
+<li>Android 7.x~는 <code>system/sepolicy/untrusted_app.te</code></li>
+</ul>
+<p>해당 파일에서 ②번에 등록되 있는 서비스에 관련되 Untrusted application이 접근을 허락하게 하는 가에 대해서 설정하는 것입니다.</p>
+<p><img src="/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/09.png" alt="untrusted_app.te"></p>
+<p><strong>Untrusted application이 접근 가능한 서비스를 추가하기 위해서는 untrusted_app.te 파일에 추가가 필요합니다.</strong></p>
 
         </div>
         <footer class="article-footer">
@@ -235,7 +274,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2019/09/16/Android-SEAndroid적용/" data-id="ck0nkog4y002f0pjynky7dopo" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2019/09/16/Android-SEAndroid적용/" data-id="ck0ols0yv00220pjyb5lba6mx" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -306,16 +345,16 @@ ga('send', 'pageview');
             "name": "Jung Max"
         },
         "headline": "SEAndroid 적용",
-        "image": "http://jung-max.github.io/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/01.png",
+        "image": "http://jung-max.github.io/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/06.png",
         "keywords": "Android SEAndroid",
         "genre": "Android Platform SEAndroid",
         "datePublished": "2019-09-16",
         "dateCreated": "2019-09-16",
-        "dateModified": "2019-09-17",
+        "dateModified": "2019-09-18",
         "url": "http://jung-max.github.io/2019/09/16/Android-SEAndroid적용/",
         "description": "SEAndroid(Security Enhancements for Android)SEAndroid는 Android를 지원하기 위해 SELinux를 확장/개선한 보안기능이며 권한이 있는 시스템관리자만 변경할 수 있도록 지원해 줍니다.
 SELinux(Security-Enhanced Linux)란 Open Source인 Linux에 추가된 MAC(Mandatory"
-        "wordCount": 245
+        "wordCount": 487
     }
 </script>
 
@@ -413,7 +452,7 @@ SELinux(Security-Enhanced Linux)란 Open Source인 Linux에 추가된 MAC(Mandat
                             <a href="/2019/09/16/Android-SEAndroid적용/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/01.png)" alt="SEAndroid 적용" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/06.png)" alt="SEAndroid 적용" class="thumbnail-image"></span>
     
     
 </a>

@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/" class="thumbnail">
+        <a href="/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Mouse-x,y%EC%B6%95-%EC%9D%B4%EB%8F%99%EC%9D%84-%ED%8C%A8%ED%82%B7%ED%99%94%ED%95%B4%EC%84%9C-bluetooth%EB%A1%9C-%EB%B3%B4%EB%82%B4%EA%B8%B0/01.png)" alt="Mouse x,y축 이동을 패킷화 해서 bluetooth로 보내기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-ActionBar.TabListener-Fragment%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C/01.png)" alt="ActionBar.TabListener Fragment에 대해서" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/">0</span>
     
 </span>
 
@@ -197,17 +197,13 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/">Mouse x,y축 이동을 패킷화 해서 bluetooth로 보내기</a>
+        <a href="/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/">ActionBar.TabListener Fragment에 대해서</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Bluetooth 통신시 기본적으로 소켓에는 byte[]형식으로 데이터가 담긴다.
-mouse의 x,y 값을 보내기 위해서는 8byte가 필요하다(int *2)
-mouse의 이동값인 것을 나타내기 위한 1byte가 필요하다.
-
-int값을 byte화 하기 위해선 변환이 필요하다.
-1234567891011public static byte[] intTobyte(i
+            개요ActionBar.TabListener는 ActionBar에 Tab의 기능을 추가하는 것이다.implements ActionBar.TabListener를 통해서 비교적 간단하게 구현 가능한 것이 특징이다.
+위 예제를 보면 탭에 따라 화면이 달라지는 것을 볼 수 있다.Canon 프로젝터 리모콘 / 리모컨 / 마우스 부분 모두 ActionBar이다.달라지는
         </p>
     </div>
 </article>
@@ -220,17 +216,17 @@ int값을 byte화 하기 위해선 변환이 필요하다.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-SystemApp/" class="thumbnail">
+        <a href="/2019/08/27/Android-수정된어플탑재/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android System App" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android 수정된 어플 탑재방법" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-SystemApp/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-수정된어플탑재/">0</span>
     
 </span>
 
@@ -241,20 +237,19 @@ int값을 byte화 하기 위해선 변환이 필요하다.
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-SystemApp/">Android System App</a>
+        <a href="/2019/08/27/Android-수정된어플탑재/">Android 수정된 어플 탑재방법</a>
         </h1>
     
 
         <p class="article-excerpt">
-            System app 권한 추가.AndroidManifest.xml에 sharedUserId 추가.
-123&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"    package="ckbs.ywjung.btremocon"    android:sharedUserId="android.ui
+            1. 아래 검색 결과처럼 packages/apps/Setting/의 어플을 수정하면 설정 어플이 수정되어 탑재된다.12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364Searching 525515 
         </p>
     </div>
 </article>
@@ -434,17 +429,17 @@ GPIO(bank)_(pad)(number)
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-수정된어플탑재/" class="thumbnail">
+        <a href="/2019/08/27/Android-SystemApp/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android 수정된 어플 탑재방법" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android System App" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-수정된어플탑재/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-SystemApp/">0</span>
     
 </span>
 
@@ -455,19 +450,20 @@ GPIO(bank)_(pad)(number)
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-수정된어플탑재/">Android 수정된 어플 탑재방법</a>
+        <a href="/2019/08/27/Android-SystemApp/">Android System App</a>
         </h1>
     
 
         <p class="article-excerpt">
-            1. 아래 검색 결과처럼 packages/apps/Setting/의 어플을 수정하면 설정 어플이 수정되어 탑재된다.12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364Searching 525515 
+            System app 권한 추가.AndroidManifest.xml에 sharedUserId 추가.
+123&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"    package="ckbs.ywjung.btremocon"    android:sharedUserId="android.ui
         </p>
     </div>
 </article>
@@ -542,7 +538,7 @@ GPIO(bank)_(pad)(number)
                             <a href="/2019/09/16/Android-SEAndroid적용/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/01.png)" alt="SEAndroid 적용" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-SEAndroid%EC%A0%81%EC%9A%A9/06.png)" alt="SEAndroid 적용" class="thumbnail-image"></span>
     
     
 </a>
