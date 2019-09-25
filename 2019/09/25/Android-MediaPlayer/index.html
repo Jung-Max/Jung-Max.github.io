@@ -22,7 +22,7 @@
 <meta property="og:description" content="미디어 플레이어 개요Android 멀티미디어 프레임 워크에는 다양한 일반 미디어 유형의 재생을 지원하므로 오디오, 비디오 및 이미지를 애플리케이션에 쉽게 통합 할 수 있습니다.  응용 프로그램의 리소스 (원시 리소스)에 저장된 미디어 파일, 파일 시스템의 독립형 파일 또는 네트워크 연결을 통해 도착하는 데이터 스트림에서 모두 MediaPlayer API를">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/Android-MediaPlayer/01.gif">
-<meta property="og:updated_time" content="2019-09-25T00:42:41.736Z">
+<meta property="og:updated_time" content="2019-09-25T00:45:26.372Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android MediaPlayer">
 <meta name="twitter:description" content="미디어 플레이어 개요Android 멀티미디어 프레임 워크에는 다양한 일반 미디어 유형의 재생을 지원하므로 오디오, 비디오 및 이미지를 애플리케이션에 쉽게 통합 할 수 있습니다.  응용 프로그램의 리소스 (원시 리소스)에 저장된 미디어 파일, 파일 시스템의 독립형 파일 또는 네트워크 연결을 통해 도착하는 데이터 스트림에서 모두 MediaPlayer API를">
@@ -191,7 +191,7 @@ ga('send', 'pageview');
         
         <div class="article-entry" itemprop="articleBody">
             <h1 id="미디어-플레이어-개요"><a href="#미디어-플레이어-개요" class="headerlink" title="미디어 플레이어 개요"></a>미디어 플레이어 개요</h1><p>Android 멀티미디어 프레임 워크에는 다양한 일반 미디어 유형의 재생을 지원하므로 오디오, 비디오 및 이미지를 애플리케이션에 쉽게 통합 할 수 있습니다. </p>
-<p>응용 프로그램의 리소스 (원시 리소스)에 저장된 미디어 파일, 파일 시스템의 독립형 파일 또는 네트워크 연결을 통해 도착하는 데이터 스트림에서 모두 <code>MediaPlayer API</code>를 사용하여 오디오 또는 비디오를 재생할 수 있습니다.</p>
+<p>응용 프로그램의 리소스 (원시 리소스)에 저장된 미디어 파일, 파일 시스템의 독립형 파일 또는 네트워크 연결을 통해 도착하는 데이터 스트림에서 모두 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a> API를 사용하여 오디오 또는 비디오를 재생할 수 있습니다.</p>
 <blockquote>
 <p>참고 : 오디오 데이터는 표준 출력 장치로만 재생할 수 있습니다. 현재는 모바일 장치 스피커 또는 Bluetooth 헤드셋입니다. 통화 중에는 대화 오디오에서 사운드 파일을 재생할 수 없습니다.</p>
 </blockquote>
@@ -209,7 +209,7 @@ ga('send', 'pageview');
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.INTERNET"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>잠금 권한 깨우기 : 플레이어 응용 프로그램에서 화면이 어두워 지거나 프로세서가 절전 모드로 전환되지 않도록하거나 <code>MediaPlayer.setScreenOnWhilePlaying()</code> 또는 <code>MediaPlayer.setWakeMode()</code> 메서드를 사용하려면이 권한을 요청해야합니다.</li>
+<li>잠금 권한 깨우기 : 플레이어 응용 프로그램에서 화면이 어두워 지거나 프로세서가 절전 모드로 전환되지 않도록하거나 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#setScreenOnWhilePlaying(boolean)" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer.setScreenOnWhilePlaying()</a> 또는 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#setWakeMode(android.content.Context,%20int)" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer.setWakeMode()</a> 메서드를 사용하려면이 권한을 요청해야합니다.</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.WAKE_LOCK"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -382,7 +382,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2019/09/25/Android-MediaPlayer/" data-id="ck0yjnrtp002321jymi1dhygp" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2019/09/25/Android-MediaPlayer/" data-id="ck0yjsgil001b38jyn25tsgfa" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -462,7 +462,7 @@ ga('send', 'pageview');
         "url": "http://jung-max.github.io/2019/09/25/Android-MediaPlayer/",
         "description": "미디어 플레이어 개요Android 멀티미디어 프레임 워크에는 다양한 일반 미디어 유형의 재생을 지원하므로 오디오, 비디오 및 이미지를 애플리케이션에 쉽게 통합 할 수 있습니다. 
 응용 프로그램의 리소스 (원시 리소스)에 저장된 미디어 파일, 파일 시스템의 독립형 파일 또는 네트워크 연결을 통해 도착하는 데이터 스트림에서 모두 MediaPlayer API를 "
-        "wordCount": 3432
+        "wordCount": 3450
     }
 </script>
 
