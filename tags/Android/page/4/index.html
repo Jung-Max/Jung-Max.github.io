@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-Platform-부분빌드방법/" class="thumbnail">
+        <a href="/2019/08/27/Android-GIPO-제어-ROCK64/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/Android_platform.png)" alt="Android Platform 부분 빌드 방법" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-GIPO-%EC%A0%9C%EC%96%B4-ROCK64/01.png)" alt="Android에서 GPIO제어(ROCK64 보드)" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-부분빌드방법/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-GIPO-제어-ROCK64/">0</span>
     
 </span>
 
@@ -190,22 +190,23 @@ ga('send', 'pageview');
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a>
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Platform-부분빌드방법/">Android Platform 부분 빌드 방법</a>
+        <a href="/2019/08/27/Android-GIPO-제어-ROCK64/">Android에서 GPIO제어(ROCK64 보드)</a>
         </h1>
     
 
         <p class="article-excerpt">
-            
-안드로이드 빌드의 시작은 source build/envsetup.sh의 명령어로 안드로이드 환경을 구성하는 것이다.현재 rk3328의 환경설정을 보면FFTools\build.sh에 다음과 같이 되어있다.
-
-12345export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64export PATH=$JAVA_HOME/bin:$P
+            GPIO indexROCK64의 핀은 아래와 같이 구성되어있습니다.GPIO의 이름은 bank, pad, number로 이루어져 있습니다.
+GPIO(bank)_(pad)(number)
+예를 들어 Pi-2 Bus의 16번 핀의 이름은 GPIO3_A5입니다.
+이 핀의 bank는 ‘3’ / pad는 ‘A’ / number는 ‘5’입니다.
+여기서 index를 구하는
         </p>
     </div>
 </article>
@@ -312,6 +313,26 @@ ga('send', 'pageview');
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2019/09/25/Android-MediaPlayer/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-MediaPlayer/01.gif)" alt="Android MediaPlayer" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></p>
+                            <p class="item-title"><a href="/2019/09/25/Android-MediaPlayer/" class="title">Android MediaPlayer</a></p>
+                            <p class="item-date"><time datetime="2019-09-25T00:42:00.000Z" itemprop="datePublished">2019-09-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2019/09/19/Github-Pages-마크다운/" class="thumbnail">
     
     
@@ -386,26 +407,6 @@ ga('send', 'pageview');
                             <p class="item-category"><a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/JNI/">JNI</a></p>
                             <p class="item-title"><a href="/2019/09/16/Android-JNI-동작구조/" class="title">JNI 동작 구조</a></p>
                             <p class="item-date"><time datetime="2019-09-16T04:48:00.000Z" itemprop="datePublished">2019-09-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/09/16/Android-Bluetooth-HID-장치만들기03/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B003/01.png)" alt="Android로 Bluetooth HID 장치(Joystick) 만들기 - 03" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/HID/">HID</a></p>
-                            <p class="item-title"><a href="/2019/09/16/Android-Bluetooth-HID-장치만들기03/" class="title">Android로 Bluetooth HID 장치(Joystick) 만들기 - 03</a></p>
-                            <p class="item-date"><time datetime="2019-09-16T01:29:00.000Z" itemprop="datePublished">2019-09-16</time></p>
                         </div>
                     </li>
                 
