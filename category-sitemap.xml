@@ -8,6 +8,27 @@
     </url>
 
     <url>
+        <loc>http://jung-max.github.io/categories/Android/MediaPlayer/</loc>
+        <lastmod>2019-09-25T00:39:11.929Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android/</loc>
+        <lastmod>2019-09-25T00:39:11.929Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android/App/</loc>
+        <lastmod>2019-09-24T04:00:14.329Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/categories/GitHub-Pages/Markdown/</loc>
         <lastmod>2019-09-18T05:50:14.319Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -17,20 +38,6 @@
     <url>
         <loc>http://jung-max.github.io/categories/GitHub-Pages/</loc>
         <lastmod>2019-09-18T05:50:14.319Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/Android/App/</loc>
-        <lastmod>2019-09-18T05:48:00.203Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/Android/</loc>
-        <lastmod>2019-09-18T05:48:00.203Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
