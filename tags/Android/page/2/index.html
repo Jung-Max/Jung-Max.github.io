@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/09/Android-BLE-Finding-Devices/" class="thumbnail">
+        <a href="/2019/09/09/Android-Advertising-BLE-Device/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Finding BLE Devices" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Advertising a BLE Device" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Finding-Devices/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-Advertising-BLE-Device/">0</span>
     
 </span>
 
@@ -197,16 +197,15 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/09/Android-BLE-Finding-Devices/">Finding BLE Devices</a>
+        <a href="/2019/09/09/Android-Advertising-BLE-Device/">Advertising a BLE Device</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Bluetooth API를 사용하려면 다음 권한이 필요합니다.
-12android.permission.BLUETOOTHandroid.permission.BLUETOOTH_ADMIN
-
-Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / advertising 작업을 수행하려는 경우 위치 권한이 필요합니다.
-12345android.per
+            Bluetooth LE Advertising을 사용하여 먼저 연결하지 않고도 데이터 패키지를 근처의 모든 장치에 브로드 캐스트 할 수 있습니다. 
+Advertising 데이터는 31 바이트로 제한됩니다. 
+기기 Advertising은 다른 사용자가 나에게 연결하도록하는 첫 번째 단계입니다.
+모든 장치가 Bluetooth LE Advertising을 지원하는
         </p>
     </div>
 </article>
@@ -319,59 +318,6 @@ Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / adve
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Android-bluetooth%EB%A1%9C-%EB%B0%9B%EC%9D%80-byte-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D%ED%95%98%EA%B8%B0/01.png)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
-            </div>
-            <div class="date"><time datetime="2019-09-02T02:42:00.000Z" itemprop="datePublished">2019-09-02</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/">bluetooth로 받은 byte 데이터 분석하기</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            앞서 client측에서 마우스 x,y데이터를 보낼때 사용했던 프로토콜을 예로 든다.
-
-여기서 0번째 바이트는 마우스 이동인 것을 알려주기 위해 0x02로 온다.14 바이트는 x값, 58 바이트는 y값이다.
-12345678910111213141516171819BufferedInputStream in = null;in = new BufferedInputStre
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
         <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/" class="thumbnail">
     
     
@@ -412,10 +358,14 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -458,6 +408,55 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
 1&lt;uses-permission android:name="android.permission.INJECT_EVENTS" /&gt;
 
 INJECT_EVENTS 권한을 취득하기 위해선 System App 권한이 
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-bluetooth%EB%A1%9C-%EB%B0%9B%EC%9D%80-byte-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D%ED%95%98%EA%B8%B0/01.png)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            </div>
+            <div class="date"><time datetime="2019-09-02T02:42:00.000Z" itemprop="datePublished">2019-09-02</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/">bluetooth로 받은 byte 데이터 분석하기</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            앞서 client측에서 마우스 x,y데이터를 보낼때 사용했던 프로토콜을 예로 든다.
+
+여기서 0번째 바이트는 마우스 이동인 것을 알려주기 위해 0x02로 온다.14 바이트는 x값, 58 바이트는 y값이다.
+12345678910111213141516171819BufferedInputStream in = null;in = new BufferedInputStre
         </p>
     </div>
 </article>
@@ -575,53 +574,6 @@ client thread 생성device 리스트에서 device가 선택되면 그 정보를 
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/30/Android-App구동시-시작화면을-나오게-하자/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="App 구동시 시작화면을 나오게 하자" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-App구동시-시작화면을-나오게-하자/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
-            </div>
-            <div class="date"><time datetime="2019-08-30T08:00:00.000Z" itemprop="datePublished">2019-08-30</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-App구동시-시작화면을-나오게-하자/">App 구동시 시작화면을 나오게 하자</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            MainActivity 이외의 Activity를 새로 만든다.(여기서는 가칭 IndexActivity)
-12345678910111213141516171819202122public class IndexActivity extends AppCompatActivity &#123;    @Override    protected void onCreate(Bundle 
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
         <a href="/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/" class="thumbnail">
     
     
@@ -657,6 +609,55 @@ client thread 생성device 리스트에서 device가 선택되면 그 정보를 
         <p class="article-excerpt">
             개요ActionBar.TabListener는 ActionBar에 Tab의 기능을 추가하는 것이다.implements ActionBar.TabListener를 통해서 비교적 간단하게 구현 가능한 것이 특징이다.
 위 예제를 보면 탭에 따라 화면이 달라지는 것을 볼 수 있다.Canon 프로젝터 리모콘 / 리모컨 / 마우스 부분 모두 ActionBar이다.달라지는
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/30/Android-bluetooth로-string데이터-보내기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-bluetooth%EB%A1%9C-string%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%B4%EB%82%B4%EA%B8%B0/01.png)" alt="bluetooth로 string 데이터 보내기" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-bluetooth로-string데이터-보내기/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            </div>
+            <div class="date"><time datetime="2019-08-30T08:00:00.000Z" itemprop="datePublished">2019-08-30</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/30/Android-bluetooth로-string데이터-보내기/">bluetooth로 string 데이터 보내기</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Bluetooth에 string값을 보내기 위해서는 메세지에 스트링 값을 담아 보내고
+받은 메세지의 string을 byte화 해서 송신을 하면 된다.
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152//string값 메세지로 write
         </p>
     </div>
 </article>
@@ -731,7 +732,7 @@ client thread 생성device 리스트에서 device가 선택되면 그 정보를 
                             <a href="/2019/09/27/Web-JavaScript-replace정규식/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/javascript_regEx.jpeg)" alt="Javascript" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/javascript_regEx.jpeg)" alt="Javascript replace 정규식 표현" class="thumbnail-image"></span>
     
     
 </a>
@@ -740,7 +741,7 @@ client thread 생성device 리스트에서 device가 선택되면 그 정보를 
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Web/">Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Web/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2019/09/27/Web-JavaScript-replace정규식/" class="title">Javascript</a></p>
+                            <p class="item-title"><a href="/2019/09/27/Web-JavaScript-replace정규식/" class="title">Javascript replace 정규식 표현</a></p>
                             <p class="item-date"><time datetime="2019-09-26T23:34:00.000Z" itemprop="datePublished">2019-09-27</time></p>
                         </div>
                     </li>

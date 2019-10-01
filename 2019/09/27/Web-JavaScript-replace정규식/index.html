@@ -6,7 +6,7 @@
     
 
     
-    <title>Javascript | Max&#39;s Blog</title>
+    <title>Javascript replace 정규식 표현 | Max&#39;s Blog</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
@@ -16,15 +16,15 @@
     <meta name="description" content="개요Javascript에서는 특정 문자열에 포함된 문자열을 다른 문자열로 대체하기 위해 replace함수라는 것을 제공합니다. 12String test = &quot;Who are you? I&apos;m your father.&quot;;String revTest = test.replace(&quot;you&quot;, &quot;wow&quot;);  결과는 revTest = “Who are wow? I’m you">
 <meta name="keywords" content="Web,Java Script">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Javascript">
+<meta property="og:title" content="Javascript replace 정규식 표현">
 <meta property="og:url" content="http://jung-max.github.io/2019/09/27/Web-JavaScript-replace정규식/index.html">
 <meta property="og:site_name" content="Max&#39;s Blog">
 <meta property="og:description" content="개요Javascript에서는 특정 문자열에 포함된 문자열을 다른 문자열로 대체하기 위해 replace함수라는 것을 제공합니다. 12String test = &quot;Who are you? I&apos;m your father.&quot;;String revTest = test.replace(&quot;you&quot;, &quot;wow&quot;);  결과는 revTest = “Who are wow? I’m you">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/Thumbnail/javascript_regEx.jpeg">
-<meta property="og:updated_time" content="2019-10-01T02:35:03.090Z">
+<meta property="og:updated_time" content="2019-10-01T02:51:13.798Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Javascript">
+<meta name="twitter:title" content="Javascript replace 정규식 표현">
 <meta name="twitter:description" content="개요Javascript에서는 특정 문자열에 포함된 문자열을 다른 문자열로 대체하기 위해 replace함수라는 것을 제공합니다. 12String test = &quot;Who are you? I&apos;m your father.&quot;;String revTest = test.replace(&quot;you&quot;, &quot;wow&quot;);  결과는 revTest = “Who are wow? I’m you">
 <meta name="twitter:image" content="http://jung-max.github.io/images/Thumbnail/javascript_regEx.jpeg">
     
@@ -163,7 +163,7 @@ ga('send', 'pageview');
                 
     
         <h1 class="article-title" itemprop="name">
-        Javascript
+        Javascript replace 정규식 표현
         </h1>
     
 
@@ -228,13 +228,13 @@ ga('send', 'pageview');
 <p>예를 들어, <code>/t$/</code> 는 <code>&quot;eater&quot;</code> 의 <code>&#39;t&#39;</code>에는 대응되지 않습니다, 그러나 <code>&quot;eat&quot;</code> 과는 대응됩니다.</p>
 <h2 id="-3"><a href="#-3" class="headerlink" title="*"></a><code>*</code></h2><p>앞의 표현식이 0회 이상 연속으로 반복되는 부분과 대응됩니다. <code>{0,}</code> 와 같은 의미입니다.</p>
 <p>예를 들어, <code>/bo*/</code> 는 <code>&quot;A ghost booooed&quot;</code> 의 <code>&#39;boooo&#39;</code> 와 대응되고, <code>&quot;A bird warbled&quot;</code> 의 <code>&#39;b&#39;</code>에 대응되지만 <code>&quot;A goat grunted&quot;</code> 내의 어느 부분과도 대응되지 않습니다.</p>
-<h2 id="36"><a href="#36" class="headerlink" title="+36"></a><code>+</code>36</h2><p>앞의 표현식이 1회 이상 연속으로 반복되는 부분과 대응됩니다. <code>{1,}</code> 와 같은 의미입니다.</p>
+<h2 id="-4"><a href="#-4" class="headerlink" title="+"></a><code>+</code></h2><p>앞의 표현식이 1회 이상 연속으로 반복되는 부분과 대응됩니다. <code>{1,}</code> 와 같은 의미입니다.</p>
 <p>예를 들어, <code>/a+/</code> 는 <code>&quot;candy&quot;</code>의 <code>&#39;a&#39;</code>에 대응되고 <code>&quot;caaaaaaandy&quot;</code> 의 모든 <code>&#39;a&#39;</code>들에 대응되지만, <code>&quot;cndy&quot;</code> 내의 어느 부분과도 대응되지 않습니다.</p>
-<h2 id="-4"><a href="#-4" class="headerlink" title="?"></a><code>?</code></h2><p>앞의 표현식이 0 또는 1회 등장하는 부분과 대응됩니다. <code>{0,1}</code> 와 같은 의미입니다.</p>
+<h2 id="-5"><a href="#-5" class="headerlink" title="?"></a><code>?</code></h2><p>앞의 표현식이 0 또는 1회 등장하는 부분과 대응됩니다. <code>{0,1}</code> 와 같은 의미입니다.</p>
 <p>예를 들어, <code>/e?le?/</code> 는 <code>&quot;angel&quot;</code>의 <code>&#39;el&#39;</code> 에 대응되고, <code>&quot;angle&quot;</code>의 <code>&#39;le&#39;</code> 에 대응되고 또한 <code>&quot;oslo&quot;</code> 의 <code>&#39;l&#39;</code>에도 대응됩니다.</p>
 <p>만약 수량자 <code>*, +, ?, {}</code> 바로 뒤에 사용하면, 기본적으로 탐욕스럽던(가능한 한 많이 대응시킴) 수량자를 탐욕스럽지 않게(가능한 가장 적은 문자들에 대응시킴) 만듭니다. 예를 들어, <code>/\d+/</code>를 <code>&quot;123abc&quot;</code>에 적용시키면 <code>&quot;123&quot;</code>과 대응됩니다. 그러나 <code>/\d+?/</code>를 같은 문자열에 적용시키면 오직 <code>&quot;1&quot;</code>과만 대응됩니다.</p>
 <p>또한 이 문자는 <code>x(?=y)</code> 와 <code>x(?!y)</code> 항목에서 설명하는 바와 같이 사전 검증(lookahead assertion)을 위해서도 쓰입니다.</p>
-<h2 id="-5"><a href="#-5" class="headerlink" title="."></a><code>.</code></h2><p>개행 문자를 제외한 모든 단일 문자와 대응됩니다.</p>
+<h2 id="-6"><a href="#-6" class="headerlink" title="."></a><code>.</code></h2><p>개행 문자를 제외한 모든 단일 문자와 대응됩니다.</p>
 <p>예를 들어, <code>/.n/</code>는 <code>&quot;nay, an apple is on the tree&quot;</code>에서 <code>&#39;an&#39;</code>과 <code>&#39;on&#39;</code>에 대응되지만, <code>&#39;nay&#39;</code> 에는 대응되지 않습니다.</p>
 <h2 id="x"><a href="#x" class="headerlink" title="(x)"></a><code>(x)</code></h2><p>다음의 예제가 보여주는것 처럼 <code>&#39;x&#39;</code>에 대응되고, 그것을 기억합니다. 괄호는 포획 괄호(capturing parentheses)라 불립니다.</p>
 <p>패턴 <code>/(foo) (bar) \1 \2/</code> 안의 <code>&#39;(foo)&#39;</code> 와 <code>&#39;(bar)&#39;</code>는 문자열<code>&quot;foo bar foo bar&quot;</code>에서 처음의 두 단어에 대응되고 이를 기억합니다. 패턴 내부의 <code>\1</code>와 <code>\2</code>는 문자열의 마지막 두 단어에 대응됩니다. (<br>역주: <code>\n</code> 패턴은 앞의 n번째 포획괄호에 대응된 문자열과 똑같은 문자열에 대응됩니다.) <code>\1</code>, <code>\2</code>, <code>\n</code>과 같은 문법은 정규식의 패턴 부분에서 사용됩니다. 정규식의 치환 부분에서는 <code>$1</code>, <code>$2</code>, <code>$n</code>과 같은 문법이 사용되어야 합니다. 예를 들어, <code>&#39;bar foo&#39;.replace( /(...) (...)/, &#39;$2 $1&#39;)</code>와 같이 사용되어야 합니다. <code>$&amp;</code> 패턴은 앞에서 대응된 전체 문자열을 가리킵니다.</p>
@@ -294,7 +294,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2019/09/27/Web-JavaScript-replace정규식/" data-id="ck178ii3z003t0pjygyqoagj8" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2019/09/27/Web-JavaScript-replace정규식/" data-id="ck178wm4e004r1yjykz4fe16k" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -364,7 +364,7 @@ ga('send', 'pageview');
             "@type": "Person",
             "name": "Jung Max"
         },
-        "headline": "Javascript",
+        "headline": "Javascript replace 정규식 표현",
         "image": "http://jung-max.github.io/images/Thumbnail/javascript_regEx.jpeg",
         "keywords": "Web Java Script",
         "genre": "Web Javascript",
@@ -475,7 +475,7 @@ revTest = “Who are wow? I’m you"
                             <a href="/2019/09/27/Web-JavaScript-replace정규식/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/javascript_regEx.jpeg)" alt="Javascript" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/javascript_regEx.jpeg)" alt="Javascript replace 정규식 표현" class="thumbnail-image"></span>
     
     
 </a>
@@ -484,7 +484,7 @@ revTest = “Who are wow? I’m you"
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Web/">Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Web/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2019/09/27/Web-JavaScript-replace정규식/" class="title">Javascript</a></p>
+                            <p class="item-title"><a href="/2019/09/27/Web-JavaScript-replace정규식/" class="title">Javascript replace 정규식 표현</a></p>
                             <p class="item-date"><time datetime="2019-09-26T23:34:00.000Z" itemprop="datePublished">2019-09-27</time></p>
                         </div>
                     </li>

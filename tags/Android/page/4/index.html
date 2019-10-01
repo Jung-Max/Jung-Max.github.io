@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-SystemApp/" class="thumbnail">
+        <a href="/2019/08/27/Android-GIPO-제어-ROCK64/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android System App" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-GIPO-%EC%A0%9C%EC%96%B4-ROCK64/01.png)" alt="Android에서 GPIO제어(ROCK64 보드)" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-SystemApp/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-GIPO-제어-ROCK64/">0</span>
     
 </span>
 
@@ -197,13 +197,16 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-SystemApp/">Android System App</a>
+        <a href="/2019/08/27/Android-GIPO-제어-ROCK64/">Android에서 GPIO제어(ROCK64 보드)</a>
         </h1>
     
 
         <p class="article-excerpt">
-            System app 권한 추가.AndroidManifest.xml에 sharedUserId 추가.
-123&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"    package="ckbs.ywjung.btremocon"    android:sharedUserId="android.ui
+            GPIO indexROCK64의 핀은 아래와 같이 구성되어있습니다.GPIO의 이름은 bank, pad, number로 이루어져 있습니다.
+GPIO(bank)_(pad)(number)
+예를 들어 Pi-2 Bus의 16번 핀의 이름은 GPIO3_A5입니다.
+이 핀의 bank는 ‘3’ / pad는 ‘A’ / number는 ‘5’입니다.
+여기서 index를 구하는
         </p>
     </div>
 </article>
@@ -333,7 +336,7 @@ ga('send', 'pageview');
                             <a href="/2019/09/27/Web-JavaScript-replace정규식/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/javascript_regEx.jpeg)" alt="Javascript" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/javascript_regEx.jpeg)" alt="Javascript replace 정규식 표현" class="thumbnail-image"></span>
     
     
 </a>
@@ -342,7 +345,7 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Web/">Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Web/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2019/09/27/Web-JavaScript-replace정규식/" class="title">Javascript</a></p>
+                            <p class="item-title"><a href="/2019/09/27/Web-JavaScript-replace정규식/" class="title">Javascript replace 정규식 표현</a></p>
                             <p class="item-date"><time datetime="2019-09-26T23:34:00.000Z" itemprop="datePublished">2019-09-27</time></p>
                         </div>
                     </li>
