@@ -320,17 +320,17 @@ evdev란 범용 입력 이벤트 드라이버를 뜻한다.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/29/Android-Kernel-빌드-옵션/" class="thumbnail">
+        <a href="/2019/08/29/Android-Kernel-compile/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/01.png)" alt="Android Kernel 빌드 옵션" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Kernel-compile/01.png)" alt="Android Kernel compile" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-빌드-옵션/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-compile/">0</span>
     
 </span>
 
@@ -348,23 +348,28 @@ evdev란 범용 입력 이벤트 드라이버를 뜻한다.
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Android-Kernel-빌드-옵션/">Android Kernel 빌드 옵션</a>
+        <a href="/2019/08/29/Android-Kernel-compile/">Android Kernel compile</a>
         </h1>
     
 
         <p class="article-excerpt">
-            make config
+            
+make
+아래 설명될 이미지를 모두 만든다.
 
-텍스트 기반 설정 방식
-모든 옵션을 하나씩 보여주고 yes, no, module 중에 하나의 옵션을 선택 → 많이 불편함
+make image
+compress되지 않은 Kernel 이미지
+arch/arm/boot/image에서 찾을 수 있음
 
-make menuconfig
+make zImage
+compress된 kernel 이미지
+arch/arm/boot/zImage에 존재
 
-텍스트 메뉴 방식
-ncurses에 기한반 GUI툴
-화살표와 스페이스 바를 이용하여 옵션 설정
-편리하고 가장 많이 사용 → 실제로 거의 이 모드를 사용한다.
-설정 이후 저장하게 되면 
+make clean
+object 파일을 지우기 위한 명령어
+
+make module
+m
         </p>
     </div>
 </article>
@@ -435,17 +440,17 @@ Menu attribute
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/29/Android-Kernel-compile/" class="thumbnail">
+        <a href="/2019/08/29/Android-Kernel-빌드-옵션/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Kernel-compile/01.png)" alt="Android Kernel compile" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/01.png)" alt="Android Kernel 빌드 옵션" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-compile/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-빌드-옵션/">0</span>
     
 </span>
 
@@ -463,28 +468,23 @@ Menu attribute
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Android-Kernel-compile/">Android Kernel compile</a>
+        <a href="/2019/08/29/Android-Kernel-빌드-옵션/">Android Kernel 빌드 옵션</a>
         </h1>
     
 
         <p class="article-excerpt">
-            
-make
-아래 설명될 이미지를 모두 만든다.
+            make config
 
-make image
-compress되지 않은 Kernel 이미지
-arch/arm/boot/image에서 찾을 수 있음
+텍스트 기반 설정 방식
+모든 옵션을 하나씩 보여주고 yes, no, module 중에 하나의 옵션을 선택 → 많이 불편함
 
-make zImage
-compress된 kernel 이미지
-arch/arm/boot/zImage에 존재
+make menuconfig
 
-make clean
-object 파일을 지우기 위한 명령어
-
-make module
-m
+텍스트 메뉴 방식
+ncurses에 기한반 GUI툴
+화살표와 스페이스 바를 이용하여 옵션 설정
+편리하고 가장 많이 사용 → 실제로 거의 이 모드를 사용한다.
+설정 이후 저장하게 되면 
         </p>
     </div>
 </article>
@@ -497,6 +497,55 @@ m
     
     
         <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/27/Android-Platform-Architecture/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-Platform-Architecture/01.png)" alt="Android Platform Architecture" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-Architecture/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Architecture/">Architecture</a>
+            </div>
+            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/27/Android-Platform-Architecture/">Android Platform Architecture</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            개요
+Open Source기반 Embedded System
+대표적인 Open Source기반 Emebedded System인 Embedded Linux와 Android 비교시 Kernel은 동일하고 응용프로그램 영역이 다름
+OpenSource 기반이기 때문에 Framework source가 공개되어 있어 수정/추가가 가능하나 제조사에서 제공되는 S/W(Bi
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -544,10 +593,14 @@ Android studio에 연결 가능PDK(Platform Development
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -596,63 +649,6 @@ Kernel 영역은 물리 메모리에서 공유된다.
     </div>
 </article>
     
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/27/Android-Kernel-Message/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android Kernel Message" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Kernel-Message/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
-            </div>
-            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Kernel-Message/">Android Kernel Message</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            printk()
-메시지 기록 관리를 위한 로그 레벨의 지정이 가능하다.
-kernel뿐만 아니라 응용프로그램의 init process도 printk()를 사용한다.
-logcat은 init가 구동하기 때문에 init는 printk()를 사용.
-
-
-원형 큐 구조의 관리, 출력 디바이스의 다중 지정이 가능하다.
-콘솔에서 확인하거나 dmesg 명령을 사용해서 로그파
-        </p>
-    </div>
-</article>
-    
 
     
     
@@ -661,17 +657,17 @@ logcat은 init가 구동하기 때문에 init는 printk()를 사용.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-Platform-Architecture/" class="thumbnail">
+        <a href="/2019/08/27/Android-Platform-Architecture-overview/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Platform-Architecture/01.png)" alt="Android Platform Architecture" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Platform-Architecture-overview/01.png)" alt="Android Platform Architecture overview" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-Architecture/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-Architecture-overview/">0</span>
     
 </span>
 
@@ -689,15 +685,14 @@ logcat은 init가 구동하기 때문에 init는 printk()를 사용.
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Platform-Architecture/">Android Platform Architecture</a>
+        <a href="/2019/08/27/Android-Platform-Architecture-overview/">Android Platform Architecture overview</a>
         </h1>
     
 
         <p class="article-excerpt">
-            개요
-Open Source기반 Embedded System
-대표적인 Open Source기반 Emebedded System인 Embedded Linux와 Android 비교시 Kernel은 동일하고 응용프로그램 영역이 다름
-OpenSource 기반이기 때문에 Framework source가 공개되어 있어 수정/추가가 가능하나 제조사에서 제공되는 S/W(Bi
+            Android platform architecture overview1. 개요이번 시간은 안드로이드의 구조에 대해서 알아보고 애플리케이션이 어떻게 구동되는지 추론해보는 시간을 가져보겠습니다.
+제목은 안드로이드 플랫폼 아키텍쳐라고 정했습니다. 
+여기서 플랫폼은 컴퓨터 시스템의 기본이 되는 특정 프로세서 모델과 하나의 컴퓨터 시스템을 바탕으로 하는 운영체제를 
         </p>
     </div>
 </article>
@@ -753,7 +748,7 @@ OpenSource 기반이기 때문에 Framework source가 공개되어 있어 수정
                             <a href="/2019/09/27/Web-Javascript-MarkDown구현/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/Web-Javascript-MarkDown%EA%B5%AC%ED%98%84/01.png)" alt="Javascript로 Markdown 파서 구현하기" class="thumbnail-image"></span>
     
     
 </a>
@@ -762,7 +757,7 @@ OpenSource 기반이기 때문에 Framework source가 공개되어 있어 수정
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Web/">Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Web/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/2019/09/27/Web-Javascript-MarkDown구현/" class="title">Javascript</a></p>
+                            <p class="item-title"><a href="/2019/09/27/Web-Javascript-MarkDown구현/" class="title">Javascript로 Markdown 파서 구현하기</a></p>
                             <p class="item-date"><time datetime="2019-09-27T03:52:00.000Z" itemprop="datePublished">2019-09-27</time></p>
                         </div>
                     </li>
@@ -773,7 +768,7 @@ OpenSource 기반이기 때문에 Framework source가 공개되어 있어 수정
                             <a href="/2019/09/27/Web-JavaScript-replace정규식/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/Thumbnail/javascript_regEx.jpeg)" alt="Javascript" class="thumbnail-image"></span>
     
     
 </a>
