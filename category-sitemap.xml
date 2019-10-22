@@ -9,14 +9,28 @@
 
     <url>
         <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/</loc>
-        <lastmod>2019-10-22T01:40:25.431Z</lastmod>
+        <lastmod>2019-10-22T01:44:11.649Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/</loc>
-        <lastmod>2019-10-22T01:40:25.431Z</lastmod>
+        <lastmod>2019-10-22T01:44:11.649Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/GitHub-Pages/</loc>
+        <lastmod>2019-10-22T01:43:29.660Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/Markdown/</loc>
+        <lastmod>2019-10-22T01:42:48.993Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -71,29 +85,8 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/categories/GitHub-Pages/Markdown/</loc>
-        <lastmod>2019-09-18T05:50:14.319Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/GitHub-Pages/</loc>
-        <lastmod>2019-09-18T05:50:14.319Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/categories/Android-Platform/SEAndroid/</loc>
         <lastmod>2019-09-18T01:43:28.788Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/GitHub-Pages/Hexo/</loc>
-        <lastmod>2019-09-17T06:43:16.947Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

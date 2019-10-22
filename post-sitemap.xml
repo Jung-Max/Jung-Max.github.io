@@ -9,7 +9,39 @@
 
     <url>
         <loc>http://jung-max.github.io/2019/10/21/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4%EB%9D%BC%EC%9D%B4%EC%84%BC%EC%8A%A4/</loc>
-        <lastmod>2019-10-22T01:40:25.431Z</lastmod>
+        <lastmod>2019-10-22T01:44:11.649Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/29/Github-Pages-Hexo/</loc>
+        <lastmod>2019-10-22T01:43:29.660Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/29/Github-Pages-Hexo-Theme/</loc>
+        <lastmod>2019-10-22T01:43:16.779Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/17/Github-Pages-Hexo-%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84%EC%B5%9C%EC%A0%81%ED%99%94/</loc>
+        <lastmod>2019-10-22T01:43:05.487Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/19/Github-Pages-%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/</loc>
+        <lastmod>2019-10-22T01:42:48.993Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -56,14 +88,6 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/09/19/Github-Pages-%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/</loc>
-        <lastmod>2019-09-18T05:50:14.319Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/2019/08/30/Android-bluetooth%EB%A1%9C-string%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%B4%EB%82%B4%EA%B8%B0/</loc>
         <lastmod>2019-09-18T05:48:00.203Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -74,22 +98,6 @@
     <url>
         <loc>http://jung-max.github.io/2019/09/16/Android-SEAndroid%EC%A0%81%EC%9A%A9/</loc>
         <lastmod>2019-09-18T01:43:28.788Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/09/17/Github-Pages-Hexo-%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84%EC%B5%9C%EC%A0%81%ED%99%94/</loc>
-        <lastmod>2019-09-17T06:43:16.947Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/29/Github-Pages-Hexo-Theme/</loc>
-        <lastmod>2019-09-17T04:30:00.304Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -130,14 +138,6 @@
     <url>
         <loc>http://jung-max.github.io/2019/08/27/Android-%EC%88%98%EC%A0%95%EB%90%9C%EC%96%B4%ED%94%8C%ED%83%91%EC%9E%AC/</loc>
         <lastmod>2019-09-16T06:26:38.660Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/29/Github-Pages-Hexo/</loc>
-        <lastmod>2019-09-16T06:26:10.814Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -248,7 +248,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-compile/</loc>
+        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel_Module/</loc>
         <lastmod>2019-09-16T03:58:43.851Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -256,7 +256,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel_Module/</loc>
+        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-compile/</loc>
         <lastmod>2019-09-16T03:58:43.851Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -288,14 +288,6 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Finding-Devices/</loc>
-        <lastmod>2019-09-09T00:42:43.065Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Connecting-GATT-Server/</loc>
         <lastmod>2019-09-09T00:42:43.065Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -305,6 +297,14 @@
 
     <url>
         <loc>http://jung-max.github.io/2019/09/09/Android-BLE-GattServer%EB%A1%9C%EB%B6%80%ED%84%B0-%EC%95%8C%EB%A6%BC%EB%B0%9B%EA%B8%B0/</loc>
+        <lastmod>2019-09-09T00:42:43.065Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Finding-Devices/</loc>
         <lastmod>2019-09-09T00:42:43.065Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
