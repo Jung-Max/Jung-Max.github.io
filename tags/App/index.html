@@ -369,6 +369,105 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
         <article class="article article-summary">
     <div class="article-summary-inner">
         
+        <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server로 부터 알림 받기" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-GattServer로부터-알림받기/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a>
+            </div>
+            <div class="date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/">Gatt Server로 부터 알림 받기</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            특성 값이 변경되면 Gatt 서버에 알림을 요청할 수 있습니다.
+12345gatt.setCharacteristicNotification(characteristic, true);BluetoothGattDescriptor descriptor = characteristic.getDescriptor(    UUID.fromString("00002902-0000-1
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server 사용하기" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Gatt서버-사용하기/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a>
+            </div>
+            <div class="date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/">Gatt Server 사용하기</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            장치가 주변 장치로 작동하려면 먼저 BluetoothGattServer를 열고
+하나 이상의 BluetoothGattService 및 하나의 BluetoothGattCharacteristic로 채워야합니다.
+123BluetoothGattServer server=bluetoothManager.openGattServer(context, bluetoothGattS
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
         <a href="/2019/09/09/Android-BLE-Finding-Devices/" class="thumbnail">
     
     
@@ -455,105 +554,6 @@ Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / adve
             Gatt 서버에 연결되면 서버의 Characteristics을 읽고 읽음으로써 Gatt 서버와 상호 작용하게됩니다.
 이렇게하려면 먼저이 서버에서 사용할 수 있는 서비스와 각 서비스에서 사용할 수 있는 Characteristics을 찾아야합니다.
 1234567891011121314151617181920212223 @Override public void onC
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server 사용하기" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Gatt서버-사용하기/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a>
-            </div>
-            <div class="date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/">Gatt Server 사용하기</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            장치가 주변 장치로 작동하려면 먼저 BluetoothGattServer를 열고
-하나 이상의 BluetoothGattService 및 하나의 BluetoothGattCharacteristic로 채워야합니다.
-123BluetoothGattServer server=bluetoothManager.openGattServer(context, bluetoothGattS
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server로 부터 알림 받기" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-GattServer로부터-알림받기/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/BLE/">BLE</a>
-            </div>
-            <div class="date"><time datetime="2019-09-08T23:42:00.000Z" itemprop="datePublished">2019-09-09</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/">Gatt Server로 부터 알림 받기</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            특성 값이 변경되면 Gatt 서버에 알림을 요청할 수 있습니다.
-12345gatt.setCharacteristicNotification(characteristic, true);BluetoothGattDescriptor descriptor = characteristic.getDescriptor(    UUID.fromString("00002902-0000-1
         </p>
     </div>
 </article>
