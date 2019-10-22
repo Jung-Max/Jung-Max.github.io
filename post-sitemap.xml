@@ -9,7 +9,7 @@
 
     <url>
         <loc>http://jung-max.github.io/2019/10/21/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4%EB%9D%BC%EC%9D%B4%EC%84%BC%EC%8A%A4/</loc>
-        <lastmod>2019-10-22T01:36:18.201Z</lastmod>
+        <lastmod>2019-10-22T01:40:25.431Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -248,7 +248,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel_Module/</loc>
+        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-compile/</loc>
         <lastmod>2019-09-16T03:58:43.851Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -256,7 +256,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-compile/</loc>
+        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel_Module/</loc>
         <lastmod>2019-09-16T03:58:43.851Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -296,7 +296,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-GattServer%EB%A1%9C%EB%B6%80%ED%84%B0-%EC%95%8C%EB%A6%BC%EB%B0%9B%EA%B8%B0/</loc>
+        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Connecting-GATT-Server/</loc>
         <lastmod>2019-09-09T00:42:43.065Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -304,7 +304,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Connecting-GATT-Server/</loc>
+        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-GattServer%EB%A1%9C%EB%B6%80%ED%84%B0-%EC%95%8C%EB%A6%BC%EB%B0%9B%EA%B8%B0/</loc>
         <lastmod>2019-09-09T00:42:43.065Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/" class="thumbnail">
+        <a href="/2019/09/02/Android-NDK를-사용해서-kernel드라이버-사용하기/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-kernel-%EA%B0%80%EC%83%81-%EB%A7%88%EC%9A%B0%EC%8A%A4-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/01.png)" alt="Android Kernel 가상 마우스 드라이버 구현하기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android NDK를 사용해서 kernel드라이버 사용하기" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-NDK를-사용해서-kernel드라이버-사용하기/">0</span>
     
 </span>
 
@@ -190,24 +190,124 @@ ga('send', 'pageview');
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
             </div>
             <div class="date"><time datetime="2019-09-02T07:17:00.000Z" itemprop="datePublished">2019-09-02</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/">Android Kernel 가상 마우스 드라이버 구현하기</a>
+        <a href="/2019/09/02/Android-NDK를-사용해서-kernel드라이버-사용하기/">Android NDK를 사용해서 kernel드라이버 사용하기</a>
         </h1>
     
 
         <p class="article-excerpt">
-            개요
-가상 마우스 동작 방식은 다음과 같다.
-App이 마우스 동작의 좌표 정보를 sysfs노드인 /sys/devices/platform/virmouse/vmevent를 거쳐 가상 마우스 드라이버(virmouse.c)에 통지한다.
-가상 마우스 드라이버는 evdev를 거쳐 이동 정보를 사용자 영역으로 보낸다.
-evdev란 범용 입력 이벤트 드라이버를 뜻한다.
+            kernel의 드라이버를 쓰기 위해서는 driver 장치 파일의 write 권한이 있어야 한다.기본적으로 장치 파일의 write 권한은 플랫폼 소스에서 부팅시 *.rc파일을 수정해서 변경 가능하다.
+여기서는 앱에서 write 권한을 취득하는 것부터 시작한다.
+앱이 파일의 접근 권한을 변경하기 위해서는 su권한이 있어야 한다.
+12345678910111213
+        </p>
+    </div>
+</article>
+    
 
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            </div>
+            <div class="date"><time datetime="2019-09-02T02:42:00.000Z" itemprop="datePublished">2019-09-02</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/">bluetooth로 받은 byte 데이터 분석하기</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            bluetooth로 받은 데이터는 기본적으로 byte형태이다.
+String 데이터를 받았다면 String 형으로 변형이 필요하다.
+12345678910111213141516BufferedInputStream in = null;in = new BufferedInputStream(socket.getInputStream());byte[] buffer = new 
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/09/02/Android-KeyEvent-발생하기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-KeyEvent-발생하기/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            </div>
+            <div class="date"><time datetime="2019-09-02T02:42:00.000Z" itemprop="datePublished">2019-09-02</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/09/02/Android-KeyEvent-발생하기/">bluetooth로 받은 byte 데이터 분석하기</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            안드로이드의 Key 이벤트를 발생하기 위해선 INJECT_EVENTS가 필요하다.
+해당 권한은 AndroidManifest.xml에 선언해 준다.
+1&lt;uses-permission android:name="android.permission.INJECT_EVENTS" /&gt;
+
+INJECT_EVENTS 권한을 취득하기 위해선 System App 권한이 
         </p>
     </div>
 </article>
@@ -257,108 +357,6 @@ evdev란 범용 입력 이벤트 드라이버를 뜻한다.
 
 여기서 0번째 바이트는 마우스 이동인 것을 알려주기 위해 0x02로 온다.14 바이트는 x값, 58 바이트는 y값이다.
 12345678910111213141516171819BufferedInputStream in = null;in = new BufferedInputStre
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
-            </div>
-            <div class="date"><time datetime="2019-09-02T02:42:00.000Z" itemprop="datePublished">2019-09-02</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/">bluetooth로 받은 byte 데이터 분석하기</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            bluetooth로 받은 데이터는 기본적으로 byte형태이다.
-String 데이터를 받았다면 String 형으로 변형이 필요하다.
-12345678910111213141516BufferedInputStream in = null;in = new BufferedInputStream(socket.getInputStream());byte[] buffer = new 
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/09/02/Android-KeyEvent-발생하기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-KeyEvent-발생하기/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
-            </div>
-            <div class="date"><time datetime="2019-09-02T02:42:00.000Z" itemprop="datePublished">2019-09-02</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/02/Android-KeyEvent-발생하기/">bluetooth로 받은 byte 데이터 분석하기</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            안드로이드의 Key 이벤트를 발생하기 위해선 INJECT_EVENTS가 필요하다.
-해당 권한은 AndroidManifest.xml에 선언해 준다.
-1&lt;uses-permission android:name="android.permission.INJECT_EVENTS" /&gt;
-
-INJECT_EVENTS 권한을 취득하기 위해선 System App 권한이 
         </p>
     </div>
 </article>
@@ -476,17 +474,17 @@ client thread 생성device 리스트에서 device가 선택되면 그 정보를 
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/30/Android-bluetooth로-string데이터-보내기/" class="thumbnail">
+        <a href="/2019/08/30/Android-App구동시-시작화면을-나오게-하자/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-bluetooth%EB%A1%9C-string%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%B4%EB%82%B4%EA%B8%B0/01.png)" alt="bluetooth로 string 데이터 보내기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="App 구동시 시작화면을 나오게 하자" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-bluetooth로-string데이터-보내기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-App구동시-시작화면을-나오게-하자/">0</span>
     
 </span>
 
@@ -504,15 +502,13 @@ client thread 생성device 리스트에서 device가 선택되면 그 정보를 
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-bluetooth로-string데이터-보내기/">bluetooth로 string 데이터 보내기</a>
+        <a href="/2019/08/30/Android-App구동시-시작화면을-나오게-하자/">App 구동시 시작화면을 나오게 하자</a>
         </h1>
     
 
         <p class="article-excerpt">
-            
-Bluetooth에 string값을 보내기 위해서는 메세지에 스트링 값을 담아 보내고
-받은 메세지의 string을 byte화 해서 송신을 하면 된다.
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152//string값 메세지로 write
+            MainActivity 이외의 Activity를 새로 만든다.(여기서는 가칭 IndexActivity)
+12345678910111213141516171819202122public class IndexActivity extends AppCompatActivity &#123;    @Override    protected void onCreate(Bundle 
         </p>
     </div>
 </article>
@@ -579,17 +575,17 @@ Fragment에서 AlertDialog+seekbar 사용seebar를 위한 코드는 MainActivity
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/30/Android-App구동시-시작화면을-나오게-하자/" class="thumbnail">
+        <a href="/2019/08/30/Android-Bluetooth-디바이스-연결/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="App 구동시 시작화면을 나오게 하자" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Bluetooth 디바이스 연결" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-App구동시-시작화면을-나오게-하자/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-Bluetooth-디바이스-연결/">0</span>
     
 </span>
 
@@ -607,13 +603,13 @@ Fragment에서 AlertDialog+seekbar 사용seebar를 위한 코드는 MainActivity
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-App구동시-시작화면을-나오게-하자/">App 구동시 시작화면을 나오게 하자</a>
+        <a href="/2019/08/30/Android-Bluetooth-디바이스-연결/">Bluetooth 디바이스 연결</a>
         </h1>
     
 
         <p class="article-excerpt">
-            MainActivity 이외의 Activity를 새로 만든다.(여기서는 가칭 IndexActivity)
-12345678910111213141516171819202122public class IndexActivity extends AppCompatActivity &#123;    @Override    protected void onCreate(Bundle 
+            Bluetooth 지원기기 체크bluetoothAdapter가 null 이면 기기가 블루투스를 지원하지 않는 것이다.
+1234if (bluetoothAdapter == null) &#123;    Toast.makeText(MainActivity.this, "이 기기는 블루투스를 지원하지 않습니다.", Toast.LENGTH_SHORT).show();   
         </p>
     </div>
 </article>

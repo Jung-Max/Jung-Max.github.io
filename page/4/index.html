@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/30/Android-Bluetooth-디바이스-연결/" class="thumbnail">
+        <a href="/2019/08/30/Android-bluetooth로-string데이터-보내기/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Bluetooth 디바이스 연결" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-bluetooth%EB%A1%9C-string%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%B4%EB%82%B4%EA%B8%B0/01.png)" alt="bluetooth로 string 데이터 보내기" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-Bluetooth-디바이스-연결/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-bluetooth로-string데이터-보내기/">0</span>
     
 </span>
 
@@ -197,13 +197,15 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-Bluetooth-디바이스-연결/">Bluetooth 디바이스 연결</a>
+        <a href="/2019/08/30/Android-bluetooth로-string데이터-보내기/">bluetooth로 string 데이터 보내기</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Bluetooth 지원기기 체크bluetoothAdapter가 null 이면 기기가 블루투스를 지원하지 않는 것이다.
-1234if (bluetoothAdapter == null) &#123;    Toast.makeText(MainActivity.this, "이 기기는 블루투스를 지원하지 않습니다.", Toast.LENGTH_SHORT).show();   
+            
+Bluetooth에 string값을 보내기 위해서는 메세지에 스트링 값을 담아 보내고
+받은 메세지의 string을 byte화 해서 송신을 하면 된다.
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152//string값 메세지로 write
         </p>
     </div>
 </article>
@@ -271,57 +273,6 @@ int값을 byte화 하기 위해선 변환이 필요하다.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/29/Github-Pages-Hexo-Theme/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/github-pages.jpg)" alt="Github pages Hexo 테마 적용하기(hueman)" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Github-Pages-Hexo-Theme/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/GitHub-Pages/">GitHub Pages</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a>
-            </div>
-            <div class="date"><time datetime="2019-08-29T02:17:13.000Z" itemprop="datePublished">2019-08-29</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Github-Pages-Hexo-Theme/">Github pages Hexo 테마 적용하기(hueman)</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            테마(Theme) 적용하기https://hexo.io/themes/ 에 접속해서 Hexo에서 사용할 수 있는 여러가지 Theme를 확인하고 선택할 수 있다.여기서는 hueman을 예로 든다.
-
-blog의 root 폴더에서 themes/hueman 폴더로 이동한다.
-아래 명령을 통해 다운받는다.
-
-1$ git clone https://github.com/pp
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
         <a href="/2019/08/29/Github-Pages-Hexo/" class="thumbnail">
     
     
@@ -363,6 +314,57 @@ Github에 가입한다.https://github.com/
 New Repository, Repository 이름은 USERNAME.github.io
 USERNAME 은 Github의 가입시에 사용자의 username을 입력한다
 Public / Private 중 Publ
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/29/Github-Pages-Hexo-Theme/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/github-pages.jpg)" alt="Github pages Hexo 테마 적용하기(hueman)" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Github-Pages-Hexo-Theme/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/GitHub-Pages/">GitHub Pages</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/GitHub-Pages/Hexo/">Hexo</a>
+            </div>
+            <div class="date"><time datetime="2019-08-29T02:17:13.000Z" itemprop="datePublished">2019-08-29</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/29/Github-Pages-Hexo-Theme/">Github pages Hexo 테마 적용하기(hueman)</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            테마(Theme) 적용하기https://hexo.io/themes/ 에 접속해서 Hexo에서 사용할 수 있는 여러가지 Theme를 확인하고 선택할 수 있다.여기서는 hueman을 예로 든다.
+
+blog의 root 폴더에서 themes/hueman 폴더로 이동한다.
+아래 명령을 통해 다운받는다.
+
+1$ git clone https://github.com/pp
         </p>
     </div>
 </article>
@@ -556,114 +558,6 @@ ncurses에 기한반 GUI툴
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-Kernel-Message/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android Kernel Message" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Kernel-Message/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
-            </div>
-            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Kernel-Message/">Android Kernel Message</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            printk()
-메시지 기록 관리를 위한 로그 레벨의 지정이 가능하다.
-kernel뿐만 아니라 응용프로그램의 init process도 printk()를 사용한다.
-logcat은 init가 구동하기 때문에 init는 printk()를 사용.
-
-
-원형 큐 구조의 관리, 출력 디바이스의 다중 지정이 가능하다.
-콘솔에서 확인하거나 dmesg 명령을 사용해서 로그파
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/27/Android-Platform-개발환경/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Android-Platform-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/01.png)" alt="Android Platform 개발환경 구축" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-개발환경/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a>
-            </div>
-            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Platform-개발환경/">Android Platform 개발환경 구축</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            기본 Image 구성
-Android 개발 툴SDK(Software Development Kit)
-Android Application을 만들기 위한 개발 환경 및 Tool을 제공
-JAVA 기반의 Application 개발 시 사용
-Windows, Linux, MAC등에 구성가능
-Android studio에 연결 가능PDK(Platform Development
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
         <a href="/2019/08/27/Android-부트로그/" class="thumbnail">
     
     
@@ -701,6 +595,103 @@ Android studio에 연결 가능PDK(Platform Development
 이미지를 교체하는 방법kernel/arch/arm/Makefile에 보면
 
 12345LOGO := $(notdir $(wildcard $(srctree)/logo.bmp))LOGO_KERNEL := $(notdir $(wildcard $(srctree)/logo_kernel.bmp))%.img: %.dtb kernel.img
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/27/Android-SystemApp/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android System App" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-SystemApp/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            </div>
+            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/27/Android-SystemApp/">Android System App</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            System app 권한 추가.AndroidManifest.xml에 sharedUserId 추가.
+123&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"    package="ckbs.ywjung.btremocon"    android:sharedUserId="android.ui
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/27/Android-수정된어플탑재/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android 수정된 어플 탑재방법" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-수정된어플탑재/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
+            </div>
+            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/27/Android-수정된어플탑재/">Android 수정된 어플 탑재방법</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            1. 아래 검색 결과처럼 packages/apps/Setting/의 어플을 수정하면 설정 어플이 수정되어 탑재된다.12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364Searching 525515 
         </p>
     </div>
 </article>
