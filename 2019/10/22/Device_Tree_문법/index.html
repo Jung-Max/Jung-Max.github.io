@@ -22,7 +22,7 @@
 <meta property="og:description" content="Device Tree란 ?단적으로 표현하면, 일정한 형식(문법)을 갖춘 텍스트를 이용하여, hardware(SoC, Board)를 기술하는 것을 말함.이와 대비되는 기존의 방식으로 platform device 기반의 board 기술 방식(C coding)이 있었음. &amp;lt;등장 배경 및 기존 방식의 문제점&amp;gt;  1) SoC 혹은 board 별로 독자적">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/Device-Tree-%EB%AC%B8%EB%B2%95/01.jpg">
-<meta property="og:updated_time" content="2019-10-28T04:56:00.078Z">
+<meta property="og:updated_time" content="2019-10-28T05:40:25.323Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Device Tree 문법">
 <meta name="twitter:description" content="Device Tree란 ?단적으로 표현하면, 일정한 형식(문법)을 갖춘 텍스트를 이용하여, hardware(SoC, Board)를 기술하는 것을 말함.이와 대비되는 기존의 방식으로 platform device 기반의 board 기술 방식(C coding)이 있었음. &amp;lt;등장 배경 및 기존 방식의 문제점&amp;gt;  1) SoC 혹은 board 별로 독자적">
@@ -402,7 +402,10 @@ ga('send', 'pageview');
 
 <p>위의 예제를 보면 PCI 호스트 브릿지는 제어를 위한 주소가 reg 속성으로 0x10180000 번지로 부터 크기는 0x1000 범위입니다. 이 번지영역을 이용 호스트 브릿지를 제어하게 됩니다. 이 호스트 브릿지는 시스템 인터럽트에 8번 인터럽트를 통해 처리하게 됩니다.</p>
 <h3 id="PCI-Host-Bridge"><a href="#PCI-Host-Bridge" class="headerlink" title="PCI Host Bridge"></a>PCI Host Bridge</h3><p>이 섹션에서는 호스트 / PCI 브리지 노드에 대해 설명합니다.</p>
-<p>이 섹션에서는 PCI에 대한 기본 지식이 있다고 가정합니다. 이것은 PCI에 대한 튜토리얼이 아니며, 더 자세한 정보가 필요하면 [여기]](<a href="https://elinux.org/Device_Tree_Usage#cite_note-1)를" rel="external nofollow noopener noreferrer" target="_blank">https://elinux.org/Device_Tree_Usage#cite_note-1)를</a> 읽어보십시오.</p>
+<p>이 섹션에서는 PCI에 대한 기본 지식이 있다고 가정합니다.</p>
+<blockquote>
+<p>peripheral component interconnect의 약어.<br>개인용 컴퓨터(PC)의 중앙 처리 장치(CPU)와 주변 장치를 연결하는 ISA나 EISA, VESA의 후속으로 개발된 로컬 버스 규격. PCI 버스 또는 PCI 로컬 버스로 널리 알려져 있으며, 이 규격의 PCI 슬롯이 대부분의 펜티엄 PC에 장착되어 있다. PCI 버스는 주소를 전달하는 신호와 데이터를 전달하는 신호를 시분할 다중화(TDM)하여 전송하기 때문에 신호선의 수가 적고, 32비트 또는 64비트 버스로서 접속 가능한 장치의 수는 10개가 권장되고 있다. PCI 버스는 CPU와 버스 사이에 브리지 회로를 두는 구조이기 때문에 VESA 로컬 버스와는 달리 CPU의 종류가 달라도 그에 대응하는 브리지 회로를 갖추기만 하면 어떤 CPU와도 연결할 수 있다. 또한 CPU와는 독자적으로 PCI 확장 카드가 작업을 동시 처리하는 버스 마스터링을 지원하므로 데이터 전송 속도가 서로 다른 여러 주변 장치가 접속되었을 때 동화(動畵) 등의 멀티미디어 데이터를 우선적으로 처리할 수 있게 한다.<br>[네이버 지식백과] PCI [peripheral component interconnect] (IT용어사전, 한국정보통신기술협회)</p>
+</blockquote>
 <h4 id="PCI-Bus-numbering"><a href="#PCI-Bus-numbering" class="headerlink" title="PCI Bus numbering"></a>PCI Bus numbering</h4><p>각 PCI 버스 세그먼트는 고유하게 번호가 지정되며 버스 번호는 두 개의 셀이 포함 된 버스 범위 특성을 사용하여 pci 노드에 노출됩니다. 첫 번째 셀은이 노드에 할당 된 버스 번호를 제공하고 두 번째 셀은 모든 하위 PCI 버스의 최대 버스 번호를 제공합니다.</p>
 <p>샘플 시스템에는 단일 PCI 버스가 있으므로 두 셀이 모두 0입니다.</p>
 <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">pci@0x10180000 </span>&#123;</span><br><span class="line">    compatible = <span class="string">"arm,versatile-pci-hostbridge"</span>, <span class="string">"pci"</span>;</span><br><span class="line">    reg = <span class="params">&lt;<span class="number">0x10180000</span> <span class="number">0x1000</span>&gt;</span>;</span><br><span class="line">    interrupts = <span class="params">&lt;<span class="number">8</span> <span class="number">0</span>&gt;</span>;</span><br><span class="line">    bus-range = <span class="params">&lt;<span class="number">0</span> <span class="number">0</span>&gt;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -493,7 +496,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2019/10/22/Device_Tree_문법/" data-id="ck29zgyd2004714jy0vhwmyeo" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2019/10/22/Device_Tree_문법/" data-id="ck2a4r62900by0pjy2wnjx0jw" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -574,7 +577,7 @@ ga('send', 'pageview');
         "description": "
 Device Tree란 ?단적으로 표현하면, 일정한 형식(문법)을 갖춘 텍스트를 이용하여, hardware(SoC, Board)를 기술하는 것을 말함.이와 대비되는 기존의 방식으로 platform device 기반의 board 기술 방식(C coding)이 있었음.
 &lt;등장 배경 및 기존 방식의 문제점&gt;  1) SoC 혹은 board 별로 독자적"
-        "wordCount": 8114
+        "wordCount": 8225
     }
 </script>
 
