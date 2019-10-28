@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/09/Android-BLE-Finding-Devices/" class="thumbnail">
+        <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Finding BLE Devices" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Connecting to a GATT Server" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Finding-Devices/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Connecting-GATT-Server/">0</span>
     
 </span>
 
@@ -197,16 +197,16 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/09/Android-BLE-Finding-Devices/">Finding BLE Devices</a>
+        <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/">Connecting to a GATT Server</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Bluetooth API를 사용하려면 다음 권한이 필요합니다.
-12android.permission.BLUETOOTHandroid.permission.BLUETOOTH_ADMIN
-
-Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / advertising 작업을 수행하려는 경우 위치 권한이 필요합니다.
-12345android.per
+            원하는 BluetoothDevice 객체를 발견하면 
+Context 객체, BLE 장치에 자동으로 연결할지 여부를 나타내는 부울 및 
+연결 이벤트 및 클라이언트 작업이있는 BluetoothGattCallback 참조를 
+매개 변수로 사용하는 connectGatt() 메서드를 사용하여 연결할 수 있습니다.
+12345if (Build.VERSION.SDK_IN
         </p>
     </div>
 </article>
@@ -219,17 +219,17 @@ Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / adve
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="thumbnail">
+        <a href="/2019/09/09/Android-Advertising-BLE-Device/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Characteristics 읽고쓰기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Advertising a BLE Device" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Characteristics-읽고쓰기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-Advertising-BLE-Device/">0</span>
     
 </span>
 
@@ -247,14 +247,15 @@ Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / adve
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/">Characteristics 읽고쓰기</a>
+        <a href="/2019/09/09/Android-Advertising-BLE-Device/">Advertising a BLE Device</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Gatt 서버에 연결되면 서버의 Characteristics을 읽고 읽음으로써 Gatt 서버와 상호 작용하게됩니다.
-이렇게하려면 먼저이 서버에서 사용할 수 있는 서비스와 각 서비스에서 사용할 수 있는 Characteristics을 찾아야합니다.
-1234567891011121314151617181920212223 @Override public void onC
+            Bluetooth LE Advertising을 사용하여 먼저 연결하지 않고도 데이터 패키지를 근처의 모든 장치에 브로드 캐스트 할 수 있습니다. 
+Advertising 데이터는 31 바이트로 제한됩니다. 
+기기 Advertising은 다른 사용자가 나에게 연결하도록하는 첫 번째 단계입니다.
+모든 장치가 Bluetooth LE Advertising을 지원하는
         </p>
     </div>
 </article>
@@ -371,7 +372,7 @@ Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / adve
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/" class="thumbnail">
+        <a href="/2019/09/02/Android-KeyEvent-발생하기/" class="thumbnail">
     
     
         <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
@@ -381,7 +382,7 @@ Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / adve
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-KeyEvent-발생하기/">0</span>
     
 </span>
 
@@ -399,14 +400,16 @@ Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / adve
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/">bluetooth로 받은 byte 데이터 분석하기</a>
+        <a href="/2019/09/02/Android-KeyEvent-발생하기/">bluetooth로 받은 byte 데이터 분석하기</a>
         </h1>
     
 
         <p class="article-excerpt">
-            bluetooth로 받은 데이터는 기본적으로 byte형태이다.
-String 데이터를 받았다면 String 형으로 변형이 필요하다.
-12345678910111213141516BufferedInputStream in = null;in = new BufferedInputStream(socket.getInputStream());byte[] buffer = new 
+            안드로이드의 Key 이벤트를 발생하기 위해선 INJECT_EVENTS가 필요하다.
+해당 권한은 AndroidManifest.xml에 선언해 준다.
+1&lt;uses-permission android:name="android.permission.INJECT_EVENTS" /&gt;
+
+INJECT_EVENTS 권한을 취득하기 위해선 System App 권한이 
         </p>
     </div>
 </article>
@@ -472,7 +475,7 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/02/Android-KeyEvent-발생하기/" class="thumbnail">
+        <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/" class="thumbnail">
     
     
         <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
@@ -482,7 +485,7 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-KeyEvent-발생하기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/">0</span>
     
 </span>
 
@@ -500,16 +503,14 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/02/Android-KeyEvent-발생하기/">bluetooth로 받은 byte 데이터 분석하기</a>
+        <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/">bluetooth로 받은 byte 데이터 분석하기</a>
         </h1>
     
 
         <p class="article-excerpt">
-            안드로이드의 Key 이벤트를 발생하기 위해선 INJECT_EVENTS가 필요하다.
-해당 권한은 AndroidManifest.xml에 선언해 준다.
-1&lt;uses-permission android:name="android.permission.INJECT_EVENTS" /&gt;
-
-INJECT_EVENTS 권한을 취득하기 위해선 System App 권한이 
+            bluetooth로 받은 데이터는 기본적으로 byte형태이다.
+String 데이터를 받았다면 String 형으로 변형이 필요하다.
+12345678910111213141516BufferedInputStream in = null;in = new BufferedInputStream(socket.getInputStream());byte[] buffer = new 
         </p>
     </div>
 </article>
@@ -623,17 +624,17 @@ client thread 생성device 리스트에서 device가 선택되면 그 정보를 
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/" class="thumbnail">
+        <a href="/2019/08/30/Android-Bluetooth-디바이스-연결/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Mouse-x,y%EC%B6%95-%EC%9D%B4%EB%8F%99%EC%9D%84-%ED%8C%A8%ED%82%B7%ED%99%94%ED%95%B4%EC%84%9C-bluetooth%EB%A1%9C-%EB%B3%B4%EB%82%B4%EA%B8%B0/01.png)" alt="Mouse x,y축 이동을 패킷화 해서 bluetooth로 보내기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Bluetooth 디바이스 연결" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-Bluetooth-디바이스-연결/">0</span>
     
 </span>
 
@@ -651,17 +652,13 @@ client thread 생성device 리스트에서 device가 선택되면 그 정보를 
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/">Mouse x,y축 이동을 패킷화 해서 bluetooth로 보내기</a>
+        <a href="/2019/08/30/Android-Bluetooth-디바이스-연결/">Bluetooth 디바이스 연결</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Bluetooth 통신시 기본적으로 소켓에는 byte[]형식으로 데이터가 담긴다.
-mouse의 x,y 값을 보내기 위해서는 8byte가 필요하다(int *2)
-mouse의 이동값인 것을 나타내기 위한 1byte가 필요하다.
-
-int값을 byte화 하기 위해선 변환이 필요하다.
-1234567891011public static byte[] intTobyte(i
+            Bluetooth 지원기기 체크bluetoothAdapter가 null 이면 기기가 블루투스를 지원하지 않는 것이다.
+1234if (bluetoothAdapter == null) &#123;    Toast.makeText(MainActivity.this, "이 기기는 블루투스를 지원하지 않습니다.", Toast.LENGTH_SHORT).show();   
         </p>
     </div>
 </article>
@@ -716,7 +713,7 @@ int값을 byte화 하기 위해선 변환이 필요하다.
                             <a href="/2019/10/22/Device_Tree_문법/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/Device-Tree-%EB%AC%B8%EB%B2%95/01.jpg)" alt="Device Tree 문법" class="thumbnail-image"></span>
     
     
 </a>

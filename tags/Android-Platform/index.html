@@ -172,7 +172,7 @@ ga('send', 'pageview');
         <a href="/2019/10/22/Device_Tree_문법/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/Device-Tree-%EB%AC%B8%EB%B2%95/01.jpg)" alt="Device Tree 문법" class="thumbnail-image"></span>
     
     
         
@@ -202,9 +202,9 @@ ga('send', 'pageview');
     
 
         <p class="article-excerpt">
-            ![Device Tree](/images/Device Tree 문법/01.jpg)
+            
 Device Tree란 ?단적으로 표현하면, 일정한 형식(문법)을 갖춘 텍스트를 이용하여, hardware(SoC, Board)를 기술하는 것을 말함.이와 대비되는 기존의 방식으로 platform device 기반의 board 기술 방식(C coding)이 있었음.
-&lt;등
+&lt;등장 배경 및 기존 방식의 문제점&gt;  1) SoC 혹은 board 별로 독자적
         </p>
     </div>
 </article>
@@ -321,121 +321,6 @@ evdev란 범용 입력 이벤트 드라이버를 뜻한다.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/29/Android-Kernel-빌드-옵션/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/01.png)" alt="Android Kernel 빌드 옵션" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-빌드-옵션/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
-            </div>
-            <div class="date"><time datetime="2019-08-29T01:54:13.000Z" itemprop="datePublished">2019-08-29</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Android-Kernel-빌드-옵션/">Android Kernel 빌드 옵션</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            make config
-
-텍스트 기반 설정 방식
-모든 옵션을 하나씩 보여주고 yes, no, module 중에 하나의 옵션을 선택 → 많이 불편함
-
-make menuconfig
-
-텍스트 메뉴 방식
-ncurses에 기한반 GUI툴
-화살표와 스페이스 바를 이용하여 옵션 설정
-편리하고 가장 많이 사용 → 실제로 거의 이 모드를 사용한다.
-설정 이후 저장하게 되면 
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/29/Android-Kernel_Module/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Android-Kernel_Module/01.jpg)" alt="Android Kernel Moduel" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel_Module/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
-            </div>
-            <div class="date"><time datetime="2019-08-29T01:54:13.000Z" itemprop="datePublished">2019-08-29</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Android-Kernel_Module/">Android Kernel Moduel</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-Kconfig
-Tree 구조로 된 configuration option들의 집합이며 모든 menu entry들은 자신만의 종속성을 가지고 있다.
-child entry는 parent entry가 보기 가능할 때만 보여진다. → 종속성
-
-
-Menu entry들은 config option을 정의하고 있다.
-Menu attribute
-모든 config optio
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
         <a href="/2019/08/29/Android-Kernel-compile/" class="thumbnail">
     
     
@@ -486,6 +371,121 @@ object 파일을 지우기 위한 명령어
 
 make module
 m
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/29/Android-Kernel-빌드-옵션/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/01.png)" alt="Android Kernel 빌드 옵션" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-빌드-옵션/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
+            </div>
+            <div class="date"><time datetime="2019-08-29T01:54:13.000Z" itemprop="datePublished">2019-08-29</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/29/Android-Kernel-빌드-옵션/">Android Kernel 빌드 옵션</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            make config
+
+텍스트 기반 설정 방식
+모든 옵션을 하나씩 보여주고 yes, no, module 중에 하나의 옵션을 선택 → 많이 불편함
+
+make menuconfig
+
+텍스트 메뉴 방식
+ncurses에 기한반 GUI툴
+화살표와 스페이스 바를 이용하여 옵션 설정
+편리하고 가장 많이 사용 → 실제로 거의 이 모드를 사용한다.
+설정 이후 저장하게 되면 
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/29/Android-Kernel_Module/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-Kernel_Module/01.jpg)" alt="Android Kernel Moduel" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel_Module/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
+            </div>
+            <div class="date"><time datetime="2019-08-29T01:54:13.000Z" itemprop="datePublished">2019-08-29</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/29/Android-Kernel_Module/">Android Kernel Moduel</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Kconfig
+Tree 구조로 된 configuration option들의 집합이며 모든 menu entry들은 자신만의 종속성을 가지고 있다.
+child entry는 parent entry가 보기 가능할 때만 보여진다. → 종속성
+
+
+Menu entry들은 config option을 정의하고 있다.
+Menu attribute
+모든 config optio
         </p>
     </div>
 </article>
@@ -610,17 +610,17 @@ logcat은 init가 구동하기 때문에 init는 printk()를 사용.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-부트로그/" class="thumbnail">
+        <a href="/2019/08/27/Android-Kernel-System-Memory-Model/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android 부트로그 수정" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Kernel-System-Memory-Model/01.png)" alt="Android Kernel System Memory Model" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-부트로그/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Kernel-System-Memory-Model/">0</span>
     
 </span>
 
@@ -631,22 +631,25 @@ logcat은 init가 구동하기 때문에 init는 printk()를 사용.
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-부트로그/">Android 부트로그 수정</a>
+        <a href="/2019/08/27/Android-Kernel-System-Memory-Model/">Android Kernel System Memory Model</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Linux 커널 부트 로고 변경
-이미지를 교체하는 방법kernel/arch/arm/Makefile에 보면
+            Android System Memory Model
+Linux/Android에서는 가상 메모리를 각 Process 마다 4GB씩 할당 받는다.(32bit 기준)
+Process의 각 유저 영역은 물리 메모리에 독립적으로 지정된다.
+Kernel 영역은 물리 메모리에서 공유된다.
 
-12345LOGO := $(notdir $(wildcard $(srctree)/logo.bmp))LOGO_KERNEL := $(notdir $(wildcard $(srctree)/logo_kernel.bmp))%.img: %.dtb kernel.img
+공유 가능 영역
+공유 가능 영역은 Kernel 공간이기 때문에 Android에서는 
         </p>
     </div>
 </article>
@@ -659,17 +662,17 @@ logcat은 init가 구동하기 때문에 init는 printk()를 사용.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-수정된어플탑재/" class="thumbnail">
+        <a href="/2019/08/27/Android-Platform-Architecture-overview/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android 수정된 어플 탑재방법" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Platform-Architecture-overview/01.png)" alt="Android Platform Architecture overview" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-수정된어플탑재/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-Architecture-overview/">0</span>
     
 </span>
 
@@ -680,19 +683,21 @@ logcat은 init가 구동하기 때문에 init는 printk()를 사용.
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Architecture/">Architecture</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-수정된어플탑재/">Android 수정된 어플 탑재방법</a>
+        <a href="/2019/08/27/Android-Platform-Architecture-overview/">Android Platform Architecture overview</a>
         </h1>
     
 
         <p class="article-excerpt">
-            1. 아래 검색 결과처럼 packages/apps/Setting/의 어플을 수정하면 설정 어플이 수정되어 탑재된다.12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364Searching 525515 
+            Android platform architecture overview1. 개요이번 시간은 안드로이드의 구조에 대해서 알아보고 애플리케이션이 어떻게 구동되는지 추론해보는 시간을 가져보겠습니다.
+제목은 안드로이드 플랫폼 아키텍쳐라고 정했습니다. 
+여기서 플랫폼은 컴퓨터 시스템의 기본이 되는 특정 프로세서 모델과 하나의 컴퓨터 시스템을 바탕으로 하는 운영체제를 
         </p>
     </div>
 </article>
@@ -747,7 +752,7 @@ logcat은 init가 구동하기 때문에 init는 printk()를 사용.
                             <a href="/2019/10/22/Device_Tree_문법/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/Device-Tree-%EB%AC%B8%EB%B2%95/01.jpg)" alt="Device Tree 문법" class="thumbnail-image"></span>
     
     
 </a>

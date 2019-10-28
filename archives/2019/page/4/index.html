@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/30/Android-App구동시-시작화면을-나오게-하자/" class="thumbnail">
+        <a href="/2019/08/30/Android-AlertDialog-seekbar-사용-방법/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="App 구동시 시작화면을 나오게 하자" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-AlertDialog-seekbar-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95/01.png)" alt="AlertDialog seekbar 사용 방법" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-App구동시-시작화면을-나오게-하자/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-AlertDialog-seekbar-사용-방법/">0</span>
     
 </span>
 
@@ -197,13 +197,16 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-App구동시-시작화면을-나오게-하자/">App 구동시 시작화면을 나오게 하자</a>
+        <a href="/2019/08/30/Android-AlertDialog-seekbar-사용-방법/">AlertDialog seekbar 사용 방법</a>
         </h1>
     
 
         <p class="article-excerpt">
-            MainActivity 이외의 Activity를 새로 만든다.(여기서는 가칭 IndexActivity)
-12345678910111213141516171819202122public class IndexActivity extends AppCompatActivity &#123;    @Override    protected void onCreate(Bundle 
+            
+Fragment에서 AlertDialog+seekbar 사용seebar를 위한 코드는 MainActivity에 구현한다.
+해당 함수의 파라미터로 Fragment의 값을 받는다.
+파라미터로 받은 Fragment의 값에서 Context를 취득한다.
+123public static void dlp_li_act(RemoconFragment a) &#123;    
         </p>
     </div>
 </article>
@@ -212,6 +215,61 @@ ga('send', 'pageview');
     
     
     
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-Mouse-x,y%EC%B6%95-%EC%9D%B4%EB%8F%99%EC%9D%84-%ED%8C%A8%ED%82%B7%ED%99%94%ED%95%B4%EC%84%9C-bluetooth%EB%A1%9C-%EB%B3%B4%EB%82%B4%EA%B8%B0/01.png)" alt="Mouse x,y축 이동을 패킷화 해서 bluetooth로 보내기" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            </div>
+            <div class="date"><time datetime="2019-08-30T08:00:00.000Z" itemprop="datePublished">2019-08-30</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/">Mouse x,y축 이동을 패킷화 해서 bluetooth로 보내기</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            Bluetooth 통신시 기본적으로 소켓에는 byte[]형식으로 데이터가 담긴다.
+mouse의 x,y 값을 보내기 위해서는 8byte가 필요하다(int *2)
+mouse의 이동값인 것을 나타내기 위한 1byte가 필요하다.
+
+int값을 byte화 하기 위해선 변환이 필요하다.
+1234567891011public static byte[] intTobyte(i
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -255,29 +313,25 @@ ga('send', 'pageview');
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
     
-        <div class="article-row">
-    
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/30/Android-bluetooth로-string데이터-보내기/" class="thumbnail">
+        <a href="/2019/08/29/Github-Pages-Hexo-Theme/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-bluetooth%EB%A1%9C-string%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%B4%EB%82%B4%EA%B8%B0/01.png)" alt="bluetooth로 string 데이터 보내기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/github-pages.jpg)" alt="Github pages Hexo 테마 적용하기(hueman)" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-bluetooth로-string데이터-보내기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Github-Pages-Hexo-Theme/">0</span>
     
 </span>
 
@@ -288,30 +342,36 @@ ga('send', 'pageview');
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            <a class="article-category-link" href="/categories/기타/">기타</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a>
             </div>
-            <div class="date"><time datetime="2019-08-30T08:00:00.000Z" itemprop="datePublished">2019-08-30</time></div>
+            <div class="date"><time datetime="2019-08-29T02:17:13.000Z" itemprop="datePublished">2019-08-29</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-bluetooth로-string데이터-보내기/">bluetooth로 string 데이터 보내기</a>
+        <a href="/2019/08/29/Github-Pages-Hexo-Theme/">Github pages Hexo 테마 적용하기(hueman)</a>
         </h1>
     
 
         <p class="article-excerpt">
-            
-Bluetooth에 string값을 보내기 위해서는 메세지에 스트링 값을 담아 보내고
-받은 메세지의 string을 byte화 해서 송신을 하면 된다.
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152//string값 메세지로 write
+            테마(Theme) 적용하기https://hexo.io/themes/ 에 접속해서 Hexo에서 사용할 수 있는 여러가지 Theme를 확인하고 선택할 수 있다.여기서는 hueman을 예로 든다.
+
+blog의 root 폴더에서 themes/hueman 폴더로 이동한다.
+아래 명령을 통해 다운받는다.
+
+1$ git clone https://github.com/pp
         </p>
     </div>
 </article>
+    
+        </div>
     
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -361,6 +421,60 @@ Public / Private 중 Publ
     </div>
 </article>
     
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/29/Android-Kernel_Module/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-Kernel_Module/01.jpg)" alt="Android Kernel Moduel" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel_Module/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
+            </div>
+            <div class="date"><time datetime="2019-08-29T01:54:13.000Z" itemprop="datePublished">2019-08-29</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/29/Android-Kernel_Module/">Android Kernel Moduel</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Kconfig
+Tree 구조로 된 configuration option들의 집합이며 모든 menu entry들은 자신만의 종속성을 가지고 있다.
+child entry는 parent entry가 보기 가능할 때만 보여진다. → 종속성
+
+
+Menu entry들은 config option을 정의하고 있다.
+Menu attribute
+모든 config optio
+        </p>
+    </div>
+</article>
+    
         </div>
     
 
@@ -373,17 +487,17 @@ Public / Private 중 Publ
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/29/Github-Pages-Hexo-Theme/" class="thumbnail">
+        <a href="/2019/08/29/Android-Kernel-빌드-옵션/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/github-pages.jpg)" alt="Github pages Hexo 테마 적용하기(hueman)" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/01.png)" alt="Android Kernel 빌드 옵션" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Github-Pages-Hexo-Theme/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-빌드-옵션/">0</span>
     
 </span>
 
@@ -394,24 +508,30 @@ Public / Private 중 Publ
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/기타/">기타</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a>
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
             </div>
-            <div class="date"><time datetime="2019-08-29T02:17:13.000Z" itemprop="datePublished">2019-08-29</time></div>
+            <div class="date"><time datetime="2019-08-29T01:54:13.000Z" itemprop="datePublished">2019-08-29</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Github-Pages-Hexo-Theme/">Github pages Hexo 테마 적용하기(hueman)</a>
+        <a href="/2019/08/29/Android-Kernel-빌드-옵션/">Android Kernel 빌드 옵션</a>
         </h1>
     
 
         <p class="article-excerpt">
-            테마(Theme) 적용하기https://hexo.io/themes/ 에 접속해서 Hexo에서 사용할 수 있는 여러가지 Theme를 확인하고 선택할 수 있다.여기서는 hueman을 예로 든다.
+            make config
 
-blog의 root 폴더에서 themes/hueman 폴더로 이동한다.
-아래 명령을 통해 다운받는다.
+텍스트 기반 설정 방식
+모든 옵션을 하나씩 보여주고 yes, no, module 중에 하나의 옵션을 선택 → 많이 불편함
 
-1$ git clone https://github.com/pp
+make menuconfig
+
+텍스트 메뉴 방식
+ncurses에 기한반 GUI툴
+화살표와 스페이스 바를 이용하여 옵션 설정
+편리하고 가장 많이 사용 → 실제로 거의 이 모드를 사용한다.
+설정 이후 저장하게 되면 
         </p>
     </div>
 </article>
@@ -490,17 +610,17 @@ m
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/29/Android-Kernel-빌드-옵션/" class="thumbnail">
+        <a href="/2019/08/27/Android-앱분해/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/01.png)" alt="Android Kernel 빌드 옵션" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-%EC%95%B1%EB%B6%84%ED%95%B4/01.png)" alt="Android Apk 분해 방법" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-빌드-옵션/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-앱분해/">0</span>
     
 </span>
 
@@ -511,139 +631,34 @@ m
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
-            </div>
-            <div class="date"><time datetime="2019-08-29T01:54:13.000Z" itemprop="datePublished">2019-08-29</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Android-Kernel-빌드-옵션/">Android Kernel 빌드 옵션</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            make config
-
-텍스트 기반 설정 방식
-모든 옵션을 하나씩 보여주고 yes, no, module 중에 하나의 옵션을 선택 → 많이 불편함
-
-make menuconfig
-
-텍스트 메뉴 방식
-ncurses에 기한반 GUI툴
-화살표와 스페이스 바를 이용하여 옵션 설정
-편리하고 가장 많이 사용 → 실제로 거의 이 모드를 사용한다.
-설정 이후 저장하게 되면 
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/29/Android-Kernel_Module/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Android-Kernel_Module/01.jpg)" alt="Android Kernel Moduel" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel_Module/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
-            </div>
-            <div class="date"><time datetime="2019-08-29T01:54:13.000Z" itemprop="datePublished">2019-08-29</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Android-Kernel_Module/">Android Kernel Moduel</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-Kconfig
-Tree 구조로 된 configuration option들의 집합이며 모든 menu entry들은 자신만의 종속성을 가지고 있다.
-child entry는 parent entry가 보기 가능할 때만 보여진다. → 종속성
-
-
-Menu entry들은 config option을 정의하고 있다.
-Menu attribute
-모든 config optio
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/27/Android-기반-Kernel/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android 기반 커널" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-기반-Kernel/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-기반-Kernel/">Android 기반 커널</a>
+        <a href="/2019/08/27/Android-앱분해/">Android Apk 분해 방법</a>
         </h1>
     
 
         <p class="article-excerpt">
-            개요
-Hardware System을 관리할 뿐 아니라 응용 소프트웨어를 실행하기 위한 기능과 서비스를 제공하는 System Software이다.
-실행되는 응용 프로그램들이 Memory, CPU, I/O장치 등의 자원들을 사용할 수 있도록 만들어 주고 공통적으로 사용할 수 있는 Service를 제공한다.
+            Android 앱 분해 방법
+APK를 다운받는다.
+https://apkpure.com/
+앱 추출 프로그램
 
-Process 관리
-Process 생성, 제거, Pr
+
+
+하기 사이트를 접속한다.
+http://www.javadecompilers.com/apk
+
+
+
+아래 메뉴에서 apk를 업로드 하고 apk 분해된 것을 다운받는다.
+
+
+
         </p>
     </div>
 </article>
@@ -656,17 +671,17 @@ Process 생성, 제거, Pr
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-커스터마이즈/" class="thumbnail">
+        <a href="/2019/08/27/Android-홈런쳐App/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/Android_platform.png)" alt="Android Platform 커스터마이즈" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-%ED%99%88%EB%9F%B0%EC%B3%90App/01.png)" alt="Android 홈 런쳐 App 작성 방법" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-커스터마이즈/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-홈런쳐App/">0</span>
     
 </span>
 
@@ -677,22 +692,21 @@ Process 생성, 제거, Pr
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-커스터마이즈/">Android Platform 커스터마이즈</a>
+        <a href="/2019/08/27/Android-홈런쳐App/">Android 홈 런쳐 App 작성 방법</a>
         </h1>
     
 
         <p class="article-excerpt">
-            안드로이드의 기본 설정값 및 기본 동작은 아래에서 설명할 파일들을 수정하여 변경할 수 있다.
-1. 안드로이드 기본 설정값1frameworks/base/packages/SettingsProvider/res/values/defaults.xml
-
-안드로이드 시스템 설정의 초기 값을 정할 수 있다. 이 중에는 기기 사용자가 설정에서 변경할 수 없는 것도 있다.시스
+            속성 설정 방법-&gt;앱의 AndroidManifest.xml을 열어서 intent-filter에 아래와 같이 추가해주면,안드로이드의 홈 버튼을 눌렀을 때 호출될, 런쳐 중 하나로 선택할 수 있다.
+-&gt;Launcher App의 외관 style 코드인 styles.xml를 아래와 같이 수정하여, 상태바를 투명하게 만들 수 있다.
+-&gt;MainAct
         </p>
     </div>
 </article>
@@ -747,7 +761,7 @@ Process 생성, 제거, Pr
                             <a href="/2019/10/22/Device_Tree_문법/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/Device-Tree-%EB%AC%B8%EB%B2%95/01.jpg)" alt="Device Tree 문법" class="thumbnail-image"></span>
     
     
 </a>
