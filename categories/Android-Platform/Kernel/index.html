@@ -272,17 +272,17 @@ evdev란 범용 입력 이벤트 드라이버를 뜻한다.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/29/Android-Kernel-compile/" class="thumbnail">
+        <a href="/2019/08/29/Android-Kernel-빌드-옵션/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Kernel-compile/01.png)" alt="Android Kernel compile" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/01.png)" alt="Android Kernel 빌드 옵션" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-compile/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-빌드-옵션/">0</span>
     
 </span>
 
@@ -300,28 +300,23 @@ evdev란 범용 입력 이벤트 드라이버를 뜻한다.
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Android-Kernel-compile/">Android Kernel compile</a>
+        <a href="/2019/08/29/Android-Kernel-빌드-옵션/">Android Kernel 빌드 옵션</a>
         </h1>
     
 
         <p class="article-excerpt">
-            
-make
-아래 설명될 이미지를 모두 만든다.
+            make config
 
-make image
-compress되지 않은 Kernel 이미지
-arch/arm/boot/image에서 찾을 수 있음
+텍스트 기반 설정 방식
+모든 옵션을 하나씩 보여주고 yes, no, module 중에 하나의 옵션을 선택 → 많이 불편함
 
-make zImage
-compress된 kernel 이미지
-arch/arm/boot/zImage에 존재
+make menuconfig
 
-make clean
-object 파일을 지우기 위한 명령어
-
-make module
-m
+텍스트 메뉴 방식
+ncurses에 기한반 GUI툴
+화살표와 스페이스 바를 이용하여 옵션 설정
+편리하고 가장 많이 사용 → 실제로 거의 이 모드를 사용한다.
+설정 이후 저장하게 되면 
         </p>
     </div>
 </article>
@@ -392,17 +387,17 @@ Menu attribute
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/29/Android-Kernel-빌드-옵션/" class="thumbnail">
+        <a href="/2019/08/29/Android-Kernel-compile/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/01.png)" alt="Android Kernel 빌드 옵션" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Kernel-compile/01.png)" alt="Android Kernel compile" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-빌드-옵션/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-compile/">0</span>
     
 </span>
 
@@ -420,23 +415,28 @@ Menu attribute
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Android-Kernel-빌드-옵션/">Android Kernel 빌드 옵션</a>
+        <a href="/2019/08/29/Android-Kernel-compile/">Android Kernel compile</a>
         </h1>
     
 
         <p class="article-excerpt">
-            make config
+            
+make
+아래 설명될 이미지를 모두 만든다.
 
-텍스트 기반 설정 방식
-모든 옵션을 하나씩 보여주고 yes, no, module 중에 하나의 옵션을 선택 → 많이 불편함
+make image
+compress되지 않은 Kernel 이미지
+arch/arm/boot/image에서 찾을 수 있음
 
-make menuconfig
+make zImage
+compress된 kernel 이미지
+arch/arm/boot/zImage에 존재
 
-텍스트 메뉴 방식
-ncurses에 기한반 GUI툴
-화살표와 스페이스 바를 이용하여 옵션 설정
-편리하고 가장 많이 사용 → 실제로 거의 이 모드를 사용한다.
-설정 이후 저장하게 되면 
+make clean
+object 파일을 지우기 위한 명령어
+
+make module
+m
         </p>
     </div>
 </article>
