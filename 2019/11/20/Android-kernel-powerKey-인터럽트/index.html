@@ -6,29 +6,29 @@
     
 
     
-    <title>Android NDK를 사용해서 kernel드라이버 사용하기 | Max&#39;s Blog</title>
+    <title>Android Kernel powerkey 인터럽트 설정 | Max&#39;s Blog</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
         <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
-        <meta name="keywords" content="Android,App,Kernel,Linux">
+        <meta name="keywords" content="Android Platform,Kernel,Linux">
     
-    <meta name="description" content="kernel의 드라이버를 쓰기 위해서는 driver 장치 파일의 write 권한이 있어야 한다.기본적으로 장치 파일의 write 권한은 플랫폼 소스에서 부팅시 *.rc파일을 수정해서 변경 가능하다. 여기서는 앱에서 write 권한을 취득하는 것부터 시작한다. 앱이 파일의 접근 권한을 변경하기 위해서는 su권한이 있어야 한다. 12345678910111213">
-<meta name="keywords" content="Android,App,Kernel,Linux">
+    <meta name="description" content="안드로이드를 포팅하다 잘되던 power key가 어느 순간 작동하지 않았다. 원인은 g-sensor를 인터럽트로 신호를 받았더니 power key가 동작을 하지 않는 것이다. g-sensor에 인터럽트가 필요했기 때문에 power key또한 인터럽트가 작동하도록 만드는 것이 필요했다. 일단 dts의 power-key 부분을 보면 123456789101112">
+<meta name="keywords" content="Android Platform,Kernel,Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android NDK를 사용해서 kernel드라이버 사용하기">
-<meta property="og:url" content="http://jung-max.github.io/2019/09/02/Android-NDK를-사용해서-kernel드라이버-사용하기/index.html">
+<meta property="og:title" content="Android Kernel powerkey 인터럽트 설정">
+<meta property="og:url" content="http://jung-max.github.io/2019/11/20/Android-kernel-powerKey-인터럽트/index.html">
 <meta property="og:site_name" content="Max&#39;s Blog">
-<meta property="og:description" content="kernel의 드라이버를 쓰기 위해서는 driver 장치 파일의 write 권한이 있어야 한다.기본적으로 장치 파일의 write 권한은 플랫폼 소스에서 부팅시 *.rc파일을 수정해서 변경 가능하다. 여기서는 앱에서 write 권한을 취득하는 것부터 시작한다. 앱이 파일의 접근 권한을 변경하기 위해서는 su권한이 있어야 한다. 12345678910111213">
+<meta property="og:description" content="안드로이드를 포팅하다 잘되던 power key가 어느 순간 작동하지 않았다. 원인은 g-sensor를 인터럽트로 신호를 받았더니 power key가 동작을 하지 않는 것이다. g-sensor에 인터럽트가 필요했기 때문에 power key또한 인터럽트가 작동하도록 만드는 것이 필요했다. 일단 dts의 power-key 부분을 보면 123456789101112">
 <meta property="og:locale" content="ko">
-<meta property="og:image" content="http://jung-max.github.io/images/Thumbnail/ANDROID.jpg">
-<meta property="og:updated_time" content="2019-09-05T07:25:11.693Z">
+<meta property="og:image" content="http://jung-max.github.io/images/Thumbnail/Android_kernel.png">
+<meta property="og:updated_time" content="2019-11-20T07:38:31.782Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android NDK를 사용해서 kernel드라이버 사용하기">
-<meta name="twitter:description" content="kernel의 드라이버를 쓰기 위해서는 driver 장치 파일의 write 권한이 있어야 한다.기본적으로 장치 파일의 write 권한은 플랫폼 소스에서 부팅시 *.rc파일을 수정해서 변경 가능하다. 여기서는 앱에서 write 권한을 취득하는 것부터 시작한다. 앱이 파일의 접근 권한을 변경하기 위해서는 su권한이 있어야 한다. 12345678910111213">
-<meta name="twitter:image" content="http://jung-max.github.io/images/Thumbnail/ANDROID.jpg">
+<meta name="twitter:title" content="Android Kernel powerkey 인터럽트 설정">
+<meta name="twitter:description" content="안드로이드를 포팅하다 잘되던 power key가 어느 순간 작동하지 않았다. 원인은 g-sensor를 인터럽트로 신호를 받았더니 power key가 동작을 하지 않는 것이다. g-sensor에 인터럽트가 필요했기 때문에 power key또한 인터럽트가 작동하도록 만드는 것이 필요했다. 일단 dts의 power-key 부분을 보면 123456789101112">
+<meta name="twitter:image" content="http://jung-max.github.io/images/Thumbnail/Android_kernel.png">
     
-    <link rel="canonical" href="http://jung-max.github.io/2019/09/02/android-ndk를-사용해서-kernel드라이버-사용하기/">
+    <link rel="canonical" href="http://jung-max.github.io/2019/11/20/android-kernel-powerkey-인터럽트/">
 
 
     
@@ -151,19 +151,19 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Android/App/">App</a>
+    <a class="page-title-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-Android-NDK를-사용해서-kernel드라이버-사용하기" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-Android-kernel-powerKey-인터럽트" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        Android NDK를 사용해서 kernel드라이버 사용하기
+        Android Kernel powerkey 인터럽트 설정
         </h1>
     
 
@@ -173,8 +173,8 @@ ga('send', 'pageview');
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2019/09/02/Android-NDK를-사용해서-kernel드라이버-사용하기/" class="article-date">
-            <time datetime="2019-09-02T07:17:00.000Z" itemprop="datePublished">2019-09-02</time>
+        <a href="/2019/11/20/Android-kernel-powerKey-인터럽트/" class="article-date">
+            <time datetime="2019-11-20T07:18:23.000Z" itemprop="datePublished">2019-11-20</time>
         </a>
     </div>
 
@@ -183,23 +183,49 @@ ga('send', 'pageview');
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Android/">Android</a>, <a class="tag-link" href="/tags/App/">App</a>, <a class="tag-link" href="/tags/Kernel/">Kernel</a>, <a class="tag-link" href="/tags/Linux/">Linux</a>
+        <a class="tag-link" href="/tags/Android-Platform/">Android Platform</a>, <a class="tag-link" href="/tags/Kernel/">Kernel</a>, <a class="tag-link" href="/tags/Linux/">Linux</a>
     </div>
 
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p>kernel의 드라이버를 쓰기 위해서는 driver 장치 파일의 write 권한이 있어야 한다.<br>기본적으로 장치 파일의 write 권한은 플랫폼 소스에서 부팅시 <code>*.rc</code>파일을 수정해서 변경 가능하다.</p>
-<p>여기서는 앱에서 write 권한을 취득하는 것부터 시작한다.</p>
-<p>앱이 파일의 접근 권한을 변경하기 위해서는 <code>su</code>권한이 있어야 한다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Process process = <span class="keyword">null</span>;</span><br><span class="line">DataOutputStream dataOutputStream = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    process = Runtime.getRuntime().exec(<span class="string">"su"</span>);</span><br><span class="line">    dataOutputStream = <span class="keyword">new</span> DataOutputStream(process.getOutputStream());</span><br><span class="line">    dataOutputStream.writeBytes(<span class="string">"chmod 777 /sys/class/tidlp_i2c/i2c_w\n"</span>);</span><br><span class="line">    dataOutputStream.writeBytes(<span class="string">"chmod 777 /sys/class/tidlp_i2c/i2c_r\n"</span>);</span><br><span class="line">    dataOutputStream.writeBytes(<span class="string">"chmod 777 /sys/devices/platform/virmouse/vmevent\n"</span>);</span><br><span class="line">    dataOutputStream.writeBytes(<span class="string">"exit\n"</span>);</span><br><span class="line">    dataOutputStream.flush();</span><br><span class="line">    process.waitFor();</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (dataOutputStream != <span class="keyword">null</span>) &#123;</span><br><span class="line">            dataOutputStream.close();</span><br><span class="line">        &#125;</span><br><span class="line">        process.destroy();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>안드로이드를 포팅하다 잘되던 power key가 어느 순간 작동하지 않았다. 원인은 g-sensor를 인터럽트로 신호를 받았더니 power key가 동작을 하지 않는 것이다.</p>
+<p>g-sensor에 인터럽트가 필요했기 때문에 power key또한 인터럽트가 작동하도록 만드는 것이 필요했다.</p>
+<p>일단 dts의 power-key 부분을 보면</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">&amp;adc</span> &#123;</span><br><span class="line">	status = <span class="string">"okay"</span>;</span><br><span class="line"><span class="symbol">	rk_key:</span> rockchip-<span class="class">key </span>&#123;</span><br><span class="line">		compatible = <span class="string">"rockchip,key"</span>;</span><br><span class="line">		io-channels = <span class="params">&lt;<span class="variable">&amp;adc</span> <span class="number">0</span>&gt;</span>;</span><br><span class="line">		status = <span class="string">"okay"</span>;</span><br><span class="line"></span><br><span class="line">		vol-up-<span class="class">key </span>&#123;</span><br><span class="line">			linux,code = <span class="params">&lt;<span class="number">113</span>&gt;</span>;</span><br><span class="line">			label = <span class="string">"F12"</span>;</span><br><span class="line">			rockchip,adc_value = <span class="params">&lt;<span class="number">4</span>&gt;</span>;</span><br><span class="line">		&#125;;</span><br><span class="line"></span><br><span class="line">		power-<span class="class">key </span>&#123;</span><br><span class="line">			gpios = <span class="params">&lt;<span class="variable">&amp;gpio0</span> GPIO_A2 GPIO_ACTIVE_LOW&gt;</span>;</span><br><span class="line">			linux,code = <span class="params">&lt;<span class="number">116</span>&gt;</span>;</span><br><span class="line">			label = <span class="string">"POWER"</span>;</span><br><span class="line">			gpio-key,wakeup;</span><br><span class="line">			<span class="comment">// rockchip,adc_value = &lt;4&gt;;</span></span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>장치 파일의 write권한을 획득했으면 ndk를 사용해 c/c++ 파일에서 드라이버 관련 함수를 구현한다.</p>
-<p>첫번째로 드라이버 장치파일을 open한다.</p>
-<p>그 후 write를 통해 드라이버 장치파일에 값을 써주어서 드라이버를 동작한다.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Brightness */</span></span><br><span class="line">extern <span class="string">"C"</span> JNIEXPORT <span class="keyword">void</span> JNICALL</span><br><span class="line">Java_ckbs_ywjung_btremocon_MainActivity_dlpBr(</span><br><span class="line">        JNIEnv *env,</span><br><span class="line">        jobject <span class="comment">/* this */</span>, jint k) &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> br = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> fd;</span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">60</span>];</span><br><span class="line">    <span class="keyword">char</span> send_buff[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line">    snprintf(buf, sizeof(buf), <span class="string">"/sys/class/tidlp_i2c/i2c_w"</span>);</span><br><span class="line"></span><br><span class="line">    fd = open(buf, O_RDWR);</span><br><span class="line">    <span class="keyword">if</span> (fd &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        br = k;</span><br><span class="line">        sprintf(send_buff, <span class="string">"0x80 0x1 0x%x"</span>, br);</span><br><span class="line">        write(fd, send_buff, strlen(send_buff));</span><br><span class="line">        close(fd);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이렇게 되어있다.</p>
+<p>기존 sdk의 dts는 power-key를 adc로 받았던 것 같은데 우리의 디바이스는 gpio0_a2와 key가 연결되어 있기 때문에 수정을 하였다.</p>
+<p>여기서 잠깐 설명을 하면 <code>linux,code = &lt;116&gt;</code>은 <code>KEY_POWER</code>를 의미한다. 이는 <code>linux/input.h</code>에 정의되어 있다.</p>
+<p>다시 돌아와서 여기서 dts를 잘 살펴보면 <code>compatible = &quot;rockchip,key&quot;;</code>이 보인다.</p>
+<p><code>rockchip,key</code>라는 <code>compatible</code>이 설정되어 있는 driver와 연결되어 있다는 의미이다.</p>
+<p><code>kernel/drivers</code>를 열심히 검색했더니 <code>rk_keys.c</code>라는 파일에 <code>compatible = &quot;rockchip,key&quot;;</code>이 설정되어 있는 것을 확인했다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">of_device_id</span> <span class="title">rk_key_match</span>[] = &#123;</span></span><br><span class="line">	&#123; .compatible = <span class="string">"rockchip,key"</span>, .data = <span class="literal">NULL</span>&#125;,</span><br><span class="line">	&#123;&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">platform_driver</span> <span class="title">keys_device_driver</span> = &#123;</span></span><br><span class="line">	.probe		= keys_probe,</span><br><span class="line">	.remove		= keys_remove,</span><br><span class="line">	.driver		= &#123;</span><br><span class="line">		.name	= <span class="string">"rk-keypad"</span>,</span><br><span class="line">		.owner	= THIS_MODULE,</span><br><span class="line">		.of_match_table = rk_key_match,</span><br><span class="line">#ifdef CONFIG_PM</span><br><span class="line">		.pm	= &amp;keys_pm_ops,</span><br><span class="line">#endif</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
+<p>이제 해당 소스에서 key의 interrupt 관련된 부분을 찾아 봤다.</p>
+<p>이에 앞서 먼저 g-sensor의 interrupt부분은 다음과 같이 이루어져 있었다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span>  <span class="title">sensor_delaywork_func</span><span class="params">(struct work_struct *work)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">delayed_work</span> *<span class="title">delaywork</span> = <span class="title">container_of</span>(<span class="title">work</span>, <span class="title">struct</span> <span class="title">delayed_work</span>, <span class="title">work</span>);</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sensor_private_data</span> *<span class="title">sensor</span> = <span class="title">container_of</span>(<span class="title">delaywork</span>, <span class="title">struct</span> <span class="title">sensor_private_data</span>, <span class="title">delaywork</span>);</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">i2c_client</span> *<span class="title">client</span> = <span class="title">sensor</span>-&gt;<span class="title">client</span>;</span></span><br><span class="line"></span><br><span class="line">	mutex_lock(&amp;sensor-&gt;sensor_mutex);</span><br><span class="line">	<span class="keyword">if</span> (sensor_get_data(client) &lt; <span class="number">0</span>)</span><br><span class="line">		DBG(KERN_ERR <span class="string">"%s: Get data failed\n"</span>,__func__);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(!sensor-&gt;pdata-&gt;irq_enable)<span class="comment">//restart work while polling</span></span><br><span class="line">	schedule_delayed_work(&amp;sensor-&gt;delaywork, msecs_to_jiffies(sensor-&gt;pdata-&gt;poll_delay_ms));</span><br><span class="line">	<span class="comment">//else</span></span><br><span class="line">	<span class="comment">//&#123;</span></span><br><span class="line">		<span class="comment">//if((sensor-&gt;ops-&gt;trig == IRQF_TRIGGER_LOW) || (sensor-&gt;ops-&gt;trig == IRQF_TRIGGER_HIGH))</span></span><br><span class="line">		<span class="comment">//enable_irq(sensor-&gt;client-&gt;irq);</span></span><br><span class="line">	<span class="comment">//&#125;</span></span><br><span class="line">	mutex_unlock(&amp;sensor-&gt;sensor_mutex);</span><br><span class="line"></span><br><span class="line">	DBG(<span class="string">"%s:%s\n"</span>,__func__,sensor-&gt;i2c_id-&gt;name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">sensor_irq_init</span><span class="params">(struct i2c_client *client)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sensor_private_data</span> *<span class="title">sensor</span> =</span></span><br><span class="line"><span class="class">	    (<span class="title">struct</span> <span class="title">sensor_private_data</span> *) <span class="title">i2c_get_clientdata</span>(<span class="title">client</span>);</span></span><br><span class="line">	<span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> irq;</span><br><span class="line">	<span class="keyword">if</span>((sensor-&gt;pdata-&gt;irq_enable)&amp;&amp;(sensor-&gt;pdata-&gt;irq_flags!= SENSOR_UNKNOW_DATA))</span><br><span class="line">	&#123;</span><br><span class="line">		INIT_DELAYED_WORK(&amp;sensor-&gt;delaywork, sensor_delaywork_func);</span><br><span class="line">		<span class="keyword">if</span>(sensor-&gt;pdata-&gt;poll_delay_ms &lt; <span class="number">0</span>)</span><br><span class="line">			sensor-&gt;pdata-&gt;poll_delay_ms = <span class="number">30</span>;</span><br><span class="line">		result = gpio_request(client-&gt;irq, sensor-&gt;i2c_id-&gt;name);</span><br><span class="line">		<span class="keyword">if</span> (result)</span><br><span class="line">		&#123;</span><br><span class="line">			printk(<span class="string">"%s:fail to request gpio :%d\n"</span>,__func__,client-&gt;irq);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//gpio_pull_updown(client-&gt;irq, PullEnable);</span></span><br><span class="line">		irq = gpio_to_irq(client-&gt;irq);</span><br><span class="line">		<span class="comment">//result = request_irq(irq, sensor_interrupt, sensor-&gt;ops-&gt;trig, sensor-&gt;ops-&gt;name, sensor);</span></span><br><span class="line">		result = request_threaded_irq(irq, <span class="literal">NULL</span>, sensor_interrupt, sensor-&gt;ops-&gt;trig, sensor-&gt;ops-&gt;name, sensor);</span><br><span class="line">		<span class="comment">//result = devm_request_threaded_irq(&amp;client-&gt;dev, irq, NULL, sensor_interrupt, sensor-&gt;pdata-&gt;irq_flags | IRQF_ONESHOT, sensor-&gt;ops-&gt;name, sensor);</span></span><br><span class="line">		<span class="keyword">if</span> (result) &#123;</span><br><span class="line">			printk(KERN_INFO <span class="string">"%s:fail to request irq = %d, ret = 0x%x\n"</span>,__func__, irq, result);</span><br><span class="line">			<span class="keyword">goto</span> error;</span><br><span class="line">		&#125;</span><br><span class="line">		client-&gt;irq = irq;</span><br><span class="line">		<span class="keyword">if</span>((sensor-&gt;pdata-&gt;type == SENSOR_TYPE_GYROSCOPE) || (sensor-&gt;pdata-&gt;type == SENSOR_TYPE_ACCEL) || (sensor-&gt;pdata-&gt;type == SENSOR_TYPE_ANGLE))			</span><br><span class="line">			disable_irq_nosync(client-&gt;irq);<span class="comment">//disable irq</span></span><br><span class="line">		<span class="keyword">if</span>(((sensor-&gt;pdata-&gt;type == SENSOR_TYPE_LIGHT) || (sensor-&gt;pdata-&gt;type == SENSOR_TYPE_PROXIMITY))&amp;&amp; (!(sensor-&gt;ops-&gt;trig &amp; IRQF_SHARED)))</span><br><span class="line">		disable_irq_nosync(client-&gt;irq);<span class="comment">//disable irq</span></span><br><span class="line">		<span class="keyword">if</span>(((sensor-&gt;pdata-&gt;type == SENSOR_TYPE_TEMPERATURE) || (sensor-&gt;pdata-&gt;type == SENSOR_TYPE_PRESSURE))&amp;&amp; (!(sensor-&gt;ops-&gt;trig &amp; IRQF_SHARED)))</span><br><span class="line">		disable_irq_nosync(client-&gt;irq);<span class="comment">//disable irq</span></span><br><span class="line">		DBG(<span class="string">"%s:use irq=%d\n"</span>,__func__,irq);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(!sensor-&gt;pdata-&gt;irq_enable)</span><br><span class="line">	&#123;</span><br><span class="line">		INIT_DELAYED_WORK(&amp;sensor-&gt;delaywork, sensor_delaywork_func);</span><br><span class="line">		<span class="keyword">if</span>(sensor-&gt;pdata-&gt;poll_delay_ms &lt; <span class="number">0</span>)</span><br><span class="line">			sensor-&gt;pdata-&gt;poll_delay_ms = <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line">		DBG(<span class="string">"%s:use polling,delay=%d ms\n"</span>,__func__,sensor-&gt;pdata-&gt;poll_delay_ms);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">error:</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>소스가 길지만 여기서 눈여겨 볼 것은 <code>INIT_DELAYED_WORK</code>와  <code>schedule_delayed_work</code>이다.</p>
+<p>이 인터럽트는 위 함수를 쓴거와 같이 workqueue 인터럽트를 사용했다.</p>
+<p>workqueue 인터럽트는 바톰 하프의 한 종류로서 softirq, tasklet, workqueue_struct중 세번째에 해당된다.</p>
+<p>특징으로는 </p>
+<ul>
+<li>사용자 편의성이 높고</li>
+<li>지연된 작업이 프로세스 컨텍스트에서 수행되어야 하는 경우</li>
+<li>네트워크 서브시스템과 같이 초당 수천번의 인터럽트가 발생하는 상황에는 적합하지 않음</li>
+<li>지연된 작업을 처리하기 위해 스케줄 가능한 요소, 즉 휴면(blocking)해야할 필요가 있는 경우<br>에 적합하다.</li>
+</ul>
+<p>다시 돌아와서 내가 관심같는 key의 소스를 보면 역시 interrupt가 구현되어 있다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">keys_probe</span><span class="params">(struct platform_device *pdev)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; ddata-&gt;nbuttons; i++) &#123;</span><br><span class="line">		<span class="class"><span class="keyword">struct</span> <span class="title">rk_keys_button</span> *<span class="title">button</span> = &amp;<span class="title">ddata</span>-&gt;<span class="title">button</span>[<span class="title">i</span>];</span></span><br><span class="line"></span><br><span class="line">		button-&gt;dev = &amp;pdev-&gt;dev;</span><br><span class="line">		<span class="keyword">if</span> (button-&gt;type == TYPE_GPIO) &#123;</span><br><span class="line">			<span class="keyword">int</span> irq;</span><br><span class="line"></span><br><span class="line">			error =</span><br><span class="line">			    devm_gpio_request(dev, button-&gt;gpio,</span><br><span class="line">					      button-&gt;desc ? : <span class="string">"keys"</span>);</span><br><span class="line">			<span class="keyword">if</span> (error &lt; <span class="number">0</span>) &#123;</span><br><span class="line">				pr_err(<span class="string">"gpio-keys: failed to request GPIO %d, error %d\n"</span>,</span><br><span class="line">				       button-&gt;gpio, error);</span><br><span class="line">				<span class="keyword">goto</span> fail1;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			error = gpio_direction_input(button-&gt;gpio);</span><br><span class="line">			<span class="keyword">if</span> (error &lt; <span class="number">0</span>) &#123;</span><br><span class="line">				pr_err(<span class="string">"gpio-keys: failed to configure input direction for GPIO %d, error %d\n"</span>,</span><br><span class="line">				       button-&gt;gpio, error);</span><br><span class="line">				gpio_free(button-&gt;gpio);</span><br><span class="line">				<span class="keyword">goto</span> fail1;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			irq = gpio_to_irq(button-&gt;gpio);</span><br><span class="line">			<span class="keyword">if</span> (irq &lt; <span class="number">0</span>) &#123;</span><br><span class="line">				error = irq;</span><br><span class="line">				pr_err(<span class="string">"gpio-keys: Unable to get irq number for GPIO %d, error %d\n"</span>,</span><br><span class="line">				       button-&gt;gpio, error);</span><br><span class="line">				gpio_free(button-&gt;gpio);</span><br><span class="line">				<span class="keyword">goto</span> fail1;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			error = devm_request_irq(dev, irq, keys_isr,</span><br><span class="line">						 button-&gt;active_low ?</span><br><span class="line">						 IRQF_TRIGGER_FALLING :</span><br><span class="line">						 IRQF_TRIGGER_RISING,</span><br><span class="line">						 button-&gt;desc ?</span><br><span class="line">						 button-&gt;desc : <span class="string">"keys"</span>,</span><br><span class="line">						 button);</span><br><span class="line">			<span class="keyword">if</span> (error) &#123;</span><br><span class="line">				pr_err(<span class="string">"gpio-keys: Unable to claim irq %d; error %d\n"</span>,</span><br><span class="line">				       irq, error);</span><br><span class="line">				gpio_free(button-&gt;gpio);</span><br><span class="line">				<span class="keyword">goto</span> fail1;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	input_set_capability(input, EV_KEY, KEY_WAKEUP);</span><br><span class="line">	<span class="comment">/* adc polling work */</span></span><br><span class="line">	<span class="keyword">if</span> (ddata-&gt;chan) </span><br><span class="line">	&#123;</span><br><span class="line">		INIT_DELAYED_WORK(&amp;ddata-&gt;adc_poll_work, adc_key_poll);</span><br><span class="line">		schedule_delayed_work(&amp;ddata-&gt;adc_poll_work,</span><br><span class="line">				      ADC_SAMPLE_JIFFIES);</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>해당 소스를 보면 열심히 key와 관련되어서 초기화 시 interrupt를 설정하였다.</p>
+<p>그런데 왜 power-key가 작동하지 않았을까…</p>
+<p>결론은 마지막에 <code>if (ddata-&gt;chan)</code>의 조건문을 만족하지 못해서 workqueue가 등록되지 안았다.</p>
+<p>여기서 <code>chan</code>은 <code>chan = iio_channel_get(&amp;pdev-&gt;dev, NULL);</code>에서 얻어온다.</p>
+<p>io-chaanel인가를 뜻하는 거 같은데… 잘 모르겠다.<br>하여튼 내가 쓰는 key는 일단 power-key 하나이므로 과감히 해당 조건문을 주석처리 했다.</p>
+<p>결론적으로 g-sensor와 power-key가 동시에 잘 동작하는 것을 확인했다.</p>
 
         </div>
         <footer class="article-footer">
@@ -207,7 +233,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2019/09/02/Android-NDK를-사용해서-kernel드라이버-사용하기/" data-id="ck36z8n5c002m0pjykpumxmqi" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2019/11/20/Android-kernel-powerKey-인터럽트/" data-id="ck36z8n5w003w0pjynzsqi83s" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -277,19 +303,19 @@ ga('send', 'pageview');
             "@type": "Person",
             "name": "Jung Max"
         },
-        "headline": "Android NDK를 사용해서 kernel드라이버 사용하기",
-        "image": "http://jung-max.github.io/images/Thumbnail/ANDROID.jpg",
-        "keywords": "Android App Kernel Linux",
-        "genre": "Android App",
-        "datePublished": "2019-09-02",
-        "dateCreated": "2019-09-02",
-        "dateModified": "2019-09-05",
-        "url": "http://jung-max.github.io/2019/09/02/Android-NDK를-사용해서-kernel드라이버-사용하기/",
-        "description": "kernel의 드라이버를 쓰기 위해서는 driver 장치 파일의 write 권한이 있어야 한다.기본적으로 장치 파일의 write 권한은 플랫폼 소스에서 부팅시 *.rc파일을 수정해서 변경 가능하다.
-여기서는 앱에서 write 권한을 취득하는 것부터 시작한다.
-앱이 파일의 접근 권한을 변경하기 위해서는 su권한이 있어야 한다.
-12345678910111213"
-        "wordCount": 414
+        "headline": "Android Kernel powerkey 인터럽트 설정",
+        "image": "http://jung-max.github.io/images/Thumbnail/Android_kernel.png",
+        "keywords": "Android Platform Kernel Linux",
+        "genre": "Android Platform Kernel",
+        "datePublished": "2019-11-20",
+        "dateCreated": "2019-11-20",
+        "dateModified": "2019-11-20",
+        "url": "http://jung-max.github.io/2019/11/20/Android-kernel-powerKey-인터럽트/",
+        "description": "안드로이드를 포팅하다 잘되던 power key가 어느 순간 작동하지 않았다. 원인은 g-sensor를 인터럽트로 신호를 받았더니 power key가 동작을 하지 않는 것이다.
+g-sensor에 인터럽트가 필요했기 때문에 power key또한 인터럽트가 작동하도록 만드는 것이 필요했다.
+일단 dts의 power-key 부분을 보면
+123456789101112"
+        "wordCount": 1125
     }
 </script>
 
@@ -329,20 +355,10 @@ ga('send', 'pageview');
         
 <nav id="article-nav">
     
-        <a href="/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">새로운</strong>
-        <p class="article-nav-title">
-        
-            Android Kernel 가상 마우스 드라이버 구현하기
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2019/11/13/Git-하위폴더의-git지우기/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">오래된</strong>
-        <p class="article-nav-title">bluetooth로 받은 byte 데이터 분석하기</p>
+        <p class="article-nav-title">Git 하위폴더의 git 지우기</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -540,7 +556,7 @@ ga('send', 'pageview');
     var disqus_shortname = 'maxs-blog-5';
     
     
-    var disqus_url = 'http://jung-max.github.io/2019/09/02/Android-NDK를-사용해서-kernel드라이버-사용하기/';
+    var disqus_url = 'http://jung-max.github.io/2019/11/20/Android-kernel-powerKey-인터럽트/';
     
     (function() {
     var dsq = document.createElement('script');
