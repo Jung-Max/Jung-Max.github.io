@@ -22,7 +22,7 @@
 <meta property="og:description" content="ADC란?ADC란 Analog to Digital Converter의 약자로서 실생활에서 연속적으로 측정되는 신호를 프로세서가 그 값을 읽을 수 있도록 디지털 신호로 변환해주는 장치입니다.  ADC 관련 용어 Sampling(표본화)아날로그 신호를 일정 주기로 추출하는 과정연속시간 → 이산시간  Quantizing[양자화, 분해능]표본화된 각각의 신호의 대">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/0002.png">
-<meta property="og:updated_time" content="2019-12-18T03:13:09.759Z">
+<meta property="og:updated_time" content="2019-12-18T03:23:16.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux kernel ADC Battery">
 <meta name="twitter:description" content="ADC란?ADC란 Analog to Digital Converter의 약자로서 실생활에서 연속적으로 측정되는 신호를 프로세서가 그 값을 읽을 수 있도록 디지털 신호로 변환해주는 장치입니다.  ADC 관련 용어 Sampling(표본화)아날로그 신호를 일정 주기로 추출하는 과정연속시간 → 이산시간  Quantizing[양자화, 분해능]표본화된 각각의 신호의 대">
@@ -241,7 +241,7 @@ ga('send', 'pageview');
 <li><strong>ref_voltage</strong> : voltage과 관계된 기준 전압값. 입력전압과 기준전압을 비교하여 디지털로 변환한다. 0 ~ Vref 측정 가능. <code>Vref = 0xffffffffff</code>(10bit일때)</li>
 <li><strong>led-gpio</strong> : ??</li>
 <li><strong>chg_ok_gpio</strong> : 충전중의 여부를 판별</li>
-<li><strong>bat_table</strong> : 충전량을 판별하기 위한 table.<br>0<del>3은 쓰이지 않음.<br>4</del>5는  ADC 샘플링 전압 분배기 저항(4는 pull_up, 5는 pull_down).<br>6<del>16은 충전중이 아닐때 최소</del>최대 전압값<br>17<del>27은 충전중일때 최소</del>최대 전압값</li>
+<li><strong>bat_table</strong> : 충전량을 판별하기 위한 table.<br>0-3은 쓰이지 않음.<br>4-5는  ADC 샘플링 전압 분배기 저항(4는 pull_up, 5는 pull_down).<br>6-16은 충전중이 아닐때 최소-최대 전압값<br>17-27은 충전중일때 최소-최대 전압값</li>
 <li><strong>is_dc_charge</strong> : dc 충전을 사용하는지 여부</li>
 <li><strong>is_usb_charge</strong> : usb 충전을 사용하는지 여부</li>
 </ul>
@@ -254,7 +254,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2019/12/13/Linux-ADC-Battery/" data-id="ck4aq9avb005i1yjy861r3bk2" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2019/12/13/Linux-ADC-Battery/" data-id="ck4aqewok00c60pjyngxb332g" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
