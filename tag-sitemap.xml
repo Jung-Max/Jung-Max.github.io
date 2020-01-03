@@ -3,6 +3,41 @@
 
 
     <url>
+        <loc>http://jung-max.github.io/tags/TabLayout/</loc>
+        <lastmod>2020-01-03T07:49:58.149Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/App/</loc>
+        <lastmod>2020-01-03T07:49:58.149Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/Android/</loc>
+        <lastmod>2020-01-03T07:49:58.149Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/Toast/</loc>
+        <lastmod>2020-01-03T07:24:22.615Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/Thread/</loc>
+        <lastmod>2020-01-03T07:24:22.615Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/tags/Linux/</loc>
         <lastmod>2019-12-18T03:23:16.695Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -32,20 +67,6 @@
 
     <url>
         <loc>http://jung-max.github.io/tags/Service/</loc>
-        <lastmod>2019-11-20T07:38:23.148Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/App/</loc>
-        <lastmod>2019-11-20T07:38:23.148Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/Android/</loc>
         <lastmod>2019-11-20T07:38:23.148Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

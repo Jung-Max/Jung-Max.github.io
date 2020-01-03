@@ -8,6 +8,22 @@
     </url>
 
     <url>
+        <loc>http://jung-max.github.io/2020/01/03/Android-Tablayout-background-color/</loc>
+        <lastmod>2020-01-03T07:49:58.149Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/01/03/Android-Thread%EC%95%88%EC%97%90%EC%84%9C_Toast%EC%82%AC%EC%9A%A9/</loc>
+        <lastmod>2020-01-03T07:24:22.615Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/2019/12/13/Linux-ADC-Battery/</loc>
         <lastmod>2019-12-18T03:23:16.695Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -352,7 +368,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Finding-Devices/</loc>
+        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-GattServer%EB%A1%9C%EB%B6%80%ED%84%B0-%EC%95%8C%EB%A6%BC%EB%B0%9B%EA%B8%B0/</loc>
         <lastmod>2019-09-09T00:42:43.065Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -360,7 +376,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-GattServer%EB%A1%9C%EB%B6%80%ED%84%B0-%EC%95%8C%EB%A6%BC%EB%B0%9B%EA%B8%B0/</loc>
+        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Finding-Devices/</loc>
         <lastmod>2019-09-09T00:42:43.065Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
