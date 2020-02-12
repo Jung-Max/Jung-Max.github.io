@@ -1848,6 +1848,7 @@ i.icon:before {
 .highlight {
   color: #d1d9e1;
   background: #474949;
+  wrap: normal;
 }
 .highlight .code .comment,
 .highlight .code .quote {
