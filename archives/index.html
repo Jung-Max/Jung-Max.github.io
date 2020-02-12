@@ -172,7 +172,7 @@ ga('send', 'pageview');
         <a href="/2020/02/12/openCV-pageDewarp-04/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/0018.png)" alt="openCv page Dewarp 분석 -4" class="thumbnail-image"></span>
     
     
         
@@ -203,7 +203,7 @@ ga('send', 'pageview');
 
         <p class="article-excerpt">
             저번 포스트에 이어서 계속 윤곽선 정보 검출에 대해서 알아보겠습니다.
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354def get_contours(name, small, pagemask, masktype):    # name :
+1234567891011121314151617181920212223242526272829303132def get_contours(name, small, pagemask, masktype):    mask = get_mask(name, small, pagemask, masktype)    
         </p>
     </div>
 </article>
@@ -307,7 +307,7 @@ name : 파일 이름
         <p class="article-excerpt">
             저번 포스트에는 프로젝트 개요 부터 이미지 입력, 이미지 resize까지 살펴 보았습니다.
 이번 포스트에선 마스킹 이미지 생성을 알아보겠습니다.
-파일 이름 구하기12345678910# basename 확장자 까지의 이름basename = os.path.basename(imgfile)# name 확장자를 뺀 파일 이름name, _ = os.path.split
+파일 이름 구하기12345678basename = os.path.basename(imgfile)name, _ = os.path.splitext(basename)print ("loaded", basename, "wi
         </p>
     </div>
 </article>
@@ -733,7 +733,7 @@ g-sensor에 인터럽트가 필요했기 때문에 power key또한 인터럽트�
                             <a href="/2020/02/12/openCV-pageDewarp-04/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/0018.png)" alt="openCv page Dewarp 분석 -4" class="thumbnail-image"></span>
     
     
 </a>

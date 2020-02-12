@@ -220,17 +220,17 @@ int값을 byte화 하기 위해선 변환이 필요하다.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/30/Android-AlertDialog-seekbar-사용-방법/" class="thumbnail">
+        <a href="/2019/08/30/Android-App구동시-시작화면을-나오게-하자/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-AlertDialog-seekbar-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95/01.png)" alt="AlertDialog seekbar 사용 방법" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="App 구동시 시작화면을 나오게 하자" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-AlertDialog-seekbar-사용-방법/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-App구동시-시작화면을-나오게-하자/">0</span>
     
 </span>
 
@@ -248,16 +248,13 @@ int값을 byte화 하기 위해선 변환이 필요하다.
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-AlertDialog-seekbar-사용-방법/">AlertDialog seekbar 사용 방법</a>
+        <a href="/2019/08/30/Android-App구동시-시작화면을-나오게-하자/">App 구동시 시작화면을 나오게 하자</a>
         </h1>
     
 
         <p class="article-excerpt">
-            
-Fragment에서 AlertDialog+seekbar 사용seebar를 위한 코드는 MainActivity에 구현한다.
-해당 함수의 파라미터로 Fragment의 값을 받는다.
-파라미터로 받은 Fragment의 값에서 Context를 취득한다.
-123public static void dlp_li_act(RemoconFragment a) &#123;    
+            MainActivity 이외의 Activity를 새로 만든다.(여기서는 가칭 IndexActivity)
+12345678910111213141516171819202122public class IndexActivity extends AppCompatActivity &#123;    @Override    protected void onCreate(Bundle 
         </p>
     </div>
 </article>
@@ -309,104 +306,6 @@ Fragment에서 AlertDialog+seekbar 사용seebar를 위한 코드는 MainActivity
         <p class="article-excerpt">
             Bluetooth 지원기기 체크bluetoothAdapter가 null 이면 기기가 블루투스를 지원하지 않는 것이다.
 1234if (bluetoothAdapter == null) &#123;    Toast.makeText(MainActivity.this, "이 기기는 블루투스를 지원하지 않습니다.", Toast.LENGTH_SHORT).show();   
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Android-ActionBar.TabListener-Fragment%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C/01.png)" alt="ActionBar.TabListener Fragment에 대해서" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
-            </div>
-            <div class="date"><time datetime="2019-08-30T08:00:00.000Z" itemprop="datePublished">2019-08-30</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/">ActionBar.TabListener Fragment에 대해서</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            개요ActionBar.TabListener는 ActionBar에 Tab의 기능을 추가하는 것이다.implements ActionBar.TabListener를 통해서 비교적 간단하게 구현 가능한 것이 특징이다.
-위 예제를 보면 탭에 따라 화면이 달라지는 것을 볼 수 있다.Canon 프로젝터 리모콘 / 리모컨 / 마우스 부분 모두 ActionBar이다.달라지는
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/30/Android-App구동시-시작화면을-나오게-하자/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="App 구동시 시작화면을 나오게 하자" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-App구동시-시작화면을-나오게-하자/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
-            </div>
-            <div class="date"><time datetime="2019-08-30T08:00:00.000Z" itemprop="datePublished">2019-08-30</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-App구동시-시작화면을-나오게-하자/">App 구동시 시작화면을 나오게 하자</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            MainActivity 이외의 Activity를 새로 만든다.(여기서는 가칭 IndexActivity)
-12345678910111213141516171819202122public class IndexActivity extends AppCompatActivity &#123;    @Override    protected void onCreate(Bundle 
         </p>
     </div>
 </article>
@@ -472,17 +371,17 @@ Bluetooth에 string값을 보내기 위해서는 메세지에 스트링 값을 �
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/29/Github-Pages-Hexo-Theme/" class="thumbnail">
+        <a href="/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/github-pages.jpg)" alt="Github pages Hexo 테마 적용하기(hueman)" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-ActionBar.TabListener-Fragment%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C/01.png)" alt="ActionBar.TabListener Fragment에 대해서" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Github-Pages-Hexo-Theme/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/">0</span>
     
 </span>
 
@@ -493,24 +392,20 @@ Bluetooth에 string값을 보내기 위해서는 메세지에 스트링 값을 �
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/기타/">기타</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a>
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
             </div>
-            <div class="date"><time datetime="2019-08-29T02:17:13.000Z" itemprop="datePublished">2019-08-29</time></div>
+            <div class="date"><time datetime="2019-08-30T08:00:00.000Z" itemprop="datePublished">2019-08-30</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Github-Pages-Hexo-Theme/">Github pages Hexo 테마 적용하기(hueman)</a>
+        <a href="/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/">ActionBar.TabListener Fragment에 대해서</a>
         </h1>
     
 
         <p class="article-excerpt">
-            테마(Theme) 적용하기https://hexo.io/themes/ 에 접속해서 Hexo에서 사용할 수 있는 여러가지 Theme를 확인하고 선택할 수 있다.여기서는 hueman을 예로 든다.
-
-blog의 root 폴더에서 themes/hueman 폴더로 이동한다.
-아래 명령을 통해 다운받는다.
-
-1$ git clone https://github.com/pp
+            개요ActionBar.TabListener는 ActionBar에 Tab의 기능을 추가하는 것이다.implements ActionBar.TabListener를 통해서 비교적 간단하게 구현 가능한 것이 특징이다.
+위 예제를 보면 탭에 따라 화면이 달라지는 것을 볼 수 있다.Canon 프로젝터 리모콘 / 리모컨 / 마우스 부분 모두 ActionBar이다.달라지는
         </p>
     </div>
 </article>
@@ -519,6 +414,60 @@ blog의 root 폴더에서 themes/hueman 폴더로 이동한다.
     
     
     
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/30/Android-AlertDialog-seekbar-사용-방법/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-AlertDialog-seekbar-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95/01.png)" alt="AlertDialog seekbar 사용 방법" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-AlertDialog-seekbar-사용-방법/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            </div>
+            <div class="date"><time datetime="2019-08-30T08:00:00.000Z" itemprop="datePublished">2019-08-30</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/30/Android-AlertDialog-seekbar-사용-방법/">AlertDialog seekbar 사용 방법</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Fragment에서 AlertDialog+seekbar 사용seebar를 위한 코드는 MainActivity에 구현한다.
+해당 함수의 파라미터로 Fragment의 값을 받는다.
+파라미터로 받은 Fragment의 값에서 Context를 취득한다.
+123public static void dlp_li_act(RemoconFragment a) &#123;    
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -568,6 +517,57 @@ Public / Private 중 Publ
     </div>
 </article>
     
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/29/Github-Pages-Hexo-Theme/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/github-pages.jpg)" alt="Github pages Hexo 테마 적용하기(hueman)" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Github-Pages-Hexo-Theme/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/기타/">기타</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a>
+            </div>
+            <div class="date"><time datetime="2019-08-29T02:17:13.000Z" itemprop="datePublished">2019-08-29</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/29/Github-Pages-Hexo-Theme/">Github pages Hexo 테마 적용하기(hueman)</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            테마(Theme) 적용하기https://hexo.io/themes/ 에 접속해서 Hexo에서 사용할 수 있는 여러가지 Theme를 확인하고 선택할 수 있다.여기서는 hueman을 예로 든다.
+
+blog의 root 폴더에서 themes/hueman 폴더로 이동한다.
+아래 명령을 통해 다운받는다.
+
+1$ git clone https://github.com/pp
+        </p>
+    </div>
+</article>
+    
         </div>
     
 
@@ -576,6 +576,60 @@ Public / Private 중 Publ
     
     
         <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/29/Android-Kernel_Module/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-Kernel_Module/01.jpg)" alt="Android Kernel Moduel" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel_Module/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
+            </div>
+            <div class="date"><time datetime="2019-08-29T01:54:13.000Z" itemprop="datePublished">2019-08-29</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/29/Android-Kernel_Module/">Android Kernel Moduel</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Kconfig
+Tree 구조로 된 configuration option들의 집합이며 모든 menu entry들은 자신만의 종속성을 가지고 있다.
+child entry는 parent entry가 보기 가능할 때만 보여진다. → 종속성
+
+
+Menu entry들은 config option을 정의하고 있다.
+Menu attribute
+모든 config optio
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -625,60 +679,6 @@ ncurses에 기한반 GUI툴
 화살표와 스페이스 바를 이용하여 옵션 설정
 편리하고 가장 많이 사용 → 실제로 거의 이 모드를 사용한다.
 설정 이후 저장하게 되면 
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/29/Android-Kernel_Module/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Android-Kernel_Module/01.jpg)" alt="Android Kernel Moduel" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel_Module/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
-            </div>
-            <div class="date"><time datetime="2019-08-29T01:54:13.000Z" itemprop="datePublished">2019-08-29</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Android-Kernel_Module/">Android Kernel Moduel</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-Kconfig
-Tree 구조로 된 configuration option들의 집합이며 모든 menu entry들은 자신만의 종속성을 가지고 있다.
-child entry는 parent entry가 보기 가능할 때만 보여진다. → 종속성
-
-
-Menu entry들은 config option을 정의하고 있다.
-Menu attribute
-모든 config optio
         </p>
     </div>
 </article>
@@ -733,7 +733,7 @@ Menu attribute
                             <a href="/2020/02/12/openCV-pageDewarp-04/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/0018.png)" alt="openCv page Dewarp 분석 -4" class="thumbnail-image"></span>
     
     
 </a>

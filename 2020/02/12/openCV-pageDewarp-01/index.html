@@ -22,7 +22,7 @@
 <meta property="og:description" content="개요 이번에는 openCV를 이용해서 북스캔을 구현하는 오픈소스를 분석해 보겠습니다. 해당 프로젝트의 기능은 기존에 구부려져 있는 책의 이미지를 피는 북스캔을 목적으로 하고 있습니다.  해당 정보는 아래를 참고 부탁드립니다.  Page dewarping blog Page dewarping gitHub  이미지 파일 로딩이 프로젝트는 page_dewarp.p">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/0011.png">
-<meta property="og:updated_time" content="2020-02-12T03:15:01.074Z">
+<meta property="og:updated_time" content="2020-02-12T08:03:23.871Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openCv page Dewarp 분석 -1">
 <meta name="twitter:description" content="개요 이번에는 openCV를 이용해서 북스캔을 구현하는 오픈소스를 분석해 보겠습니다. 해당 프로젝트의 기능은 기존에 구부려져 있는 책의 이미지를 피는 북스캔을 목적으로 하고 있습니다.  해당 정보는 아래를 참고 부탁드립니다.  Page dewarping blog Page dewarping gitHub  이미지 파일 로딩이 프로젝트는 page_dewarp.p">
@@ -208,10 +208,10 @@ ga('send', 'pageview');
 <li>③은 이미지 파일이 여러개가 로드되었을때 for문을 통해 모듈을 반복해서 돌립니다. 이미지가 하나라면 한번만 실행됩니다.</li>
 <li>④는 <code>cv.imread()</code>를 통해서 입력된 이미지 파일을 openCV에서 처리할 numpy배열(img)로 변환합니다.</li>
 </ul>
-<h2 id="이미지-resize"><a href="#이미지-resize" class="headerlink" title="이미지 resize"></a>이미지 resize</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">small = resize_to_screen(img) <span class="comment"># resize 기준크기(1280x700)의 크기로 보정한다.(작으면 보정 안함)</span></span><br></pre></td></tr></table></figure>
+<h2 id="이미지-resize"><a href="#이미지-resize" class="headerlink" title="이미지 resize"></a>이미지 resize</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">small = resize_to_screen(img)</span><br></pre></td></tr></table></figure>
 
 <p><code>resize_to_screen()</code> 함수를 통해서 이미지 resize를 실행합니다.</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">resize_to_screen</span><span class="params">(src, maxw=<span class="number">1280</span>, maxh=<span class="number">700</span>, copy=False)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># src.shape는 이미지의 높이와 넓이를 취득 함수. 0=높이 1=넓이</span></span><br><span class="line">    height, width = src.shape[:<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 기준 크기(1280x700)과 이미지의 크기를 비교해 스케일 값을 구한다.</span></span><br><span class="line">    scl_x = float(width)/maxw</span><br><span class="line">    scl_y = float(height)/maxh</span><br><span class="line"></span><br><span class="line">    <span class="comment"># np.ceil 요소별 올림</span></span><br><span class="line">    <span class="comment"># max 요소중 최대값을 돌려줌</span></span><br><span class="line">    <span class="comment"># scl은 scl값중 최대값을 받아 올림 작업을 해서 정수형으로 만듬</span></span><br><span class="line">    scl = int(np.ceil(max(scl_x, scl_y)))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 스케일이 1이상이면(원본 소스가 크면) 리사이즈 작업</span></span><br><span class="line">    <span class="keyword">if</span> scl &gt; <span class="number">1.0</span>:</span><br><span class="line">        <span class="comment"># 기준크기(1280x700)로 만들기 위한 비율 계산</span></span><br><span class="line">        inv_scl = <span class="number">1.0</span>/scl</span><br><span class="line">        <span class="comment"># resize 작업. 상대 크기로 inv_scl 비율만큼 x, y의 사이즈를 줄인다.</span></span><br><span class="line">        <span class="comment"># cv2.INTER_AREA 영역 보간법 : 픽셀간의 관계를 고려해서 리샘플링</span></span><br><span class="line">        <span class="comment"># 즉, 결과 이미지의 픽셀 위치를 입력 이미지의 픽셀 위치에 배치하고 겹치는 영역의 평균을 구해 결과 이미지의 픽셀값으로 사용.</span></span><br><span class="line">        img = cv2.resize(src, (<span class="number">0</span>, <span class="number">0</span>), <span class="literal">None</span>, inv_scl, inv_scl, cv2.INTER_AREA)</span><br><span class="line">    <span class="keyword">elif</span> copy:</span><br><span class="line">        img = src.copy()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        img = src</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> img</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">resize_to_screen</span><span class="params">(src, maxw=<span class="number">1280</span>, maxh=<span class="number">700</span>, copy=False)</span>:</span></span><br><span class="line"></span><br><span class="line">    height, width = src.shape[:<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">    scl_x = float(width)/maxw</span><br><span class="line">    scl_y = float(height)/maxh</span><br><span class="line"></span><br><span class="line">    scl = int(np.ceil(max(scl_x, scl_y)))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> scl &gt; <span class="number">1.0</span>:</span><br><span class="line">        inv_scl = <span class="number">1.0</span>/scl</span><br><span class="line">        img = cv2.resize(src, (<span class="number">0</span>, <span class="number">0</span>), <span class="literal">None</span>, inv_scl, inv_scl, cv2.INTER_AREA)</span><br><span class="line">    <span class="keyword">elif</span> copy:</span><br><span class="line">        img = src.copy()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        img = src</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> img</span><br></pre></td></tr></table></figure>
 
 <p>해당 함수의 기능은 입력 받은 이미지의 높이와 폭을 원본 비율을 유지시키는 선에서 기준크기<code>1280x700</code>과 비교해서 더 작게 resize하는 것입니다.</p>
 <p>기본적으로 함수를 사용할 때 파라미터로 <code>src</code>만 입력했기 때문에 <code>maxw=1280, maxh=700, copy=False</code>값은 유지됩니다.</p>
@@ -249,7 +249,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2020/02/12/openCV-pageDewarp-01/" data-id="ck6izess9006134jyacs35ewx" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2020/02/12/openCV-pageDewarp-01/" data-id="ck6j1f7e100650pjysinijs4h" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -334,7 +334,7 @@ Page dewarping blog
 Page dewarping gitHub
 
 이미지 파일 로딩이 프로젝트는 page_dewarp.p"
-        "wordCount": 893
+        "wordCount": 720
     }
 </script>
 
@@ -412,7 +412,7 @@ Page dewarping gitHub
                             <a href="/2020/02/12/openCV-pageDewarp-04/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/0018.png)" alt="openCv page Dewarp 분석 -4" class="thumbnail-image"></span>
     
     
 </a>

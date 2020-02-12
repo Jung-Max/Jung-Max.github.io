@@ -13,19 +13,19 @@
         <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
         <meta name="keywords" content="openCV,pageDewarp">
     
-    <meta name="description" content="저번 포스트에는 프로젝트 개요 부터 이미지 입력, 이미지 resize까지 살펴 보았습니다. 이번 포스트에선 마스킹 이미지 생성을 알아보겠습니다. 파일 이름 구하기12345678910# basename 확장자 까지의 이름basename = os.path.basename(imgfile)# name 확장자를 뺀 파일 이름name, _ = os.path.split">
+    <meta name="description" content="저번 포스트에는 프로젝트 개요 부터 이미지 입력, 이미지 resize까지 살펴 보았습니다. 이번 포스트에선 마스킹 이미지 생성을 알아보겠습니다. 파일 이름 구하기12345678basename = os.path.basename(imgfile)name, _ = os.path.splitext(basename)print (&quot;loaded&quot;, basename, &quot;wi">
 <meta name="keywords" content="openCV,pageDewarp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="openCv page Dewarp 분석 -2">
 <meta property="og:url" content="http://jung-max.github.io/2020/02/12/openCV-pageDewarp-02/index.html">
 <meta property="og:site_name" content="Max&#39;s Blog">
-<meta property="og:description" content="저번 포스트에는 프로젝트 개요 부터 이미지 입력, 이미지 resize까지 살펴 보았습니다. 이번 포스트에선 마스킹 이미지 생성을 알아보겠습니다. 파일 이름 구하기12345678910# basename 확장자 까지의 이름basename = os.path.basename(imgfile)# name 확장자를 뺀 파일 이름name, _ = os.path.split">
+<meta property="og:description" content="저번 포스트에는 프로젝트 개요 부터 이미지 입력, 이미지 resize까지 살펴 보았습니다. 이번 포스트에선 마스킹 이미지 생성을 알아보겠습니다. 파일 이름 구하기12345678basename = os.path.basename(imgfile)name, _ = os.path.splitext(basename)print (&quot;loaded&quot;, basename, &quot;wi">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/0012.png">
-<meta property="og:updated_time" content="2020-02-12T05:12:47.054Z">
+<meta property="og:updated_time" content="2020-02-12T08:03:52.798Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openCv page Dewarp 분석 -2">
-<meta name="twitter:description" content="저번 포스트에는 프로젝트 개요 부터 이미지 입력, 이미지 resize까지 살펴 보았습니다. 이번 포스트에선 마스킹 이미지 생성을 알아보겠습니다. 파일 이름 구하기12345678910# basename 확장자 까지의 이름basename = os.path.basename(imgfile)# name 확장자를 뺀 파일 이름name, _ = os.path.split">
+<meta name="twitter:description" content="저번 포스트에는 프로젝트 개요 부터 이미지 입력, 이미지 resize까지 살펴 보았습니다. 이번 포스트에선 마스킹 이미지 생성을 알아보겠습니다. 파일 이름 구하기12345678basename = os.path.basename(imgfile)name, _ = os.path.splitext(basename)print (&quot;loaded&quot;, basename, &quot;wi">
 <meta name="twitter:image" content="http://jung-max.github.io/images/0012.png">
     
     <link rel="canonical" href="http://jung-max.github.io/2020/02/12/opencv-pagedewarp-02/">
@@ -192,7 +192,7 @@ ga('send', 'pageview');
         <div class="article-entry" itemprop="articleBody">
             <p>저번 포스트에는 프로젝트 개요 부터 이미지 입력, 이미지 resize까지 살펴 보았습니다.</p>
 <p>이번 포스트에선 마스킹 이미지 생성을 알아보겠습니다.</p>
-<h2 id="파일-이름-구하기"><a href="#파일-이름-구하기" class="headerlink" title="파일 이름 구하기"></a>파일 이름 구하기</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># basename 확장자 까지의 이름</span></span><br><span class="line">basename = os.path.basename(imgfile)</span><br><span class="line"><span class="comment"># name 확장자를 뺀 파일 이름</span></span><br><span class="line">name, _ = os.path.splitext(basename)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"loaded"</span>, basename, <span class="string">"with size"</span>, imgsize(img),)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">'and resized to'</span>, imgsize(small))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> DEBUG_LEVEL &gt;= <span class="number">3</span>:</span><br><span class="line">    debug_show(name, <span class="number">0.0</span>, <span class="string">'original'</span>, small)</span><br></pre></td></tr></table></figure>
+<h2 id="파일-이름-구하기"><a href="#파일-이름-구하기" class="headerlink" title="파일 이름 구하기"></a>파일 이름 구하기</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">basename = os.path.basename(imgfile)</span><br><span class="line">name, _ = os.path.splitext(basename)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"loaded"</span>, basename, <span class="string">"with size"</span>, imgsize(img),)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">'and resized to'</span>, imgsize(small))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> DEBUG_LEVEL &gt;= <span class="number">3</span>:</span><br><span class="line">    debug_show(name, <span class="number">0.0</span>, <span class="string">'original'</span>, small)</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><code>os.path.basename</code> : 입력받은 경로의 기본 이름(base name)을 반환합니다.</li>
@@ -232,10 +232,10 @@ ga('send', 'pageview');
 <li>winname : 윈도우 창의 이름을 설정합니다.</li>
 <li>mat : 보여줄 이미지</li>
 </ul>
-<h2 id="masking을-위한-준비"><a href="#masking을-위한-준비" class="headerlink" title="masking을 위한 준비"></a>masking을 위한 준비</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 마진 x축 50, y축 20 만큼 있는 사각형을 그림.</span></span><br><span class="line">pagemask, page_outline = get_page_extents(small)</span><br></pre></td></tr></table></figure>
+<h2 id="masking을-위한-준비"><a href="#masking을-위한-준비" class="headerlink" title="masking을 위한 준비"></a>masking을 위한 준비</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pagemask, page_outline = get_page_extents(small)</span><br></pre></td></tr></table></figure>
 
 <p><code>get_page_extents()</code> 함수를 통해서 making을 위한 그림을 그립니다.</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_page_extents</span><span class="params">(small)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 이미지의 높이, 넓이 취득</span></span><br><span class="line">    height, width = small.shape[:<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">    xmin = PAGE_MARGIN_X <span class="comment">#50</span></span><br><span class="line">    ymin = PAGE_MARGIN_Y <span class="comment">#20</span></span><br><span class="line">    xmax = width-PAGE_MARGIN_X</span><br><span class="line">    ymax = height-PAGE_MARGIN_Y</span><br><span class="line"></span><br><span class="line">    <span class="comment"># height, width 크기를 지닌 0으로 채워진 배열 생성.</span></span><br><span class="line">    page = np.zeros((height, width), dtype=np.uint8)</span><br><span class="line">    <span class="comment"># page(도화지 느낌)에 흰색(255,255,255)의 선을 가진 좌측 상단 모서리(xmin, ymin)부터 우측 하단 모서리(xmax,ymax)까지 직사각형을 그림</span></span><br><span class="line">    <span class="comment"># 선 두께 -1은 선 두께 없이 모든 내용을 채우는 것을 의미?</span></span><br><span class="line">    cv2.rectangle(page, (xmin, ymin), (xmax, ymax), (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"page show"</span>)</span><br><span class="line">    cv2.imshow(<span class="string">"page"</span>, page)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 그린 직사각형 4점의 좌표를 저장해 리턴</span></span><br><span class="line">    outline = np.array([</span><br><span class="line">        [xmin, ymin],</span><br><span class="line">        [xmin, ymax],</span><br><span class="line">        [xmax, ymax],</span><br><span class="line">        [xmax, ymin]])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> page, outline</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_page_extents</span><span class="params">(small)</span>:</span></span><br><span class="line"></span><br><span class="line">    height, width = small.shape[:<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">    xmin = PAGE_MARGIN_X <span class="comment">#50</span></span><br><span class="line">    ymin = PAGE_MARGIN_Y <span class="comment">#20</span></span><br><span class="line">    xmax = width-PAGE_MARGIN_X</span><br><span class="line">    ymax = height-PAGE_MARGIN_Y</span><br><span class="line"></span><br><span class="line">    page = np.zeros((height, width), dtype=np.uint8)</span><br><span class="line">    cv2.rectangle(page, (xmin, ymin), (xmax, ymax), (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"page show"</span>)</span><br><span class="line">    cv2.imshow(<span class="string">"page"</span>, page)</span><br><span class="line"></span><br><span class="line">    outline = np.array([</span><br><span class="line">        [xmin, ymin],</span><br><span class="line">        [xmin, ymax],</span><br><span class="line">        [xmax, ymax],</span><br><span class="line">        [xmax, ymin]])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> page, outline</span><br></pre></td></tr></table></figure>
 
 <p><code>height, width = small.shape[:2]</code>를 통해 이미지의 높이와 폭을 구한다. Numpy array에서 <code>shape</code>는 몇행 몇열로 이루어져있는지 차원을 알 수 있습니다.</p>
 <p>여기서는 페이지의 마진을 폭에는 50, 높이에는 20을 고정값으로 주고 있습니다.</p>
@@ -259,7 +259,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2020/02/12/openCV-pageDewarp-02/" data-id="ck6izessb006834jy7fb86or1" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2020/02/12/openCV-pageDewarp-02/" data-id="ck6j1f7e3006d0pjyh6cw73i0" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -339,8 +339,8 @@ ga('send', 'pageview');
         "url": "http://jung-max.github.io/2020/02/12/openCV-pageDewarp-02/",
         "description": "저번 포스트에는 프로젝트 개요 부터 이미지 입력, 이미지 resize까지 살펴 보았습니다.
 이번 포스트에선 마스킹 이미지 생성을 알아보겠습니다.
-파일 이름 구하기12345678910# basename 확장자 까지의 이름basename = os.path.basename(imgfile)# name 확장자를 뺀 파일 이름name, _ = os.path.split"
-        "wordCount": 1004
+파일 이름 구하기12345678basename = os.path.basename(imgfile)name, _ = os.path.splitext(basename)print ("loaded", basename, "wi"
+        "wordCount": 899
     }
 </script>
 
@@ -418,7 +418,7 @@ ga('send', 'pageview');
                             <a href="/2020/02/12/openCV-pageDewarp-04/" class="thumbnail">
     
     
-        <span class="thumbnail-image thumbnail-none"></span>
+        <span style="background-image:url(/images/0018.png)" alt="openCv page Dewarp 분석 -4" class="thumbnail-image"></span>
     
     
 </a>
