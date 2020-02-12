@@ -383,17 +383,17 @@ drawable 폴더에 tab_background.xml selector 생성
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/" class="thumbnail">
+        <a href="/2019/09/02/Android-KeyEvent-발생하기/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-bluetooth%EB%A1%9C-%EB%B0%9B%EC%9D%80-byte-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D%ED%95%98%EA%B8%B0/01.png)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-KeyEvent-발생하기/">0</span>
     
 </span>
 
@@ -411,15 +411,16 @@ drawable 폴더에 tab_background.xml selector 생성
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/">bluetooth로 받은 byte 데이터 분석하기</a>
+        <a href="/2019/09/02/Android-KeyEvent-발생하기/">bluetooth로 받은 byte 데이터 분석하기</a>
         </h1>
     
 
         <p class="article-excerpt">
-            앞서 client측에서 마우스 x,y데이터를 보낼때 사용했던 프로토콜을 예로 든다.
+            안드로이드의 Key 이벤트를 발생하기 위해선 INJECT_EVENTS가 필요하다.
+해당 권한은 AndroidManifest.xml에 선언해 준다.
+1&lt;uses-permission android:name="android.permission.INJECT_EVENTS" /&gt;
 
-여기서 0번째 바이트는 마우스 이동인 것을 알려주기 위해 0x02로 온다.14 바이트는 x값, 58 바이트는 y값이다.
-12345678910111213141516171819BufferedInputStream in = null;in = new BufferedInputStre
+INJECT_EVENTS 권한을 취득하기 위해선 System App 권한이 
         </p>
     </div>
 </article>
@@ -484,17 +485,17 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/02/Android-KeyEvent-발생하기/" class="thumbnail">
+        <a href="/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-bluetooth%EB%A1%9C-%EB%B0%9B%EC%9D%80-byte-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D%ED%95%98%EA%B8%B0/01.png)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-KeyEvent-발생하기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/">0</span>
     
 </span>
 
@@ -512,16 +513,15 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/02/Android-KeyEvent-발생하기/">bluetooth로 받은 byte 데이터 분석하기</a>
+        <a href="/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/">bluetooth로 받은 byte 데이터 분석하기</a>
         </h1>
     
 
         <p class="article-excerpt">
-            안드로이드의 Key 이벤트를 발생하기 위해선 INJECT_EVENTS가 필요하다.
-해당 권한은 AndroidManifest.xml에 선언해 준다.
-1&lt;uses-permission android:name="android.permission.INJECT_EVENTS" /&gt;
+            앞서 client측에서 마우스 x,y데이터를 보낼때 사용했던 프로토콜을 예로 든다.
 
-INJECT_EVENTS 권한을 취득하기 위해선 System App 권한이 
+여기서 0번째 바이트는 마우스 이동인 것을 알려주기 위해 0x02로 온다.14 바이트는 x값, 58 바이트는 y값이다.
+12345678910111213141516171819BufferedInputStream in = null;in = new BufferedInputStre
         </p>
     </div>
 </article>
@@ -635,17 +635,17 @@ client thread 생성device 리스트에서 device가 선택되면 그 정보를 
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/30/Android-Bluetooth-디바이스-연결/" class="thumbnail">
+        <a href="/2019/08/30/Android-AlertDialog-seekbar-사용-방법/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Bluetooth 디바이스 연결" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-AlertDialog-seekbar-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95/01.png)" alt="AlertDialog seekbar 사용 방법" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-Bluetooth-디바이스-연결/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-AlertDialog-seekbar-사용-방법/">0</span>
     
 </span>
 
@@ -663,13 +663,16 @@ client thread 생성device 리스트에서 device가 선택되면 그 정보를 
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-Bluetooth-디바이스-연결/">Bluetooth 디바이스 연결</a>
+        <a href="/2019/08/30/Android-AlertDialog-seekbar-사용-방법/">AlertDialog seekbar 사용 방법</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Bluetooth 지원기기 체크bluetoothAdapter가 null 이면 기기가 블루투스를 지원하지 않는 것이다.
-1234if (bluetoothAdapter == null) &#123;    Toast.makeText(MainActivity.this, "이 기기는 블루투스를 지원하지 않습니다.", Toast.LENGTH_SHORT).show();   
+            
+Fragment에서 AlertDialog+seekbar 사용seebar를 위한 코드는 MainActivity에 구현한다.
+해당 함수의 파라미터로 Fragment의 값을 받는다.
+파라미터로 받은 Fragment의 값에서 Context를 취득한다.
+123public static void dlp_li_act(RemoconFragment a) &#123;    
         </p>
     </div>
 </article>

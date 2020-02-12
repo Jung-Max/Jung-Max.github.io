@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-Platform-부분빌드방법/" class="thumbnail">
+        <a href="/2019/08/27/Android-Platform-Architecture-overview/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/Android_platform.png)" alt="Android Platform 부분 빌드 방법" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Platform-Architecture-overview/01.png)" alt="Android Platform Architecture overview" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-부분빌드방법/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-Architecture-overview/">0</span>
     
 </span>
 
@@ -190,22 +190,21 @@ ga('send', 'pageview');
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a>
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Architecture/">Architecture</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Platform-부분빌드방법/">Android Platform 부분 빌드 방법</a>
+        <a href="/2019/08/27/Android-Platform-Architecture-overview/">Android Platform Architecture overview</a>
         </h1>
     
 
         <p class="article-excerpt">
-            
-안드로이드 빌드의 시작은 source build/envsetup.sh의 명령어로 안드로이드 환경을 구성하는 것이다.현재 rk3328의 환경설정을 보면FFTools\build.sh에 다음과 같이 되어있다.
-
-12345export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64export PATH=$JAVA_HOME/bin:$P
+            Android platform architecture overview1. 개요이번 시간은 안드로이드의 구조에 대해서 알아보고 애플리케이션이 어떻게 구동되는지 추론해보는 시간을 가져보겠습니다.
+제목은 안드로이드 플랫폼 아키텍쳐라고 정했습니다. 
+여기서 플랫폼은 컴퓨터 시스템의 기본이 되는 특정 프로세서 모델과 하나의 컴퓨터 시스템을 바탕으로 하는 운영체제를 
         </p>
     </div>
 </article>
@@ -218,17 +217,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-Kernel-주요-디렉토리/" class="thumbnail">
+        <a href="/2019/08/27/Android-Kernel-Message/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android Kernel 주요 디렉토리" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android Kernel Message" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Kernel-주요-디렉토리/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Kernel-Message/">0</span>
     
 </span>
 
@@ -246,17 +245,19 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Kernel-주요-디렉토리/">Android Kernel 주요 디렉토리</a>
+        <a href="/2019/08/27/Android-Kernel-Message/">Android Kernel Message</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Kernel 주요 디렉토리Top
-Kernel의 Top디렉토리는 kernel을 빌드하기 위한 Makefile을 가지고 있으며 모든 빌드 동작은 이 디렉토리에서 시작된다.
+            printk()
+메시지 기록 관리를 위한 로그 레벨의 지정이 가능하다.
+kernel뿐만 아니라 응용프로그램의 init process도 printk()를 사용한다.
+logcat은 init가 구동하기 때문에 init는 printk()를 사용.
 
-arch
-Architecture 즉 프로세서(CPU), Soc(AP) 및 타깃 보드 관련된 소스가 구현된 디렉토리이다.
-각 CPU별 디렉토리를 가지고 있으며, ARM프로세스 관련 소스는 a
+
+원형 큐 구조의 관리, 출력 디바이스의 다중 지정이 가능하다.
+콘솔에서 확인하거나 dmesg 명령을 사용해서 로그파
         </p>
     </div>
 </article>
@@ -273,17 +274,17 @@ Architecture 즉 프로세서(CPU), Soc(AP) 및 타깃 보드 관련된 소스�
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-수정된어플탑재/" class="thumbnail">
+        <a href="/2019/08/27/Android-Platform-개발환경/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android 수정된 어플 탑재방법" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Platform-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/01.png)" alt="Android Platform 개발환경 구축" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-수정된어플탑재/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-개발환경/">0</span>
     
 </span>
 
@@ -294,19 +295,24 @@ Architecture 즉 프로세서(CPU), Soc(AP) 및 타깃 보드 관련된 소스�
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a>
             </div>
             <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-수정된어플탑재/">Android 수정된 어플 탑재방법</a>
+        <a href="/2019/08/27/Android-Platform-개발환경/">Android Platform 개발환경 구축</a>
         </h1>
     
 
         <p class="article-excerpt">
-            1. 아래 검색 결과처럼 packages/apps/Setting/의 어플을 수정하면 설정 어플이 수정되어 탑재된다.12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364Searching 525515 
+            기본 Image 구성
+Android 개발 툴SDK(Software Development Kit)
+Android Application을 만들기 위한 개발 환경 및 Tool을 제공
+JAVA 기반의 Application 개발 시 사용
+Windows, Linux, MAC등에 구성가능
+Android studio에 연결 가능PDK(Platform Development
         </p>
     </div>
 </article>
