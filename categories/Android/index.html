@@ -530,17 +530,17 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="thumbnail">
+        <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Characteristics 읽고쓰기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server로 부터 알림 받기" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Characteristics-읽고쓰기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-GattServer로부터-알림받기/">0</span>
     
 </span>
 
@@ -558,14 +558,13 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/">Characteristics 읽고쓰기</a>
+        <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/">Gatt Server로 부터 알림 받기</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Gatt 서버에 연결되면 서버의 Characteristics을 읽고 읽음으로써 Gatt 서버와 상호 작용하게됩니다.
-이렇게하려면 먼저이 서버에서 사용할 수 있는 서비스와 각 서비스에서 사용할 수 있는 Characteristics을 찾아야합니다.
-1234567891011121314151617181920212223 @Override public void onC
+            특성 값이 변경되면 Gatt 서버에 알림을 요청할 수 있습니다.
+12345gatt.setCharacteristicNotification(characteristic, true);BluetoothGattDescriptor descriptor = characteristic.getDescriptor(    UUID.fromString("00002902-0000-1
         </p>
     </div>
 </article>
@@ -582,17 +581,17 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="thumbnail">
+        <a href="/2019/09/09/Android-BLE-Finding-Devices/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Connecting to a GATT Server" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Finding BLE Devices" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Connecting-GATT-Server/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Finding-Devices/">0</span>
     
 </span>
 
@@ -610,16 +609,16 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/">Connecting to a GATT Server</a>
+        <a href="/2019/09/09/Android-BLE-Finding-Devices/">Finding BLE Devices</a>
         </h1>
     
 
         <p class="article-excerpt">
-            원하는 BluetoothDevice 객체를 발견하면 
-Context 객체, BLE 장치에 자동으로 연결할지 여부를 나타내는 부울 및 
-연결 이벤트 및 클라이언트 작업이있는 BluetoothGattCallback 참조를 
-매개 변수로 사용하는 connectGatt() 메서드를 사용하여 연결할 수 있습니다.
-12345if (Build.VERSION.SDK_IN
+            Bluetooth API를 사용하려면 다음 권한이 필요합니다.
+12android.permission.BLUETOOTHandroid.permission.BLUETOOTH_ADMIN
+
+Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / advertising 작업을 수행하려는 경우 위치 권한이 필요합니다.
+12345android.per
         </p>
     </div>
 </article>
