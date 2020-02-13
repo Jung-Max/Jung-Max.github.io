@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="thumbnail">
+        <a href="/2019/09/09/Android-BLE-Finding-Devices/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server 사용하기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Finding BLE Devices" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Gatt서버-사용하기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Finding-Devices/">0</span>
     
 </span>
 
@@ -197,14 +197,16 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/">Gatt Server 사용하기</a>
+        <a href="/2019/09/09/Android-BLE-Finding-Devices/">Finding BLE Devices</a>
         </h1>
     
 
         <p class="article-excerpt">
-            장치가 주변 장치로 작동하려면 먼저 BluetoothGattServer를 열고
-하나 이상의 BluetoothGattService 및 하나의 BluetoothGattCharacteristic로 채워야합니다.
-123BluetoothGattServer server=bluetoothManager.openGattServer(context, bluetoothGattS
+            Bluetooth API를 사용하려면 다음 권한이 필요합니다.
+12android.permission.BLUETOOTHandroid.permission.BLUETOOTH_ADMIN
+
+Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / advertising 작업을 수행하려는 경우 위치 권한이 필요합니다.
+12345android.per
         </p>
     </div>
 </article>
@@ -270,17 +272,17 @@ Advertising 데이터는 31 바이트로 제한됩니다.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/09/Android-BLE-Finding-Devices/" class="thumbnail">
+        <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Finding BLE Devices" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server 사용하기" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Finding-Devices/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Gatt서버-사용하기/">0</span>
     
 </span>
 
@@ -298,16 +300,14 @@ Advertising 데이터는 31 바이트로 제한됩니다.
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/09/Android-BLE-Finding-Devices/">Finding BLE Devices</a>
+        <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/">Gatt Server 사용하기</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Bluetooth API를 사용하려면 다음 권한이 필요합니다.
-12android.permission.BLUETOOTHandroid.permission.BLUETOOTH_ADMIN
-
-Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / advertising 작업을 수행하려는 경우 위치 권한이 필요합니다.
-12345android.per
+            장치가 주변 장치로 작동하려면 먼저 BluetoothGattServer를 열고
+하나 이상의 BluetoothGattService 및 하나의 BluetoothGattCharacteristic로 채워야합니다.
+123BluetoothGattServer server=bluetoothManager.openGattServer(context, bluetoothGattS
         </p>
     </div>
 </article>
@@ -320,17 +320,17 @@ Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / adve
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="thumbnail">
+        <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Characteristics 읽고쓰기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Connecting to a GATT Server" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Characteristics-읽고쓰기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Connecting-GATT-Server/">0</span>
     
 </span>
 
@@ -348,14 +348,16 @@ Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / adve
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/">Characteristics 읽고쓰기</a>
+        <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/">Connecting to a GATT Server</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Gatt 서버에 연결되면 서버의 Characteristics을 읽고 읽음으로써 Gatt 서버와 상호 작용하게됩니다.
-이렇게하려면 먼저이 서버에서 사용할 수 있는 서비스와 각 서비스에서 사용할 수 있는 Characteristics을 찾아야합니다.
-1234567891011121314151617181920212223 @Override public void onC
+            원하는 BluetoothDevice 객체를 발견하면 
+Context 객체, BLE 장치에 자동으로 연결할지 여부를 나타내는 부울 및 
+연결 이벤트 및 클라이언트 작업이있는 BluetoothGattCallback 참조를 
+매개 변수로 사용하는 connectGatt() 메서드를 사용하여 연결할 수 있습니다.
+12345if (Build.VERSION.SDK_IN
         </p>
     </div>
 </article>
@@ -519,6 +521,60 @@ Android 6.0 (API 레벨 23) 이상의 장치를 대상으로하고 스캔 / adve
         <article class="article article-summary">
     <div class="article-summary-inner">
         
+        <a href="/2019/09/02/Android-KeyEvent-발생하기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-KeyEvent-발생하기/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            </div>
+            <div class="date"><time datetime="2019-09-02T02:42:00.000Z" itemprop="datePublished">2019-09-02</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/09/02/Android-KeyEvent-발생하기/">bluetooth로 받은 byte 데이터 분석하기</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            안드로이드의 Key 이벤트를 발생하기 위해선 INJECT_EVENTS가 필요하다.
+해당 권한은 AndroidManifest.xml에 선언해 준다.
+1&lt;uses-permission android:name="android.permission.INJECT_EVENTS" /&gt;
+
+INJECT_EVENTS 권한을 취득하기 위해선 System App 권한이 
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
         <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/" class="thumbnail">
     
     
@@ -559,14 +615,10 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -608,56 +660,6 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
 
 여기서 0번째 바이트는 마우스 이동인 것을 알려주기 위해 0x02로 온다.14 바이트는 x값, 58 바이트는 y값이다.
 12345678910111213141516171819BufferedInputStream in = null;in = new BufferedInputStre
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/09/02/Android-KeyEvent-발생하기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-KeyEvent-발생하기/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
-            </div>
-            <div class="date"><time datetime="2019-09-02T02:42:00.000Z" itemprop="datePublished">2019-09-02</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/02/Android-KeyEvent-발생하기/">bluetooth로 받은 byte 데이터 분석하기</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            안드로이드의 Key 이벤트를 발생하기 위해선 INJECT_EVENTS가 필요하다.
-해당 권한은 AndroidManifest.xml에 선언해 준다.
-1&lt;uses-permission android:name="android.permission.INJECT_EVENTS" /&gt;
-
-INJECT_EVENTS 권한을 취득하기 위해선 System App 권한이 
         </p>
     </div>
 </article>
