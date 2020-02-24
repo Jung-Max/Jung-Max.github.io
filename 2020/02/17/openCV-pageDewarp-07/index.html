@@ -22,7 +22,7 @@
 <meta property="og:description" content="이번 포스트는 굴곡을 펴기 위해서 cv2.solvePnP를 사용하는 것을 알아보겠습니다. get_default_paramssolvePnP 함수는 영상을 획득한 카메라의 위치 및 방향 (camera pose)을 알아낼 때 유용하게 사용할 수 있습니다.카메라 내부 파라미터 행렬 K와 3D 월드좌표 - 2D 픽셀좌표 매칭쌍들을 입력으로 주면, 카메라 외부 파라미">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/0039.png">
-<meta property="og:updated_time" content="2020-02-24T05:39:07.760Z">
+<meta property="og:updated_time" content="2020-02-24T07:06:20.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openCv page Dewarp 분석 -7">
 <meta name="twitter:description" content="이번 포스트는 굴곡을 펴기 위해서 cv2.solvePnP를 사용하는 것을 알아보겠습니다. get_default_paramssolvePnP 함수는 영상을 획득한 카메라의 위치 및 방향 (camera pose)을 알아낼 때 유용하게 사용할 수 있습니다.카메라 내부 파라미터 행렬 K와 3D 월드좌표 - 2D 픽셀좌표 매칭쌍들을 입력으로 주면, 카메라 외부 파라미">
@@ -258,6 +258,12 @@ ga('send', 'pageview');
 <p>결론적으로 <code>cv2.solvePnP</code>에서 취득한 값들을 배열화해 <code>params</code>라는 배열로 리턴합니다.</p>
 <h2 id="optimize-params"><a href="#optimize-params" class="headerlink" title="optimize_params"></a>optimize_params</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">project_xy</span><span class="params">(xy_coords, pvec)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># get cubic polynomial coefficients given</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#  f(0) = 0, f'(0) = alpha</span></span><br><span class="line">    <span class="comment">#  f(1) = 0, f'(1) = beta</span></span><br><span class="line"></span><br><span class="line">    alpha, beta = tuple(pvec[CUBIC_IDX])</span><br><span class="line"></span><br><span class="line">    poly = np.array([</span><br><span class="line">        alpha + beta,</span><br><span class="line">        <span class="number">-2</span>*alpha - beta,</span><br><span class="line">        alpha,</span><br><span class="line">        <span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">    xy_coords = xy_coords.reshape((<span class="number">-1</span>, <span class="number">2</span>))</span><br><span class="line">    z_coords = np.polyval(poly, xy_coords[:, <span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">    objpoints = np.hstack((xy_coords, z_coords.reshape((<span class="number">-1</span>, <span class="number">1</span>))))</span><br><span class="line"></span><br><span class="line">    image_points, _ = cv2.projectPoints(objpoints,</span><br><span class="line">                                        pvec[RVEC_IDX],</span><br><span class="line">                                        pvec[TVEC_IDX],</span><br><span class="line">                                        K, np.zeros(<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> image_points</span><br></pre></td></tr></table></figure>
 
+<p><code>np.polyval</code>함수는 스칼라 값에서 다항식의 해를 구합니다. 기본형은 <code>polyval(p, x)</code>입니다.</p>
+<ul>
+<li>첫번째 파라미터 p는 다항식을 의미합니다.</li>
+<li>두번째 파라미터 x는 해를 뜻합니다.</li>
+</ul>
+<p>예를 들어 <code>np.polyval([1, -2, 1], 2)</code>가 있다면 [1, -2, 1]은 <code>x²-2x+1</code>을 뜻하고 여기에 2를 대입한 결과 1을 리턴합니다.<br><code>np.polyval([1, -12, 10, 7, -10], 3)</code>가 있다면 [1, -12, 10, 7, -10] 은 <code>x⁴-12x³+10x²+7x-10</code>을 뜻하고 여기에 3을 대입한 결과 -142를 리턴합니다.</p>
 <p><code>cv2.projectPoints</code>는 3차원 공간상의 객체의 Pose(rorcpdml dnlcldhk qkdgid)정보를 2차원 화면상의 이미지의 Pose 정보로 변경해 줍니다. 위에서 설명한 월드 좌표계(3D)의 값을 이미지 좌표계(2D)로 변환합니다.</p>
 <p>기본형은 아래와 같습니다.</p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imagePoints, jacobian = cv2.projectPoints(objectPoints, rvec, tvec, cameraMatrix, distCoeffs[, imagePoints[, jacobian[, aspectRatio]]])</span><br></pre></td></tr></table></figure>
@@ -279,7 +285,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2020/02/17/openCV-pageDewarp-07/" data-id="ck702t35f006p0pjyqofjwquf" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2020/02/17/openCV-pageDewarp-07/" data-id="ck704cjd400fo1mjyhy5g7pu1" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -359,7 +365,7 @@ ga('send', 'pageview');
         "url": "http://jung-max.github.io/2020/02/17/openCV-pageDewarp-07/",
         "description": "이번 포스트는 굴곡을 펴기 위해서 cv2.solvePnP를 사용하는 것을 알아보겠습니다.
 get_default_paramssolvePnP 함수는 영상을 획득한 카메라의 위치 및 방향 (camera pose)을 알아낼 때 유용하게 사용할 수 있습니다.카메라 내부 파라미터 행렬 K와 3D 월드좌표 - 2D 픽셀좌표 매칭쌍들을 입력으로 주면, 카메라 외부 파라미"
-        "wordCount": 2028
+        "wordCount": 2081
     }
 </script>
 
