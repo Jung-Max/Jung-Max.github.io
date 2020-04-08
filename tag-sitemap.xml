@@ -3,22 +3,29 @@
 
 
     <url>
-        <loc>http://jung-max.github.io/tags/VScode/</loc>
-        <lastmod>2020-03-23T05:41:30.278Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/pageDewarp/</loc>
-        <lastmod>2020-02-27T02:17:20.059Z</lastmod>
+        <loc>http://jung-max.github.io/tags/Contours/</loc>
+        <lastmod>2020-04-08T02:42:11.689Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jung-max.github.io/tags/openCV/</loc>
-        <lastmod>2020-02-27T02:17:20.059Z</lastmod>
+        <lastmod>2020-04-08T02:42:11.689Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/pageDewarp/</loc>
+        <lastmod>2020-04-08T00:17:00.249Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/VScode/</loc>
+        <lastmod>2020-03-23T05:41:30.278Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

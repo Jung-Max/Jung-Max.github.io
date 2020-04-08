@@ -8,6 +8,22 @@
     </url>
 
     <url>
+        <loc>http://jung-max.github.io/2020/04/08/opencv%20%EC%9C%A4%EA%B3%BD%EC%84%A0(Contours)%EA%B0%92%EC%9D%98%20%EC%9D%98%EB%AF%B8(%EB%82%B4%EC%9A%A9)%20%EC%B5%9C%EB%8C%80%EA%B0%92%20%EC%B5%9C%EC%86%8C%EA%B0%92%20%EA%B5%AC%ED%95%98%EA%B8%B0/</loc>
+        <lastmod>2020-04-08T02:42:11.689Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/02/12/openCV-pageDewarp-01/</loc>
+        <lastmod>2020-04-08T00:17:00.249Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/2020/03/23/VS%20%EC%BD%94%EB%93%9C-%ED%99%95%EC%9E%A5-%EC%98%A4%EB%A5%98-%EC%88%98%EC%A0%95/</loc>
         <lastmod>2020-03-23T05:41:30.278Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -58,14 +74,6 @@
     <url>
         <loc>http://jung-max.github.io/2020/02/12/openCV-pageDewarp-02/</loc>
         <lastmod>2020-02-12T08:03:52.798Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2020/02/12/openCV-pageDewarp-01/</loc>
-        <lastmod>2020-02-12T08:03:23.871Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -384,7 +392,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-compile/</loc>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Kernel-System-Memory-Model/</loc>
         <lastmod>2019-09-16T03:58:43.851Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -392,7 +400,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/08/27/Android-Kernel-System-Memory-Model/</loc>
+        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-compile/</loc>
         <lastmod>2019-09-16T03:58:43.851Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -432,14 +440,6 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-GattServer%EB%A1%9C%EB%B6%80%ED%84%B0-%EC%95%8C%EB%A6%BC%EB%B0%9B%EA%B8%B0/</loc>
-        <lastmod>2019-09-09T00:42:43.065Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Connecting-GATT-Server/</loc>
         <lastmod>2019-09-09T00:42:43.065Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -449,6 +449,14 @@
 
     <url>
         <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Finding-Devices/</loc>
+        <lastmod>2019-09-09T00:42:43.065Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-GattServer%EB%A1%9C%EB%B6%80%ED%84%B0-%EC%95%8C%EB%A6%BC%EB%B0%9B%EA%B8%B0/</loc>
         <lastmod>2019-09-09T00:42:43.065Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
