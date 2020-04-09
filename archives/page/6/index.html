@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/30/Android-AlertDialog-seekbar-사용-방법/" class="thumbnail">
+        <a href="/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-AlertDialog-seekbar-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95/01.png)" alt="AlertDialog seekbar 사용 방법" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Mouse-x,y%EC%B6%95-%EC%9D%B4%EB%8F%99%EC%9D%84-%ED%8C%A8%ED%82%B7%ED%99%94%ED%95%B4%EC%84%9C-bluetooth%EB%A1%9C-%EB%B3%B4%EB%82%B4%EA%B8%B0/01.png)" alt="Mouse x,y축 이동을 패킷화 해서 bluetooth로 보내기" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-AlertDialog-seekbar-사용-방법/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/">0</span>
     
 </span>
 
@@ -197,16 +197,17 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-AlertDialog-seekbar-사용-방법/">AlertDialog seekbar 사용 방법</a>
+        <a href="/2019/08/30/Android-Mouse-x,y축-이동을-패킷화해서-bluetooth로-보내기/">Mouse x,y축 이동을 패킷화 해서 bluetooth로 보내기</a>
         </h1>
     
 
         <p class="article-excerpt">
-            
-Fragment에서 AlertDialog+seekbar 사용seebar를 위한 코드는 MainActivity에 구현한다.
-해당 함수의 파라미터로 Fragment의 값을 받는다.
-파라미터로 받은 Fragment의 값에서 Context를 취득한다.
-123public static void dlp_li_act(RemoconFragment a) &#123;    
+            Bluetooth 통신시 기본적으로 소켓에는 byte[]형식으로 데이터가 담긴다.
+mouse의 x,y 값을 보내기 위해서는 8byte가 필요하다(int *2)
+mouse의 이동값인 것을 나타내기 위한 1byte가 필요하다.
+
+int값을 byte화 하기 위해선 변환이 필요하다.
+1234567891011public static byte[] intTobyte(i
         </p>
     </div>
 </article>
@@ -219,17 +220,17 @@ Fragment에서 AlertDialog+seekbar 사용seebar를 위한 코드는 MainActivity
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/29/Github-Pages-Hexo/" class="thumbnail">
+        <a href="/2019/08/30/Android-bluetooth로-string데이터-보내기/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/github-pages.jpg)" alt="Github pages Hexo를 사용해서 만들기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-bluetooth%EB%A1%9C-string%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%B4%EB%82%B4%EA%B8%B0/01.png)" alt="bluetooth로 string 데이터 보내기" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Github-Pages-Hexo/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-bluetooth로-string데이터-보내기/">0</span>
     
 </span>
 
@@ -240,26 +241,22 @@ Fragment에서 AlertDialog+seekbar 사용seebar를 위한 코드는 MainActivity
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/기타/">기타</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a>
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
             </div>
-            <div class="date"><time datetime="2019-08-29T02:17:13.000Z" itemprop="datePublished">2019-08-29</time></div>
+            <div class="date"><time datetime="2019-08-30T08:00:00.000Z" itemprop="datePublished">2019-08-30</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Github-Pages-Hexo/">Github pages Hexo를 사용해서 만들기</a>
+        <a href="/2019/08/30/Android-bluetooth로-string데이터-보내기/">bluetooth로 string 데이터 보내기</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Github Repository 생성하기
-Github에 가입한다.https://github.com/
-
-아래와 같은 순서로 Repository 생성
-
-New Repository, Repository 이름은 USERNAME.github.io
-USERNAME 은 Github의 가입시에 사용자의 username을 입력한다
-Public / Private 중 Publ
+            
+Bluetooth에 string값을 보내기 위해서는 메세지에 스트링 값을 담아 보내고
+받은 메세지의 string을 byte화 해서 송신을 하면 된다.
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152//string값 메세지로 write
         </p>
     </div>
 </article>
@@ -272,6 +269,53 @@ Public / Private 중 Publ
     
     
         <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-ActionBar.TabListener-Fragment%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C/01.png)" alt="ActionBar.TabListener Fragment에 대해서" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            </div>
+            <div class="date"><time datetime="2019-08-30T08:00:00.000Z" itemprop="datePublished">2019-08-30</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/">ActionBar.TabListener Fragment에 대해서</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            개요ActionBar.TabListener는 ActionBar에 Tab의 기능을 추가하는 것이다.implements ActionBar.TabListener를 통해서 비교적 간단하게 구현 가능한 것이 특징이다.
+위 예제를 보면 탭에 따라 화면이 달라지는 것을 볼 수 있다.Canon 프로젝터 리모콘 / 리모컨 / 마우스 부분 모두 ActionBar이다.달라지는
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -319,60 +363,6 @@ blog의 root 폴더에서 themes/hueman 폴더로 이동한다.
     </div>
 </article>
     
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/29/Android-Kernel_Module/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Android-Kernel_Module/01.jpg)" alt="Android Kernel Moduel" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel_Module/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
-            </div>
-            <div class="date"><time datetime="2019-08-29T01:54:13.000Z" itemprop="datePublished">2019-08-29</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Android-Kernel_Module/">Android Kernel Moduel</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-Kconfig
-Tree 구조로 된 configuration option들의 집합이며 모든 menu entry들은 자신만의 종속성을 가지고 있다.
-child entry는 parent entry가 보기 가능할 때만 보여진다. → 종속성
-
-
-Menu entry들은 config option을 정의하고 있다.
-Menu attribute
-모든 config optio
-        </p>
-    </div>
-</article>
-    
         </div>
     
 
@@ -385,17 +375,17 @@ Menu attribute
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/29/Android-Kernel-빌드-옵션/" class="thumbnail">
+        <a href="/2019/08/29/Github-Pages-Hexo/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/01.png)" alt="Android Kernel 빌드 옵션" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/github-pages.jpg)" alt="Github pages Hexo를 사용해서 만들기" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-빌드-옵션/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Github-Pages-Hexo/">0</span>
     
 </span>
 
@@ -406,30 +396,26 @@ Menu attribute
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
+            <a class="article-category-link" href="/categories/기타/">기타</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a>
             </div>
-            <div class="date"><time datetime="2019-08-29T01:54:13.000Z" itemprop="datePublished">2019-08-29</time></div>
+            <div class="date"><time datetime="2019-08-29T02:17:13.000Z" itemprop="datePublished">2019-08-29</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/29/Android-Kernel-빌드-옵션/">Android Kernel 빌드 옵션</a>
+        <a href="/2019/08/29/Github-Pages-Hexo/">Github pages Hexo를 사용해서 만들기</a>
         </h1>
     
 
         <p class="article-excerpt">
-            make config
+            Github Repository 생성하기
+Github에 가입한다.https://github.com/
 
-텍스트 기반 설정 방식
-모든 옵션을 하나씩 보여주고 yes, no, module 중에 하나의 옵션을 선택 → 많이 불편함
+아래와 같은 순서로 Repository 생성
 
-make menuconfig
-
-텍스트 메뉴 방식
-ncurses에 기한반 GUI툴
-화살표와 스페이스 바를 이용하여 옵션 설정
-편리하고 가장 많이 사용 → 실제로 거의 이 모드를 사용한다.
-설정 이후 저장하게 되면 
+New Repository, Repository 이름은 USERNAME.github.io
+USERNAME 은 Github의 가입시에 사용자의 username을 입력한다
+Public / Private 중 Publ
         </p>
     </div>
 </article>
@@ -508,63 +494,17 @@ m
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-수정된어플탑재/" class="thumbnail">
+        <a href="/2019/08/29/Android-Kernel_Module/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android 수정된 어플 탑재방법" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-수정된어플탑재/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
-            </div>
-            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-수정된어플탑재/">Android 수정된 어플 탑재방법</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            1. 아래 검색 결과처럼 packages/apps/Setting/의 어플을 수정하면 설정 어플이 수정되어 탑재된다.12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364Searching 525515 
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/27/Android-기반-Kernel/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android 기반 커널" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Kernel_Module/01.jpg)" alt="Android Kernel Moduel" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-기반-Kernel/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel_Module/">0</span>
     
 </span>
 
@@ -577,22 +517,82 @@ m
             <div class="category">
             <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
             </div>
-            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
+            <div class="date"><time datetime="2019-08-29T01:54:13.000Z" itemprop="datePublished">2019-08-29</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-기반-Kernel/">Android 기반 커널</a>
+        <a href="/2019/08/29/Android-Kernel_Module/">Android Kernel Moduel</a>
         </h1>
     
 
         <p class="article-excerpt">
-            개요
-Hardware System을 관리할 뿐 아니라 응용 소프트웨어를 실행하기 위한 기능과 서비스를 제공하는 System Software이다.
-실행되는 응용 프로그램들이 Memory, CPU, I/O장치 등의 자원들을 사용할 수 있도록 만들어 주고 공통적으로 사용할 수 있는 Service를 제공한다.
+            
+Kconfig
+Tree 구조로 된 configuration option들의 집합이며 모든 menu entry들은 자신만의 종속성을 가지고 있다.
+child entry는 parent entry가 보기 가능할 때만 보여진다. → 종속성
 
-Process 관리
-Process 생성, 제거, Pr
+
+Menu entry들은 config option을 정의하고 있다.
+Menu attribute
+모든 config optio
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/29/Android-Kernel-빌드-옵션/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/01.png)" alt="Android Kernel 빌드 옵션" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/29/Android-Kernel-빌드-옵션/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
+            </div>
+            <div class="date"><time datetime="2019-08-29T01:54:13.000Z" itemprop="datePublished">2019-08-29</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/29/Android-Kernel-빌드-옵션/">Android Kernel 빌드 옵션</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            make config
+
+텍스트 기반 설정 방식
+모든 옵션을 하나씩 보여주고 yes, no, module 중에 하나의 옵션을 선택 → 많이 불편함
+
+make menuconfig
+
+텍스트 메뉴 방식
+ncurses에 기한반 GUI툴
+화살표와 스페이스 바를 이용하여 옵션 설정
+편리하고 가장 많이 사용 → 실제로 거의 이 모드를 사용한다.
+설정 이후 저장하게 되면 
         </p>
     </div>
 </article>
@@ -609,64 +609,17 @@ Process 생성, 제거, Pr
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-SystemApp/" class="thumbnail">
+        <a href="/2019/08/27/Android-Platform-개발환경/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android System App" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-SystemApp/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
-            </div>
-            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-SystemApp/">Android System App</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            System app 권한 추가.AndroidManifest.xml에 sharedUserId 추가.
-123&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"    package="ckbs.ywjung.btremocon"    android:sharedUserId="android.ui
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/27/Android-Platform-부분빌드방법/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/Android_platform.png)" alt="Android Platform 부분 빌드 방법" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Platform-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/01.png)" alt="Android Platform 개발환경 구축" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-부분빌드방법/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-개발환경/">0</span>
     
 </span>
 
@@ -684,15 +637,65 @@ Process 생성, 제거, Pr
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Platform-부분빌드방법/">Android Platform 부분 빌드 방법</a>
+        <a href="/2019/08/27/Android-Platform-개발환경/">Android Platform 개발환경 구축</a>
         </h1>
     
 
         <p class="article-excerpt">
-            
-안드로이드 빌드의 시작은 source build/envsetup.sh의 명령어로 안드로이드 환경을 구성하는 것이다.현재 rk3328의 환경설정을 보면FFTools\build.sh에 다음과 같이 되어있다.
+            기본 Image 구성
+Android 개발 툴SDK(Software Development Kit)
+Android Application을 만들기 위한 개발 환경 및 Tool을 제공
+JAVA 기반의 Application 개발 시 사용
+Windows, Linux, MAC등에 구성가능
+Android studio에 연결 가능PDK(Platform Development
+        </p>
+    </div>
+</article>
+    
 
-12345export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64export PATH=$JAVA_HOME/bin:$P
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/27/Android-Platform-Architecture-overview/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-Platform-Architecture-overview/01.png)" alt="Android Platform Architecture overview" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-Architecture-overview/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Architecture/">Architecture</a>
+            </div>
+            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/27/Android-Platform-Architecture-overview/">Android Platform Architecture overview</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            Android platform architecture overview1. 개요이번 시간은 안드로이드의 구조에 대해서 알아보고 애플리케이션이 어떻게 구동되는지 추론해보는 시간을 가져보겠습니다.
+제목은 안드로이드 플랫폼 아키텍쳐라고 정했습니다. 
+여기서 플랫폼은 컴퓨터 시스템의 기본이 되는 특정 프로세서 모델과 하나의 컴퓨터 시스템을 바탕으로 하는 운영체제를 
         </p>
     </div>
 </article>
@@ -740,6 +743,46 @@ Process 생성, 제거, Pr
         <h3 class="widget-title">최근 글</h3>
         <div class="widget">
             <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/09/opencv-PageDewarping-책 반으로 자르기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/0051.png)" alt="openCv page Dewarp 책 반으로 자르기" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/openCV/">openCV</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></p>
+                            <p class="item-title"><a href="/2020/04/09/opencv-PageDewarping-책 반으로 자르기/" class="title">openCv page Dewarp 책 반으로 자르기</a></p>
+                            <p class="item-date"><time datetime="2020-04-09T07:39:25.000Z" itemprop="datePublished">2020-04-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/04/09/opencv-PageDewarping-동적마스킹/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/0051.png)" alt="openCv page Dewarp 동적 마스킹" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/openCV/">openCV</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></p>
+                            <p class="item-title"><a href="/2020/04/09/opencv-PageDewarping-동적마스킹/" class="title">openCv page Dewarp 동적 마스킹</a></p>
+                            <p class="item-date"><time datetime="2020-04-09T07:04:36.000Z" itemprop="datePublished">2020-04-09</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -801,46 +844,6 @@ Process 생성, 제거, Pr
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2020/02/17/openCV-pageDewarp-06/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/0036.png)" alt="openCv page Dewarp 분석 -6" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/openCV/">openCV</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></p>
-                            <p class="item-title"><a href="/2020/02/17/openCV-pageDewarp-06/" class="title">openCv page Dewarp 분석 -6</a></p>
-                            <p class="item-date"><time datetime="2020-02-16T23:42:31.000Z" itemprop="datePublished">2020-02-17</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2020/02/14/openCV-pageDewarp-05/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/0022.png)" alt="openCv page Dewarp 분석 -5" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/openCV/">openCV</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></p>
-                            <p class="item-title"><a href="/2020/02/14/openCV-pageDewarp-05/" class="title">openCv page Dewarp 분석 -5</a></p>
-                            <p class="item-date"><time datetime="2020-02-14T02:17:12.000Z" itemprop="datePublished">2020-02-14</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -850,7 +853,7 @@ Process 생성, 제거, Pr
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">카테고리</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/">Android Platform</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/Architecture/">Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/DTS/">DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/JNI/">JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/Kernel/">Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/SEAndroid/">SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/SurfaceFlinger/">SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/U-Boot/">U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/boot/">boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/개인용/">개인용</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/오픈소스/">오픈소스</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">32</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/">Android Platform</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/Architecture/">Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/DTS/">DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/JNI/">JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/Kernel/">Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/SEAndroid/">SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/SurfaceFlinger/">SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/U-Boot/">U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/boot/">boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/개인용/">개인용</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/오픈소스/">오픈소스</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -860,7 +863,7 @@ Process 생성, 제거, Pr
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">아카이브</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
         </div>
     </div>
 
@@ -870,7 +873,7 @@ Process 생성, 제거, Pr
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">태그</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -880,7 +883,7 @@ Process 생성, 제거, Pr
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">태그 클라우드</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.78px;">Android Platform</a> <a href="/tags/App/" style="font-size: 18.89px;">App</a> <a href="/tags/Architecture/" style="font-size: 11.11px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 14.44px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 13.33px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 11.11px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 13.33px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 12.22px;">HID</a> <a href="/tags/Hexo/" style="font-size: 12.22px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 11.11px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 16.67px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 16.67px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10px;">VScode</a> <a href="/tags/Web/" style="font-size: 11.11px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 15.56px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 14.44px;">pageDewarp</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.11px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 18px;">Android Platform</a> <a href="/tags/App/" style="font-size: 19px;">App</a> <a href="/tags/Architecture/" style="font-size: 11px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 14px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 13px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 11px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 13px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 12px;">HID</a> <a href="/tags/Hexo/" style="font-size: 12px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 11px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 17px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 17px;">Linux</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10px;">VScode</a> <a href="/tags/Web/" style="font-size: 11px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15px;">pageDewarp</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
         </div>
     </div>
 
