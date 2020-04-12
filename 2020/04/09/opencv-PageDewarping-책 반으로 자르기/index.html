@@ -21,12 +21,12 @@
 <meta property="og:site_name" content="Max&#39;s Blog">
 <meta property="og:description" content="개요기존 소스는 책의 이미지가 반으로 잘린 것을 기준으로 동작하였습니다. 이번 포스팅에서는 책의 이미지를 반으로 자르는 것을 구현하는 것에 대해서 설명하겠습니다.  구현123456789101112131415161718192021def cut_half(img):    height, width = img.shape[:2]    gray = cv2.cvtColo">
 <meta property="og:locale" content="ko">
-<meta property="og:image" content="http://jung-max.github.io/images/0051.png">
-<meta property="og:updated_time" content="2020-04-09T08:15:45.051Z">
+<meta property="og:image" content="http://jung-max.github.io/images/0052.png">
+<meta property="og:updated_time" content="2020-04-12T22:55:42.886Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openCv page Dewarp 책 반으로 자르기">
 <meta name="twitter:description" content="개요기존 소스는 책의 이미지가 반으로 잘린 것을 기준으로 동작하였습니다. 이번 포스팅에서는 책의 이미지를 반으로 자르는 것을 구현하는 것에 대해서 설명하겠습니다.  구현123456789101112131415161718192021def cut_half(img):    height, width = img.shape[:2]    gray = cv2.cvtColo">
-<meta name="twitter:image" content="http://jung-max.github.io/images/0051.png">
+<meta name="twitter:image" content="http://jung-max.github.io/images/0052.png">
     
     <link rel="canonical" href="http://jung-max.github.io/2020/04/09/opencv-pagedewarping-책 반으로 자르기/">
 
@@ -192,7 +192,7 @@ ga('send', 'pageview');
         <div class="article-entry" itemprop="articleBody">
             <h2 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h2><p>기존 소스는 책의 이미지가 반으로 잘린 것을 기준으로 동작하였습니다.</p>
 <p>이번 포스팅에서는 책의 이미지를 반으로 자르는 것을 구현하는 것에 대해서 설명하겠습니다.</p>
-<p><img src="/images/0051.png" alt="책 반으로 자르기"></p>
+<p><img src="/images/0052.png" alt="책 반으로 자르기"></p>
 <h2 id="구현"><a href="#구현" class="headerlink" title="구현"></a>구현</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cut_half</span><span class="params">(img)</span>:</span></span><br><span class="line">    height, width = img.shape[:<span class="number">2</span>]</span><br><span class="line">    gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)</span><br><span class="line">    edges = cv2.Canny(gray,<span class="number">50</span>,<span class="number">150</span>,apertureSize = <span class="number">3</span>)</span><br><span class="line">    <span class="comment"># 선을 추출</span></span><br><span class="line">    lines = cv2.HoughLinesP(edges,<span class="number">1</span>,np.pi/<span class="number">180</span>,<span class="number">100</span>, minLineLength=<span class="number">80</span>, maxLineGap=<span class="number">5</span>)</span><br><span class="line">    tmp_candy = []</span><br><span class="line">    tmp_abs = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(lines)):</span><br><span class="line">        <span class="keyword">for</span> x1,y1,x2,y2 <span class="keyword">in</span> lines[i]:</span><br><span class="line">            gapY = np.abs(y2-y1)</span><br><span class="line">            gapX = np.abs(x2-x1)</span><br><span class="line">            <span class="comment"># 선의 x축의 차이가 5이하 y축의 차이가 10이상이면 세로줄로 판별</span></span><br><span class="line">            <span class="keyword">if</span> gapX &lt; <span class="number">5</span> <span class="keyword">and</span> gapY &gt; <span class="number">50</span> :</span><br><span class="line">                tmp_candy.append(x1)</span><br><span class="line">                tmp_abs.append(np.abs(x1- width//<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">    left_img = img[<span class="number">0</span>:height,<span class="number">0</span>:tmp_candy[np.argmin(tmp_abs)]]</span><br><span class="line">    right_img = img[<span class="number">0</span>:height,tmp_candy[np.argmin(tmp_abs)]+<span class="number">1</span>:width]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> left_img, right_img</span><br></pre></td></tr></table></figure>
 
 <p>입력으로 이미지를 받은 후 <code>HoughLinesP</code>함수를 통해 선을 추출한 후 세로선을 판별, </p>
@@ -235,7 +235,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2020/04/09/opencv-PageDewarping-책 반으로 자르기/" data-id="ck8shmec500660pjydjgjw82a" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2020/04/09/opencv-PageDewarping-책 반으로 자르기/" data-id="ck8xndc29006t0pjyfmmjdyv5" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -306,12 +306,12 @@ ga('send', 'pageview');
             "name": "Jung Max"
         },
         "headline": "openCv page Dewarp 책 반으로 자르기",
-        "image": "http://jung-max.github.io/images/0051.png",
+        "image": "http://jung-max.github.io/images/0052.png",
         "keywords": "openCV pageDewarp",
         "genre": "openCV pageDewarp",
         "datePublished": "2020-04-09",
         "dateCreated": "2020-04-09",
-        "dateModified": "2020-04-09",
+        "dateModified": "2020-04-13",
         "url": "http://jung-max.github.io/2020/04/09/opencv-PageDewarping-책 반으로 자르기/",
         "description": "개요기존 소스는 책의 이미지가 반으로 잘린 것을 기준으로 동작하였습니다.
 이번 포스팅에서는 책의 이미지를 반으로 자르는 것을 구현하는 것에 대해서 설명하겠습니다.
@@ -385,7 +385,7 @@ ga('send', 'pageview');
                             <a href="/2020/04/09/opencv-PageDewarping-책 반으로 자르기/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/0051.png)" alt="openCv page Dewarp 책 반으로 자르기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/0052.png)" alt="openCv page Dewarp 책 반으로 자르기" class="thumbnail-image"></span>
     
     
 </a>

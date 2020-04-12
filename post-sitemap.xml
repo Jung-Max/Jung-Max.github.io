@@ -9,7 +9,7 @@
 
     <url>
         <loc>http://jung-max.github.io/2020/04/09/opencv-PageDewarping-%EC%B1%85%20%EB%B0%98%EC%9C%BC%EB%A1%9C%20%EC%9E%90%EB%A5%B4%EA%B8%B0/</loc>
-        <lastmod>2020-04-09T08:15:45.051Z</lastmod>
+        <lastmod>2020-04-12T22:55:42.886Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -408,14 +408,6 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-compile/</loc>
-        <lastmod>2019-09-16T03:58:43.851Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/2019/08/27/Android-Kernel-System-Memory-Model/</loc>
         <lastmod>2019-09-16T03:58:43.851Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -425,6 +417,14 @@
 
     <url>
         <loc>http://jung-max.github.io/2019/08/29/Android-Kernel_Module/</loc>
+        <lastmod>2019-09-16T03:58:43.851Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-compile/</loc>
         <lastmod>2019-09-16T03:58:43.851Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
