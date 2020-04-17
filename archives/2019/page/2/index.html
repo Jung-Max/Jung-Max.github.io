@@ -625,17 +625,17 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="thumbnail">
+        <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Connecting to a GATT Server" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server 사용하기" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Connecting-GATT-Server/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Gatt서버-사용하기/">0</span>
     
 </span>
 
@@ -653,16 +653,14 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/">Connecting to a GATT Server</a>
+        <a href="/2019/09/09/Android-BLE-Gatt서버-사용하기/">Gatt Server 사용하기</a>
         </h1>
     
 
         <p class="article-excerpt">
-            원하는 BluetoothDevice 객체를 발견하면 
-Context 객체, BLE 장치에 자동으로 연결할지 여부를 나타내는 부울 및 
-연결 이벤트 및 클라이언트 작업이있는 BluetoothGattCallback 참조를 
-매개 변수로 사용하는 connectGatt() 메서드를 사용하여 연결할 수 있습니다.
-12345if (Build.VERSION.SDK_IN
+            장치가 주변 장치로 작동하려면 먼저 BluetoothGattServer를 열고
+하나 이상의 BluetoothGattService 및 하나의 BluetoothGattCharacteristic로 채워야합니다.
+123BluetoothGattServer server=bluetoothManager.openGattServer(context, bluetoothGattS
         </p>
     </div>
 </article>
