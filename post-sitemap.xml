@@ -9,7 +9,7 @@
 
     <url>
         <loc>http://jung-max.github.io/2020/04/17/openCV-pageDewarp-%EC%A4%91%EC%8B%AC%EC%9D%B4%EB%A1%A0%EC%84%A4%EB%AA%85/</loc>
-        <lastmod>2020-04-17T06:14:25.925Z</lastmod>
+        <lastmod>2020-04-17T06:30:06.850Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -376,7 +376,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/</loc>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-Architecture-overview/</loc>
         <lastmod>2019-09-16T03:59:28.372Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -384,7 +384,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-Architecture-overview/</loc>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/</loc>
         <lastmod>2019-09-16T03:59:28.372Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -464,6 +464,14 @@
     </url>
 
     <url>
+        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Connecting-GATT-Server/</loc>
+        <lastmod>2019-09-09T00:42:43.065Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/2019/09/09/Android-BLE-GattServer%EB%A1%9C%EB%B6%80%ED%84%B0-%EC%95%8C%EB%A6%BC%EB%B0%9B%EA%B8%B0/</loc>
         <lastmod>2019-09-09T00:42:43.065Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -473,14 +481,6 @@
 
     <url>
         <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Finding-Devices/</loc>
-        <lastmod>2019-09-09T00:42:43.065Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Connecting-GATT-Server/</loc>
         <lastmod>2019-09-09T00:42:43.065Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
