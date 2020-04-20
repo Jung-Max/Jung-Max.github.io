@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-커스터마이즈/" class="thumbnail">
+        <a href="/2019/08/27/Android-부트로그/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/Android_platform.png)" alt="Android Platform 커스터마이즈" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android 부트로그 수정" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-커스터마이즈/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-부트로그/">0</span>
     
 </span>
 
@@ -197,15 +197,15 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-커스터마이즈/">Android Platform 커스터마이즈</a>
+        <a href="/2019/08/27/Android-부트로그/">Android 부트로그 수정</a>
         </h1>
     
 
         <p class="article-excerpt">
-            안드로이드의 기본 설정값 및 기본 동작은 아래에서 설명할 파일들을 수정하여 변경할 수 있다.
-1. 안드로이드 기본 설정값1frameworks/base/packages/SettingsProvider/res/values/defaults.xml
+            Linux 커널 부트 로고 변경
+이미지를 교체하는 방법kernel/arch/arm/Makefile에 보면
 
-안드로이드 시스템 설정의 초기 값을 정할 수 있다. 이 중에는 기기 사용자가 설정에서 변경할 수 없는 것도 있다.시스
+12345LOGO := $(notdir $(wildcard $(srctree)/logo.bmp))LOGO_KERNEL := $(notdir $(wildcard $(srctree)/logo_kernel.bmp))%.img: %.dtb kernel.img
         </p>
     </div>
 </article>
@@ -268,17 +268,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-부트로그/" class="thumbnail">
+        <a href="/2019/08/27/Android-커스터마이즈/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Android 부트로그 수정" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/Android_platform.png)" alt="Android Platform 커스터마이즈" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-부트로그/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-커스터마이즈/">0</span>
     
 </span>
 
@@ -296,15 +296,15 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-부트로그/">Android 부트로그 수정</a>
+        <a href="/2019/08/27/Android-커스터마이즈/">Android Platform 커스터마이즈</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Linux 커널 부트 로고 변경
-이미지를 교체하는 방법kernel/arch/arm/Makefile에 보면
+            안드로이드의 기본 설정값 및 기본 동작은 아래에서 설명할 파일들을 수정하여 변경할 수 있다.
+1. 안드로이드 기본 설정값1frameworks/base/packages/SettingsProvider/res/values/defaults.xml
 
-12345LOGO := $(notdir $(wildcard $(srctree)/logo.bmp))LOGO_KERNEL := $(notdir $(wildcard $(srctree)/logo_kernel.bmp))%.img: %.dtb kernel.img
+안드로이드 시스템 설정의 초기 값을 정할 수 있다. 이 중에는 기기 사용자가 설정에서 변경할 수 없는 것도 있다.시스
         </p>
     </div>
 </article>
