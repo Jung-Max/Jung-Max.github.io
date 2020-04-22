@@ -169,121 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-Platform-개발환경/" class="thumbnail">
+        <a href="/2019/08/27/Android-Kernel-System-Memory-Model/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-Platform-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/01.png)" alt="Android Platform 개발환경 구축" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-개발환경/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/개발-환경/">개발 환경</a>
-            </div>
-            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Platform-개발환경/">Android Platform 개발환경 구축</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            기본 Image 구성
-Android 개발 툴SDK(Software Development Kit)
-Android Application을 만들기 위한 개발 환경 및 Tool을 제공
-JAVA 기반의 Application 개발 시 사용
-Windows, Linux, MAC등에 구성가능
-Android studio에 연결 가능PDK(Platform Development
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/27/Android-커스터마이즈/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/Android_platform.png)" alt="Android Platform 커스터마이즈" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-Kernel-System-Memory-Model/01.png)" alt="Android Kernel System Memory Model" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-커스터마이즈/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/boot/">boot</a>
-            </div>
-            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-커스터마이즈/">Android Platform 커스터마이즈</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            안드로이드의 기본 설정값 및 기본 동작은 아래에서 설명할 파일들을 수정하여 변경할 수 있다.
-1. 안드로이드 기본 설정값1frameworks/base/packages/SettingsProvider/res/values/defaults.xml
-
-안드로이드 시스템 설정의 초기 값을 정할 수 있다. 이 중에는 기기 사용자가 설정에서 변경할 수 없는 것도 있다.시스
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/08/27/Android-Kernel-주요-디렉토리/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android Kernel 주요 디렉토리" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Kernel-주요-디렉토리/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Kernel-System-Memory-Model/">0</span>
     
 </span>
 
@@ -301,17 +197,121 @@ Android studio에 연결 가능PDK(Platform Development
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Kernel-주요-디렉토리/">Android Kernel 주요 디렉토리</a>
+        <a href="/2019/08/27/Android-Kernel-System-Memory-Model/">Android Kernel System Memory Model</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Kernel 주요 디렉토리Top
-Kernel의 Top디렉토리는 kernel을 빌드하기 위한 Makefile을 가지고 있으며 모든 빌드 동작은 이 디렉토리에서 시작된다.
+            Android System Memory Model
+Linux/Android에서는 가상 메모리를 각 Process 마다 4GB씩 할당 받는다.(32bit 기준)
+Process의 각 유저 영역은 물리 메모리에 독립적으로 지정된다.
+Kernel 영역은 물리 메모리에서 공유된다.
 
-arch
-Architecture 즉 프로세서(CPU), Soc(AP) 및 타깃 보드 관련된 소스가 구현된 디렉토리이다.
-각 CPU별 디렉토리를 가지고 있으며, ARM프로세스 관련 소스는 a
+공유 가능 영역
+공유 가능 영역은 Kernel 공간이기 때문에 Android에서는 
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/27/Android-기반-Kernel/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android 기반 커널" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-기반-Kernel/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
+            </div>
+            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/27/Android-기반-Kernel/">Android 기반 커널</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            개요
+Hardware System을 관리할 뿐 아니라 응용 소프트웨어를 실행하기 위한 기능과 서비스를 제공하는 System Software이다.
+실행되는 응용 프로그램들이 Memory, CPU, I/O장치 등의 자원들을 사용할 수 있도록 만들어 주고 공통적으로 사용할 수 있는 Service를 제공한다.
+
+Process 관리
+Process 생성, 제거, Pr
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/08/27/Android-Platform-Architecture-overview/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-Platform-Architecture-overview/01.png)" alt="Android Platform Architecture overview" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Platform-Architecture-overview/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Architecture/">Architecture</a>
+            </div>
+            <div class="date"><time datetime="2019-08-27T08:29:24.000Z" itemprop="datePublished">2019-08-27</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/08/27/Android-Platform-Architecture-overview/">Android Platform Architecture overview</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            Android platform architecture overview1. 개요이번 시간은 안드로이드의 구조에 대해서 알아보고 애플리케이션이 어떻게 구동되는지 추론해보는 시간을 가져보겠습니다.
+제목은 안드로이드 플랫폼 아키텍쳐라고 정했습니다. 
+여기서 플랫폼은 컴퓨터 시스템의 기본이 되는 특정 프로세서 모델과 하나의 컴퓨터 시스템을 바탕으로 하는 운영체제를 
         </p>
     </div>
 </article>

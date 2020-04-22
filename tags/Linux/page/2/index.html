@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-기반-Kernel/" class="thumbnail">
+        <a href="/2019/08/27/Android-Kernel-Message/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android 기반 커널" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android Kernel Message" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-기반-Kernel/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Kernel-Message/">0</span>
     
 </span>
 
@@ -197,17 +197,19 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-기반-Kernel/">Android 기반 커널</a>
+        <a href="/2019/08/27/Android-Kernel-Message/">Android Kernel Message</a>
         </h1>
     
 
         <p class="article-excerpt">
-            개요
-Hardware System을 관리할 뿐 아니라 응용 소프트웨어를 실행하기 위한 기능과 서비스를 제공하는 System Software이다.
-실행되는 응용 프로그램들이 Memory, CPU, I/O장치 등의 자원들을 사용할 수 있도록 만들어 주고 공통적으로 사용할 수 있는 Service를 제공한다.
+            printk()
+메시지 기록 관리를 위한 로그 레벨의 지정이 가능하다.
+kernel뿐만 아니라 응용프로그램의 init process도 printk()를 사용한다.
+logcat은 init가 구동하기 때문에 init는 printk()를 사용.
 
-Process 관리
-Process 생성, 제거, Pr
+
+원형 큐 구조의 관리, 출력 디바이스의 다중 지정이 가능하다.
+콘솔에서 확인하거나 dmesg 명령을 사용해서 로그파
         </p>
     </div>
 </article>
@@ -276,17 +278,17 @@ Kernel 영역은 물리 메모리에서 공유된다.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/27/Android-Kernel-Message/" class="thumbnail">
+        <a href="/2019/08/27/Android-기반-Kernel/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android Kernel Message" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/Android_kernel.png)" alt="Android 기반 커널" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-Kernel-Message/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/27/Android-기반-Kernel/">0</span>
     
 </span>
 
@@ -304,19 +306,17 @@ Kernel 영역은 물리 메모리에서 공유된다.
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/27/Android-Kernel-Message/">Android Kernel Message</a>
+        <a href="/2019/08/27/Android-기반-Kernel/">Android 기반 커널</a>
         </h1>
     
 
         <p class="article-excerpt">
-            printk()
-메시지 기록 관리를 위한 로그 레벨의 지정이 가능하다.
-kernel뿐만 아니라 응용프로그램의 init process도 printk()를 사용한다.
-logcat은 init가 구동하기 때문에 init는 printk()를 사용.
+            개요
+Hardware System을 관리할 뿐 아니라 응용 소프트웨어를 실행하기 위한 기능과 서비스를 제공하는 System Software이다.
+실행되는 응용 프로그램들이 Memory, CPU, I/O장치 등의 자원들을 사용할 수 있도록 만들어 주고 공통적으로 사용할 수 있는 Service를 제공한다.
 
-
-원형 큐 구조의 관리, 출력 디바이스의 다중 지정이 가능하다.
-콘솔에서 확인하거나 dmesg 명령을 사용해서 로그파
+Process 관리
+Process 생성, 제거, Pr
         </p>
     </div>
 </article>

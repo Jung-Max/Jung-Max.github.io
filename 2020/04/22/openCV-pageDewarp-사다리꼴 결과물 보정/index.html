@@ -22,7 +22,7 @@
 <meta property="og:description" content="개요이미지 디워핑을 하다보면 가끔 이미지의 가장자리 부분이 잡아 끌려와서 이상하게 처리되 사다리꼴이 된 모습을 볼 수 있다.  이와 같이 노이즈가 경계면에 있는 이유는 마스킹 때 이미지를 벗어난 좌표까지 기준으로 했기 때문에 그렇다.  위 그림처럼 페이지를 새로 만들 부분을 이미지 경계면에서 벗어난 오른쪽 부분까지 지정한 것을 볼 수 있다. 그림에서는 이미">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/0065.png">
-<meta property="og:updated_time" content="2020-04-22T01:42:39.513Z">
+<meta property="og:updated_time" content="2020-04-22T01:47:48.621Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openCv page Dewarp 사다리꼴 결과물 보정">
 <meta name="twitter:description" content="개요이미지 디워핑을 하다보면 가끔 이미지의 가장자리 부분이 잡아 끌려와서 이상하게 처리되 사다리꼴이 된 모습을 볼 수 있다.  이와 같이 노이즈가 경계면에 있는 이유는 마스킹 때 이미지를 벗어난 좌표까지 기준으로 했기 때문에 그렇다.  위 그림처럼 페이지를 새로 만들 부분을 이미지 경계면에서 벗어난 오른쪽 부분까지 지정한 것을 볼 수 있다. 그림에서는 이미">
@@ -207,7 +207,7 @@ ga('send', 'pageview');
 
 <p>위 코드를 간단히 설명하면 이미지를 gray → canny로 변경하여 선찾기를 위한 전처리 과정을 진행한다.</p>
 <p>canny로 변경한 이미지는 아래와 같다.</p>
-<p><img src="/imgaes/0068.png" alt="canny 이미지"></p>
+<p><img src="/images/0068.png" alt="canny 이미지"></p>
 <p>이 이미지를 기준으로 선을 찾게 된다.</p>
 <h2 id="기준이-되는-좌표-찾기"><a href="#기준이-되는-좌표-찾기" class="headerlink" title="기준이 되는 좌표 찾기"></a>기준이 되는 좌표 찾기</h2><p>사다리 꼴 모양을 똑바로 펴기 위해서는  네개의 모서리 점의 좌표가 필요하다.</p>
 <p>일단 여기서 오른쪽의 좌표는 </p>
@@ -242,7 +242,7 @@ ga('send', 'pageview');
 <p>두점을 가지고 <code>cv2.getPerspectiveTransform</code>를 사용해 변환 행렬을 구한다.</p>
 <p>구한 변환행렬을 사용해 <code>cv2.warpPerspective</code>를 사용해 이미지 와핑을 해주면 끝난다.</p>
 <p>결과물은 아래와 같다.</p>
-<p><img src="/imgaes/0069.png" alt="이미지 와핑 결과물"></p>
+<p><img src="/images/0069.png" alt="이미지 와핑 결과물"></p>
 
         </div>
         <footer class="article-footer">
@@ -250,7 +250,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2020/04/22/openCV-pageDewarp-사다리꼴 결과물 보정/" data-id="ck9aob5y0006v0pjytdwoldo7" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2020/04/22/openCV-pageDewarp-사다리꼴 결과물 보정/" data-id="ck9aohgpz007e0pjyydl103z5" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
