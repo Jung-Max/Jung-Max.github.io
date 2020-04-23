@@ -169,17 +169,17 @@ ga('send', 'pageview');
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/09/Android-Advertising-BLE-Device/" class="thumbnail">
+        <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Advertising a BLE Device" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Connecting to a GATT Server" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-Advertising-BLE-Device/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Connecting-GATT-Server/">0</span>
     
 </span>
 
@@ -197,15 +197,16 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/09/Android-Advertising-BLE-Device/">Advertising a BLE Device</a>
+        <a href="/2019/09/09/Android-BLE-Connecting-GATT-Server/">Connecting to a GATT Server</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Bluetooth LE Advertising을 사용하여 먼저 연결하지 않고도 데이터 패키지를 근처의 모든 장치에 브로드 캐스트 할 수 있습니다. 
-Advertising 데이터는 31 바이트로 제한됩니다. 
-기기 Advertising은 다른 사용자가 나에게 연결하도록하는 첫 번째 단계입니다.
-모든 장치가 Bluetooth LE Advertising을 지원하는
+            원하는 BluetoothDevice 객체를 발견하면 
+Context 객체, BLE 장치에 자동으로 연결할지 여부를 나타내는 부울 및 
+연결 이벤트 및 클라이언트 작업이있는 BluetoothGattCallback 참조를 
+매개 변수로 사용하는 connectGatt() 메서드를 사용하여 연결할 수 있습니다.
+12345if (Build.VERSION.SDK_IN
         </p>
     </div>
 </article>
@@ -269,57 +270,6 @@ Advertising 데이터는 31 바이트로 제한됩니다.
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Android-kernel-%EA%B0%80%EC%83%81-%EB%A7%88%EC%9A%B0%EC%8A%A4-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/01.png)" alt="Android Kernel 가상 마우스 드라이버 구현하기" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
-            </div>
-            <div class="date"><time datetime="2019-09-02T07:17:00.000Z" itemprop="datePublished">2019-09-02</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/">Android Kernel 가상 마우스 드라이버 구현하기</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            개요
-가상 마우스 동작 방식은 다음과 같다.
-App이 마우스 동작의 좌표 정보를 sysfs노드인 /sys/devices/platform/virmouse/vmevent를 거쳐 가상 마우스 드라이버(virmouse.c)에 통지한다.
-가상 마우스 드라이버는 evdev를 거쳐 이동 정보를 사용자 영역으로 보낸다.
-evdev란 범용 입력 이벤트 드라이버를 뜻한다.
-
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
         <a href="/2019/09/02/Android-NDK를-사용해서-kernel드라이버-사용하기/" class="thumbnail">
     
     
@@ -361,29 +311,25 @@ evdev란 범용 입력 이벤트 드라이버를 뜻한다.
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
     
-        <div class="article-row">
-    
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/" class="thumbnail">
+        <a href="/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Android-bluetooth%EB%A1%9C-%EB%B0%9B%EC%9D%80-byte-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D%ED%95%98%EA%B8%B0/01.png)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-kernel-%EA%B0%80%EC%83%81-%EB%A7%88%EC%9A%B0%EC%8A%A4-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/01.png)" alt="Android Kernel 가상 마우스 드라이버 구현하기" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/">0</span>
     
 </span>
 
@@ -394,70 +340,24 @@ evdev란 범용 입력 이벤트 드라이버를 뜻한다.
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            <a class="article-category-link" href="/categories/Android-Platform/">Android Platform</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android-Platform/Kernel/">Kernel</a>
             </div>
-            <div class="date"><time datetime="2019-09-02T02:42:00.000Z" itemprop="datePublished">2019-09-02</time></div>
+            <div class="date"><time datetime="2019-09-02T07:17:00.000Z" itemprop="datePublished">2019-09-02</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/">bluetooth로 받은 byte 데이터 분석하기</a>
+        <a href="/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/">Android Kernel 가상 마우스 드라이버 구현하기</a>
         </h1>
     
 
         <p class="article-excerpt">
-            앞서 client측에서 마우스 x,y데이터를 보낼때 사용했던 프로토콜을 예로 든다.
+            개요
+가상 마우스 동작 방식은 다음과 같다.
+App이 마우스 동작의 좌표 정보를 sysfs노드인 /sys/devices/platform/virmouse/vmevent를 거쳐 가상 마우스 드라이버(virmouse.c)에 통지한다.
+가상 마우스 드라이버는 evdev를 거쳐 이동 정보를 사용자 영역으로 보낸다.
+evdev란 범용 입력 이벤트 드라이버를 뜻한다.
 
-여기서 0번째 바이트는 마우스 이동인 것을 알려주기 위해 0x02로 온다.14 바이트는 x값, 58 바이트는 y값이다.
-12345678910111213141516171819BufferedInputStream in = null;in = new BufferedInputStre
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/">0</span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
-            </div>
-            <div class="date"><time datetime="2019-09-02T02:42:00.000Z" itemprop="datePublished">2019-09-02</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/">bluetooth로 받은 byte 데이터 분석하기</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            bluetooth로 받은 데이터는 기본적으로 byte형태이다.
-String 데이터를 받았다면 String 형으로 변형이 필요하다.
-12345678910111213141516BufferedInputStream in = null;in = new BufferedInputStream(socket.getInputStream());byte[] buffer = new 
         </p>
     </div>
 </article>
@@ -512,6 +412,107 @@ String 데이터를 받았다면 String 형으로 변형이 필요하다.
 1&lt;uses-permission android:name="android.permission.INJECT_EVENTS" /&gt;
 
 INJECT_EVENTS 권한을 취득하기 위해선 System App 권한이 
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Android-bluetooth%EB%A1%9C-%EB%B0%9B%EC%9D%80-byte-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D%ED%95%98%EA%B8%B0/01.png)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            </div>
+            <div class="date"><time datetime="2019-09-02T02:42:00.000Z" itemprop="datePublished">2019-09-02</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/09/02/Android-bluetooth로-받은-byte-데이터-분석하기/">bluetooth로 받은 byte 데이터 분석하기</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            앞서 client측에서 마우스 x,y데이터를 보낼때 사용했던 프로토콜을 예로 든다.
+
+여기서 0번째 바이트는 마우스 이동인 것을 알려주기 위해 0x02로 온다.14 바이트는 x값, 58 바이트는 y값이다.
+12345678910111213141516171819BufferedInputStream in = null;in = new BufferedInputStre
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="bluetooth로 받은 byte 데이터 분석하기" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Android/App/">App</a>
+            </div>
+            <div class="date"><time datetime="2019-09-02T02:42:00.000Z" itemprop="datePublished">2019-09-02</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/09/02/Android-bluetooth로-받은-string-데이터-분석하기/">bluetooth로 받은 byte 데이터 분석하기</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            bluetooth로 받은 데이터는 기본적으로 byte형태이다.
+String 데이터를 받았다면 String 형으로 변형이 필요하다.
+12345678910111213141516BufferedInputStream in = null;in = new BufferedInputStream(socket.getInputStream());byte[] buffer = new 
         </p>
     </div>
 </article>
@@ -625,17 +626,17 @@ client thread 생성device 리스트에서 device가 선택되면 그 정보를 
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/08/30/Android-Bluetooth-디바이스-연결/" class="thumbnail">
+        <a href="/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/ANDROID.jpg)" alt="Bluetooth 디바이스 연결" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Android-ActionBar.TabListener-Fragment%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C/01.png)" alt="ActionBar.TabListener Fragment에 대해서" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-Bluetooth-디바이스-연결/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/">0</span>
     
 </span>
 
@@ -653,13 +654,13 @@ client thread 생성device 리스트에서 device가 선택되면 그 정보를 
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/08/30/Android-Bluetooth-디바이스-연결/">Bluetooth 디바이스 연결</a>
+        <a href="/2019/08/30/Android-ActionBar.TabListener-Fragment에-대해서/">ActionBar.TabListener Fragment에 대해서</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Bluetooth 지원기기 체크bluetoothAdapter가 null 이면 기기가 블루투스를 지원하지 않는 것이다.
-1234if (bluetoothAdapter == null) &#123;    Toast.makeText(MainActivity.this, "이 기기는 블루투스를 지원하지 않습니다.", Toast.LENGTH_SHORT).show();   
+            개요ActionBar.TabListener는 ActionBar에 Tab의 기능을 추가하는 것이다.implements ActionBar.TabListener를 통해서 비교적 간단하게 구현 가능한 것이 특징이다.
+위 예제를 보면 탭에 따라 화면이 달라지는 것을 볼 수 있다.Canon 프로젝터 리모콘 / 리모컨 / 마우스 부분 모두 ActionBar이다.달라지는
         </p>
     </div>
 </article>

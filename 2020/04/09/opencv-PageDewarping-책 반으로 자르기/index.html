@@ -22,7 +22,7 @@
 <meta property="og:description" content="개요기존 소스는 책의 이미지가 반으로 잘린 것을 기준으로 동작하였습니다. 이번 포스팅에서는 책의 이미지를 반으로 자르는 것을 구현하는 것에 대해서 설명하겠습니다.  구현123456789101112131415161718192021def cut_half(img):    height, width = img.shape[:2]    gray = cv2.cvtColo">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/0052.png">
-<meta property="og:updated_time" content="2020-04-12T22:55:42.886Z">
+<meta property="og:updated_time" content="2020-04-23T00:52:48.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openCv page Dewarp 책 반으로 자르기">
 <meta name="twitter:description" content="개요기존 소스는 책의 이미지가 반으로 잘린 것을 기준으로 동작하였습니다. 이번 포스팅에서는 책의 이미지를 반으로 자르는 것을 구현하는 것에 대해서 설명하겠습니다.  구현123456789101112131415161718192021def cut_half(img):    height, width = img.shape[:2]    gray = cv2.cvtColo">
@@ -218,6 +218,7 @@ ga('send', 'pageview');
 </li>
 </ul>
 <p><code>HoughLinesP</code>의 결과는 두점의 좌표로 리턴됩니다. 두점을 이으면 선이 됩니다.</p>
+<p><img src="/images/0070.png" alt="찾은 선의 이미지"></p>
 <p>세로선인 것을 찾기 위해서는 간단히 두 점의 x축 차이는 매우 작고 y축 차이는 매우 크면됩니다.</p>
 <p>두점의 좌표 차이를 구하기 위해서 절대값을 구하는 함수인 <code>np.abs</code>을 사용하였습니다.</p>
 <p>제가 사용한 기준은 x축의 차이는 5픽셀 이하이고 y축의 차이는 50이상으로 잡았습니다.</p>
@@ -235,7 +236,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2020/04/09/opencv-PageDewarping-책 반으로 자르기/" data-id="ck9aohgpx00760pjyg68i2fwp" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2020/04/09/opencv-PageDewarping-책 반으로 자르기/" data-id="ck9c1ysbr006u0pjyj7146wjp" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -311,13 +312,13 @@ ga('send', 'pageview');
         "genre": "openCV pageDewarp",
         "datePublished": "2020-04-09",
         "dateCreated": "2020-04-09",
-        "dateModified": "2020-04-13",
+        "dateModified": "2020-04-23",
         "url": "http://jung-max.github.io/2020/04/09/opencv-PageDewarping-책 반으로 자르기/",
         "description": "개요기존 소스는 책의 이미지가 반으로 잘린 것을 기준으로 동작하였습니다.
 이번 포스팅에서는 책의 이미지를 반으로 자르는 것을 구현하는 것에 대해서 설명하겠습니다.
 
 구현123456789101112131415161718192021def cut_half(img):    height, width = img.shape[:2]    gray = cv2.cvtColo"
-        "wordCount": 725
+        "wordCount": 729
     }
 </script>
 
