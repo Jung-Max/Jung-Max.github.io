@@ -22,7 +22,7 @@
 <meta property="og:description" content="윤곽선(Contours)이란영상이나 이미지의 윤곽선(컨투어)를 검출하기 위해서 사용합니다. 윤곽선은 외곽 뿐만 아니라 내곽도 검출 가능합니다. 컨투어(contour)란 동일한 색 또는 동일한 픽셀값(강도,intensity)을 가지고 있는 영역의 경계선 정보입니다. 물체의 윤곽선, 외형을 파악하는데 사용됩니다.  윤곽선 검출윤곽선의 검출 과정은 cv2.fin">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/0048.png">
-<meta property="og:updated_time" content="2020-04-08T02:42:11.689Z">
+<meta property="og:updated_time" content="2020-04-24T06:50:11.027Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="opencv 윤곽선(Contours)값의 의미(내용) 최대값 최소값 구하기">
 <meta name="twitter:description" content="윤곽선(Contours)이란영상이나 이미지의 윤곽선(컨투어)를 검출하기 위해서 사용합니다. 윤곽선은 외곽 뿐만 아니라 내곽도 검출 가능합니다. 컨투어(contour)란 동일한 색 또는 동일한 픽셀값(강도,intensity)을 가지고 있는 영역의 경계선 정보입니다. 물체의 윤곽선, 외형을 파악하는데 사용됩니다.  윤곽선 검출윤곽선의 검출 과정은 cv2.fin">
@@ -213,7 +213,7 @@ ga('send', 'pageview');
 </li>
 </ul>
 <h2 id="실행"><a href="#실행" class="headerlink" title="실행"></a>실행</h2><p><img src="/images/0049.png" alt="예제 이미지"></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">src = cv2.imread(<span class="string">"contours.jpg"</span>, cv2.IMREAD_COLOR)</span><br><span class="line"></span><br><span class="line">gray = cv2.cvtColor(src, cv2.COLOR_RGB2GRAY)</span><br><span class="line">ret, binary = cv2.threshold(gray, <span class="number">127</span>, <span class="number">255</span>, cv2.THRESH_BINARY)</span><br><span class="line">binary = cv2.bitwise_not(binary)</span><br><span class="line"></span><br><span class="line">contours, hierachy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"contours = "</span>, contours)</span><br><span class="line"></span><br><span class="line">cv2.drawContours(src, [contours[i]], <span class="number">0</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line">cv2.imshow(<span class="string">"src"</span>, src)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">src = cv2.imread(<span class="string">"contours.jpg"</span>, cv2.IMREAD_COLOR)</span><br><span class="line"></span><br><span class="line">gray = cv2.cvtColor(src, cv2.COLOR_RGB2GRAY)</span><br><span class="line">ret, binary = cv2.threshold(gray, <span class="number">127</span>, <span class="number">255</span>, cv2.THRESH_BINARY)</span><br><span class="line">binary = cv2.bitwise_not(binary)</span><br><span class="line"></span><br><span class="line">contours, hierachy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"contours = "</span>, contours)</span><br><span class="line"></span><br><span class="line">cv2.drawContours(src, [contours[<span class="number">0</span>]], <span class="number">0</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line">cv2.imshow(<span class="string">"src"</span>, src)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
 
 <p>위 예제는 최외곽 윤곽선을 찾고 윤곽선을 빨간색으로 그려주는 소스입니다.</p>
 <p>결과는 아래와 같습니다.</p>
@@ -262,7 +262,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2020/04/08/opencv 윤곽선(Contours)값의 의미(내용) 최대값 최소값 구하기/" data-id="ck9dtc4dn00eg0pjyj7mnzv85" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2020/04/08/opencv 윤곽선(Contours)값의 의미(내용) 최대값 최소값 구하기/" data-id="ck9i6g08g006b0pjye6y6non5" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -338,13 +338,13 @@ ga('send', 'pageview');
         "genre": "openCV 지식",
         "datePublished": "2020-04-08",
         "dateCreated": "2020-04-08",
-        "dateModified": "2020-04-08",
+        "dateModified": "2020-04-24",
         "url": "http://jung-max.github.io/2020/04/08/opencv 윤곽선(Contours)값의 의미(내용) 최대값 최소값 구하기/",
         "description": "윤곽선(Contours)이란영상이나 이미지의 윤곽선(컨투어)를 검출하기 위해서 사용합니다. 윤곽선은 외곽 뿐만 아니라 내곽도 검출 가능합니다.
 컨투어(contour)란 동일한 색 또는 동일한 픽셀값(강도,intensity)을 가지고 있는 영역의 경계선 정보입니다. 물체의 윤곽선, 외형을 파악하는데 사용됩니다.
 
 윤곽선 검출윤곽선의 검출 과정은 cv2.fin"
-        "wordCount": 861
+        "wordCount": 862
     }
 </script>
 
