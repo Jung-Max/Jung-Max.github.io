@@ -8,6 +8,22 @@
     </url>
 
     <url>
+        <loc>http://jung-max.github.io/2020/04/29/openCV-pageDewarp-remapping%EC%9D%84%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%B3%B4%EC%A0%95/</loc>
+        <lastmod>2020-04-29T03:29:12.689Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/04/09/opencv-PageDewarping-%EB%8F%99%EC%A0%81%EB%A7%88%EC%8A%A4%ED%82%B9/</loc>
+        <lastmod>2020-04-29T02:35:26.371Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/2020/04/23/openCV-pageDewarp-remapping/</loc>
         <lastmod>2020-04-27T07:44:47.279Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -42,14 +58,6 @@
     <url>
         <loc>http://jung-max.github.io/2020/04/17/openCV-pageDewarp-%EC%A4%91%EC%8B%AC%EC%9D%B4%EB%A1%A0%EC%84%A4%EB%AA%85/</loc>
         <lastmod>2020-04-17T06:30:06.850Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2020/04/09/opencv-PageDewarping-%EB%8F%99%EC%A0%81%EB%A7%88%EC%8A%A4%ED%82%B9/</loc>
-        <lastmod>2020-04-09T07:35:37.987Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -432,7 +440,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/08/27/Android-Kernel-System-Memory-Model/</loc>
+        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-compile/</loc>
         <lastmod>2019-09-16T03:58:43.851Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -440,7 +448,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-compile/</loc>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Kernel-System-Memory-Model/</loc>
         <lastmod>2019-09-16T03:58:43.851Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
