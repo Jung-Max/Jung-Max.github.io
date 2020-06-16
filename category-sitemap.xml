@@ -8,14 +8,91 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/python/</loc>
-        <lastmod>2020-06-16T03:02:48.793Z</lastmod>
+        <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/%EA%B8%B0%ED%83%80/</loc>
+        <lastmod>2020-06-16T03:29:57.575Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/</loc>
+        <lastmod>2020-06-16T03:29:57.575Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android/Platform-U-Boot/</loc>
+        <lastmod>2020-06-16T03:29:42.217Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android/</loc>
+        <lastmod>2020-06-16T03:29:42.217Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android/Platform-Kernel/</loc>
+        <lastmod>2020-06-16T03:29:32.098Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android/Platform-SurfaceFlinger/</loc>
+        <lastmod>2020-06-16T03:29:10.343Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android/Platform-SEAndroid/</loc>
+        <lastmod>2020-06-16T03:29:04.179Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android/Platform-%EA%B0%9C%EB%B0%9C-%ED%99%98%EA%B2%BD/</loc>
+        <lastmod>2020-06-16T03:28:57.261Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android/Platform-Architecture/</loc>
+        <lastmod>2020-06-16T03:28:32.770Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android/Platform-DTS/</loc>
+        <lastmod>2020-06-16T03:28:13.954Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android/Platform-JNI/</loc>
+        <lastmod>2020-06-16T03:27:01.936Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/Android/Platform-boot/</loc>
+        <lastmod>2020-06-16T03:26:32.915Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/python/</loc>
         <lastmod>2020-06-16T03:02:48.793Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -43,27 +120,6 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/%EA%B8%B0%ED%83%80/</loc>
-        <lastmod>2020-03-23T05:41:30.278Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/Android-Platform/SurfaceFlinger/</loc>
-        <lastmod>2020-01-28T06:10:42.182Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/Android-Platform/</loc>
-        <lastmod>2020-01-28T06:10:42.182Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/categories/Android/App/</loc>
         <lastmod>2020-01-03T07:49:58.149Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -71,36 +127,8 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/categories/Android/</loc>
-        <lastmod>2020-01-03T07:49:58.149Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/Android-Platform/Kernel/</loc>
-        <lastmod>2019-12-18T03:23:16.695Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/Git/</loc>
         <lastmod>2019-11-13T07:25:06.004Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/Android-Platform/U-Boot/</loc>
-        <lastmod>2019-11-07T04:42:39.678Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/%EA%B0%9C%EC%9D%B8%EC%9A%A9/</loc>
-        <lastmod>2019-11-06T00:26:42.850Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -120,13 +148,6 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/</loc>
-        <lastmod>2019-10-22T01:44:11.649Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/GitHub-Pages/</loc>
         <lastmod>2019-10-22T01:43:29.660Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -141,13 +162,6 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/categories/Android-Platform/DTS/</loc>
-        <lastmod>2019-10-15T00:43:21.991Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/categories/Android/MediaPlayer/</loc>
         <lastmod>2019-09-25T06:20:30.196Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -155,43 +169,8 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/categories/Android-Platform/SEAndroid/</loc>
-        <lastmod>2019-09-18T01:43:28.788Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/categories/Android/HID/</loc>
         <lastmod>2019-09-16T06:43:06.920Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/Android-Platform/boot/</loc>
-        <lastmod>2019-09-16T06:43:01.018Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/Android-Platform/Architecture/</loc>
-        <lastmod>2019-09-16T06:40:21.875Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/Android-Platform/JNI/</loc>
-        <lastmod>2019-09-16T06:21:09.685Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/Android-Platform/%EA%B0%9C%EB%B0%9C-%ED%99%98%EA%B2%BD/</loc>
-        <lastmod>2019-09-16T03:59:28.372Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

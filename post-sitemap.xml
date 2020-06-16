@@ -8,6 +8,206 @@
     </url>
 
     <url>
+        <loc>http://jung-max.github.io/2019/10/21/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4%EB%9D%BC%EC%9D%B4%EC%84%BC%EC%8A%A4/</loc>
+        <lastmod>2020-06-16T03:29:57.575Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/11/06/Rockchip_uBoot_%EB%B6%84%EC%84%9D/</loc>
+        <lastmod>2020-06-16T03:29:42.217Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/12/13/Linux-ADC-Battery/</loc>
+        <lastmod>2020-06-16T03:29:32.098Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/10/22/Device_Tree_%EB%AC%B8%EB%B2%95/</loc>
+        <lastmod>2020-06-16T03:29:19.033Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/01/16/Android-Surfaceflinger/</loc>
+        <lastmod>2020-06-16T03:29:10.343Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/16/Android-SEAndroid%EC%A0%81%EC%9A%A9/</loc>
+        <lastmod>2020-06-16T03:29:04.179Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/10/30/Android-rk3328-%EA%B4%80%EB%A0%A8%EB%AC%B8%EC%84%9C%EC%A0%95%EB%A6%AC/</loc>
+        <lastmod>2020-06-16T03:28:57.261Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-Architecture-overview/</loc>
+        <lastmod>2020-06-16T03:28:32.770Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-Architecture/</loc>
+        <lastmod>2020-06-16T03:28:27.552Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-%EB%B6%80%EB%B6%84%EB%B9%8C%EB%93%9C%EB%B0%A9%EB%B2%95/</loc>
+        <lastmod>2020-06-16T03:28:21.055Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/06/16/Android-Platform-%EB%B0%B0%ED%84%B0%EB%A6%AC/</loc>
+        <lastmod>2020-06-16T03:28:13.954Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/</loc>
+        <lastmod>2020-06-16T03:28:08.649Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Kernel-System-Memory-Model/</loc>
+        <lastmod>2020-06-16T03:27:54.409Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/11/20/Android-kernel-powerKey-%EC%9D%B8%ED%84%B0%EB%9F%BD%ED%8A%B8/</loc>
+        <lastmod>2020-06-16T03:27:48.521Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Kernel-Message/</loc>
+        <lastmod>2020-06-16T03:27:41.721Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-compile/</loc>
+        <lastmod>2020-06-16T03:27:35.554Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Kernel-%EC%A3%BC%EC%9A%94-%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC/</loc>
+        <lastmod>2020-06-16T03:27:30.150Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/</loc>
+        <lastmod>2020-06-16T03:27:22.994Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/02/Android-kernel-%EA%B0%80%EC%83%81-%EB%A7%88%EC%9A%B0%EC%8A%A4-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/</loc>
+        <lastmod>2020-06-16T03:27:17.081Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel_Module/</loc>
+        <lastmod>2020-06-16T03:27:11.304Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/16/Android-JNI-%EB%8F%99%EC%9E%91%EA%B5%AC%EC%A1%B0/</loc>
+        <lastmod>2020-06-16T03:27:01.936Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-%EC%BB%A4%EC%8A%A4%ED%84%B0%EB%A7%88%EC%9D%B4%EC%A6%88/</loc>
+        <lastmod>2020-06-16T03:26:32.915Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-%EA%B8%B0%EB%B0%98-Kernel/</loc>
+        <lastmod>2020-06-16T03:26:25.515Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-%EB%B6%80%ED%8A%B8%EB%A1%9C%EA%B7%B8/</loc>
+        <lastmod>2020-06-16T03:26:24.712Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-%EC%88%98%EC%A0%95%EB%90%9C%EC%96%B4%ED%94%8C%ED%83%91%EC%9E%AC/</loc>
+        <lastmod>2020-06-16T03:26:23.803Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/2020/06/15/Python-serial/</loc>
         <lastmod>2020-06-16T03:02:48.793Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -144,14 +344,6 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2020/01/16/Android-Surfaceflinger/</loc>
-        <lastmod>2020-01-28T06:10:42.182Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/2020/01/03/Android-Tablayout-background-color/</loc>
         <lastmod>2020-01-03T07:49:58.149Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -162,22 +354,6 @@
     <url>
         <loc>http://jung-max.github.io/2020/01/03/Android-Thread%EC%95%88%EC%97%90%EC%84%9C_Toast%EC%82%AC%EC%9A%A9/</loc>
         <lastmod>2020-01-03T07:24:22.615Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/12/13/Linux-ADC-Battery/</loc>
-        <lastmod>2019-12-18T03:23:16.695Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/11/20/Android-kernel-powerKey-%EC%9D%B8%ED%84%B0%EB%9F%BD%ED%8A%B8/</loc>
-        <lastmod>2019-11-20T07:38:31.782Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -200,40 +376,8 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/11/06/Rockchip_uBoot_%EB%B6%84%EC%84%9D/</loc>
-        <lastmod>2019-11-07T04:42:39.678Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/10/30/Android-rk3328-%EA%B4%80%EB%A0%A8%EB%AC%B8%EC%84%9C%EC%A0%95%EB%A6%AC/</loc>
-        <lastmod>2019-11-06T00:26:42.850Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/10/22/Device_Tree_%EB%AC%B8%EB%B2%95/</loc>
-        <lastmod>2019-10-30T04:07:38.437Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/2019/09/27/Web-JavaScript-replace%EC%A0%95%EA%B7%9C%EC%8B%9D/</loc>
         <lastmod>2019-10-28T02:35:25.639Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/10/21/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4%EB%9D%BC%EC%9D%B4%EC%84%BC%EC%8A%A4/</loc>
-        <lastmod>2019-10-22T01:44:11.649Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -272,14 +416,6 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/10/15/Android-Platform-%EB%B0%B0%ED%84%B0%EB%A6%AC/</loc>
-        <lastmod>2019-10-15T00:43:21.991Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/2019/09/27/Web-Javascript-MarkDown%EA%B5%AC%ED%98%84/</loc>
         <lastmod>2019-10-01T02:50:51.501Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -312,48 +448,8 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/09/16/Android-SEAndroid%EC%A0%81%EC%9A%A9/</loc>
-        <lastmod>2019-09-18T01:43:28.788Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/2019/09/09/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B001/</loc>
         <lastmod>2019-09-16T06:43:06.920Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/27/Android-%EC%BB%A4%EC%8A%A4%ED%84%B0%EB%A7%88%EC%9D%B4%EC%A6%88/</loc>
-        <lastmod>2019-09-16T06:43:01.018Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-Architecture/</loc>
-        <lastmod>2019-09-16T06:40:21.875Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/09/02/Android-kernel-%EA%B0%80%EC%83%81-%EB%A7%88%EC%9A%B0%EC%8A%A4-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/</loc>
-        <lastmod>2019-09-16T06:26:38.660Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/27/Android-%EC%88%98%EC%A0%95%EB%90%9C%EC%96%B4%ED%94%8C%ED%83%91%EC%9E%AC/</loc>
-        <lastmod>2019-09-16T06:26:38.660Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -376,14 +472,6 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/09/16/Android-JNI-%EB%8F%99%EC%9E%91%EA%B5%AC%EC%A1%B0/</loc>
-        <lastmod>2019-09-16T06:21:09.685Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/2019/09/11/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B002/</loc>
         <lastmod>2019-09-16T04:23:14.496Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -394,94 +482,6 @@
     <url>
         <loc>http://jung-max.github.io/2019/09/16/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B003/</loc>
         <lastmod>2019-09-16T04:23:11.860Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/27/Android-%EB%B6%80%ED%8A%B8%EB%A1%9C%EA%B7%B8/</loc>
-        <lastmod>2019-09-16T04:00:00.617Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/27/Android-%EA%B8%B0%EB%B0%98-Kernel/</loc>
-        <lastmod>2019-09-16T03:59:58.262Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-Architecture-overview/</loc>
-        <lastmod>2019-09-16T03:59:28.372Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/</loc>
-        <lastmod>2019-09-16T03:59:28.372Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-%EB%B6%80%EB%B6%84%EB%B9%8C%EB%93%9C%EB%B0%A9%EB%B2%95/</loc>
-        <lastmod>2019-09-16T03:59:03.234Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/27/Android-Kernel-%EC%A3%BC%EC%9A%94-%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC/</loc>
-        <lastmod>2019-09-16T03:58:43.859Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/27/Android-Kernel-Message/</loc>
-        <lastmod>2019-09-16T03:58:43.852Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/27/Android-Kernel-System-Memory-Model/</loc>
-        <lastmod>2019-09-16T03:58:43.851Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-compile/</loc>
-        <lastmod>2019-09-16T03:58:43.851Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel_Module/</loc>
-        <lastmod>2019-09-16T03:58:43.851Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/</loc>
-        <lastmod>2019-09-16T03:58:23.228Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
