@@ -3,15 +3,29 @@
 
 
     <url>
+        <loc>http://jung-max.github.io/tags/serial/</loc>
+        <lastmod>2020-06-16T03:02:48.793Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/python/</loc>
+        <lastmod>2020-06-16T03:02:48.793Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/tags/pageDewarp/</loc>
-        <lastmod>2020-05-06T00:51:26.524Z</lastmod>
+        <lastmod>2020-06-16T03:02:41.820Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jung-max.github.io/tags/openCV/</loc>
-        <lastmod>2020-05-06T00:51:26.524Z</lastmod>
+        <lastmod>2020-06-16T03:02:41.820Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

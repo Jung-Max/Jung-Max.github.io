@@ -8,15 +8,29 @@
     </url>
 
     <url>
+        <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/python/</loc>
+        <lastmod>2020-06-16T03:02:48.793Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/</loc>
+        <lastmod>2020-06-16T03:02:48.793Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/categories/openCV/pageDewarp/</loc>
-        <lastmod>2020-05-06T00:51:26.524Z</lastmod>
+        <lastmod>2020-06-16T03:02:41.820Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jung-max.github.io/categories/openCV/</loc>
-        <lastmod>2020-05-06T00:51:26.524Z</lastmod>
+        <lastmod>2020-06-16T03:02:41.820Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -30,13 +44,6 @@
 
     <url>
         <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/%EA%B8%B0%ED%83%80/</loc>
-        <lastmod>2020-03-23T05:41:30.278Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/categories/%EA%B8%B0%ED%83%80/</loc>
         <lastmod>2020-03-23T05:41:30.278Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
