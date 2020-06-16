@@ -625,17 +625,17 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/" class="thumbnail">
+        <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/" class="thumbnail">
     
     
-        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Characteristics 읽고쓰기" class="thumbnail-image"></span>
+        <span style="background-image:url(/images/Thumbnail/BLE.png)" alt="Gatt Server로 부터 알림 받기" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-Characteristics-읽고쓰기/">0</span>
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2019/09/09/Android-BLE-GattServer로부터-알림받기/">0</span>
     
 </span>
 
@@ -653,14 +653,13 @@ BluetoothHidDevice를 사용해서 Bluetooth Joystick을 구현하는 것을 설
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/09/09/Android-BLE-Characteristics-읽고쓰기/">Characteristics 읽고쓰기</a>
+        <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/">Gatt Server로 부터 알림 받기</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Gatt 서버에 연결되면 서버의 Characteristics을 읽고 읽음으로써 Gatt 서버와 상호 작용하게됩니다.
-이렇게하려면 먼저이 서버에서 사용할 수 있는 서비스와 각 서비스에서 사용할 수 있는 Characteristics을 찾아야합니다.
-1234567891011121314151617181920212223 @Override public void onC
+            특성 값이 변경되면 Gatt 서버에 알림을 요청할 수 있습니다.
+12345gatt.setCharacteristicNotification(characteristic, true);BluetoothGattDescriptor descriptor = characteristic.getDescriptor(    UUID.fromString("00002902-0000-1
         </p>
     </div>
 </article>

@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="Max&#39;s Blog">
 <meta property="og:description" content="개요pyqt5에서 이미지는 QPixmap의 라이브러리를 사용한다. 하지만 해당 라이브러리로 이미지를 불러온다면 클릭시 연결 함수를 제공하지 않는다. 클릭을 가능하게 하려면 몇가지 수정이 필요하다. 이미지 로드아래와 같이 로드가 가능합니다. 12345678910111213141516171819202122232425262728293031from PyQt5.Qt">
 <meta property="og:locale" content="ko">
-<meta property="og:updated_time" content="2020-06-16T06:38:36.654Z">
+<meta property="og:updated_time" content="2020-06-16T06:41:56.453Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python pyqt5 이미지 클릭">
 <meta name="twitter:description" content="개요pyqt5에서 이미지는 QPixmap의 라이브러리를 사용한다. 하지만 해당 라이브러리로 이미지를 불러온다면 클릭시 연결 함수를 제공하지 않는다. 클릭을 가능하게 하려면 몇가지 수정이 필요하다. 이미지 로드아래와 같이 로드가 가능합니다. 12345678910111213141516171819202122232425262728293031from PyQt5.Qt">
@@ -208,6 +208,7 @@ ga('send', 'pageview');
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pictureListClicked</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> FILE_LIST</span><br><span class="line">    <span class="keyword">global</span> PNG_LIST</span><br><span class="line">    png_path = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i, object_name <span class="keyword">in</span> enumerate(FILE_LIST):</span><br><span class="line">        <span class="keyword">if</span> object_name == self.sender():</span><br><span class="line">            png_path = PNG_LIST[i]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> png_path != <span class="string">''</span>:</span><br><span class="line">        self.grid.addWidget(self.pictureShowGroup(png_path), <span class="number">0</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">8</span>)</span><br><span class="line">        self.update()</span><br></pre></td></tr></table></figure>
 
 <p>원리는 sender를 이용해 클릭된 이미지의 순서를 알아내고 따로 저장된 PNG_LIST로 해당 파일을 불러와 그 이미지를 가지고 다른 위젯에 표시하는 함수입니다.</p>
+<p><a href="/images/0087.png">이미지 리스트(왼쪽)와 리스트 클릭시 이미지 표시(오른쪽)</a></p>
 
         </div>
         <footer class="article-footer">
@@ -215,7 +216,7 @@ ga('send', 'pageview');
 
 
 
-    <a data-url="http://jung-max.github.io/2020/06/16/Python-pyqt5-이미지클릭/" data-id="ckbhk2zyn005w0pjydqobnpsn" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+    <a data-url="http://jung-max.github.io/2020/06/16/Python-pyqt5-이미지클릭/" data-id="ckbhk78tx006021jy84yovwxe" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -297,7 +298,7 @@ ga('send', 'pageview');
 클릭을 가능하게 하려면 몇가지 수정이 필요하다.
 이미지 로드아래와 같이 로드가 가능합니다.
 12345678910111213141516171819202122232425262728293031from PyQt5.Qt"
-        "wordCount": 827
+        "wordCount": 833
     }
 </script>
 
