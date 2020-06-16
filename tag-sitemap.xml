@@ -3,6 +3,55 @@
 
 
     <url>
+        <loc>http://jung-max.github.io/tags/gui/</loc>
+        <lastmod>2020-06-16T06:38:36.654Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/pyqt5/</loc>
+        <lastmod>2020-06-16T06:38:36.654Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/python/</loc>
+        <lastmod>2020-06-16T06:38:36.654Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/serial/</loc>
+        <lastmod>2020-06-16T03:35:41.425Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/Battery/</loc>
+        <lastmod>2020-06-16T03:34:09.921Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/DTS/</loc>
+        <lastmod>2020-06-16T03:34:09.921Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/Android/</loc>
+        <lastmod>2020-06-16T03:34:09.921Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/tags/licence/</loc>
         <lastmod>2020-06-16T03:29:57.575Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -52,13 +101,6 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/tags/DTS/</loc>
-        <lastmod>2020-06-16T03:29:19.033Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jung-max.github.io/tags/SurfaceFlinger/</loc>
         <lastmod>2020-06-16T03:29:10.343Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -67,13 +109,6 @@
 
     <url>
         <loc>http://jung-max.github.io/tags/SEAndroid/</loc>
-        <lastmod>2020-06-16T03:29:04.179Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/Android/</loc>
         <lastmod>2020-06-16T03:29:04.179Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -89,13 +124,6 @@
     <url>
         <loc>http://jung-max.github.io/tags/%EB%B6%80%EB%B6%84%EB%B9%8C%EB%93%9C/</loc>
         <lastmod>2020-06-16T03:28:21.055Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/Battery/</loc>
-        <lastmod>2020-06-16T03:28:13.954Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -124,20 +152,6 @@
     <url>
         <loc>http://jung-max.github.io/tags/App/</loc>
         <lastmod>2020-06-16T03:26:23.803Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/serial/</loc>
-        <lastmod>2020-06-16T03:02:48.793Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/python/</loc>
-        <lastmod>2020-06-16T03:02:48.793Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
