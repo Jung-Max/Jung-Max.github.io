@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>http://jung-max.github.io/tags/SpringBoot/</loc>
+        <lastmod>2020-06-23T03:03:37.325Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/Web/</loc>
+        <lastmod>2020-06-23T03:03:37.325Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/tags/gui/</loc>
         <lastmod>2020-06-16T07:02:53.582Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -235,13 +249,6 @@
 
     <url>
         <loc>http://jung-max.github.io/tags/Java-Script/</loc>
-        <lastmod>2019-10-28T02:35:25.639Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/Web/</loc>
         <lastmod>2019-10-28T02:35:25.639Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
