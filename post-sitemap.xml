@@ -8,8 +8,32 @@
     </url>
 
     <url>
+        <loc>http://jung-max.github.io/2020/06/24/Web-7_SpringBoot-%EA%B2%8C%EC%8B%9C%ED%8C%90%EB%A7%8C%EB%93%A4%EA%B8%B0-3/</loc>
+        <lastmod>2020-06-24T08:19:07.914Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/06/24/Web-6_SpringBoot-%EA%B2%8C%EC%8B%9C%ED%8C%90%EB%A7%8C%EB%93%A4%EA%B8%B0-2/</loc>
+        <lastmod>2020-06-24T07:12:46.796Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/06/24/Web-5_SpringBoot-%EA%B2%8C%EC%8B%9C%ED%8C%90%EB%A7%8C%EB%93%A4%EA%B8%B0-1/</loc>
+        <lastmod>2020-06-24T06:49:55.004Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/2020/06/24/Web-4_SpringBoot-Mybatis%EC%97%B0%EB%8F%99/</loc>
-        <lastmod>2020-06-24T03:36:36.823Z</lastmod>
+        <lastmod>2020-06-24T06:00:45.310Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
