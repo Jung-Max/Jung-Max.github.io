@@ -8,24 +8,32 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2020/06/24/Web-SpringBoot-MariaDb%EC%97%B0%EA%B2%B0/</loc>
-        <lastmod>2020-06-24T02:04:02.122Z</lastmod>
+        <loc>http://jung-max.github.io/2020/06/24/Web-4_SpringBoot-Mybatis%EC%97%B0%EB%8F%99/</loc>
+        <lastmod>2020-06-24T03:36:36.823Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2020/06/24/Web-SpringBoot%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%83%9D%EC%84%B1/</loc>
-        <lastmod>2020-06-24T01:39:43.153Z</lastmod>
+        <loc>http://jung-max.github.io/2020/06/24/Web-2_SpringBoot%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%83%9D%EC%84%B1/</loc>
+        <lastmod>2020-06-24T02:09:05.554Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2020/06/23/Web-SpringBoot-%ED%99%98%EA%B2%BD%EC%84%A4%EC%A0%95/</loc>
-        <lastmod>2020-06-24T01:39:17.354Z</lastmod>
+        <loc>http://jung-max.github.io/2020/06/24/Web-3_SpringBoot-MariaDb%EC%97%B0%EA%B2%B0/</loc>
+        <lastmod>2020-06-24T02:08:57.340Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/06/23/Web-1_SpringBoot-%ED%99%98%EA%B2%BD%EC%84%A4%EC%A0%95/</loc>
+        <lastmod>2020-06-24T02:08:42.404Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
