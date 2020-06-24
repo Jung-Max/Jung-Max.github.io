@@ -8,8 +8,16 @@
     </url>
 
     <url>
+        <loc>http://jung-max.github.io/2020/06/24/Web-SpringBoot%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%83%9D%EC%84%B1/</loc>
+        <lastmod>2020-06-24T00:07:33.446Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/2020/06/23/Web-SpringBoot-%ED%99%98%EA%B2%BD%EC%84%A4%EC%A0%95/</loc>
-        <lastmod>2020-06-23T03:03:37.325Z</lastmod>
+        <lastmod>2020-06-23T23:35:22.543Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -17,7 +25,7 @@
 
     <url>
         <loc>http://jung-max.github.io/2020/06/16/Python-pyqt5-%EC%9D%B4%EB%AF%B8%EC%A7%80%ED%81%B4%EB%A6%AD/</loc>
-        <lastmod>2020-06-16T07:02:53.582Z</lastmod>
+        <lastmod>2020-06-23T03:14:15.329Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -520,7 +528,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Connecting-GATT-Server/</loc>
+        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Finding-Devices/</loc>
         <lastmod>2019-09-09T00:42:43.065Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -536,7 +544,7 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Finding-Devices/</loc>
+        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Connecting-GATT-Server/</loc>
         <lastmod>2019-09-09T00:42:43.065Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
