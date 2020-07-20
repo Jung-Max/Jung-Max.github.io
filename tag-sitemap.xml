@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>http://jung-max.github.io/tags/Web/</loc>
+        <lastmod>2020-07-20T06:50:53.284Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/</loc>
+        <lastmod>2020-07-20T06:50:53.284Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/tags/MariaDB/</loc>
         <lastmod>2020-06-24T23:27:06.269Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -11,13 +25,6 @@
 
     <url>
         <loc>http://jung-max.github.io/tags/SpringBoot/</loc>
-        <lastmod>2020-06-24T23:27:06.269Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/Web/</loc>
         <lastmod>2020-06-24T23:27:06.269Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -145,13 +152,6 @@
     <url>
         <loc>http://jung-max.github.io/tags/%EB%B6%80%EB%B6%84%EB%B9%8C%EB%93%9C/</loc>
         <lastmod>2020-06-16T03:28:21.055Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/tags/%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/</loc>
-        <lastmod>2020-06-16T03:28:08.649Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
