@@ -3,29 +3,29 @@
 
 
     <url>
-        <loc>http://jung-max.github.io/tags/boot/</loc>
-        <lastmod>2021-04-27T02:01:07.486Z</lastmod>
+        <loc>http://jung-max.github.io/tags/Android-raspberry-pi/</loc>
+        <lastmod>2021-04-30T06:43:06.495Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/tags/Android-Platform/</loc>
-        <lastmod>2021-04-27T02:01:07.486Z</lastmod>
+        <loc>http://jung-max.github.io/tags/raspberry-pi/</loc>
+        <lastmod>2021-04-28T06:40:50.015Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jung-max.github.io/tags/setting/</loc>
-        <lastmod>2021-04-26T08:22:26.708Z</lastmod>
+        <lastmod>2021-04-28T04:57:43.780Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jung-max.github.io/tags/raspberryPi/</loc>
-        <lastmod>2021-04-26T08:22:26.708Z</lastmod>
+        <lastmod>2021-04-28T04:57:43.780Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -150,6 +150,13 @@
     </url>
 
     <url>
+        <loc>http://jung-max.github.io/tags/Android-Platform/</loc>
+        <lastmod>2020-06-16T03:29:32.098Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/tags/Device-Tree/</loc>
         <lastmod>2020-06-16T03:29:19.033Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -187,6 +194,13 @@
     <url>
         <loc>http://jung-max.github.io/tags/JNI/</loc>
         <lastmod>2020-06-16T03:27:01.936Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/tags/boot/</loc>
+        <lastmod>2020-06-16T03:26:24.712Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
