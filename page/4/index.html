@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="description" content="개발시 정리했던 사항을 끄적이기 위한 블로그">
+<meta name="keywords" content="Android, java, 안드로이드, 자바">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Max&#39;s Blog">
+<meta property="og:url" content="http://jung-max.github.io/page/4/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="개발시 정리했던 사항을 끄적이기 위한 블로그">
+<meta property="og:locale" content="ko">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Max&#39;s Blog">
+<meta name="twitter:description" content="개발시 정리했던 사항을 끄적이기 위한 블로그">
+    
+    <link rel="canonical" href="http://jung-max.github.io/page/4/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <em class="page-title-link" data-url="home">홈</em>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            
+
+    
+    
+        
+        
+        <section class="archives-wrap">
+            <div class="archive-year-wrap">
+                <a href="/archives/2020" class="archive-year"><i class="icon fa fa-calendar-o"></i>2020</a>
+            </div>
+            <div class="archives">
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2020/06/24/Web-7_SpringBoot-게시판만들기-3/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/0133.png)" alt="7. SpringBoot 게시판 만들기-3" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2020/06/24/Web-7_SpringBoot-게시판만들기-3/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Web/">Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Web/SpringBoot/">SpringBoot</a>
+            </div>
+            <div class="date"><time datetime="2020-06-24T07:13:02.000Z" itemprop="datePublished">2020-06-24</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2020/06/24/Web-7_SpringBoot-게시판만들기-3/">7. SpringBoot 게시판 만들기-3</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            컨트롤러 영역컨트롤러는 클라이언트의 요청을 받아서 해당 요청을 수행하는데 필요한 비즈니스 로직을 호출하고 그 결과를 포함하여 응답을 해 주는 디스패처(Dispatcher) 역할을 수행한다.
+컨트롤러는 다음의 과정을 거쳐서 구현한다.
+
+컨트롤러 클래스에 @Controller 어노테이션을 적용한다.
+@RequestMapping 어노테이션을 이용하여 요청에 대한
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2020/06/24/Web-6_SpringBoot-게시판만들기-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/0131.png)" alt="6. SpringBoot 게시판 만들기-2" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2020/06/24/Web-6_SpringBoot-게시판만들기-2/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Web/">Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Web/SpringBoot/">SpringBoot</a>
+            </div>
+            <div class="date"><time datetime="2020-06-24T06:03:16.000Z" itemprop="datePublished">2020-06-24</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2020/06/24/Web-6_SpringBoot-게시판만들기-2/">6. SpringBoot 게시판 만들기-2</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            롬복(Lombok) 추가롬복(Lombok)은 자바클래스를 만들 때 흔히 만드는 코드들을 어노테이션을 이용해서 자동으로 만들어 주는 라이브러리이다.
+흔히 만드는 코드란 DTO와 같은 모델에서 항상 만들게 되는 getter, setter 메서드나 상황에 따라 자주 만드는 toString, equals, hashcode와 같은 메서드를 의미한다.
+이클립스와 같은
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2020/06/24/Web-5_SpringBoot-게시판만들기-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/0127.png)" alt="5. SpringBoot 게시판 만들기-1" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2020/06/24/Web-5_SpringBoot-게시판만들기-1/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Web/">Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Web/SpringBoot/">SpringBoot</a>
+            </div>
+            <div class="date"><time datetime="2020-06-24T06:02:16.000Z" itemprop="datePublished">2020-06-24</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2020/06/24/Web-5_SpringBoot-게시판만들기-1/">5. SpringBoot 게시판 만들기-1</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            게시판은 웹개발에서 필요한 기본적인 내용이 대부분 들어가 있다. 데이터 조회, 입력, 수정, 삭제뿐만 아니라 파일 업로드 및 다운로드등 웹 프로젝트에서 필요한 다양한 기능을 포함하기 때문이다.
+게시판 만들기를 통해서 스프링 MVC 구조를 이해하고 이를 토대로 프로젝트를 진행하기에 적합한 예제이다.
+DB 구성하기일단 본격적으로 게시판을 만들기 위해서 DB를 
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2020/06/24/Web-4_SpringBoot-Mybatis연동/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/0125.png)" alt="4. SpringBoot와 MyBatis 연동" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2020/06/24/Web-4_SpringBoot-Mybatis연동/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Web/">Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Web/SpringBoot/">SpringBoot</a>
+            </div>
+            <div class="date"><time datetime="2020-06-24T02:09:15.000Z" itemprop="datePublished">2020-06-24</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2020/06/24/Web-4_SpringBoot-Mybatis연동/">4. SpringBoot와 MyBatis 연동</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            마이바티스(MyBatis)란마이바티스는 쿼리 기반 웹 애플리케이션을 개발할 때 가장 많이 사용되는 SQL Mapper 프레임워크이다.
+마이바티스는 기존의 JDBC를 이용하여 개발하는 방식에 비해 개발자의 부담을 덜어 주고 생산성을 향상시켜 준다. JDBC를 이용하여 프로그래밍 하는 방식은 글래스나 JSP와 같은 코드안에 SQL문을 작성하는 방식이었다. 따라
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2020/06/24/Web-3_SpringBoot-MariaDb연결/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/0114.png)" alt="3. SpringBoot와 MariaDB 연결" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2020/06/24/Web-3_SpringBoot-MariaDb연결/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Web/">Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Web/SpringBoot/">SpringBoot</a>
+            </div>
+            <div class="date"><time datetime="2020-06-24T00:24:09.000Z" itemprop="datePublished">2020-06-24</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2020/06/24/Web-3_SpringBoot-MariaDb연결/">3. SpringBoot와 MariaDB 연결</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            이번 포스트에서는 스프링 부트와 MariaDB를 연결하는 것에 대해서 살펴본다.
+MariaDB 설치https://downloads.mariadb.org/로 들어가 MariaDB를 다운받는다.
+설치 버전을 사용한다면 .msi / 무설치 버전은 .zip을 다운받는다.
+설치시 Next를 누르고 root 계정 입력시 passworld를 설정한다.
+
+윈도우즈 서비스
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2020/06/24/Web-2_SpringBoot프로젝트생성/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/0101.png)" alt="2. SpringBoot 프로젝트 생성(이클립스)" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2020/06/24/Web-2_SpringBoot프로젝트생성/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Web/">Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Web/SpringBoot/">SpringBoot</a>
+            </div>
+            <div class="date"><time datetime="2020-06-23T23:07:09.000Z" itemprop="datePublished">2020-06-24</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2020/06/24/Web-2_SpringBoot프로젝트생성/">2. SpringBoot 프로젝트 생성(이클립스)</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            저번 시간에는 스프링부트의 개발환경 구성을 살펴보았다.
+이번 포스트에서는 이클립스로 스프링부트 프로젝트를 생성하는 것을 살펴본다.
+스프링 부트로 프로젝트 생성하기먼저 File &gt; New &gt; Spring starter Project를 선택하여 새 스프링 부트 프로젝트를 생성한다.
+
+그리고 프로젝트 이름 및 패키지를 설정한다.
+여기서는 프로젝트의 이
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2020/06/23/Web-1_SpringBoot-환경설정/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/0088.png)" alt="1. SpringBoot 개발환경 구성(이클립스)" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2020/06/23/Web-1_SpringBoot-환경설정/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/Web/">Web</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Web/SpringBoot/">SpringBoot</a>
+            </div>
+            <div class="date"><time datetime="2020-06-22T23:37:11.000Z" itemprop="datePublished">2020-06-23</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2020/06/23/Web-1_SpringBoot-환경설정/">1. SpringBoot 개발환경 구성(이클립스)</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            스프링부트를 처음 시작하기 위한 개발환경 구성에 대해서 설명한다.
+JDK 설치Spring Boot를 사용하기 위해서는 JDK 설치가 선행되어야 한다.
+요즘은 오라클의 정책으로 인해서 OpenJDK가 권장된다.
+https://github.com/ojdkbuild/ojdkbuild에서 자신의 컴퓨터와 맞는 jdk를 다운받아 설치한다.
+
+위와같이 자바 버전이 확
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2020/06/16/Python-pyqt5-이미지클릭/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/0087.png)" alt="python pyqt5 이미지 클릭" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2020/06/16/Python-pyqt5-이미지클릭/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/python/">python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/python/GUI/">GUI</a>
+            </div>
+            <div class="date"><time datetime="2020-06-16T03:36:22.000Z" itemprop="datePublished">2020-06-16</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2020/06/16/Python-pyqt5-이미지클릭/">python pyqt5 이미지 클릭</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            개요pyqt5에서 이미지는 QPixmap의 라이브러리를 사용한다. 하지만 해당 라이브러리로 이미지를 불러온다면 클릭시 연결 함수를 제공하지 않는다.
+클릭을 가능하게 하려면 몇가지 수정이 필요하다.
+이미지 로드아래와 같이 로드가 가능합니다.
+12345678910111213141516171819202122232425262728293031from PyQt5.Qt
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2020/06/15/Python-serial/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/0086.png)" alt="python 시리얼 통신 - 라즈베리파이4(raspberry pi 4)와 PC간 usb 시리얼 통신" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2020/06/15/Python-serial/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/python/">python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/python/통신/">통신</a>
+            </div>
+            <div class="date"><time datetime="2020-06-15T06:03:09.000Z" itemprop="datePublished">2020-06-15</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2020/06/15/Python-serial/">python 시리얼 통신 - 라즈베리파이4(raspberry pi 4)와 PC간 usb 시리얼 통신</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            개요라즈베리 파이4와 PC간에 USB 통신에 대한 방법에 대해서 살펴보겠다.(파이썬을 이용)
+라즈베리 파이4는 이전 버전과는 달리 USB-C포트를 이용해서 USB to serial을 사용할 수 있다. 이는 기존에는 라즈베리파이 제로에만 있던 기능이다.
+라즈베리 파이 4 USB Gadget Mode라즈베리 파이4는 라즈베리파이 제로와 같은 방법으로 USB t
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2020/06/15/Python-pip3 인스톨시 SSL에러/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier data-disqus-url="http://jung-max.github.io/2020/06/15/Python-pip3 인스톨시 SSL에러/">0</span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/python/">python</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/python/setting/">setting</a>
+            </div>
+            <div class="date"><time datetime="2020-06-15T06:03:09.000Z" itemprop="datePublished">2020-06-15</time></div>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2020/06/15/Python-pip3 인스톨시 SSL에러/">Python-pip3 인스톨시 SSL에러</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            파이썬으로 pip install시 SSL 관련 에러로 설치가 불가능할때가 있다.
+그럴때 아래과 같이 입력하면 설치가 가능하다.
+
+아래와 같이 입력해도 주황색으로 에러같은게 뜰 수 있다. 일단 기다리면 설치가 완료되니 기다리자.
+
+python21pip install --trusted-host pypi.org --trusted-host files.pythonh
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+
+    </div></section>
+
+
+    <nav id="page-nav">
+        <span class="pages">Page 4 of 12</span>
+        <a class="extend prev" rel="prev" href="/page/3/">&laquo;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/5/">&raquo;</a>
+    </nav>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

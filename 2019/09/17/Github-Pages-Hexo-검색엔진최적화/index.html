@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>Github Pages Hexo 검색엔진최적화(SEO) | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="Github Pages,Hexo">
+    
+    <meta name="description" content="블로그 등을 운영하면서 나의 게시물이 검색엔진에 잘 노출되기 위해서는 몇가지 선행조건이 필요합니다. 크게 네이버와 구글, 다음에 등록하시는 것을 추천합니다.  네이버 웹마스터 도구 구글 Search Console 다음 검색등록  위 사이트에 등록을 잘하기 위해서는 몇가지 도구들이 필요합니다. 이를 위한 hexo 플러그인을 소개합니다. hexo-autonof">
+<meta name="keywords" content="Github Pages,Hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Github Pages Hexo 검색엔진최적화(SEO)">
+<meta property="og:url" content="http://jung-max.github.io/2019/09/17/Github-Pages-Hexo-검색엔진최적화/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="블로그 등을 운영하면서 나의 게시물이 검색엔진에 잘 노출되기 위해서는 몇가지 선행조건이 필요합니다. 크게 네이버와 구글, 다음에 등록하시는 것을 추천합니다.  네이버 웹마스터 도구 구글 Search Console 다음 검색등록  위 사이트에 등록을 잘하기 위해서는 몇가지 도구들이 필요합니다. 이를 위한 hexo 플러그인을 소개합니다. hexo-autonof">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/Github-Pages-Hexo-%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84%EC%B5%9C%EC%A0%81%ED%99%94/01.png">
+<meta property="og:updated_time" content="2022-02-08T02:11:11.800Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Github Pages Hexo 검색엔진최적화(SEO)">
+<meta name="twitter:description" content="블로그 등을 운영하면서 나의 게시물이 검색엔진에 잘 노출되기 위해서는 몇가지 선행조건이 필요합니다. 크게 네이버와 구글, 다음에 등록하시는 것을 추천합니다.  네이버 웹마스터 도구 구글 Search Console 다음 검색등록  위 사이트에 등록을 잘하기 위해서는 몇가지 도구들이 필요합니다. 이를 위한 hexo 플러그인을 소개합니다. hexo-autonof">
+<meta name="twitter:image" content="http://jung-max.github.io/images/Github-Pages-Hexo-%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84%EC%B5%9C%EC%A0%81%ED%99%94/01.png">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2019/09/17/github-pages-hexo-검색엔진최적화/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/기타/">기타</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Github-Pages-Hexo-검색엔진최적화" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Github Pages Hexo 검색엔진최적화(SEO)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/09/17/Github-Pages-Hexo-검색엔진최적화/" class="article-date">
+            <time datetime="2019-09-17T05:44:00.000Z" itemprop="datePublished">2019-09-17</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Github-Pages/">Github Pages</a>, <a class="tag-link" href="/tags/Hexo/">Hexo</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>블로그 등을 운영하면서 나의 게시물이 검색엔진에 잘 노출되기 위해서는 몇가지 선행조건이 필요합니다.</p>
+<p>크게 네이버와 구글, 다음에 등록하시는 것을 추천합니다.</p>
+<ul>
+<li><a href="https://webmastertool.naver.com/" rel="external nofollow noopener noreferrer" target="_blank">네이버 웹마스터 도구</a></li>
+<li><a href="www.google.com/webmasters/tools/home?hl=ko">구글 Search Console</a></li>
+<li><a href="https://register.search.daum.net/index.daum" rel="external nofollow noopener noreferrer" target="_blank">다음 검색등록</a></li>
+</ul>
+<p>위 사이트에 등록을 잘하기 위해서는 몇가지 도구들이 필요합니다.</p>
+<p>이를 위한 hexo 플러그인을 소개합니다.</p>
+<h1 id="hexo-autonofollow"><a href="#hexo-autonofollow" class="headerlink" title="hexo-autonofollow"></a>hexo-autonofollow</h1><p>해당 포스트에서 참고하고 있는 외부 링크에 nofollow 속성을 자동으로 추가해주는 플러그인입니다.</p>
+<p>먼저 nofollow 속성이 무엇이고 왜 추가해야하는지 알아보겠습니다.</p>
+<h2 id="nofollow"><a href="#nofollow" class="headerlink" title="nofollow"></a>nofollow</h2><p>특정 페이지의 링크를 추적하지 않도록 하거나 특정 링크의 추적을 막을때 nofollow 속성값을 사용 할 수 있습니다.</p>
+<blockquote>
+<p>검색엔진마다 nofollow 속성을 처리하는 방식이 다를 수 있습니다.</p>
+</blockquote>
+<p>이 페이지의 링크를 추적하지 않도록 설정할때 :</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"robots"</span> <span class="attr">content</span>=<span class="string">"nofollow"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>특정 링크의 추적을 하지 않도록 설정할때 :</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://www.test.com/"</span> <span class="attr">rel</span>=<span class="string">"nofollow"</span>&gt;</span>링크<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>보통 신뢰할 수 없는 콘텐츠나 유료 링크의 경우 다른 사용자의 검색에 노출되지 않아야 하므로 nofollow 속성을 사용하는 것이 좋습니다.</p>
+<h2 id="기능"><a href="#기능" class="headerlink" title="기능"></a>기능</h2><ul>
+<li>모든 외부 링크에 rel=”external nofollow” 속성을 자동으로 추가합니다.</li>
+<li>외부링크에만 동작하기 때문에 본인 사이트의 도메인 링크는 제외됩니다.</li>
+<li>외부 링크에 target=”_blank” 속성을 넣어서 클릭할 경우 새로운 탭 또는 윈도우에서 열리게 합니다.</li>
+</ul>
+<h2 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-autonofollow --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="옵션"><a href="#옵션" class="headerlink" title="옵션"></a>옵션</h2><p><code>_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">nofollow:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">exclude:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">exclude1.com</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">exclude2.com</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>enable</td>
+<td>플러그인 활성화</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td>제외할 호스트</td>
+</tr>
+</tbody></table>
+<h1 id="hexo-generator-robotstxt"><a href="#hexo-generator-robotstxt" class="headerlink" title="hexo-generator-robotstxt"></a>hexo-generator-robotstxt</h1><p><img src="/images/Github-Pages-Hexo-%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84%EC%B5%9C%EC%A0%81%ED%99%94/01.png" alt="네이버 웹마스터도구 robots.txt"></p>
+<p>robots.txt 문서는 일반 사용자 분들이나 사이트를 제작한지 얼마 안되신 분들에게는 아마 생소한 문서 이실겁니다.</p>
+<p>무엇을 하고 이게 왜 필요 한지에 대해서도 모르실것이구요.</p>
+<p>구글이나 위키백과 같은 곳에서는 다음과 같이 정의 하고 있습니다.</p>
+<blockquote>
+<p>robots.txt 파일은 사이트의 루트에 위치하며 사이트에서 검색 엔진 크롤러가 액세스하지 않기를 바라는<br>부분을 표시합니다. </p>
+<p>파일에서는 로봇 배제 표준 프로토콜의 명령을 사용하여 섹션별, 웹 크롤러 종류별(모바일 크롤러, 데스크톱 크롤러 등)로 사이트에 대한 액세스 권한을 표시합니다.</p>
+</blockquote>
+<p>출처 : 구글(<a href="https://support.google.com/webmasters/answer/6062608?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">https://support.google.com/webmasters/answer/6062608?hl=ko</a>)</p>
+<p>간단하게 말하자만 내 사이트에서 포털사이트(검색엔진)의 로봇이 가져가도 괜찮다고 허락하는 부분과 가져가면 안된다 라는 설정을 하는 부분이라고 보시면 됩니다.</p>
+<p>robots.txt 문서를 작성하는데 있어서 중요한 3가지 키워드가 있습니다.</p>
+<blockquote>
+<p>User-agent / Disallow / Allow</p>
+</blockquote>
+<p>위에 보시는 3가지 입니다. 각각의 의미하는 내용은 아래와 같습니다.</p>
+<ul>
+<li>User-agent : 다음 규칙이 적용되는 로봇의 이름</li>
+<li>Disallow : 차단할 URL 경로</li>
+<li>Allow : 차단 된 상위 디렉토리의 하위 디렉토리에있는 URL 경로이며 차단 해제 할 디렉토리</li>
+</ul>
+<p><code>hexo-generator-robotstxt</code>는 이 robots.txt를 자동으로 생성해 줍니다.</p>
+<h2 id="설치-1"><a href="#설치-1" class="headerlink" title="설치"></a>설치</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-robotstxt --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="옵션-1"><a href="#옵션-1" class="headerlink" title="옵션"></a>옵션</h2><p><code>_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">plugins:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">hexo-generator-robotstxt</span></span><br><span class="line"></span><br><span class="line"><span class="attr">robotstxt:</span></span><br><span class="line">  <span class="attr">useragent:</span> <span class="string">"*"</span></span><br><span class="line">  <span class="attr">disallow:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/one_file_to_disallow.html</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/2nd_file_to_disallow.html</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/3rd_file_to_disallow.html</span></span><br><span class="line">  <span class="attr">allow:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/one_file_to_allow.html</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/2nd_file_to_allow.html</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/3rd_file_to_allow.html</span></span><br><span class="line">  <span class="attr">sitemap:</span> <span class="string">/sitemap.xml</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>useragent</td>
+<td>다음 규칙이 적용되는 로봇의 이름</td>
+</tr>
+<tr>
+<td>disallow</td>
+<td>차단할 URL 경로</td>
+</tr>
+<tr>
+<td>allow</td>
+<td>차단 된 상위 디렉토리의 하위 디렉토리에있는 URL 경로이며 차단 해제 할 디렉토리</td>
+</tr>
+<tr>
+<td>sitemap</td>
+<td>sitemap의 경로</td>
+</tr>
+</tbody></table>
+<h1 id="hexo-auto-canonical"><a href="#hexo-auto-canonical" class="headerlink" title="hexo-auto-canonical"></a>hexo-auto-canonical</h1><p><img src="/images/Github-Pages-Hexo-%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84%EC%B5%9C%EC%A0%81%ED%99%94/02.png" alt="네이버 웹마스터도구 대표 URL"></p>
+<p><code>&lt;meta&gt;</code> 태그 중 <code>canonical</code> 속성은 대표 URL (선호 URL) 을 나타냅니다. </p>
+<p>동일 콘텐츠를 여러개의 URL로 표현이 가능할 경우 가장 선호되는 대표 URL을 지정하는 것이 바로 대표 URL 입니다. </p>
+<p>중복되거나 비슷한 콘텐츠에 대한 링크를 통합해서 같은 주제에 통계를 내기가 쉽고 사용자가 검색을 통해 페이지에 방문하기에 유리합니다.</p>
+<p>hexo-auto-canonical를 사용하면 자동으로 각 포스트마다 <code>canonical</code>을 넣어줍니다.</p>
+<h2 id="설치-2"><a href="#설치-2" class="headerlink" title="설치"></a>설치</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-auto-canonical --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="사용법"><a href="#사용법" class="headerlink" title="사용법"></a>사용법</h2><p>이제 <head><meta name="generator" content="Hexo 3.9.0"> 태그 안에 대표 URL 속성을 집어넣어야합니다.<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head></p>
+<p><code>head.ejs</code> 안에 다음 코드를 넣으면 generate 할 때 코드를 생성해줍니다. </p>
+<p>파일 중간 쯤에 <code>&lt;%- meta(page) %&gt;</code> 라고 있는데 그 바로 아래 붙여넣으시면 됩니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%- autoCanonical(config, page) %&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="hexo-generator-seo-friendly-sitemap"><a href="#hexo-generator-seo-friendly-sitemap" class="headerlink" title="hexo-generator-seo-friendly-sitemap"></a>hexo-generator-seo-friendly-sitemap</h1><p><img src="/images/Github-Pages-Hexo-%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84%EC%B5%9C%EC%A0%81%ED%99%94/03.png" alt="네이버 웹마스터도구 sitemap"></p>
+<p>sitemap이란 홈페이지에 있는 정보가 어떻게 설계되어 있는지를 표준화된 규칙으로 작성한 xml 파일을 말합니다.</p>
+<p>검색엔진(크롤러)가 복잡한 홈페이지에서 길을 잃지 않게 도와주는 동반자 역활을 합니다.</p>
+<p><code>sitemap.xml</code>을 자동으로 만들어주는 플러그인을 알아보겠습니다.</p>
+<h2 id="설치-3"><a href="#설치-3" class="headerlink" title="설치"></a>설치</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-seo-friendly-sitemap --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="사용법-1"><a href="#사용법-1" class="headerlink" title="사용법"></a>사용법</h2><p><code>_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sitemap auto generator</span></span><br><span class="line"><span class="attr">sitemap:</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">sitemap.xml</span></span><br></pre></td></tr></table></figure>
+
+<p>path 값을 sitemap.xml 이라고 지정했기 때문에 root 폴더에 sitemap.xml 이 생성됩니다.</p>
+<h1 id="hexo-generator-feed"><a href="#hexo-generator-feed" class="headerlink" title="hexo-generator-feed"></a>hexo-generator-feed</h1><p><img src="/images/Github-Pages-Hexo-%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84%EC%B5%9C%EC%A0%81%ED%99%94/04.png" alt="네이버 웹마스터도구 RSS 제출"></p>
+<p>RSS feed 는 사이트내의 최신 콘텐츠를 담고 있는 파일입니다. </p>
+<p>등록한 사이트에서 새 글이 올라오면 바로 읽을 수 있는 RSS feed Reader 를 생각해보시면 되겠습니다. </p>
+<p>이 또한 검색엔진에 제출할 수 있습니다.</p>
+<p>RSS를 자동으로 만들어주는 플러그인을 알아보겠습니다.</p>
+<h2 id="설치-4"><a href="#설치-4" class="headerlink" title="설치"></a>설치</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-feed --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="사용법-2"><a href="#사용법-2" class="headerlink" title="사용법"></a>사용법</h2><p><code>_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rss feed auto generator</span></span><br><span class="line"><span class="attr">feed:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">rss2</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">feed.xml</span></span><br><span class="line">  <span class="attr">limit:</span> <span class="number">20</span></span><br><span class="line">  <span class="attr">hub:</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>옵션</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type</td>
+<td>feed 타입 설정 (atom/rss2)</td>
+</tr>
+<tr>
+<td>path</td>
+<td>feed 파일을 저장할 경로 (기본값 atom.xml/rss2.xml)</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>최신 포스트의 갯수 설정. (0 또는 false 입력 시 전체 포스트)</td>
+</tr>
+</tbody></table>
+<p>root 경로에 feed.xml 이 생긴 것을 확인하실 수 있습니다.</p>
+<p>네이버 웹마스터 도구는 atom을 신식하지 못하기 때문에 rss2 type으로 설정하시는 것이 좋습니다.<br>(구글 서치 콘솔은 atom도 인식합니다.)</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2019/09/17/Github-Pages-Hexo-검색엔진최적화/" data-id="ckzfaqfn2003ldyuonvlqj9lq" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "Github Pages Hexo 검색엔진최적화(SEO)",
+        "image": "http://jung-max.github.io/images/Github-Pages-Hexo-%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84%EC%B5%9C%EC%A0%81%ED%99%94/01.png",
+        "keywords": "Github Pages Hexo",
+        "genre": "기타 GitHub Pages",
+        "datePublished": "2019-09-17",
+        "dateCreated": "2019-09-17",
+        "dateModified": "2022-02-08",
+        "url": "http://jung-max.github.io/2019/09/17/Github-Pages-Hexo-검색엔진최적화/",
+        "description": "블로그 등을 운영하면서 나의 게시물이 검색엔진에 잘 노출되기 위해서는 몇가지 선행조건이 필요합니다.
+크게 네이버와 구글, 다음에 등록하시는 것을 추천합니다.
+
+네이버 웹마스터 도구
+구글 Search Console
+다음 검색등록
+
+위 사이트에 등록을 잘하기 위해서는 몇가지 도구들이 필요합니다.
+이를 위한 hexo 플러그인을 소개합니다.
+hexo-autonof"
+        "wordCount": 863
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/09/19/Github-Pages-마크다운/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            마크다운과 마크다운 문법 설명
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/09/16/Android-SEAndroid적용/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">SEAndroid 적용</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2019/09/17/Github-Pages-Hexo-검색엔진최적화/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>오픈소스 라이센스 소개 | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="opensource,licence">
+    
+    <meta name="description" content="해당 게시물은 한국저작권위원회가 발행한 오픈소스 소프트웨어 라이선스 가이드 3.0을 참고해서 작성되었습니다. 소프트웨어 지적 재산권저작권(copyright)창작물에 대하여 창작자(저작자)가 취득하는 권리로서 창작의 결과물을 보호하며, 창작과 동시에 권리가 발생한다. 따라서 어떤 프로그래머가 소프트웨어를 개발하면 저작권이 자동으로 발생하며, 그 권리는 프로그">
+<meta name="keywords" content="opensource,licence">
+<meta property="og:type" content="article">
+<meta property="og:title" content="오픈소스 라이센스 소개">
+<meta property="og:url" content="http://jung-max.github.io/2019/10/21/오픈소스라이센스/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="해당 게시물은 한국저작권위원회가 발행한 오픈소스 소프트웨어 라이선스 가이드 3.0을 참고해서 작성되었습니다. 소프트웨어 지적 재산권저작권(copyright)창작물에 대하여 창작자(저작자)가 취득하는 권리로서 창작의 결과물을 보호하며, 창작과 동시에 권리가 발생한다. 따라서 어떤 프로그래머가 소프트웨어를 개발하면 저작권이 자동으로 발생하며, 그 권리는 프로그">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4%EB%9D%BC%EC%9D%B4%EC%84%BC%EC%8A%A4/01.png">
+<meta property="og:updated_time" content="2022-02-08T02:11:11.833Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="오픈소스 라이센스 소개">
+<meta name="twitter:description" content="해당 게시물은 한국저작권위원회가 발행한 오픈소스 소프트웨어 라이선스 가이드 3.0을 참고해서 작성되었습니다. 소프트웨어 지적 재산권저작권(copyright)창작물에 대하여 창작자(저작자)가 취득하는 권리로서 창작의 결과물을 보호하며, 창작과 동시에 권리가 발생한다. 따라서 어떤 프로그래머가 소프트웨어를 개발하면 저작권이 자동으로 발생하며, 그 권리는 프로그">
+<meta name="twitter:image" content="http://jung-max.github.io/images/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4%EB%9D%BC%EC%9D%B4%EC%84%BC%EC%8A%A4/01.png">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2019/10/21/오픈소스라이센스/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/기타/">기타</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/기타/기타/">기타</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-오픈소스라이센스" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        오픈소스 라이센스 소개
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/10/21/오픈소스라이센스/" class="article-date">
+            <time datetime="2019-10-21T07:39:28.000Z" itemprop="datePublished">2019-10-21</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/licence/">licence</a>, <a class="tag-link" href="/tags/opensource/">opensource</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>해당 게시물은 한국저작권위원회가 발행한 오픈소스 소프트웨어 라이선스 가이드 3.0을 참고해서 작성되었습니다.</p>
+<h1 id="소프트웨어-지적-재산권"><a href="#소프트웨어-지적-재산권" class="headerlink" title="소프트웨어 지적 재산권"></a>소프트웨어 지적 재산권</h1><h2 id="저작권-copyright"><a href="#저작권-copyright" class="headerlink" title="저작권(copyright)"></a>저작권(copyright)</h2><p>창작물에 대하여 창작자(저작자)가 취득하는 권리로서 창작의 결과물을 보호하며, 창작과 동시에 권리가 발생한다. 따라서 어떤 <font color="#ff4500">프로그래머가 소프트웨어를 개발하면 저작권이 자동으로 발생</font>하며, 그 권리는 프로그래머 또는 그가 속한 회사에 부여된다. 저작권이 있는 저작물은 <font color="#ff4500">저작권자의 허락이 없이는 누구도 해당 저작물을 복제, 배포, 수정할 수 없다.</font></p>
+<h2 id="특허권-patent"><a href="#특허권-patent" class="headerlink" title="특허권(patent)"></a>특허권(patent)</h2><p>특허권(patent)은 발명에 관하여 발명자(특허권자)가 갖는 독점배타권이다. 저작권과는<br>달리 일정한 방식으로 출원해야 하며, 심사를 통과한 후 등록되어야만 권리가 발생한다.</p>
+<p>특허기술을 사용하기 위해서는 반드시 특허권자의 허락을 얻어야만 한다. <font color="#ff4500">특허받은<br>방식을 구현하는 소프트웨어라면 프로그래밍 언어에 상관없이 특허권의 범위에 속한다.</font></p>
+<p>공개되지 않은 소스코드는 영업비밀로서 보호를 받을 수 있다. 하지만 영업비밀은 일단<br>공개되면 더 이상 보호받기 어렵고, 또한 영업비밀을 알지 못하고 사용한 제3자에게<br>법적으로 문제를 삼을 수 없다는 한계가 있다.</p>
+<h1 id="오픈소스-라이선스"><a href="#오픈소스-라이선스" class="headerlink" title="오픈소스 라이선스"></a>오픈소스 라이선스</h1><p>일반 상용 소프트웨어와 마찬가지로 <font color="#ff4500">오픈소스에도 저작권 등 지적재산권이 있다.</font> 그래서 권리자의 허락 없이 함부로 사용하면 소송을 당할 수 있다. </p>
+<p>그런데 오픈소스의 권리자들은 되도록 많은 사람이 자유롭게 사용할 수 있도록 광범위한 라이선스를 부여하고 있다.</p>
+<p>예를 들어 사용자들에게 사용에 대한 권리뿐만 아니라 마음대로 복제 및 배포를 할 수 있도록 하고, 소스코드까지 제공하여 마음대로 수정할 수 있도록 허락한다.<br>하지만 상용 소프트웨어처럼 그에 따르는 로열티를 요구하지는 않으며, 대신 몇 가지 지켜야 할 <font color="#ff4500">의무사항을 요구</font>한다. </p>
+<p>구체적인 예를 통해 몇 가지 의무사항을 살펴보기로 하자.</p>
+<h2 id="저작권-개발자-및-기여자-정보의-표시"><a href="#저작권-개발자-및-기여자-정보의-표시" class="headerlink" title="저작권, 개발자 및 기여자 정보의 표시"></a>저작권, 개발자 및 기여자 정보의 표시</h2><p>대부분의 오픈소스 라이선스는 <font color="#ff4500">개발자 또는 기여자에 관한 사항과 저작권에 관한 사항을 제품에 표시하거나 포함하도록 요구</font>하고 있다. 마치 저작인격권의 하나인 성명표시권과 유사하다.</p>
+<h2 id="코드를-수정한-경우-수정한-정보의-표시"><a href="#코드를-수정한-경우-수정한-정보의-표시" class="headerlink" title="코드를 수정한 경우 수정한 정보의 표시"></a>코드를 수정한 경우 수정한 정보의 표시</h2><p>이용자가 소스코드를 수정하였을 때에는 <font color="#ff4500">수정한 사람, 수정 일자 등 수정에 관한 내용을 포함</font>하도록 함으로써, 원본과 구별할 수 있도록 한다. 저작인격권의 하나인 동일성유지권에 비유할 수 있다.</p>
+<h2 id="라이선스-정보의-제공"><a href="#라이선스-정보의-제공" class="headerlink" title="라이선스 정보의 제공"></a>라이선스 정보의 제공</h2><p>많은 오픈소스 라이선스들은 이용자들이 오픈소스에 관한 권리를 잘 이해할 수 있도록 배포자가 해당 <font color="#ff4500">라이선스의 사본을 함께 첨부</font>할 것을 요구하고 있다.</p>
+<h2 id="동일한-라이선스로-재배포할-것-카피레프트"><a href="#동일한-라이선스로-재배포할-것-카피레프트" class="headerlink" title="동일한 라이선스로 재배포할 것 (카피레프트)"></a>동일한 라이선스로 재배포할 것 (카피레프트)</h2><p>라이선스에 따라 큰 차이를 보이는 부분은 <font color="#ff4500">‘카피레프트(Copyleft)’</font>에 관한 사항이다.</p>
+<p>GPL을 대표로 하는 카피레프트 라이선스들은 이용자들이 소프트웨어를 수정한 후 배포하고자 할 때 <font color="#ff4500">수정된 소프트웨어도 동일한 라이선스로 배포</font>할 것을 요구한다.</p>
+<blockquote>
+<p>카피레프트(Copyleft)라는 용어는 원래 저작권(Copyright)에 반대한다는 의미로 “Copy-right”에서 “right” 대신 “left”로 바꾸어 사용하기 시작한 것이다. 그런데, FSF가 말하는 “소프트웨어의 자유”를 지키기 위한 구체적인 수단이 GPL이며, 그 중에서도 핵심적인 내용은 파생저작물을 GPL로 재배포할 것을 요구하는 조항이기 때문에, 보통 이 조항을 가리켜 카피레프트 조항이라고 부르고 있다.</p>
+</blockquote>
+<h2 id="소스코드의-제공"><a href="#소스코드의-제공" class="headerlink" title="소스코드의 제공"></a>소스코드의 제공</h2><p><font color="#ff4500">카피레프트 조항을 포함하는 라이선스의 경우, 소프트웨어를 배포할 때 소스코드까지 함께 배포하도록 요구</font>한다.</p>
+<table>
+<thead>
+<tr>
+<th align="center">라이선스의 특징 및 의무사항</th>
+<th align="center">BSD</th>
+<th align="center">Apache2.0</th>
+<th align="center">GPL 2.0</th>
+<th align="center">GPL 3.0</th>
+<th align="center">LGPL 2.1</th>
+<th align="center">MPL</th>
+<th align="center">CDDL</th>
+<th align="center">CPL/ EPL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">복제·배포·수정의 권한 부여</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+</tr>
+<tr>
+<td align="center">배포시 라이선스 사본 첨부</td>
+<td align="center"></td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+</tr>
+<tr>
+<td align="center">저작권고지사항 또는 Attribution 고지사항 유지</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+</tr>
+<tr>
+<td align="center">배포시 소스코드 제공 의무(Reciprocity)와 범위</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">derivative work</td>
+<td align="center">work based on the program</td>
+<td align="center">derivative work</td>
+<td align="center">file</td>
+<td align="center">file</td>
+<td align="center">module</td>
+</tr>
+<tr>
+<td align="center">조합저작물(Larger Work)작성 및 타 라이선스 배포 허용</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+</tr>
+<tr>
+<td align="center">수정시 수정내용 고지</td>
+<td align="center"></td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+</tr>
+<tr>
+<td align="center">명시적 특허라이선스의 부여</td>
+<td align="center"></td>
+<td align="center">O</td>
+<td align="center"></td>
+<td align="center">O</td>
+<td align="center"></td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+</tr>
+<tr>
+<td align="center">라이선시가 특허소송 제기시 라이선스 종료</td>
+<td align="center"></td>
+<td align="center">O</td>
+<td align="center"></td>
+<td align="center">O</td>
+<td align="center"></td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+</tr>
+<tr>
+<td align="center">복이름, 상표, 상호에 대한 사용제한</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+</tr>
+<tr>
+<td align="center">보증의 부인</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+</tr>
+<tr>
+<td align="center">책임의 제한</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">O</td>
+</tr>
+</tbody></table>
+<h1 id="주요-오픈소스-라이선스"><a href="#주요-오픈소스-라이선스" class="headerlink" title="주요 오픈소스 라이선스"></a>주요 오픈소스 라이선스</h1><h2 id="BSD형-라이선스-및-주요-프로젝트"><a href="#BSD형-라이선스-및-주요-프로젝트" class="headerlink" title="BSD형 라이선스 및 주요 프로젝트"></a>BSD형 라이선스 및 주요 프로젝트</h2><p>BSD형 라이선스에는 <font color="#ff4500">BSD, MIT, Apache</font> 라이선스 등이 포함되며, 비교적 오랜 역사를 가진 라이선스들이다. 이들 라이선스는 <font color="#ff4500">카피레프트(Copyleft) 조항을 포함하지 않으며, 의무사항도 비교적 간단</font>하다.</p>
+<h3 id="BSD-라이선스"><a href="#BSD-라이선스" class="headerlink" title="BSD 라이선스"></a>BSD 라이선스</h3><p>BSD 라이선스는 버클리 대학에서 만든 라이선스로, 소프트웨어를 재배포할 때 저작권 표시를 할 것과 준수 조건 및 보증부인에 대한 고지사항을 소스코드 또는 문서 및 기타자료에 포함할 것을 요구하고 있다.</p>
+<p>4개의 조항으로 구성된 BSD 4-Clause 라이선스 (Original BSD 혹은 Old BSD 라고도 불림)에는 <font color="#ff4500">“광고 조항”</font>이 포함되어 있다.<br>이는 파생저작물의 모든 홍보물에 “This product includes software developed by the <organization>” 문구를 포함해야 하는데, 이는 문제 소지가 있는 조항으로 판단되어 1999년 7월 이를 삭제한 BSD 3-Clause 라이선스(Modified BSD 혹은 New BSD 라고도 불림)가 만들어졌다.</organization></p>
+<h3 id="Apache-라이선스"><a href="#Apache-라이선스" class="headerlink" title="Apache 라이선스"></a>Apache 라이선스</h3><p>Apache 라이선스는 아파치소프트웨어재단(Apache Software Foundation)에서 만들어 배포한 라이선스이다. 1.0과 1.1 버전은 BSD와 비슷하게 간단한 내용만을 담고 있었지만, 현재 사용되고 있는 2.0 버전은 2004년에 배포된 것으로 비교적 상세한 내용을 담고 있다.</p>
+<p>배포 시의 의무사항으로는 <font color="#ff4500">저작권, 특허, 상표, 권리귀속(attribution)에 대한 고지사항을 소스코드 또는 “NOTICE” 파일 등에 포함</font>할 것과, 수취인에게 <font color="#ff4500">라이선스 사본을 제공</font>하도록 요구하고 있으며, 파일을 수정하여 배포할 경우 <font color="#ff4500">수정된 파일에 대해 수정사항을 표시한 안내 문구를 첨부</font>할 것을 요구하고 있다. </p>
+<p>하지만 카피레프트 조항을 포함하고 있지 않기 때문에 반드시 <font color="#ff4500">동일한 라이선스로 배포할 필요는 없으며, 소스코드 제공 의무도 없다</font>는 점에서 기본적으로 BSD 라이선스와 비슷한 것으로 평가할 수 있다.</p>
+<h3 id="MIT-License"><a href="#MIT-License" class="headerlink" title="MIT License"></a>MIT License</h3><p>MIT 라이선스(MIT License)는 미국 매사추세츠 공과대학교(MIT)에서 해당 대학의 소프트웨어 공학도들을 돕기 위해 개발한 라이선스다. </p>
+<p>MIT 라이선스를 따르는 소프트웨어를 개조한 제품을 <font color="#ff4500">반드시 오픈 소스로 배포해야 한다는 규정이 없으며 GNU 일반 공중 라이선스의 엄격함을 피하려는 사용자들에게 인기</font>가 있다. </p>
+<p>The MIT License</p>
+<p>MIT 라이선스</p>
+<p>Copyright (c) <year> <copyright holders></copyright></year></p>
+<p>Copyright (c) &lt;연도&gt; &lt;저작권자&gt;</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>이 소프트웨어의 복제본과 관련된 문서화 파일(“소프트웨어”)을 획득하는 사람은 누구라도 소프트웨어를 별다른 제한 없이 무상으로 사용할 수 있는 권한을 부여 받는다. 여기에는 소프트웨어의 복제본을 무제한으로 사용, 복제, 수정, 병합, 공표, 배포, 서브라이선스 설정 및 판매할 수 있는 권리와 이상의 행위를 소프트웨어를 제공받은 다른 수취인들에게 허용할 수 있는 권리가 포함되며, 다음과 같은 조건을 충족시키는 것을 전제로 한다.</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>위와 같은 저작권 안내 문구와 본 허용 문구가 소프트웨어의 모든 복제본 및 중요 부분에 포함되어야 한다.</p>
+<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF ERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+<p>이 소프트웨어는 상품성, 특정 목적 적합성, 그리고 비침해에 대한 보증을 포함한 어떠한 형태의 보증도 명시적이나 묵시적으로 설정되지 않은 “있는 그대로의” 상태로 제공된다.</p>
+<p>소프트웨어를 개발한 프로그래머나 저작권자는 어떠한 경우에도 소프트웨어나 소프트웨어의 사용 등의 행위와 관련하여 일어나는 어떤 요구사항이나 손해 및 기타 책임에 대해 계약상, 불법행위 또는 기타 이유로 인한 책임을 지지 않는다.</p>
+<h4 id="안드로이드-플랫폼"><a href="#안드로이드-플랫폼" class="headerlink" title="안드로이드 플랫폼"></a>안드로이드 플랫폼</h4><p>아파치 서버 등 아파치재단의 프로젝트들뿐만 아니라, (2008년 조사결과) Source Forge.net의 5,000개 이상의 프로젝트가 Apache 라이선스로 배포되고 있다.<br>또한, 2008년 5월 구글은 블로그를 통해 Google Code의 100,000여개 프로젝트 중 25%가 Apache 라이선스를 사용하고 있다고 발표했었다.</p>
+<p>최근 Apache 라이선스로 배포되는 가장 큰 프로젝트는 안드로이드 플랫폼이다.<br><font color="#ff4500">커널과 애플리케이션을 제외한 안드로이드 플랫폼의 많은 부분은 Apache 라이선스로 배포</font>되고있다. </p>
+<p>하지만 <font color="#ff4500">일부 구성요소들은 CPL, EPL, GPL, LGPL 등으로 배포되고 있으며, 이들은 Apache 라이선스가 아닌 각각의 라이선스 규칙을 따라야 한다는 점을 주의</font>할 필요가 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">APACHE2 bionic/linker</span><br><span class="line">APACHE2 dalvik</span><br><span class="line">APACHE2 dalvik/libcore-disabled/instrument</span><br><span class="line">APACHE2 dalvik/libcore-disabled/sound</span><br><span class="line">APACHE2 dalvik/libcore/annotation</span><br><span class="line">APACHE2 dalvik/libcore/archive</span><br><span class="line">APACHE2 dalvik/libcore/auth</span><br><span class="line">APACHE2 dalvik/libcore/awt-kernel</span><br><span class="line">APACHE2 dalvik/libcore/crypto</span><br><span class="line">APACHE2 dalvik/libcore/dalvik</span><br><span class="line">APACHE2 dalvik/libcore/logging</span><br><span class="line">APACHE2 dalvik/libcore/luni</span><br><span class="line">APACHE2 dalvik/libcore/luni-kernel</span><br><span class="line">APACHE2 dalvik/libcore/math</span><br><span class="line">…</span><br><span class="line"></span><br><span class="line">CPL dalvik/libcore/junit</span><br><span class="line">EPL prebuilt/common/eclipse</span><br><span class="line">EPL prebuilt/common/osgi</span><br><span class="line">EPL prebuilt/darwin-x86/swt</span><br><span class="line">...</span><br><span class="line">GPL external/blktrace</span><br><span class="line">GPL external/e2fsprogs</span><br><span class="line">GPL external/e2fsprogs/e2fsck</span><br><span class="line">...</span><br><span class="line">LGPL external/e2fsprogs/lib/blkid</span><br><span class="line">LGPL external/e2fsprogs/lib/e2p</span><br><span class="line">...</span><br><span class="line">MIT external/e2fsprogs/lib/ss</span><br><span class="line">OSL1 external/elfutils</span><br><span class="line">W3C dalvik/libcore/xml</span><br></pre></td></tr></table></figure>
+
+<h4 id="안드로이드-애플리케이션의-라이선스-이슈"><a href="#안드로이드-애플리케이션의-라이선스-이슈" class="headerlink" title="안드로이드 애플리케이션의 라이선스 이슈"></a>안드로이드 애플리케이션의 라이선스 이슈</h4><p>미들웨어가 Apache 라이선스로 배포되는 경우 애플리케이션의 라이선스에는 영향을 미치지 않는다. 그 결과 애플리케이션의 개발자들은 자유롭게 라이선스를 결정할 수 있다. 유료의 상용 라이선스를 선택하는 것도 물론 가능하다. </p>
+<p>구글이 안드로이드 플랫폼에 대한 라이선스를 GPL이 아닌 Apache 라이선스로 결정한 것은 더욱 많은 개발자들의 참여를 끌어내기 위해서이다. 스마트폰의 경쟁력은 얼마나 많은 애플리케이션을 확보하고 있는가에 달려 있다. </p>
+<p>구글의 입장에서는 GPL로 대변되는 오픈소스의 정신을 존중하는 것도 중요했지만, 개발자들에게 라이선스를 선택할 수 있는 자유를 주어 보다 많은 애플리케이션이 개발될 수 있도록 하는 것이 더 중요했다고 볼 수 있다.</p>
+<p>그런데 애플리케이션에 따라서는 기존의 오픈소스를 기반으로 개발되는 것도 있다. 이러한 경우 해당하는 오픈소스 라이선스를 지켜야 하는 것은 물론이다. 예를 들어 <font color="#ff4500">GPL로 배포되는 오픈소스를 기반으로 안드로이드 애플리케이션을 개발하는 경우 GPL에 따라 소스코드를 제공</font>해 주어야 한다. 앱스토어(안드로이드 마켓)를 통해 직접 소스코드를 제공하는 것은 어려우므로 애플리케이션의 일정 부분에 소스코드를 제공한다는 안내를<br>하고 다른 웹서버를 통해 소스코드를 제공하는 방법을 고려할 수 있다. 이러한 사항을 지키지 않는 경우 라이선스 위반에 해당하여 소송을 당할 수 있다.</p>
+<p>이러한 경우 애플리케이션 개발자가 책임을 지는 것과는 별도로, 앱스토어 운영사도 라이선스 위반에 대한 책임이 있는가? 이 문제는 이용자의 저작권 침해에 대해 네이버 등 서비스제공자도 책임을 져야 하는가의 문제와 유사하다. 서비스유형에 따라 다른 판결이 나오고 있지만, 권리자가 권리침해가 있다는 통지를 해오는 경우 <font color="#ff4500">서비스제공자는 즉시 관련 저작물을 삭제하는 것으로 대응</font>하고 있다.</p>
+<h2 id="GPL형-라이선스"><a href="#GPL형-라이선스" class="headerlink" title="GPL형 라이선스"></a>GPL형 라이선스</h2><p>GPL형 라이선스에는 GPL 2.0, GPL 3.0, LGPL 2.1, LGPL 3.0, AGPL 3.0 등이 포함되며, 대부분 FSF(Free Software Foundation)에서 주도하여 만든 것이다. </p>
+<p>비교적 오랜 역사를 가진다는 점에서 BSD와 비슷하지만, <font color="#ff4500">카피레프트 조항과 소스코드 제공 의무를 가지고 있다는 점에서 큰 차이</font>가 있다. 카피레프트의 적용 범위 및 소스코드 제공 의무의 범위는 GPL, LGPL, AGPL 각각에 차이가 있다.</p>
+<h3 id="GPL-2-0"><a href="#GPL-2-0" class="headerlink" title="GPL 2.0"></a>GPL 2.0</h3><p>GPL 2.0으로 배포되는 오픈소스는 </p>
+<p>i) 각 복제본에 적절한 저작권 표시와 보증책임이 없음을 명시하고, </p>
+<p>ii) GPL 라이선스를 언급하는 고지사항과 보증책임 관련 고지사항을 원본 그대로 유지하고, </p>
+<p>iii) 소프트웨어를 양도받는 모든 이들에게 소프트웨어와 함께 GPL 라이선스 사본을 제공하고, </p>
+<p>iv) 파일을 수정한 경우 수정했다는 사실과 날짜를 파일에 명기해야 한다. 그리고 </p>
+<p>v) <font color="#ff4500">원본저작물과 파생저작물(derivative work)을 GPL 2.0에 의해 배포</font>해야 하며, </p>
+<p>vi) <font color="#ff4500">원본저작물 및 파생저작물에 대한 소스코드를 제공하거나, 요청 시 제공하겠다는 약정서를 제공</font>해야 한다. </p>
+<p>여기서 i) ~ iv)의 의무사항은 Apache 라이선스와 동일하거나 유사한 내용이지만, v) 및 vi)의 의무사항은 BSD형의 라이선스에서는 찾아볼 수 없는 내용이다.</p>
+<h4 id="lt-참고-gt-파생저작물의-범위에-관한-해석"><a href="#lt-참고-gt-파생저작물의-범위에-관한-해석" class="headerlink" title="&lt;참고&gt; 파생저작물의 범위에 관한 해석"></a>&lt;참고&gt; 파생저작물의 범위에 관한 해석</h4><p>오픈소스 현장에서는 GPL 2.0에서 언급하고 있는 파생저작물(derivative work)의 범위가 어디까지인지에 관해 논란이 많다. </p>
+<p>일반적으로 계약이나 법 조항이 명확하지 않은 경우 당사자의 의도나 거래 관행 등을 종합적으로 고려하여 법원에서 결정하게 된다. </p>
+<p>GPL도 명확하지 않은 부분이 많으며, 최종적으로는 법원에서 가려지겠지만, GPL을 만든 FSF에서는 GPL의 해석에 도움을 주고자 많은 FAQ를 제공하고 있다.</p>
+<p>예를 들면, GPL로 배포된 소프트웨어를 수정하였거나 새로운 소프트웨어에 정적 링크시키는 경우, 즉 <font color="#ff4500">두 개의 모듈이 동일한 실행 파일에 포함되어 있을 경우는 해당 실행 파일에 포함된 모든 소스는 GPL이 적용</font>된다</p>
+<p><img src="/images/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4%EB%9D%BC%EC%9D%B4%EC%84%BC%EC%8A%A4/01.png" alt="GPL로 배포된 SW를 포함하는 경우(동일한 Binary)"></p>
+<p>또한, 동일한 바이너리에 포함되지 않더라도 <font color="#ff4500">동적 링크 등의 방식으로 공유주소영역에서 링크되어 실행되도록 설계된 경우, 플러그인이 동적으로 링크되어 함수를 호출하고 데이터구조를 공유하는 경우</font>에도 GPL 소프트웨어와 함께 링크되어 실행되는 소프트웨어에도 GPL이 적용되어 소스코드를 제공해야 한다.</p>
+<p><img src="/images/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4%EB%9D%BC%EC%9D%B4%EC%84%BC%EC%8A%A4/02.png" alt="메모리를 공유하는 방식으로 사용하는 모든 SW"></p>
+<p>반면, 두 개의 프로그램이 <font color="#ff4500">파이프(pipes), 소켓(sockets), command-line arguments형태로 통신하는 경우, 플러그인이 fork나 exec을 이용하는 경우</font> 등은 별도의 저작물로서 GPL이 적용되지 않는다고 답변하고 있다.</p>
+<h3 id="GPL-3-0"><a href="#GPL-3-0" class="headerlink" title="GPL 3.0"></a>GPL 3.0</h3><p>GPL 3.0은 GPL 2.0이 배포되고 난 이후 오픈소스 환경을 둘러싼 다양한 변화들을 수용하여 만든 라이선스이다. GPL 3.0의 의무사항으로는 </p>
+<p>i) 각 복제본에 저작권 고지와 보증책임이 없음을 명시할 것, </p>
+<p>ii) GPL 3.0의 조건 및 제7조의 조건에 관한 내용을 있는 그대로 유지할 것, </p>
+<p>iii) 소프트웨어를 양도받는 모든 이들에게 소프트웨어와 함께 GPL 라이선스 사본을 제공할 것, </p>
+<p>iv) 소프트웨어를 수정했을 경우 수정사실 및 일시를 명시할 것, </p>
+<p>v) 원본저작물과 그에 기반한 저작물(Work based on the program)을 GPL 3.0에 의해 배포할 것, </p>
+<p>vi) 원본저작물 및 그에 기반한 저작물(Work based on the program)에 대한 소스코드를 제공하거나, 요청 시 제공하겠다는 약정서를 제공할 것, </p>
+<p>vii) <font color="#ff4500">사용자 제품(user product)에 대한 인증키 등 설치정보(installation information)를 제공</font>할 것, </p>
+<p>viii) <font color="#ff4500">차별적인 특허라이선스 계약을 체결하지 말 것</font> 등의 내용이 포함되어 있다.</p>
+<p>i) ~ vi) 의 내용은 GPL 2.0의 내용과 같거나 내용을 더욱 명확히 하는 것이었지만, vii) 및 viii)의 내용은 GPL 3.0에 처음으로 포함된 내용으로 많은 논란을 불러일으켰다.</p>
+<h3 id="LGPL"><a href="#LGPL" class="headerlink" title="LGPL"></a>LGPL</h3><p>LGPL은 주로 <font color="#ff4500">라이브러리에 사용</font>하기 위해 FSF가 GPL과는 별도로 만든 라이선스이다.</p>
+<p>라이브러리에 GPL 라이선스를 적용하게 되면 응용프로그램까지 GPL로 배포해야 하므로 사용자는 해당 라이브러리의 사용을 꺼리게 된다. </p>
+<p>FSF는 GPL의 내용을 약간 수정하여 라이브러리 자체를 수정한 경우에는 카피레프트 조항을 적용하지만, <font color="#ff4500">해당 라이브러리를 이용한 응용프로그램은 카피레프트 조항을 적용하지 않고 소스코드 제공 의무도 없는 형태</font>로 LGPL 라이선스를 만들었다.</p>
+<p>LGPL의 의무사항은 </p>
+<p>i) 각 복제본에 적절한 저작권 안내와 보증책임이 없음을 명시할 것,</p>
+<p>ii) LGPL 라이선스를 언급하는 안내 사항과 보증책임 관련 고지사항을 원본 그대로 유지할 것, </p>
+<p>iii) 소프트웨어를 양도받는 모든 이들에게 소프트웨어와 함께 LGPL 라이선스 사본을 제공할 것, </p>
+<p>iv) 라이브러리 형태로의 수정을 허용하며, 만약 수정한 경우 수정사실과 날짜를 파일에 명기할 것, </p>
+<p>iv) 원본저작물과 파생저작물을 LGPL 또는 GPL에 의해 배포할 것, </p>
+<p>v) 원본저작물 및 파생저작물에 대한 소스코드를 제공하거나, 요청 시 제공하겠다는 약정서를 제공할 것, </p>
+<p>vi) 응용프로그램을 배포할 경우, <font color="#ff4500">LGPL 라이브러리를 사용하고 있다는 사실을 명시</font>할 것, </p>
+<p>vii) 사용자가 라이브러리를 수정해도 응용프로그램을 사용할 수 있도록 (예를 들어 응용프로그램의 오브젝트 코드를 제공하거나, 해당 라이브러리의 형태를 공유 라이브러리 방식 등을 이용하여) 허용할 것 등이다. </p>
+<p>i) ~ v)의 내용은 GPL 2.0과 동일하거나 유사하지만, vi) ~ vii)은 LGPL에 특유한 내용이다.</p>
+<h3 id="Affero-GPL"><a href="#Affero-GPL" class="headerlink" title="Affero GPL"></a>Affero GPL</h3><p>BSD, Apache, GPL, LGPL, MPL, EPL 등 대다수의 오픈소스 라이선스들은 해당 소프트웨어를 복제하여 ‘배포(distribute)’할 때 지켜야 하는 다양한 요구사항들을 규정하고 있다. </p>
+<p>이를 반대로 해석하면 해당 소프트웨어를 배포하지 않고 기업이 해당 오픈소스를 내부적으로만 사용하거나 네트워크 서버 형태로 이용하고 있는 경우에는 라이선스에 따른 의무사항들이 거의 없다는 점이다.</p>
+<p>오픈소스 라이선스의 이러한 한계에 대해 비판적인 견해를 가지고 있던 Affero 프로젝트는 기존의 GPL 라이선스를 변경하여 <font color="#ff4500">네트워크 서버에 의해 서비스를 제공하는 경우에도 카피레프트 조항과 소스코드 제공 의무가 적용</font>되도록 하였다. </p>
+<p>Affero GPL의 의무사항은 GPL과 기본적으로 동일하다. 다만, 그 적용의 범위가 단순한 ‘배포’를 넘어서 네트워크 서버 형태로 소프트웨어를 이용하는 경우에도 적용된다는 점에 차이가 있다.</p>
+<h3 id="GPL-Exceptions"><a href="#GPL-Exceptions" class="headerlink" title="GPL Exceptions"></a>GPL Exceptions</h3><p>여러 오픈소스 프로젝트들은 해당 프로젝트는 GPL로 배포되길 바라면서 이를 활용하여 동작하는 프로그램들은 GPL의 copyleft 조항에서 자유로울 수 있도록, <font color="#ff4500">GPL 2.0의 2조를 다소 완화한 조건으로 배포할 수 있도록 허락</font>해주는 exception을 추가하기도 한다. </p>
+<p>이는 추가적인 제한 사항을 주는 것이 아니므로 GPL과도 호환된다.</p>
+<h4 id="Bison-Exception"><a href="#Bison-Exception" class="headerlink" title="Bison Exception"></a>Bison Exception</h4><p>Bison은 GNU 파서 생성기로, 정의된 문법을 처리하고 해석하여 C 코드로 만들어주는 도구다. </p>
+<p>Bison의 주요 결과물(Bison parser implementation file)은 상당 부분 Bison의 소스코드를 그대로 복사하여 skeleton 코드를 포함하게 된다. </p>
+<p>일반적인 GPL이라면 이 skeleton 코드에도 GPL이 적용되어야 하고, 이에 따라 bison 결과물인 C 파일과 이를<br>사용하는 프로그램 모두 GPL이 적용되어, 사용자들이 bison 사용을 부담스러워할 수 있다.</p>
+<p>이에 Bison에 예외 조항을 추가하여 Bison이 생성하는 소스코드에 대해서는 GPL 적용이 되지 않도록 예외를 추가하였다.</p>
+<h4 id="Classpath-exception"><a href="#Classpath-exception" class="headerlink" title="Classpath exception"></a>Classpath exception</h4><p>GNU Classpath 프로젝트는 자바 언어의 가상머신 및 컴파일러에서 사용되는 핵심 클래스 라이브러리를 자유 소프트웨어로 대체하기 위한 프로젝트이다. </p>
+<p>이를 널리 사용할 수 있도록, GNU Classpath 등 Classpath exception이 적용된 수정하지 않은 core class library를 link하여 생성한 program은 GPL의 영향을 받지 않는다. </p>
+<p>예를 들면, OpenJDK 프로젝트에서 가상머신 자체는 GPL 2.0으로 배포하고, Class library와 가상머신 내의 Public API로 노출되는 부분은 Classpath exception으로 배포하고 있다.</p>
+<h4 id="Autoconf-exception"><a href="#Autoconf-exception" class="headerlink" title="Autoconf exception"></a>Autoconf exception</h4><p>GNU Autoconf는 M4 매크로의 확장 패키지로, 소스코드 패키지들의 환경을 설정하는 쉘 스크립트를 자동으로 생성한다. Autoconf는 GPL로 배포되며, configure.ac의 시스템 정보를 입력받아, Autoconf의 일부분과 결합, configure 스크립트를 생성한다.</p>
+<p>이에 해당 configure 내에 autoconf의 일부가 포함될 수밖에 없음에도 해당 configure는<br>GPL의 파생저작물이 되지 않도록 예외를 적용해주는 것이 autoconf exception이다.</p>
+<h4 id="GCC-Runtime-Library-Exception-GCC-RLE"><a href="#GCC-Runtime-Library-Exception-GCC-RLE" class="headerlink" title="GCC Runtime Library Exception (GCC RLE)"></a>GCC Runtime Library Exception (GCC RLE)</h4><p>GCC는 GNU 대표적인 컴파일러로, 이 Exception의 목적은 non-GPL 소스코드를 GCC로 컴파일할 때, GCC Runtime Library (header file 포함)가 Program에 포함되는 것을 허용하기 위한 것이다. </p>
+<p>이 Exception에 의하면, “정당한 Compile 과정 (Eligible Compilation Process)” 중 Independent Module과 GCC Runtime Library가 결합하여 형성된 Target Code라면, 이는 GPL에 상관없이 다른 라이선스로 배포될 수 있다.</p>
+<p>GCC Runtime Library는 libgcc, libstdc++, libfortran, libgomp, libdecnumber 등이 있다. 만약 GCC Runtime Library가 정당한 컴파일 과정에 의해서가 아닌, 다른 방법으로 Program에 포함된 경우에는 GPL 의무사항을 모두 준수해야 한다.</p>
+<h2 id="MPL형-라이선스"><a href="#MPL형-라이선스" class="headerlink" title="MPL형 라이선스"></a>MPL형 라이선스</h2><p>MPL 형 라이선스는 주로 기업들이 주도하는 오픈소스 프로젝트에서 사용하는 라이선스로 MPL, CDDL, EPL 등이 포함된다. </p>
+<p>BSD형과 GPL형의 라이선스와는 달리, 처음부터 법률가들이 참여하여 만들었기 때문에 소프트웨어 라이선스의 관점에서는 더욱 정교하다고 볼 수 있지만, 프로그래머들에게는 그만큼 복잡하고 이해하기 어려운 라이선스들이다. </p>
+<p><font color="#ff4500">카피레프트 조항을 포함하고 있다는 점에서 GPL형과 비슷하지만, 적용 범위와 소스코드 제공범위는 GPL보다는 LGPL에 가까운 것</font>으로 볼 수 있다.</p>
+<h3 id="MPL"><a href="#MPL" class="headerlink" title="MPL"></a>MPL</h3><p>MPL은 1998년 넷스케이프사가 자사의 브라우저를 오픈소스로 배포하면서 만든 라이선스이다. MPL로 배포되는 오픈소스를 이용하기 위해서는 </p>
+<p>i) 원 코드에 포함된 저작권표시, 개발자 및 권리자에 관한 사항들을 그대로 표시할 것과, </p>
+<p>ii) 배포 시 MPL 라이선스 사본을 첨부할 것, </p>
+<p>iii) 수정했을 경우에는 최초개발자의 코드로부터 파생되었다는 사실, 수정사항 및 날짜 등을 포함한 파일(Exhibit A)을 소스코드의 각 파일에 포함할 것, </p>
+<p>iv) 원본 및 수정코드를 MPL에 의해 배포할 것과, </p>
+<p>v) 수정코드에 대한 소스코드를 전자배포방식 등을 통해 제공할 것, </p>
+<p>vi) MPL 코드를 사용할 때 제3자의 지식재산권에 의한 라이선스가 필요하다는 사실을 알고 있는 경우 “LEGAL” 파일에 관련 내용을 포함할 것 등이다.</p>
+<p>MPL 2.0은 MPL 1.1에 비해 더욱 짧고 이해하기 쉽게 만든 라이선스이다. 특히 Apache License 2.0과 양립할 수 있게 되었으며 특허 관련 조항들이 정비되었다. </p>
+<p>또한 MPL 2.0에서 Secondary License로 정의한 라이선스인 GPL 2.0, LGPL 2.1, AGPL 3.0과 각각 이후 버전들과 양립할 수 있게 된 것이 큰 변화이다.</p>
+<h3 id="CDDL"><a href="#CDDL" class="headerlink" title="CDDL"></a>CDDL</h3><p>CDDL은 썬(sun)이 자사의 유닉스 운영체제인 솔라리스를 오픈소스로 배포하면서 만든 라이선스이다. MPL을 참조하여 만들었기 때문에 MPL의 내용과 비슷하다. </p>
+<p>i) 저작권 등 권리관련 사항, 라이선스 관련 사항 등의 고지사항을 제거하거나 변경할 수 없으며, </p>
+<p>ii) 배포 시 CDDL 라이선스 사본을 첨부해야 하며, </p>
+<p>iii) 수정한 경우 수정코드의 기여자임을 밝혀야 한다. </p>
+<p>iv) 원본 및 수정코드를 CDDL에 의해 배포해야 하며, </p>
+<p>v) 수정코드에 대한 소스코드를 합리적인 방식으로 제공해야 한다.</p>
+<h3 id="CPL-EPL"><a href="#CPL-EPL" class="headerlink" title="CPL, EPL"></a>CPL, EPL</h3><p>CPL과 EPL은 IBM이 이클립스(Eclipse) 등 오픈소스 프로젝트를 진행하면서 만든 라이선스이다. CPL과 EPL은 특허보복조항에 관한 사항에서만 차이가 있고 다른 내용은 모두 동일하다. IBM은 현재 EPL만 사용하고 있다. EPL로 배포되는 소프트웨어를 배포할 때 지켜야 할 의무사항으로는 </p>
+<p>i) 각 코드의 저작권 고지사항을 제거하거나 변경하지 말 것과, </p>
+<p>ii) EPL 라이선스 사본을 포함할 것과, </p>
+<p>iii) 각 기여물의 창작자를 식별할 수 있도록 신분을 밝힐 것과, </p>
+<p>iv) 오브젝트코드로 배포하는 경우 EPL 조건을 준수하고, 보증부인 및 책임배제에 관한 내용과 소스코드의 확보방법을 알려 줄 것, </p>
+<p>v) 소스코드로 배포하는 경우 EPL 라이선스를 적용할 것과, </p>
+<p>vi) 상업적 배포의 경우 기여자에게 책임이 발생하지 않도록 조치할 것 등의 내용을 포함하고 있다.</p>
+<h1 id="상담-사례"><a href="#상담-사례" class="headerlink" title="상담 사례"></a>상담 사례</h1><h2 id="R을-이용한-상용-소프트웨어의-개발"><a href="#R을-이용한-상용-소프트웨어의-개발" class="headerlink" title="R을 이용한 상용 소프트웨어의 개발"></a>R을 이용한 상용 소프트웨어의 개발</h2><p>Q: 저희가 개발하는 S/W의 기능 추가를 위해 GPL 2.0을 따르는 오픈소스를 사용하는 데<br>있어서 문제가 없는지 문의합니다.</p>
+<ol>
+<li><p>R : 통계용 Open Source S/W (GPL 2.0)</p>
+</li>
+<li><p>qpcR : 저희가 추가하려는 기능의 핵심 모듈이 들어있는 패키지로 R이 기본적으로 설치되어 있어야 함.</p>
+</li>
+<li><p>R(D)-COM Interface : 저희가 개발하려는 S/W와 R 간의 Interface를 위한 S/W 위의 세 가지 모두 소스코드는 수정하지 않을 것이며, 아래와 같은 구조로 사용하려고 합니다.</p>
+</li>
+</ol>
+<p><img src="/images/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4%EB%9D%BC%EC%9D%B4%EC%84%BC%EC%8A%A4/03.png" alt="R소프트웨어 구조"></p>
+<p>위와 같이 사용하려고 할 때, 라이선스 관련 위배 사항이 없는 지 궁금하며, 위배 사항이 있을 경우 어느 정도까지 소스 공개가 되어야 하는 지 궁금합니다.</p>
+<p>A: <font color="#ff4500">R(D)-COM은 별도의 라이선스 정책을 적용하고 있지는 않지만, 이미 GPL이 적용된 R과의 결합 정도에 따라 GPL 적용 여부가 결정될 것으로 판단</font>됩니다. </p>
+<p>GPL FAQ에 의하면 결합 정도에 따른 GPL 적용 범위의 구분 기준을 제시하고 있습니다. </p>
+<p>예를 들어, 프로그램의 플러그인이 동적 링크로 실행되는 경우 메인 프로그램이 확장된 경우에 해당하여 GPL 적용 범위에 포함되지만, fork나 exec을 사용하는 경우에는 별도의 프로그램에 해당하여 포함되지 않습니다. </p>
+<p>또는 두 개의 프로그램이 공유된 메모리를 사용하여 복합데이터 구조와 통신하는 경우 GPL 적용 범위에 포함되지만, 파이프(pipe), 소켓(socket), command-line argument 형태로 통신하는 경우에는 포함되지 않습니다.</p>
+<p><font color="#ff4500">당사가 개발한 소프트웨어와 R(D)-COM이 통신하는 경우에도, 소프트웨어 사용 환경 및 적용 범위를 고려하고 위의 구분 기준에 비추어 결합 정도를 판단</font>하여야 할 것입니다. </p>
+<p>만약 GPL의 적용 범위에 포함되는 것으로 판단되면 GPL 사본 첨부, 저작권 고지사항 유지, 프로그램 소스코드 제공 등의 GPL 요구사항을 준수하여야 합니다.</p>
+<p>R 코어 팀에서 제공하는 FAQ에서도, R 패키지의 상업적 이용을 제한하지 않는다고 말하고 있지만, 관련 사항에 대해서는 담당 변호사에게 자문을 구하도록 하고 있으며, 직접적인 답변을 줄 수 없다고 명시하고 있습니다. </p>
+<p>따라서, GNU·GPL이 사유 소프트웨어와 결합할 수 없다고 명시하고 있음에도 불구하고, R(D)-COM이 사유 소프트웨어인 마이크로소프트社의 엑셀 등과 GPL이 적용된 R을 연결하기 위해 사용되는 소프트웨어로 소개되어 있지만, 실질적으로 다른 소프트웨어와 함께 사용하는 경우에는 GPL이 적용된 R 패키지와의 동작 관계를 명확하게 확인하여야 할 것으로 판단됩니다.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2019/10/21/오픈소스라이센스/" data-id="ckzfaqfuk00q0dyuoytpofe1h" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "오픈소스 라이센스 소개",
+        "image": "http://jung-max.github.io/images/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4%EB%9D%BC%EC%9D%B4%EC%84%BC%EC%8A%A4/01.png",
+        "keywords": "opensource licence",
+        "genre": "기타 기타",
+        "datePublished": "2019-10-21",
+        "dateCreated": "2019-10-21",
+        "dateModified": "2022-02-08",
+        "url": "http://jung-max.github.io/2019/10/21/오픈소스라이센스/",
+        "description": "해당 게시물은 한국저작권위원회가 발행한 오픈소스 소프트웨어 라이선스 가이드 3.0을 참고해서 작성되었습니다.
+소프트웨어 지적 재산권저작권(copyright)창작물에 대하여 창작자(저작자)가 취득하는 권리로서 창작의 결과물을 보호하며, 창작과 동시에 권리가 발생한다. 따라서 어떤 프로그래머가 소프트웨어를 개발하면 저작권이 자동으로 발생하며, 그 권리는 프로그"
+        "wordCount": 3241
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/10/22/Device_Tree_문법/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            Device Tree 문법
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/10/14/Android-Platform-배터리/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">Android Platform 배터리 개발 방법(rk816을 기준으로)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2019/10/21/오픈소스라이센스/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

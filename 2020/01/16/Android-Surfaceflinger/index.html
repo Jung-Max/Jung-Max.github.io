@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>Android SurfaceFlinger 분석 | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="Android Platform,SurfaceFlinger">
+    
+    <meta name="description" content="개요안드로이드는 응용 프로그램에서 만든 메뉴나 다이얼로그 박스, 사용자 인터페이스 구성 요소들을 SurfaceFlinger를 통하여 리눅스 커널에 위치한 LCD 디스플레이 드라이버인 프레임 버퍼 드라이버를 통해 그림을 그리게 됩니다.   안드로이드 GDI의 구조를 이해하기 위해서 하위레벨에서 상위레벨로 접근하여 살펴보도록 하겠습니다. FrameBuffer커">
+<meta name="keywords" content="Android Platform,SurfaceFlinger">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android SurfaceFlinger 분석">
+<meta property="og:url" content="http://jung-max.github.io/2020/01/16/Android-Surfaceflinger/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="개요안드로이드는 응용 프로그램에서 만든 메뉴나 다이얼로그 박스, 사용자 인터페이스 구성 요소들을 SurfaceFlinger를 통하여 리눅스 커널에 위치한 LCD 디스플레이 드라이버인 프레임 버퍼 드라이버를 통해 그림을 그리게 됩니다.   안드로이드 GDI의 구조를 이해하기 위해서 하위레벨에서 상위레벨로 접근하여 살펴보도록 하겠습니다. FrameBuffer커">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/0008.jpg">
+<meta property="og:updated_time" content="2022-02-08T02:11:11.778Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android SurfaceFlinger 분석">
+<meta name="twitter:description" content="개요안드로이드는 응용 프로그램에서 만든 메뉴나 다이얼로그 박스, 사용자 인터페이스 구성 요소들을 SurfaceFlinger를 통하여 리눅스 커널에 위치한 LCD 디스플레이 드라이버인 프레임 버퍼 드라이버를 통해 그림을 그리게 됩니다.   안드로이드 GDI의 구조를 이해하기 위해서 하위레벨에서 상위레벨로 접근하여 살펴보도록 하겠습니다. FrameBuffer커">
+<meta name="twitter:image" content="http://jung-max.github.io/images/0008.jpg">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2020/01/16/android-surfaceflinger/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Android-Surfaceflinger" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Android SurfaceFlinger 분석
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2020/01/16/Android-Surfaceflinger/" class="article-date">
+            <time datetime="2020-01-16T05:29:19.000Z" itemprop="datePublished">2020-01-16</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Android-Platform/">Android Platform</a>, <a class="tag-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h1><p>안드로이드는 응용 프로그램에서 만든 메뉴나 다이얼로그 박스, 사용자 인터페이스 구성 요소들을 SurfaceFlinger를 통하여 리눅스 커널에 위치한 LCD 디스플레이 드라이버인 프레임 버퍼 드라이버를 통해 그림을 그리게 됩니다. </p>
+<p><img src="/images/0008.jpg" alt="Android SurfaceFlinger &amp; FB"></p>
+<p>안드로이드 GDI의 구조를 이해하기 위해서 하위레벨에서 상위레벨로 접근하여 살펴보도록 하겠습니다.</p>
+<h1 id="FrameBuffer"><a href="#FrameBuffer" class="headerlink" title="FrameBuffer"></a>FrameBuffer</h1><p>커널 영역에 위치한 프레임 버퍼는 LCD 등의 출력 장치를 위한 디스플레이 하드웨어를 제어하기 위한 디바이스 드라이버입니다. 사용자 영역에서 프레임 버퍼로 그래픽 데이터를 출력 장치에 표시합니다. 프레임 버퍼는 출력장치에 표시될 그래픽 데이터가 가장 마지막으로 보관되며 출력 장치에 같은 해상도의 크기와 픽셀 포멧으로 설정됩니다. 프레임 버퍼의 데이터는 출력장치에서 요구하는 기준에 맞춰 주기적으로 출력 장치에 출력됩니다.</p>
+<p>안드로이드에서 <code>/dev/graphics/fb0</code> 형태로 프레임 버퍼 드라이버를 오픈 하여 mmap() 함수를 사용하여 프레임 버퍼에 대한 직접적인 제어를 통해 LCD를 제어할 수 있도록 하고 있습니다.<br>프레임 버퍼 드라이버는 리눅스 시스템에서 사용자 레벨의 응용 프로그램에서 제어할 수 있도록 만들어진 디바이스 드라이버입니다. 또한 open, mmap과 같은 표준 인터페이스 함수를 통해 이용할 수 있는 구조로 구성되어 있습니다.</p>
+<p><img src="/images/0009.jpg" alt="FrameBuffer"></p>
+<p>위 그림에서는 프레임 버퍼 드라이버의 동작 모습을 사용자의 응용 프로그램 관점에서 보여줍니다. 사용자의 응용 프로그램에서 작성한 화면은 프레임 버퍼 드라이버를 거쳐, 프로세서 내부에 있는 LCD 컨트롤러를 통해 LCD에 표시되게 됩니다. 물론 안드로이드 시스템에서는 프로그램을 작성하여 운영할 수 있지만, 앱이나 사용자의 프로세스에서 만들어진 모든 동작들은 SurfaceFlinger를 통해 운영이 됩니다. 즉, 사용자의 응용 프로그램과 프레임 버퍼 드라이버상에 위치하여 관리하게 됩니다. 따라서 프레임 버퍼에 대한 윈리의 이해, SurfaceFlinger에 대한 정확한 동작의 이해가 필요합니다.</p>
+<h2 id="프레임-버퍼-드라이버의-일반적인-사항"><a href="#프레임-버퍼-드라이버의-일반적인-사항" class="headerlink" title="프레임 버퍼 드라이버의 일반적인 사항"></a>프레임 버퍼 드라이버의 일반적인 사항</h2><ul>
+<li>디바이스 드라이버로써 이식성을 높이기 위해 사용됨 표시장치의 종류가 많고, 이러한 여러 하드웨어를 고려하지 않고 표준화된 인터페이스를 제공하기 위함</li>
+<li>통상 <code>/dev/fb0, dev/graphics/fb0</code> 형태로 장치 드라이버가 구성되어 있고 드라이버가 할당한 메모리를 사용자 응용 프로그램에서 사용할 수 있도록 메모리 매핑하여 사용함</li>
+<li>사용자 응용 프로그램에서 전송한 프레임 버퍼 데이터를 LCD 드라이버가 수신하여 LCD 컨트롤러를 통해 TFT LCD나 다른 표시 장치에 출력하는 역할을 함</li>
+</ul>
+<h2 id="안드로이드-시스템에서-프레임-버퍼-드라이버의-특이사항"><a href="#안드로이드-시스템에서-프레임-버퍼-드라이버의-특이사항" class="headerlink" title="안드로이드 시스템에서 프레임 버퍼 드라이버의 특이사항"></a>안드로이드 시스템에서 프레임 버퍼 드라이버의 특이사항</h2><ul>
+<li>기존 리눅스 프레임 버퍼 드라이버에 struct fp_ops와 fb_ pan_display 함수가 추가로 구현되어야 함</li>
+<li>실제 프레임 버퍼 크기보다 두 배의 메모리 할당 필요 해당 함수는 프레임 버퍼의 디스플레이 포인터를 옮기는 기능을 제공한다. 즉, 실제 화면보다 넓은 가상 디스플레이를 구현 가능하도록 함</li>
+<li>안드로이드 시스템의 프레임 버퍼 드라이버는 고속 처리를 위해 반드시 더블 버퍼링(Double Buffering)을 사용하도록 구성됨</li>
+</ul>
+<h2 id="Android-7-0-기준-프레임버퍼-fb-제어"><a href="#Android-7-0-기준-프레임버퍼-fb-제어" class="headerlink" title="Android 7.0 기준 프레임버퍼(fb)제어"></a>Android 7.0 기준 프레임버퍼(fb)제어</h2><p>Android 7.0 기준 프레임버퍼(fb)제어는 아래 폴더를 통해 제어 가능합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">rk3328_box:/sys/devices/fb.17/graphics/fb0 # ls -al</span><br><span class="line">total 0</span><br><span class="line">drwxr-xr-x 3 root   root        0 1970-01-01 00:00 .</span><br><span class="line">drwxr-xr-x 7 root   root        0 1970-01-01 00:00 ..</span><br><span class="line">-rw-rw-r-- 1 root   system   4096 1970-01-01 00:00 bcsh</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 bits_per_pixel</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 blank</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 cabc</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 cabc_lut</span><br><span class="line">--w------- 1 root   root     4096 1970-01-01 00:33 car_reverse</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 console</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 cursor</span><br><span class="line">-r--r--r-- 1 root   root     4096 1970-01-01 00:33 dev</span><br><span class="line">lrwxrwxrwx 1 root   root        0 1970-01-01 00:33 device -&gt; ../../../fb.17</span><br><span class="line">-r--r--r-- 1 root   root     4096 1970-01-01 00:33 disp_info</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 dsp_buf</span><br><span class="line">-rw-rw-r-- 1 root   system   4096 1970-01-01 00:00 dsp_lut</span><br><span class="line">-r--r--r-- 1 root   root     4096 1970-01-01 00:33 dsp_mode</span><br><span class="line">-r--r--r-- 1 root   root     4096 1970-01-01 00:33 dual_mode</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 dump_buf</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 enable</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:00 fps</span><br><span class="line">-rw-rw-r-- 1 root   system   4096 1970-01-01 00:00 hdr_bt1886eotf</span><br><span class="line">-rw-rw-r-- 1 root   system   4096 1970-01-01 00:00 hdr_st2084oetf</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 hwc_lut</span><br><span class="line">-r--r--r-- 1 root   root     4096 1970-01-01 00:00 lcdcid</span><br><span class="line">-rw-rw-r-- 1 root   system   4096 1970-01-01 00:00 map</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 mode</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 modes</span><br><span class="line">-r--r--r-- 1 root   root     4096 1970-01-01 00:33 name</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 overlay</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 pan</span><br><span class="line">-r--r--r-- 1 root   root     4096 1970-01-01 00:33 phys_addr</span><br><span class="line">drwxr-xr-x 2 root   root        0 1970-01-01 00:00 power</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 rotate</span><br><span class="line">-rw-rw-r-- 1 system graphics 4096 1970-01-01 00:00 scale</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:00 screen_info</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 state</span><br><span class="line">-r--r--r-- 1 root   root     4096 1970-01-01 00:33 stride</span><br><span class="line">lrwxrwxrwx 1 root   root        0 1970-01-01 00:33 subsystem -&gt; ../../../../class/graphics</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:00 uevent</span><br><span class="line">-r--r--r-- 1 root   root     4096 1970-01-01 00:33 virt_addr</span><br><span class="line">-rw-r--r-- 1 root   root     4096 1970-01-01 00:33 virtual_size</span><br><span class="line">-r--r--r-- 1 root   root     4096 1970-01-01 00:00 vsync</span><br><span class="line">-r--r--r-- 1 root   root     4096 1970-01-01 00:33 win_property</span><br></pre></td></tr></table></figure>
+
+<p>상기 폴더의 파일을 read 함으로서 fb의 정보를 얻을 수 있습니다.<br>아래는 <code>screen_info</code>를 read한 것입니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rk3328_box:/sys/devices/fb.17/graphics/fb0 # cat screen_info</span><br><span class="line">xres:1920</span><br><span class="line">yres:1080</span><br><span class="line">fps:60</span><br><span class="line">type:6</span><br><span class="line">interlace:0</span><br></pre></td></tr></table></figure>
+
+<p>몇몇 파일은 write 함으로서 fb를 제어할 수 있습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rk3328_box:/sys/devices/fb.17/graphics/fb0 # cat scale</span><br><span class="line">xscale=100 yscale=100</span><br><span class="line">left=100 top=100 right=100 bottom=100</span><br><span class="line">rk3328_box:/sys/devices/fb.17/graphics/fb0 # echo xscale=70 &gt; scale</span><br><span class="line">rk3328_box:/sys/devices/fb.17/graphics/fb0 # cat scale</span><br><span class="line">xscale=70 yscale=100</span><br><span class="line">left=70 top=100 right=70 bottom=100</span><br></pre></td></tr></table></figure>
+
+<p>위 명령은 화면의 x축 크기를 70%로 줄인 것입니다.<br>위 명령을 통해서 화면의 크기가 축소된 것을 확인할 수 있습니다.</p>
+<h1 id="SurfaceFlinger"><a href="#SurfaceFlinger" class="headerlink" title="SurfaceFlinger"></a>SurfaceFlinger</h1><p>SurfaceFlinger의 역할은 앞에서 앱이나 사용자의 응용 프로그램에서 생성한 화면(여기에서는 Surface라는 용어를 사용함) 합성 관리하는 역할입니다. “Surface+Flinger”의 합성입니다. Surface의 “표면”이라는 의미와 Flinger의 “던지는 사람”이라는 조합으로 SurfaceFlinger 기능을 이 두 단어가 모두 함축하고 있습니다. 즉, 생성된 여러 개의 Surface를 하나의 Surface로 만들고 이 만든 화면을 프레임 버퍼 드라이버와 연계하여 프레임 버퍼로 만들고, LCD 화면에 표시하는 역할을 하는 것입니다.</p>
+<p><img src="/images/0010.jpg" alt="SurfaceFlinger"></p>
+<p>Surface는 2D나 3D일 ㅅ 있고, RGB888 또는 RGB565등 다양한 형태의 포멧일 수 있습니다. SurfaceFlinger는 이러한 Surface를 지원하며, Framebuffer에서 원하는 형태의 포멧으로 합성하여 FrameBuffer에 던져줍니다.</p>
+<h2 id="SurfaceFlinger-관련-용어"><a href="#SurfaceFlinger-관련-용어" class="headerlink" title="SurfaceFlinger 관련 용어"></a>SurfaceFlinger 관련 용어</h2><h3 id="Surface"><a href="#Surface" class="headerlink" title="Surface"></a>Surface</h3><p>하나의 화면을 이야기합니다. 일반적인 윈도우 개념으로 생각하면 됩니다. 실제로는 소프트웨어적인 Overlay를 이야기합니다. Surface는 클라이언트쪽(어플리케이션) 입장에서만 사용하는 용어입니다. 서버쪽에서는 실제로 옵션에 따라 적절한 Layer를 생성합니다.</p>
+<h3 id="SurfaceComposer"><a href="#SurfaceComposer" class="headerlink" title="SurfaceComposer"></a>SurfaceComposer</h3><p>Surface와 SurfaceFlinger와의 연결을 처리하고, 여러가지 Surface로부터 SurfaceFlinger로 전달되는 제어 오퍼레이션을 담당합니다.(연결, 클라이언트로부터 트랜잭션등 처리.)</p>
+<p>Surface를 생성할 때는 반드시 SurfaceComposer에 대한 접속 포인트인 SurfaceComposerClient 클래스를 생성한 후에 Surface를 생성합니다.</p>
+<h3 id="SurfaceFlinger-1"><a href="#SurfaceFlinger-1" class="headerlink" title="SurfaceFlinger"></a>SurfaceFlinger</h3><p>클라이언트인 Surface로부터 전달된 데이터를 합성 후 HAL로 전달하는 역할을 하는 안드로이드의 디스플레이 서버입니다. 이 서버는 시작된 후에는 스레드 루프를 돌면서 Surface로부터 데이터가 입력되거나, 화면이 업데이트되어야 하는 경우에 입력된 데이터의 좌표(X,Y,Z축)에 따라 Surface를 합성하고 이를 HAL로 전달해서 LCD 화면에 디스플레이할 수 있도록 제어합니다.</p>
+<h3 id="Layer"><a href="#Layer" class="headerlink" title="Layer"></a>Layer</h3><p>Surface를 구성하는 클래스로 Surface의 용도의 특성을 결정짓습니다. SurfaceFlinger쪽에서 사용되고 생성되는 클래스틑 LayerBase클래스에서 상속된 Layer, LayerBuffer, LayerDim, LayerBlur의 네종류의 클래스가 생성됩니다.</p>
+<h3 id="gralloc"><a href="#gralloc" class="headerlink" title="gralloc"></a>gralloc</h3><p>SurfaceFlinger를 구성하는 HAL의 하나로, 그래픽 버퍼용 메모리를 매핑하고 디스플레이 device driver를 제어합니다. 대부분의 칩 벤더에서는 이 부분을 바이너리 형태로 제공해 디버깅하는데 제약사항이 생기는 경우가 많습니다. </p>
+<h3 id="Overlay"><a href="#Overlay" class="headerlink" title="Overlay"></a>Overlay</h3><p>SurfaceFlinger를 구성하는 HAL의 하나로, LayerBuffer의 하부 구조 중 일부를 담당합니다. 실제로는 일반적으로 표현되는 하드웨어 Overlay를 이야기하며, 주로 멀티미디어 관련 연산에 사용되는 경우가 많습니다.</p>
+<h2 id="SurfaceFlinger-관련-소스-리스트"><a href="#SurfaceFlinger-관련-소스-리스트" class="headerlink" title="SurfaceFlinger 관련 소스 리스트"></a>SurfaceFlinger 관련 소스 리스트</h2><h3 id="클라이언트"><a href="#클라이언트" class="headerlink" title="클라이언트"></a>클라이언트</h3><ul>
+<li>frameworks/base/services/core/java/com/android/server/wm/WindowManagerService.java</li>
+<li>frameworks/base/core/java/android/view/*</li>
+</ul>
+<h3 id="라이브러리"><a href="#라이브러리" class="headerlink" title="라이브러리"></a>라이브러리</h3><ul>
+<li>frameworks/base/core/jni/android_view_Surface.cpp</li>
+<li>frameworks/native/libs/gui/Surface.cpp Surface<strong>* / ISurface*</strong>들</li>
+<li>frameworks/native/services/surfaceflinger/*</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2020/01/16/Android-Surfaceflinger/" data-id="ckzfaqfs300m2dyuooxuwkk3l" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "Android SurfaceFlinger 분석",
+        "image": "http://jung-max.github.io/images/0008.jpg",
+        "keywords": "Android Platform SurfaceFlinger",
+        "genre": "Android Platform SurfaceFlinger",
+        "datePublished": "2020-01-16",
+        "dateCreated": "2020-01-16",
+        "dateModified": "2022-02-08",
+        "url": "http://jung-max.github.io/2020/01/16/Android-Surfaceflinger/",
+        "description": "개요안드로이드는 응용 프로그램에서 만든 메뉴나 다이얼로그 박스, 사용자 인터페이스 구성 요소들을 SurfaceFlinger를 통하여 리눅스 커널에 위치한 LCD 디스플레이 드라이버인 프레임 버퍼 드라이버를 통해 그림을 그리게 됩니다. 
+
+안드로이드 GDI의 구조를 이해하기 위해서 하위레벨에서 상위레벨로 접근하여 살펴보도록 하겠습니다.
+FrameBuffer커"
+        "wordCount": 1417
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/02/12/openCV-pageDewarp-01/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            openCv page Dewarp 분석 -1
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2020/01/03/Android-Tablayout-background-color/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">Android TabLayout backgroud color 설정하기</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2020/01/16/Android-Surfaceflinger/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>Android OTA Update | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="Android Platform">
+    
+    <meta name="description" content="안드로이드 업데이트 (OTA Updates)안드로이드 디바이스는 시스템, 어플리케이션, 타임존 룰을 over-the-air(OTA) update로 받고 설치할 수 있다. 이 섹션은 Update Package의 구조를 설명하고 Update Package를 빌드하기 위한 도구에 대해서 설명한다. OTA Update은 OS를 업그레이드하고, 시스템 파티션에 설치">
+<meta name="keywords" content="Android Platform">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android OTA Update">
+<meta property="og:url" content="http://jung-max.github.io/2022/01/11/Android-OTA Update/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="안드로이드 업데이트 (OTA Updates)안드로이드 디바이스는 시스템, 어플리케이션, 타임존 룰을 over-the-air(OTA) update로 받고 설치할 수 있다. 이 섹션은 Update Package의 구조를 설명하고 Update Package를 빌드하기 위한 도구에 대해서 설명한다. OTA Update은 OS를 업그레이드하고, 시스템 파티션에 설치">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/Thumbnail/Android_OTA.jpg">
+<meta property="og:updated_time" content="2022-02-08T02:11:11.770Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android OTA Update">
+<meta name="twitter:description" content="안드로이드 업데이트 (OTA Updates)안드로이드 디바이스는 시스템, 어플리케이션, 타임존 룰을 over-the-air(OTA) update로 받고 설치할 수 있다. 이 섹션은 Update Package의 구조를 설명하고 Update Package를 빌드하기 위한 도구에 대해서 설명한다. OTA Update은 OS를 업그레이드하고, 시스템 파티션에 설치">
+<meta name="twitter:image" content="http://jung-max.github.io/images/Thumbnail/Android_OTA.jpg">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2022/01/11/android-ota update/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Android/지식/">지식</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Android-OTA Update" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Android OTA Update
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2022/01/11/Android-OTA Update/" class="article-date">
+            <time datetime="2022-01-11T00:23:41.000Z" itemprop="datePublished">2022-01-11</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Android-Platform/">Android Platform</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="안드로이드-업데이트-OTA-Updates"><a href="#안드로이드-업데이트-OTA-Updates" class="headerlink" title="안드로이드 업데이트 (OTA Updates)"></a>안드로이드 업데이트 (OTA Updates)</h1><p>안드로이드 디바이스는 시스템, 어플리케이션, 타임존 룰을 over-the-air(OTA) update로 받고 설치할 수 있다. 이 섹션은 Update Package의 구조를 설명하고 Update Package를 빌드하기 위한 도구에 대해서 설명한다.</p>
+<p>OTA Update은 OS를 업그레이드하고, 시스템 파티션에 설치된 ReadOnly 앱을 업그레이드하고, 타임존 룰을 업그레이드하도록 디자인되어 있다. 이 업데이트는 사용자에 의해 설치된 어플리케이션에는 영향을 미치지 않는다.</p>
+<h2 id="OTA-Package-Tools"><a href="#OTA-Package-Tools" class="headerlink" title="OTA Package Tools"></a>OTA Package Tools</h2><p>build/tools/releasetools 위치에 제공되는 ota_from_target_files 도구는 full 과 incremental(증분)의 두 가지 종류의 패키지를 빌드할 수 있다. 이 도구는 안드로이드 빌드 시스템에서 만들어진 target_files.zip 파일을 입력으로 받는다.</p>
+<h3 id="Full-Updates"><a href="#Full-Updates" class="headerlink" title="Full Updates"></a>Full Updates</h3><p>Full Update는 패키지 안에 디바이스의 최종 상태 전체(system, boot, recovery 파티션)를 포함하고 있다. 디바이스가 패키지를 받고 리커버리 시스템으로 부팅할 수 있는 한, 디바이스의 현재 상태에 상관없이 패키지를 설치할 수 있다.</p>
+<p>예시 &gt; 가상의 tardis 디바이스를 위한 Full Update를 빌드하기 위한 릴리즈 툴의 사용</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># first, build the target-files.zip</span><br><span class="line">$ . build/envsetup.sh &amp;&amp; lunch tardis-eng</span><br><span class="line">$ mkdir dist_output</span><br><span class="line">$ make dist DIST_DIR=dist_output</span><br></pre></td></tr></table></figure>
+
+<p>target-files.zip은 OTP 패키지를 구성하기 위한 모든 것을 포함하고 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./build/tools/releasetools/ota_from_target_files dist_output/tardis-target_files.zip ota_update.zip</span><br></pre></td></tr></table></figure>
+
+<p>위와 같이 하면 테스트 디바이스를 위한 ota_update.zip이 준비된다. 사용자 디바이스를 위해서는 <a href="Android/OTAUpdates/sign_builds">Signing builds for release</a>에 설명된 대로 별도의 개인 키를 생성해야 한다.</p>
+<h3 id="Incremental-Updates-증분-업데이트"><a href="#Incremental-Updates-증분-업데이트" class="headerlink" title="Incremental Updates (증분 업데이트)"></a>Incremental Updates (증분 업데이트)</h3><p>증분 업데이트는 디바이스에 이미 있는 데이타에 대한 바이너리 패치의 집합으로 구성되어 있다. 이는 상당히 작은 양의 업데이트 패키지를 만들어낸다.<br>*. 변경대상이 아닌 파일은 포함되지 않는다.<br>*. 자주 변경되는 파일은 보통 이전 버전과 아주 비슷해서 패키지는 두 파일의 차이만을 포함한다.<br>증분 업데이트는 디바이스에 설치되어 있는 이전의 패키지를 가지고 있거나 이전의 패키지를 다시 빌드 할 수 있는 소스가 있는 경우에만 사용할 수 있다. 증분 업데이트를 만들기 위해서는 새 빌드의 target_files.zip 뿐만 아니라 이전 빌드의 target_files.zip 가 필요하다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./build/tools/releasetools/ota_from_target_files -i PREVIOUS-tardis-target_files.zip dist_output/tardis-target_files.zip incremental_ota_update.zip # make incremental from the older version</span><br></pre></td></tr></table></figure>
+
+<p>새 빌드는 이전 빌드와 비슷하기 때문에 증분 업데이트 패키지는 Full Update 에 비해서 상당히 작다.</p>
+<p>증분 빌드는 증분 빌드를 만들기 위해 사용된 이전 빌드와 정확히 일치하는 빌드를 사용하는 디바이스에만 배포되어야 한다. 다른 빌드를 사용하고 있는 디바이스에 증분 업데이트를 사용할 경우에는 복구 에러 아이콘을 보여준다. 이 시점에 디바이스를 재부팅하면 옛날 시스템으로 부팅할 것이다. </p>
+<h3 id="Update-Packages"><a href="#Update-Packages" class="headerlink" title="Update Packages"></a>Update Packages</h3><p>업데이트 패키지(ota_update.zip, incremental_ota_update.zip)은 <code>META-INF/com/google/android/update-binary</code>를 포함하고 있는 zip 파일이다. 패키지의 서명을 검증한 이후에는 리커버리는 이 바이너리를 /tmp에 압축해제하고 다음의 인자를 넘긴다.</p>
+<ul>
+<li><strong>Update binary API version number.</strong> update binary에 넘기는 인자가 변경되면 이 숫자는 증가한다.</li>
+<li><strong>File descriptor of the command pipe.</strong> update 프로그램은 pipe를 통해 리커버리 바이너리에 명령을 되돌려 보낼 수 있다. (대부분의 경우 진행상황을 사용자에게 표시하기 위핸 UI 변경),</li>
+<li><em>*Filename of the update package.zip file.</em></li>
+</ul>
+<p>리커버리 패키지는 update binary에 정적으로 링크된 바이너리를 사용할 수 있다. OTA 패키지 구성 도구는 updater 프로그램을 사용한다.( bootable/recovery/updater 에 소스가 있다.) updater 프로그램은 간단한 스크립팅 언어를 제공하여 여러 설치 작업을 할 수 있게 한다. </p>
+<p>updater binary와 edify 문법, 내장 함수에 대해서는 <a href="https://source.android.com/devices/tech/ota/nonab/inside_packages.html" rel="external nofollow noopener noreferrer" target="_blank">Inside OTA Packages</a>를 참조하라.</p>
+<h2 id="Signing-Builds-for-Release"><a href="#Signing-Builds-for-Release" class="headerlink" title="Signing Builds for Release"></a>Signing Builds for Release</h2><p>안드로이드 OS는 두 곳에서 암호화 서명을 사용한다.</p>
+<ol>
+<li>이미지의 각 .apk 파일은 서명되어야 한다. 안드로이드의 Package Manager는 .apk 서명을 두 가지고 사용한다.<ul>
+<li>어플리케이션이 교체될 때, 이전 어플리케이션 data에 접근하기 위하여 이전 어플리케이션과 동일한 키로 서명되어야 한다. 이는 사용자 앱에서나 시스템 앱에서나 동일하게 적용된다. </li>
+<li>둘 이상의 어플리케이션이 동일한 user ID를 공유하려고 할 경우에는, 동일한 키로 서명되어야 한다.</li>
+</ul>
+</li>
+<li>OTA update 패키지는 system에 의해 기대되어지는 키 중 하나로 서명되어야 한다. 그렇지 않으면 설치 프로젝트가 설치를 거부할 것이다.</li>
+</ol>
+<h3 id="Release-Keys"><a href="#Release-Keys" class="headerlink" title="Release Keys"></a>Release Keys</h3><p>안드로이드는 build/target/product/security 디렉토리 안에 test-keys를 가지고 있다. make를 사용하여 안드로이드 OS 이미지를 만들때 모든 .apk 파일은 test-keys를 이용하여 서명된다. test-keys가 알려져 있기 때문에 누구나 자신의 .apk를 같은 키로 서명할 수 있다. 이는 다른사람이 이 서명을 이용하여 OS Image의 시스템 앱을 교체하거나 시스템앱을 하이재킹할 수 있게 한다. 이런 이유로 공개적으로 접근할 수 없는 release-keys를 사용하여 안드로이드 OS 이미지에 서명하는 것은 중요하다.</p>
+<p>자신의 유일한 release-keys를 생성하기 위해서는 안드로이드 트리의 최상단 디렉토리에서 다음을 실행하라.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ subject=&apos;/C=US/ST=California/L=Mountain View/O=Android/OU=Android/CN=Android/emailAddress=android@android.com&apos;</span><br><span class="line">$ mkdir ~/.android-certs</span><br><span class="line">$ for x in releasekey platform shared media; do \</span><br><span class="line">    ./development/tools/make_key ~/.android-certs/$x &quot;$subject&quot;; \</span><br><span class="line">  done</span><br></pre></td></tr></table></figure>
+
+<p>$subject는 기관의 정보를 반영하도록 수정되어야 한다. 어떤 디렉토리라도 사용할 수 있지만 백업이 되고 안전한 장소를 사용하도록 주의를 기울여야 한다. 몇몇의 vendor들은 강력한 비밀구문을 이용하여 private-key를 압호화하고 암호화된 키를 source control에 저장한다. 다른 vendor들은 release key를 완전히 다른 곳에 보관한다.</p>
+<p>릴리즈 이미지를 만들기 위해서 다음을 사용하라</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ make dist</span><br><span class="line">$ ./build/tools/releasetools/sign_target_files_apks \</span><br><span class="line">    -o \    # explained in the next section</span><br><span class="line">    -d ~/.android-certs out/dist/*-target_files-*.zip \</span><br><span class="line">    signed-target_files.zip</span><br></pre></td></tr></table></figure>
+
+<p>sign_target_files_apks 스크립트는 target-files.zip을 입력으로 받고 그 안의 모든 apk를 새로운 키로 서명한다. 새로 서명된 이미지는 /IMAGE/안에 signed-target_files.zip에서 찾을 수 있다.</p>
+<h3 id="Signing-OTA-Packages"><a href="#Signing-OTA-Packages" class="headerlink" title="Signing OTA Packages"></a>Signing OTA Packages</h3><p>서명된 target-files zip은 다음의 명령으로 서명된 OTA update zip 파일료 변환할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ./build/tools/releasetools/ota_from_target_files \</span><br><span class="line">    -k ~/.android-certs/releasekey \</span><br><span class="line">    signed-target_files.zip \</span><br><span class="line">    signed-ota_update.zip</span><br></pre></td></tr></table></figure>
+
+<h4 id="Signatures-and-sideloading"><a href="#Signatures-and-sideloading" class="headerlink" title="Signatures and sideloading"></a>Signatures and sideloading</h4><p>Sideloading은 리커버리의 일반 패키지 서명 확인 메카니즘을 건너뛰지 않는다. 일반 OTA 패키지에 대해서와 같이 패키지를 설치하기 전에 리커버리는 리커버리 파티션에 저장되어있는 공개 키에 맞는 private key로 서명되어 있는지 확인한다.</p>
+<p>메인 시스템에서 받은 업데이트 패키지는 전형적으로 두번 검증된다. 한번은 안드로이드 API의 RecoverySystem.verifyPackage() 메소드를 사용하는 메인 시스템에서 검증하고, 리커버리에서 다시 한번 검증된다. RecoverySystem API는 메인시스템에 저장된 공개 키(디폴트는 /system/etc/security/otacerts.zip)에 대해서 서명을 체크한다. 리커버리 시스템은 리커버리 파티션의 RAM disk에 저장된 공개키(/res/keys)에 대해서 서명을 체크한다.</p>
+<p>디폴트로 build로 만들어지는 target-files.zip는 OTA 인증서가 test key에 맞도록 설정한다. 릴리즈 이미지에서는 디바이스가 업데이트 패키지의 인증을 검증할 수 있도록 다른 인증서가 사용되어야 한다. sign_target_files_apks에 -o 플래그를  넘김으로써 cert 디렉토리의 test key certificate 을 release key certificate으로 교체할 수 있다.</p>
+<p>일반적으로 시스템 이미지와 복구 이미지는 같은 OTA public key 셋을 저장한다. 복구 시스템에만 key를 추가함으로써 sideloading을 통해서 설치할 수 있게 서명하는 것이 가능하다.(메인 시스템 업데이트 다운로드 메카니즘은 ocacert.zip을 통해 검증을 올바르게 수행한다.) PRODUCT_EXTRA_RECOVERY_KEYS변수를 설정함으로써 추가의 키를 리커버리에 포함하도록 할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vendor/yoyodyne/tardis/products/tardis.mk</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[...]</span><br><span class="line"></span><br><span class="line">PRODUCT_EXTRA_RECOVERY_KEYS := vendor/yoyodyne/security/tardis/sideload</span><br></pre></td></tr></table></figure>
+
+<p>이것은 vendor/yoyodyne/security/tardis/sideload.x509.pem 공개키를 리커버리 키 파일에 포함하도록 한다. 인스톨 패키지는 이 키로 서명할 수 있다. 이 추가의 키는 otacerts.zip에는 포함되지 않는다. 그러므로 시스템은 다운로드된 패키지를 올바르게 검증할 수 있다.</p>
+<h3 id="Certificates-and-private-keys"><a href="#Certificates-and-private-keys" class="headerlink" title="Certificates and private keys"></a>Certificates and private keys</h3><p>각각의 키는 두 개의 파일로 구성된다. .x509.pem 의 확장자를 가지는 certificate과 pk8확장자를 가지는 private key가 그것이다. private key는 패키지에 서명할 때 필요하며 비밀로 안전하게 보관되어야 한다. 키는 패스워드로 보호될 수 있다. certificate은 키의 공개된 반만을 포함하고 있고 공개되어 넓게 배포된다. certificate은 private key로 서명이 되었는지 검증하기 위해 사용한다.</p>
+<p>표준 안드로이드 빌드는 4가지 key를 사용한다. 모든 키는 build/target/product/security에 위치한다.</p>
+<p><strong>testkey</strong><br>   키를 지정하지 않았을 때 사용되는 일반 디폴트 키이다.</p>
+<p><strong>platform</strong><br>   core platform의 부분의 패키지들에 사용되는 test key이다.</p>
+<p><strong>shared</strong><br>   home/contects 과정에 공유되는 것들에 대한 test key이다.</p>
+<p><strong>media</strong><br>   media/download 시스템의 일부의 패키지에 사용되는 test key이다.</p>
+<p>각각의 패키지는 Android.mk의 LOCAL_CERTIFICATE에 이중 하나를 지정한다. (이 값이 지정되지 않으면 testkey가 사용된다.) pathname을 사용하여 완전히 다른 키를 지정할 수도 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">device/yoyodyne/apps/SpecialApp/Android.mk</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> [...]</span><br><span class="line"></span><br><span class="line">LOCAL_CERTIFICATE := device/yoyodyne/security/special</span><br></pre></td></tr></table></figure>
+
+<p>위와 같이 하면 device/yoyodyne/security/special.{x509.pem, pk8}키가 SpecialApp.apk를 서명하는 데 사용된다. 빌드는 password로 보호되지 않는 private key만을 사용할 수 있다.</p>
+<h3 id="Advanced-signing-options"><a href="#Advanced-signing-options" class="headerlink" title="Advanced signing options"></a>Advanced signing options</h3><h3 id="Manually-generating-keys"><a href="#Manually-generating-keys" class="headerlink" title="Manually generating keys"></a>Manually generating keys</h3><h3 id="Creating-image-files"><a href="#Creating-image-files" class="headerlink" title="Creating image files"></a>Creating image files</h3><h2 id="Reducing-OTA-Size"><a href="#Reducing-OTA-Size" class="headerlink" title="Reducing OTA Size"></a><a href="https://source.android.com/devices/tech/ota/reduce_size" rel="external nofollow noopener noreferrer" target="_blank">Reducing OTA Size</a></h2><h1 id="A-B-Seamless-system-updates"><a href="#A-B-Seamless-system-updates" class="headerlink" title="A/B (Seamless) system updates"></a>A/B (Seamless) system updates</h1><p>근대의 안드로이드 디바이스는 각 파티션(A, B)의 두 개의 복사본을 가지고 있어서 Update를 현재 사용하지 않는 파티션에 적용할 수 있다. A/B 디바이스는 네트워크에서 수신하면서 바로 업데이트를 적용하기 때문에 패키지를 다운로드해서 저장하기 위한 별도의 공간이 필요하지 않다. 이런것을 Streaming A/B 라고 알려져 있다. A/B 디바이스의 OTA update에 대한 추가의 정보는 <a href="Android/OTAUpdates/ab">A/B(Seamless) System Updates</a>를 참조하라.</p>
+<h2 id="A-B-Seamless-System-Updates"><a href="#A-B-Seamless-System-Updates" class="headerlink" title="A/B (Seamless) System Updates"></a>A/B (Seamless) System Updates</h2><p>A/B System Update는 seamless updates로 알려져 있는데, OTA Update중에 동작가능한 부팅 시스템이 남아있는 것을 보장한다. 이 접근은 업데이트 후에 디바이스가 사용 불가능하게 될 가능성을 줄인다.(즉, 보증 센터에서 디바이스 교환이나 디바이스 리플래싱을 하는 것을 줄인다.) Chrome과 같은 다른 상용 레벨 OS도 A/B Update을 성공적으로 사용하고 있다.</p>
+<p>A/B System Update이 어떻게 동작하는지에 대해서는 [Partition selection(slots)]를 보라.</p>
+<p>A/B System Update는 다음의 이익을 제공한다.</p>
+<ul>
+<li>OTA Update가 시스템이 동작하는 동안에 사용자의 동작을 방해하는 것 없이 수행될 수 있다. 사용자는 OTA Update중에 디바이스를 사용하는 것을 계속 할 수 있다. 유일한 사용하지 못하는 시간은 디바이스가 리부팅하는 동안뿐이다.</li>
+<li>Update 후의 리부팅은 일반적인 상황에서의 리부팅보다 오래 걸리지 않는다.</li>
+<li>OTA 적용이 실패했을 경우에도 사용자는 영향을 받지 않는다. 사용자는 옛날 OS를 가지고 계속 동작할 수 있으며, 다시 업데이트를 재시도 할 수 있다.</li>
+<li>만약 OTA update를 적용했는데 부팅이 실패한다면 디바이스는 옛날 파티션으로 재부팅하게 된다. 사용자는 나중에 업데이트를 재시도할 수 있다.</li>
+<li>어떤 에러도 사용하지 않고 있는 파티션에만 적용되기 때문에 나중에 재시도할 수 있다. 이런 에러는 가능성이 낮은데, 사용자의 사용성을 낮추는 것을 막기 위해 I/O 부하가 아주 적기 때문이다.</li>
+<li>Update는 A/B 디바이스에 스트리밍 될 수 있다. 업데이트를 다운로드하고 인스톨 할 필요가 없다. 스트리밍은 /data나 /cache 디렉토리에 업데이트 패키지를 저장하기 위해 충분한 공간을 가질 필요가 없게 한다.</li>
+<li>cache 파티션은 OTA update 패키지를 저장하는데 더이상 사용되지 않는다. 그러므로 cache 파티션이 업데이트를 위해 클 필요가 없다.</li>
+<li>dm-verify는 손상되지 않은 이미지를 부팅하는 것을 보장한다. 만약 디바이스가 잘못된 OTA나 dm-verify문제로 부팅하지 않는다면 디바이스는 이전의 이미지로 리부팅할 수 있다. (안드로이드 Verified Boot은 A/B Update를 필요로하지 않는다.)</li>
+</ul>
+<h3 id="About-A-B-system-updates"><a href="#About-A-B-system-updates" class="headerlink" title="About A/B system updates"></a>About A/B system updates</h3><h4 id="Partition-selection-slots"><a href="#Partition-selection-slots" class="headerlink" title="Partition selection (slots)"></a>Partition selection (slots)</h4><h4 id="Update-engine-daemon"><a href="#Update-engine-daemon" class="headerlink" title="Update engine daemon"></a>Update engine daemon</h4><h4 id="Bootloader-interactions"><a href="#Bootloader-interactions" class="headerlink" title="Bootloader interactions"></a>Bootloader interactions</h4><h4 id="Streaming-update-support"><a href="#Streaming-update-support" class="headerlink" title="Streaming update support"></a>Streaming update support</h4><h3 id="Life-of-an-A-B-update"><a href="#Life-of-an-A-B-update" class="headerlink" title="Life of an A/B update"></a>Life of an A/B update</h3><h4 id="Post-installation"><a href="#Post-installation" class="headerlink" title="Post-installation"></a>Post-installation</h4><h4 id="After-reboot"><a href="#After-reboot" class="headerlink" title="After reboot"></a>After reboot</h4><ul>
+<li><h3 id="Implementing-A-B-Updates"><a href="#Implementing-A-B-Updates" class="headerlink" title="Implementing A/B Updates"></a><a href="https://source.android.com/devices/tech/ota/ab/ab_implement" rel="external nofollow noopener noreferrer" target="_blank">Implementing A/B Updates</a></h3></li>
+<li><h3 id="Frequently-Asked-Questions"><a href="#Frequently-Asked-Questions" class="headerlink" title="Frequently Asked Questions"></a><a href="https://source.android.com/devices/tech/ota/ab/ab_faqs" rel="external nofollow noopener noreferrer" target="_blank">Frequently Asked Questions</a></h3></li>
+</ul>
+<h1 id="Non-A-B-system-updates"><a href="#Non-A-B-system-updates" class="headerlink" title="Non-A/B system updates"></a>Non-A/B system updates</h1><p>옛날의 안드로이드 디바이스는 업데이트 패키지의 압축을 풀고 Update를 다른 파티션에 적용하기 위한 소프트웨어를 포함하는 전용의 리커버리 피티션을 가지고 있다. 더 많은 정보를 위해서는 <a href="Android/OTAUpdates/NonAB">Non-A/B System Updates</a>를 참조하라.</p>
+<h2 id="Non-A-B-System-Updates"><a href="#Non-A-B-System-Updates" class="headerlink" title="Non-A/B System Updates"></a>Non-A/B System Updates</h2><p>A/B 파티션이 없는 예전의 안드로이드 디바이스의 경우에 플래시 공간은 다음의 파티션들을 포함한다.:</p>
+<ul>
+<li><p><strong>boot</strong> : 리눅스 커널과 작은 root 파일시스템을 포함하고 있다. (RAM Disk에 로드된다.) System과 다른 파티션들을 마운트하고 system 파티션에 위치한 runtime을 개시한다.</p>
+</li>
+<li><p><strong>system</strong> : AOSP에서 이용가능한 소스코드로 생성되는 System Application과 라이브러리를 포함한다. 일반적인 동작에서 이 파티션은 read-only로 마운트되고 OTA update동안에만 이 파티션의 내용이 바뀐다.</p>
+</li>
+<li><p><strong>vendor</strong> : AOSP에 포함되지 않은 소스코드로 생성되는 System Application과 라이브러리를 포함한다. 일반적인 동작에서 이 파티션은 read-only로 마운트되고 OTA update동안에만 이 파티션의 내용이 바뀐다.</p>
+</li>
+<li><p><strong>userdata</strong> : 사용자가 설치한 application에 의해 저장되는 데이터를 보존한다. 일반적으로 이 파티션은 OTA update에 의해 변경되지 않는다.</p>
+</li>
+<li><p><strong>cache</strong> : 일부 Application에 의해 사용되는 임시 영역이다.(이 영역을 접근하려면 특별한 app 퍼미션이 필요하다.) 이 영역은 OTA update 패키지를 다운로드하는 공간으로 사용된다. 다른 프로그램은 언제든 이 영역에 있는 파일들이 사라질 수 있다는 것을 가정한다. 몇몇의 OTA 패키지의 설치는 이 파티션을 완전히 지우는 결과가 될 수 있다. 이 파티션은 OTA update의 log를 포함한다.</p>
+</li>
+<li><p><strong>recovery</strong> : 두번째의 완전한 리눅스 시스템을 포함하고 있다. 커널과 다른 파티션을 update하는 데 사용하는 특별한 복구용의 바이너리들을 포함하고 있다.</p>
+</li>
+<li><p><strong>misc</strong> : OTA 패키지가 적용되는 동안 재시작할 때 어떤 작업을 하는 중인지에 대한 정보를 저장하기 위해 리커버리에서 사용되는 작은 파티션이다.</p>
+</li>
+</ul>
+<h3 id="OTA-Update의-생명주기-순서"><a href="#OTA-Update의-생명주기-순서" class="headerlink" title="OTA Update의 생명주기(순서)"></a>OTA Update의 생명주기(순서)</h3><p>전형적인 OTA update는 다음의 과정을 포함한다.</p>
+<ol>
+<li>디바이스는 OTA 서버를 주기적으로 체크하고 업데이트(OTA 서버로부터 업데이트 패키지의 URL과 사용자에게 보여줄 설명 등을 포함하여)가 사용가능한지 확인한다. </li>
+<li>cache나 data 파티션에 업데이트를 다운로드하고 암호화 서명을 /system/etc/security/otacert.zip에 대해서 검증한다. 사용자에게 업데이트를 설치하는 것을 알린다.</li>
+<li>디바이스는 리커버리 모드로 리부팅한다. 리커버리 모드로 리부팅하면 boot 파티션에 있는 커널 대신에 recovery 파티션에 있는 커널과 시스템으로 부팅되게 된다.</li>
+<li>리커버리 바이너리가 실행되면 /cache/recovery/command의 명령줄 인자를 찾는다. /cache/recovery/command에는 다운로드된 패키지의 경로가 포함되어 있다.</li>
+<li>리커버리는 /res/keys의 공통키에 대해서 패키지의 암호화 서명을 검증한다. (res/keys는 recovery파티션에 포함되어있는 RAM disk의 일부이다.)</li>
+<li>패키지에서 데이타를 추출하여 필요에 따라 boot, system, vendor 파티션을 업데이트한다. system 파티션에서는 새로운 recovery 파티션을 파일로 포함하고 있다.</li>
+<li>일반 모드로 디바이스가 리부팅한다.<ul>
+<li>새로 업데이트된 boot 파이션이 로딩된다. 새롭게 업데이트된 system 파티션을 마운트하고 system 파티션의 바이너리를 실행한다.</li>
+<li>일반적인 시작 과정의 일부로, 시스템은 recovery 파티션의 내용이 system 파티션에 파일로 저장되어 있는 recovery파티션과 같은지 확인한다. 만약 다르다면 recovery 파티션은 system 파티션에 있는 내용으로 다시 쓰여진다. (다음번의 부팅에서는 recovery파티션은 system 파티션에 있는 내용과 동일하므로 다시쓰기 작업은 필요없어진다.)</li>
+</ul>
+</li>
+</ol>
+<p>시스템 업데이트 과정이 완료되면 Update로그는 /cache/recovery/last_log 에서 찾을 수 있다.</p>
+<h3 id="Migratiing-from-previous-releases"><a href="#Migratiing-from-previous-releases" class="headerlink" title="Migratiing from previous releases"></a>Migratiing from previous releases</h3><p>안드로이드 2.3/3.0/4.0에서 이전할 때, 주요 변경은 디바이스 특정적인 C 함수의 집합이 미리 정의된 C++ 객체로 변경된 것이다. 다음 테이블은 거의 동일한 목적의 옛날 함수와 새로운 함수를 열거한다.</p>
+<table>
+<thead>
+<tr>
+<th>C function</th>
+<th>C++ method</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>device_recovery_start()</td>
+<td>Device::RecoveryStart()</td>
+</tr>
+<tr>
+<td>device_toggle_display(), device_reboot_now()</td>
+<td>RecoveryUI::CheckKey()(also RecoveryUI::IsKeyPressed())</td>
+</tr>
+<tr>
+<td>device_handle_key()</td>
+<td>Device::HandleMenuKey()</td>
+</tr>
+<tr>
+<td>device_perform_action()</td>
+<td>Device::InvokeMenuItem()</td>
+</tr>
+<tr>
+<td>device_wipe_data()</td>
+<td>Device::WipeData()</td>
+</tr>
+<tr>
+<td>device_ui_init()</td>
+<td>ScreenRecoveryUI::Init()</td>
+</tr>
+</tbody></table>
+<p>옛날 함수에서 새 메소드로의 변환은 상당히 직관적이다. 그리고 개발자의 디바이스에 대한 Device class의 서브클래스 객체를 리턴하는 함수 make_device()를 구현해야 한다.</p>
+<h2 id="Block-Based-OTAs"><a href="#Block-Based-OTAs" class="headerlink" title="Block-Based OTAs"></a>Block-Based OTAs</h2><p>안드로이드 5.0이상의 디바이스에서부터 Block 기반 OTA를 활성화 할 수 있다. OTA는 OEM이 디바이스의 system 파티션을 원격으로 업데이트하는 메카니즘이다.</p>
+<ul>
+<li><strong>Android 5.0</strong>과 이후의 버전은 각 디바이스가 정확히 동일한 파티션을 사용하는지 보장하기 위해 block OTA 업데이트를 사용한다. 각각의 파일을 비교하고 바이너리 패치를 만드는 대신에, block OTA는 결과 파티션이 정확히 의도된 bit을 포함하는 것을 보장하기 위해 전체 파티션을 하나의 파일로 다루고 하나의 바이너리 패치를 계산한다. 이것은 fastboot나 OTA를 통해 디바이스 시스템 이미지가 동일 상태가 되게 한다.</li>
+<li>*<em>Android 4.0</em>과 이전버전은 file OTA 업데이트를 사용한다. 이 방법은 각 디바이스가 동일한 파일과 퍼미션, 모드를 가지도록 보장하지만 업데이트 방법에 따라 metadata가 달라질 수 있다.</li>
+</ul>
+<p>block OTA는 각 디바이스가 동일한 파티션을 가지게 되는 것을 보장하기 때문에, dm-verify을 사용하여 system 파티션에 서명하는 것을 가능하게 한다. dm-verify에 대한 것은 <a href="https://source.android.com/security/verifiedboot/index.html" rel="external nofollow noopener noreferrer" target="_blank">Verified Boot</a>을 참조하라.</p>
+<h3 id="Recommendations"><a href="#Recommendations" class="headerlink" title="Recommendations"></a>Recommendations</h3><p>안드로이드 5.0과 이후 버전에 대하여 factory ROM에 block OTA update를 사용하라. 이어지는 업데이트를 위한 block 기반의 OTA를 생성하기 위해서는 ota_from_target_files에 –block 옵션을 넘겨줘야 한다.</p>
+<p>안드로이드 4.0과 이전 버전에 대해서 file OTA update를 사용하라. Android 5.0과 이후버전의 전체 block OTA를 전송하는 것이 가능하지만 full OTA는 증분 OTA를 보내는 것보다 상당히 큰 사이즈이다.</p>
+<p>dm-verify는 안드로이드 5.0과 이후버전에서 나타나는 bootloader의 지원이 필요하기 때문에 기존에 존재하는 디바이스에 대해서는 dm-verify를 활성화 할 수 없다.</p>
+<p>안드로이드 OTA 시스템(recovery 이미지와 OTA를 생성하는 스크립트)에서 작업하는 개발자는 <a href="mailto:android-ota@googlegroups.com" rel="external nofollow noopener noreferrer" target="_blank">android-ota@googlegroups.com</a> 메일링 리스트를 구독함으로써 변경 내용을 추적할 수 있다.</p>
+<h3 id="File-vs-Block-OTAs"><a href="#File-vs-Block-OTAs" class="headerlink" title="File vs Block OTAs"></a>File vs Block OTAs</h3><p>file 기반 OTA중에, 안드로이드는 system 파이션의 filesystem layer의 내용을 바꾼다.(파일마다). 일관된 순서로 파일을 쓴다거나 일관된 파일 수정시간, 동일 위치에 파일이 쓰이는 것에 대해서 보장되지 않는다. 이런 이유로 file 기반의 OTA는 dm-verify-enabled 디바이스에서 실패한다. OTA 시도후에 디바이스는 부팅할 수 없게 될수도 있다.</p>
+<p>block 기반 OTA중에 안드로이드는 두 집합의 파일의 차이보다는 두 block 이미지의 차이를 본다. 업데이트는 해당하는 빌드 서버에서 디바이스 빌드를 다음중에 하나의 방법을 사용하여 확인한다.</p>
+<ul>
+<li><strong>Full Update</strong> 전체 시스템 이미지를 복사하는 것은 간단하고 패치 생성을 쉽게 만든다. 하지만 큰 사이즈의 이미지는 패치 적용 비용을 비싸게 만들 수 있다.</li>
+<li><strong>Incremental Update</strong> 바이너리 diff 도구를 사용하여 보다 작은 이미지를 만들어내고 패치 적용을 쉽게 만든다. 하지만 패치를 생성할 때 메모리 사용량이 많을 수 있다.</li>
+</ul>
+<h3 id="Updating-unmodified-systems-system-파티션이-변경되지-않은-상태에서의-업데이트"><a href="#Updating-unmodified-systems-system-파티션이-변경되지-않은-상태에서의-업데이트" class="headerlink" title="Updating unmodified systems (system 파티션이 변경되지 않은 상태에서의 업데이트)"></a>Updating unmodified systems (system 파티션이 변경되지 않은 상태에서의 업데이트)</h3><p>안드로이드 5.0을 사용하는 system 파티션이 변경되지 않은 디바이스에서는 file OTA와 block OTA에 대해서 다운로드와 설치 과정이 동일하다. 하지만 OTA 업데이트 그 자체는 다음과 같은 차이가 있을 수 있다.</p>
+<ul>
+<li>다운로드 사이즈 : Full block OTA는 full file OTA와 사이즈가 비슷하다. 증분 업데이트의 경우에는 몇 메가바이트가 더 클 수 있다. 일반적으로는 증분 block OTA 가 증분 file OTA보다 더 크다.</li>
+<li>Flash 와 RAM 에 대한 오류 민감성 : 파일이 깨진 경우에, file OTA는 깨진 파일을 접근하지 않는 동안에는 성공하지만 block OTA는 system 파티션의 어떤 깨짐에도 실패하게 된다.</li>
+</ul>
+<h3 id="Updating-modified-systems-system-파티션이-변경된-상태에서의-업데이트"><a href="#Updating-modified-systems-system-파티션이-변경된-상태에서의-업데이트" class="headerlink" title="Updating modified systems (system 파티션이 변경된 상태에서의 업데이트)"></a>Updating modified systems (system 파티션이 변경된 상태에서의 업데이트)</h3><p>안드로이드 5.0을 사용하는 system 파티션이 변경된 디바이스에서</p>
+<ul>
+<li>증분 block OTA update는 실패한다. system 파티션은 adb remount 동안에 변경되거나 malware에 의해 변경될 수 있다. file OTA는 파티션의 일부 변경에 대해서 더 강인하다(예를 들어 증분 OTA에 포함되지 않은 파일의 추가나 변경에 대하여). 그러나 block OTA는 파티션의 어떤 변경에 대해서도 실패한다. 이런 경우에 Full OTA 로 system 파티션의 변경을 덥어써야 한다.</li>
+<li>. 변경된 파일을 바꾸려고 시도하는 것은 업데이트 실패를 발생시킨다. block OTA와 file OTA모두에서 변경된 파일을 업데이트하려는 것은 업데이트를 실패하게 한다.</li>
+<li>. 변경된 파일에 접근하려는 것은 에러를 만들어낸다.(dm-verify only) block OTA와 file OTA모두에서 dm-verify가 활성화되어 있고 system 파일시스템의 변경된 부분을 OTA 가 접근하려는 것은 에러를 발생시킨다.</li>
+</ul>
+<ul>
+<li><h3 id="Inside-OTA-Packages"><a href="#Inside-OTA-Packages" class="headerlink" title="Inside OTA Packages"></a><a href="https://source.android.com/devices/tech/ota/nonab/inside_packages" rel="external nofollow noopener noreferrer" target="_blank">Inside OTA Packages</a></h3></li>
+</ul>
+<h2 id="Device-Specific-Code"><a href="#Device-Specific-Code" class="headerlink" title="Device-Specific Code"></a>Device-Specific Code</h2><p>리커버리 시스템은 OTA 업데이타가 안드로이드 시스템 이외의 부분 역시 업데이트 할 수 있도록 디바이스 특정적인 코드를 삽입할 훅을 포함하고 있다.(예를 들면, Baseband or radio processor)</p>
+<p>다음 섹션은 yoyodyne 벤더가 생산하는 tardis 디바이스를 커스터마이즈하는 예제이다.</p>
+<h3 id="Partition-map"><a href="#Partition-map" class="headerlink" title="Partition map"></a>Partition map</h3><p>안드로이드 2.3부터 플랫폼에서는 eMMc 플래시 디바이스를 지원하고 ext4 파일시스템을 지원한다. 또한 옛날 릴리즈를 위하여 Memory Technology Device(MTD) 플래시 디바이스와 yaffs2 파일시스템을 지원한다.</p>
+<p>파티션 맵은 TARGET_RECOVERY_FSTAB에 의해 지정된다. 이 파일은 recovery 바이너리와 패키지 빌딩 도구들에 의해 사용된다. BoardConfig.mk에서 TARGET_RECOVERY_FSTAB를 사용하여 맵파일을 지정할 수 있다.</p>
+<p>샘플 파티션 맵 파일은 다음과 같은 모양이다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">device/yoyodyne/tardis/recovery.fstab</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># mount point       fstype  device       [device2]        [options (3.0+ only)]</span><br><span class="line"></span><br><span class="line">/sdcard     vfat    /dev/block/mmcblk0p1 /dev/block/mmcblk0</span><br><span class="line">/cache      yaffs2  cache</span><br><span class="line">/misc       mtd misc</span><br><span class="line">/boot       mtd boot</span><br><span class="line">/recovery   emmc    /dev/block/platform/s3c-sdhci.0/by-name/recovery</span><br><span class="line">/system     ext4    /dev/block/platform/s3c-sdhci.0/by-name/system length=-4096</span><br><span class="line">/data       ext4    /dev/block/platform/s3c-sdhci.0/by-name/userdata</span><br></pre></td></tr></table></figure>
+
+<p>옵션인 /sdcard를 제외하고는 이 예제의 모든 파티션은 반드시 정의되어야 한다.(디바이스는 이 이외의 파티션도 추가할 수 있다.).<br>다섯 종류의 파일시스템 타입을 지원한다.</p>
+<ul>
+<li><strong>yaffs2</strong></li>
+<li><strong>mtd</strong></li>
+<li><strong>ext4</strong></li>
+<li><strong>emmc</strong></li>
+<li><strong>vfat</strong></li>
+</ul>
+<p>안드로이드 3.0부터, recovery.fstab 파일은 options 라는 추가의 옵션 필드를 가진다. 현재로써는 정의된 유일한 옵션은 length이다. 이것은 파티션의 길이를 명시적으로 지정할 수 있게 한다. 이 length는 파티션을 재포맷할 때에 사용된다.(e.g. data wipe/factory reset 동작중에 userdata 파티션을 위해서나 full OTA 패키지의 설치시 system 파티션을 위해서..) 만약 length 가 음수이면 포멧으로의 사이즈가 실제의 파티션 사이즈에 length 값을 추가한 값으로 정해진다.<br>예를 들어 “length=-16384”로 설정하는 것은 그 파티션의 마지막 16k는 파티션이 재포맷될 때 덥어씌워지지 않게 한다. 이것은 userdata 파티션의 암호화와 같은 기능을 지원한다.(암호화 메타데이타가 파티션의 마지막에 저장되어 있어 덮어쓰면 안되는 경우)</p>
+<h3 id="Boot-animation"><a href="#Boot-animation" class="headerlink" title="Boot animation"></a>Boot animation</h3><p>디바이스 제조사는 안드로이드 디바이스가 부팅할 때 보여지는 애니메이션을 커스터마이즈할 수 있다. 이렇게 하기 위해서 <a href>bootanimation format</a>에 따라 .zip 파일을 구성해야 한다.</p>
+<p>Note: 이미지는 <a href="https://source.android.com/setup/start/brands" rel="external nofollow noopener noreferrer" target="_blank">Android Brand Guidelines</a> 에 맞아야 합니다.</p>
+<h3 id="Recovery-UI"><a href="#Recovery-UI" class="headerlink" title="Recovery UI"></a>Recovery UI</h3><p>다른 하드웨어를 가지고 있는 디바이스를 지원하기 위해서, 복구 인터페이스를 커스터마이즈 하여 상태를 표시하고, 수동으로 동작하는 숨겨진 기능에 접근할 수 있습니다.</p>
+<p>Goal은 디바이스 특정적인 기능을 제공하는 C++ object의 쌍을 정적 라이브러리로 제공하는 것입니다. <figure class="highlight plain"><figcaption><span>기본적으로 사용됩니다. 이 파일을 복사하고 새 디바이스에 대한 버전을 쓰는 것이 좋은 시작점입니다.</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>device/yoyodyne/tardis/recovery/recovery_ui.cpp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```cpp</span><br><span class="line">#include &lt;linux/input.h&gt;</span><br><span class="line"></span><br><span class="line">#include &quot;common.h&quot;</span><br><span class="line">#include &quot;device.h&quot;</span><br><span class="line">#include &quot;screen_ui.h&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Header-and-item-functions"><a href="#Header-and-item-functions" class="headerlink" title="Header and item functions"></a>Header and item functions</h4><p>Device 클래스는 숨겨진 리커버리 메뉴에 나타나야 하는 헤더와 아이템을 리턴하는 함수가 필요합니다. 헤더들은 어떻게 메뉴를 동작해야 하는지 나타냅니다.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span>* HEADERS[] = &#123; <span class="string">"Volume up/down to move highlight;"</span>,</span><br><span class="line">                                 <span class="string">"power button to select."</span>,</span><br><span class="line">                                 <span class="string">""</span>,</span><br><span class="line">                                 <span class="literal">NULL</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span>* ITEMS[] =  &#123;<span class="string">"reboot system now"</span>,</span><br><span class="line">                               <span class="string">"apply update from ADB"</span>,</span><br><span class="line">                               <span class="string">"wipe data/factory reset"</span>,</span><br><span class="line">                               <span class="string">"wipe cache partition"</span>,</span><br><span class="line">                               <span class="literal">NULL</span> &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>긴 라인은 잘려나가기 때문에 디바이스의 화면 크기를 고려해야 합니다.</p>
+<h4 id="Customize-CheckKey"><a href="#Customize-CheckKey" class="headerlink" title="Customize CheckKey"></a>Customize CheckKey</h4><p>다음으로, 디바이스의 RecoveryUI 구현을 정의해야 합니다. 이 예제는 tardis 디바이스가 스크린을 가지고 있다고 가정했으며 내장의 ScreenRecoveryUIimplementation에서 상속이 가능합니다.(스크린 없는 디바이스에서의 동작은 [devices without a screen]을 보세요) ScreenRecoveryUI에서 커스터마이즈할 함수는 CheckKey()입니다. 이 함수는 최초 비동기적 키 핸들링을 합니다.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TardisUI</span> :</span> <span class="keyword">public</span> ScreenRecoveryUI &#123;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> KeyAction <span class="title">CheckKey</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (key == KEY_HOME) &#123;</span><br><span class="line">            <span class="keyword">return</span> TOGGLE;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ENQUEUE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="KEY-constants"><a href="#KEY-constants" class="headerlink" title="KEY constants"></a>KEY constants</h5><p>KEY_* 상수는 linux/input.h 에 정의되어 있습니다. CheckKey()는 리커버리의 나머지에서 어떤것을 하던지 불려집니다. 메뉴가 toggled off 될 때, on 될 때, 패키지 설치중에, userdata wiping 중에 등… 이 함수는 다음의 값 중 하나를 리턴할 수 있습니다.</p>
+<ul>
+<li><strong>TOGGLE.</strong> 메뉴의 디스플레이를 토글하고 text 를 log on 또는 off 합니다.</li>
+<li><strong>REBOOT.</strong> 즉시 디바이스를 재부팅합니다.</li>
+<li><strong>IGNORE.</strong> 키 입력을 무시합니다.</li>
+<li><strong>ENQUEUE.</strong> 키 입력을 enqueue합니다. &lt;= 수정할것….</li>
+</ul>
+<p>CheckKey()는 KeyUp 이벤트가 따라오는 KeyDown 이벤트마다 호출됩니다. (A-down, B-down, B-up, A-up의 경우 CheckKey(B)만 호출됩니다.) CheckKey()는 IsKeyPressed()를 호출해서 다른 키가 눌려져 있는지 확인할 수 있습니다. (위의 시퀀스에서 CheckKey(B) 가 IsKeyPressed(A)를 호출하면 true를 리턴한다.)</p>
+<p>CheckKey()는 클래스에서 상태를 유지할 수 있습니다. 이것은 특정 순서의 키 순서를 감지하기 위해 유용합니다. 이 예제는 다소 복잡한 setup을 보여줍니다. POWER키가 눌린 상태에서 VOLUMEUP 키를 누르면 디스플레이가 토글되고 POWER 버튼을 다섯번 누르면 디바이스는 리붓합니다.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TardisUI</span> :</span> <span class="keyword">public</span> ScreenRecoveryUI &#123;</span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> consecutive_power_keys;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    TardisUI() : consecutive_power_keys(<span class="number">0</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> KeyAction <span class="title">CheckKey</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (IsKeyPressed(KEY_POWER) &amp;&amp; key == KEY_VOLUMEUP) &#123;</span><br><span class="line">            <span class="keyword">return</span> TOGGLE;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (key == KEY_POWER) &#123;</span><br><span class="line">            ++consecutive_power_keys;</span><br><span class="line">            <span class="keyword">if</span> (consecutive_power_keys &gt;= <span class="number">5</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> REBOOT;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            consecutive_power_keys = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ENQUEUE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="ScreenRecoveryUI"><a href="#ScreenRecoveryUI" class="headerlink" title="ScreenRecoveryUI"></a>ScreenRecoveryUI</h4><p>ScreenRecoveryUI에서 다른 이미지를 사용하는 경우 animation_fps를 설정하여 애니메이션의 frame 표시 속도를 조절할 수 있습니다.</p>
+<ul>
+<li>interlace-frames.py 스크립트는 animation_fps정보를 이미지 그 자체에 저장하는 것을 가능하게 합니다. 이전의 안드로이드 버전에서는 animation_fps 를 설정해야 했습니다.</li>
+</ul>
+<p>animation_fps를 설정하기 위해 ScreenRecoveryUI::Init()함수를 오버라이드 해야 합니다. 값을 설정하고 parent의 Init()함수를 호출합니다. 디폴트 값은 20FPS입니다. 디폴트 이미지를 사용하고 디폴트 값을 사용한다면 Init()함수를 제공할 필요가 없습니다. 자세한 것은 <code>Recovery UI Images</code>를 보세요.</p>
+<p>Device Class<br>RecoveryUI 구현 이후에, 디바이스의 device 클래스를 정의해야 합니다.(내장 Device class의 서브클래스) device클래스는 하나의 UI객체를 생성하고  GetUI함수를 통해 디바이스에서 사용할 UI 클래스를 리턴해야 합니다.</p>
+<p>StartRecovery<br>StartRecovery() 메소드는 리커버리의 시작시점에 호출됩니다. (이 시점은 UI 가 초기화 되고, 인자들이 모두 파싱된 이후이고, 실제의 동작이 수행되기 이전입니다. 디폴트 구현은 아무것도 하지 않습니다. 그렇기 때문에 아무것도 할 게 없다면 서브클래스에서 이 함수를 제공할 필요는 없습니다.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StartRecovery</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ... do something tardis-specific here, if needed ....</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Supplying-and-managing-recovery-menu"><a href="#Supplying-and-managing-recovery-menu" class="headerlink" title="Supplying and managing recovery menu"></a>Supplying and managing recovery menu</h4><p>system은 두 개의 메소드를 호출하여 헤더 라인과 아이템 리스트를 얻습니다. 이 구현에서는 파일의 가장 위에 정의된 정적 배열을 리턴합니다.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span>* <span class="title">GetMenuHeaders</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> HEADERS; &#125;</span><br><span class="line"><span class="function"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span>* <span class="title">GetMenuItems</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> ITEMS; &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="HandleMenuKey"><a href="#HandleMenuKey" class="headerlink" title="HandleMenuKey"></a>HandleMenuKey</h4><p>다음으로 HandleMenuKey()함수를 제공합니다. 이 메소드는 키입력과 현재 메뉴의 가시성을 입력으로 받고 어떤 동작을 할지 결정합니다.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">HandleMenuKey</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> visible)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (visible) &#123;</span><br><span class="line">         <span class="keyword">switch</span> (key) &#123;</span><br><span class="line">           <span class="keyword">case</span> KEY_VOLUMEDOWN: <span class="keyword">return</span> kHighlightDown;</span><br><span class="line">           <span class="keyword">case</span> KEY_VOLUMEUP:   <span class="keyword">return</span> kHighlightUp;</span><br><span class="line">           <span class="keyword">case</span> KEY_POWER:      <span class="keyword">return</span> kInvokeItem;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> kNoAction;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>이 메소드는 key code와 menu/text log가 보이는지에 대한 상태를 입력으로 받습니다. 리턴 값은 정수입니다. 만약 값이 0이상이면, 메뉴 아이템의 포지션으로 취해지고 즉시 호출됩니다. (아래의 InvokeMenuItem() 메소드를 보세요.).<br>그렇지 않으면 다음의 상수를 리턴할 수 있습니다.</p>
+<ul>
+<li>kHighlightUp. 메뉴의 포커스를 앞으로(위로) 이동합니다.</li>
+<li>kHighlightDown. 메뉴의 포커스를 다음으로(아래로) 이동합니다.</li>
+<li>kInvokeItem. 현재 Highlight 된 아이템을 호출합니다.</li>
+<li>kNoAction. 아무것도 하지 않습니다.<br>visible 인자에서 함축하듯이, HandleMenuKey()는 보이지 않는 menu에 대해서도 불릴 수 있습니다. CheckKey()와는 달리, 패키지 설치를 하거나 Data Wipe를 하는 등의 리커버리 작업 중에는 호출되지 않습니다. - 이 함수는 리커버리가 idle 상태이거나 입력을 기다리고 있는 경우에만 호출됩니다.</li>
+</ul>
+<h4 id="Trackball-Mechanisms"><a href="#Trackball-Mechanisms" class="headerlink" title="Trackball Mechanisms"></a>Trackball Mechanisms</h4><p>디바이스가 트랙볼 입력 메카니즘을 가지고 있다면(EV_REL 타입과 REL_Y 코드의 입력 이벤트를 생성) 리커버리는 트랙볼같은 입력 디바이스가 Y축의 움직임을 보고할 때마다 KEY_UP과 KEY_DOWN키 입력을 합성합니다.<br>작업해야 하는 것은 KEY_UP 과 KEY_DOWN이벤트를 메뉴 동작으로 맵핑하는 것 뿐입니다. 이 맵핑은 CheckKey()에서는 일어나지 않습니다. 그러므로 트랙볼 모션을 리부팅이나 디스플레이 토글을 발생시키기 위해 사용할 수 없습니다.</p>
+<h4 id="Modifier-Keys"><a href="#Modifier-Keys" class="headerlink" title="Modifier Keys"></a>Modifier Keys</h4><p>키가 modifier로써 누른 상태로 있는 것을 체크하기 위해서는 IsKeyPressed()메소드를 호출합니다. 예를 들어 어떤 디바이스는 Alt-W를 리커버리에 누르면 data wipe을 개시합니다. 다음과 같이 구현합니다.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">HandleMenuKey</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> visible)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (ui-&gt;IsKeyPressed(KEY_LEFTALT) &amp;&amp; key == KEY_W) &#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="number">2</span>;  <span class="comment">// position of the "wipe data" item in the menu</span></span><br><span class="line">     &#125;</span><br><span class="line">     ...</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>visible 이 false 이더라도 메뉴를 조작하기 위해 리턴하는 값에는 영향이 없습니다. 그러므로 원하는 동작에 대한 값을 리턴하면 됩니다.</li>
+</ul>
+<h4 id="InvokeMenuItem"><a href="#InvokeMenuItem" class="headerlink" title="InvokeMenuItem"></a>InvokeMenuItem</h4><p>다음으로 InvokeMenuItem() 메소드를 제공합니다. 이 메소드는 정수의 position을 GetMenuItems()함수에서 리턴되는 동작으로 맵핑합니다. 예를 들어 다음과 같습니다.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BuiltinAction <span class="title">InvokeMenuItem</span><span class="params">(<span class="keyword">int</span> menu_position)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">switch</span> (menu_position) &#123;</span><br><span class="line">       <span class="keyword">case</span> <span class="number">0</span>: <span class="keyword">return</span> REBOOT;</span><br><span class="line">       <span class="keyword">case</span> <span class="number">1</span>: <span class="keyword">return</span> APPLY_ADB_SIDELOAD;</span><br><span class="line">       <span class="keyword">case</span> <span class="number">2</span>: <span class="keyword">return</span> WIPE_DATA;</span><br><span class="line">       <span class="keyword">case</span> <span class="number">3</span>: <span class="keyword">return</span> WIPE_CACHE;</span><br><span class="line">       <span class="keyword">default</span>: <span class="keyword">return</span> NO_ACTION;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>이 메소드는 시스템이 어떤 동작을 수행할지를 시스템에 알려주기 위해 BuiltinAction 열거값의 어떤 값이라도 리턴할 수 있습니다.(또는 아무것도 하지 않게 하기 위해 NO_ACTION을 리턴할 수 있습니다.) 이 위치는 시스템에서 제공하는 것 이상의 복구 기능을 제공하기 위한 위치입니다. 메뉴에 아이템을 추가하고 메뉴아이템이 불렸을 때 이 위치에서 동작을 실행하고, NO_ACTION을 리턴하여 시스템이 다른 동작을 하지 않게 합니다.</p>
+<p>BuiltinAction은 다음의 값들을 가지고 있습니다.</p>
+<ul>
+<li><strong>NO_ACTION</strong> 아무것도 하지 않습니다.</li>
+<li><strong>REBOOT</strong> 리커버리를 나오고 디바이스를 일반 모드로 리붓합니다.</li>
+<li><strong>APPLY_EXT</strong>, <strong>APPLY_CACHE</strong>, <strong>APPLY_ADB_SIDELOAD</strong>. 다양한 위치의 update 패키지를 설치합니다. 자세한 내용은 <code>Sideloading</code>을 보세요.</li>
+<li><strong>WIPE_CACHE</strong> 캐시 파티션을 재포맷합니다. 비교적 피해가 없기때문에 확인 메세지는 표시되지 않습니다.</li>
+<li><strong>WIPE_DATA</strong> userdata와 cache 파티션을 재포멧합나다. factory data reset으로 알려져 있습니다. 진행하기 전에 사용자에게 확인을 받게 됩니다.</li>
+</ul>
+<p>마지막 메소드인, WipeData()는 옵션입니다. 이 함수는 data wipe 이 초기화 되었을 때 호출됩니다. 이 메소드는 userdata 와 cache 파티션이 wipe 되기 전에 호출됩니다. 만약 디바이스가 user data 를 이 두 파티션 이외에 저장한다면 이 위치에서 지워야 합니다. 리턴값 0은 성공을 나타내고 다른 값은 실패를 나타냅니다. (현재로서는 이 리턴값은 무시되고 있습니다.) 리턴값에 관계없이 userdata 와 cache 파티션은 지워집니다.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">WipeData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="comment">// ... do something tardis-specific here, if needed ....</span></span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">#### Make Device</span><br><span class="line">마지막으로, recovery_ui.cpp의 마지막에 make_device()를 위한 코드를 삽입합니다. 이 함수는 Device <span class="class"><span class="keyword">class</span>의 인스턴스를 생성하고 리턴합니다.</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">```<span class="title">cpp</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">TardisDevice</span> :</span> <span class="keyword">public</span> Device &#123;</span><br><span class="line">   <span class="comment">// ... all the above methods ...</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">Device* <span class="title">make_device</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> TardisDevice();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Build-and-link-to-device-recovery"><a href="#Build-and-link-to-device-recovery" class="headerlink" title="Build and link to device recovery"></a>Build and link to device recovery</h4><p>recovery_ui.cpp 파일을 완료한 다음에, 빌드하고 디바이스의 리커버리에 링크합니다. Android.mk에서 이 C++ 파일만을 포함하는 정적 라이브러리를 포함합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">device/yoyodyne/tardis/recovery/Android.mk</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">LOCAL_PATH := $(call my-dir)</span><br><span class="line">include $(CLEAR_VARS)</span><br><span class="line"></span><br><span class="line">LOCAL_MODULE_TAGS := eng</span><br><span class="line">LOCAL_C_INCLUDES += bootable/recovery</span><br><span class="line">LOCAL_SRC_FILES := recovery_ui.cpp</span><br><span class="line"></span><br><span class="line"># should match TARGET_RECOVERY_UI_LIB set in BoardConfig.mk</span><br><span class="line">LOCAL_MODULE := librecovery_ui_tardis</span><br><span class="line"></span><br><span class="line">include $(BUILD_STATIC_LIBRARY)</span><br></pre></td></tr></table></figure>
+
+<p>그리고, 이 디바이스의 Board Configuration에서 이 정적 라이브러리를 TARGET_RECOVERY_UI_LIB에서 지정합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">device/yoyodyne/tardis/BoardConfig.mk</span><br><span class="line"> [...]</span><br><span class="line"></span><br><span class="line"># device-specific extensions to the recovery UI</span><br><span class="line">TARGET_RECOVERY_UI_LIB := librecovery_ui_tardis</span><br></pre></td></tr></table></figure>
+
+<h3 id="Recovery-UI-images"><a href="#Recovery-UI-images" class="headerlink" title="Recovery UI images"></a>Recovery UI images</h3><h3 id="Progress-bars"><a href="#Progress-bars" class="headerlink" title="Progress bars"></a>Progress bars</h3><h3 id="Devices-without-screens"><a href="#Devices-without-screens" class="headerlink" title="Devices without screens"></a>Devices without screens</h3><h3 id="Updater"><a href="#Updater" class="headerlink" title="Updater"></a>Updater</h3><h3 id="OTA-package-generation"><a href="#OTA-package-generation" class="headerlink" title="OTA package generation"></a>OTA package generation</h3><h3 id="Sideloading"><a href="#Sideloading" class="headerlink" title="Sideloading"></a>Sideloading</h3><h2 id="Time-zone-rule-updates"><a href="#Time-zone-rule-updates" class="headerlink" title="Time zone rule updates"></a>Time zone rule updates</h2><p>안드로이드 8.1부터 system 업데이트를 하지 않고도 업데이트된 time zone rule data를 push 할 수 있게 되었다. 이 메카니즘은 사용자가 적시에 업데이트를 받고 OEM이 system image 업데이트와 독립적으로 time zone updates를 테스트 할 수 있게 한다. 자세한 것은 <a href="https://source.android.com/devices/tech/config/timezone-rules" rel="external nofollow noopener noreferrer" target="_blank">Time Zone Rules</a>를 참조하라.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2022/01/11/Android-OTA Update/" data-id="ckzfaqfuw00qjdyuodmktd1fc" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "Android OTA Update",
+        "image": "http://jung-max.github.io/images/Thumbnail/Android_OTA.jpg",
+        "keywords": "Android Platform",
+        "genre": "Android 지식",
+        "datePublished": "2022-01-11",
+        "dateCreated": "2022-01-11",
+        "dateModified": "2022-02-08",
+        "url": "http://jung-max.github.io/2022/01/11/Android-OTA Update/",
+        "description": "안드로이드 업데이트 (OTA Updates)안드로이드 디바이스는 시스템, 어플리케이션, 타임존 룰을 over-the-air(OTA) update로 받고 설치할 수 있다. 이 섹션은 Update Package의 구조를 설명하고 Update Package를 빌드하기 위한 도구에 대해서 설명한다.
+OTA Update은 OS를 업그레이드하고, 시스템 파티션에 설치"
+        "wordCount": 5129
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2022/02/08/Linux-libcurl/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            libcurl
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2021/04/30/라즈베리파이-tp link t2u plus(ac600) 드라이버 설치(8812au)/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">라즈베리파이 tp link t2u plus(ac600) 드라이버 설치(8812au)</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2022/01/11/Android-OTA Update/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

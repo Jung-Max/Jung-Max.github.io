@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>libcurl URL API | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="Linux,buildroot,http,cURL">
+    
+    <meta name="description" content="URL APIlibcurl은 URL을 구문 분석, 업데이트 및 생성하기 위한 API를 제공합니다. 이를 사용하여 응용 프로그램은 자체 목적을 위해 libcurl의 URL 파서를 사용할 수 있습니다. 동일한 파서를 사용함으로써 다른 해석으로 인한 보안 문제를 피할 수 있습니다. Include filesURL API를 사용하려는 경우 코드에 &amp;lt;curl/c">
+<meta name="keywords" content="Linux,buildroot,http,cURL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="libcurl URL API">
+<meta property="og:url" content="http://jung-max.github.io/2022/02/09/Linux-libcurl URL API/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="URL APIlibcurl은 URL을 구문 분석, 업데이트 및 생성하기 위한 API를 제공합니다. 이를 사용하여 응용 프로그램은 자체 목적을 위해 libcurl의 URL 파서를 사용할 수 있습니다. 동일한 파서를 사용함으로써 다른 해석으로 인한 보안 문제를 피할 수 있습니다. Include filesURL API를 사용하려는 경우 코드에 &amp;lt;curl/c">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/Thumbnail/curl.png">
+<meta property="og:updated_time" content="2022-02-09T06:18:43.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="libcurl URL API">
+<meta name="twitter:description" content="URL APIlibcurl은 URL을 구문 분석, 업데이트 및 생성하기 위한 API를 제공합니다. 이를 사용하여 응용 프로그램은 자체 목적을 위해 libcurl의 URL 파서를 사용할 수 있습니다. 동일한 파서를 사용함으로써 다른 해석으로 인한 보안 문제를 피할 수 있습니다. Include filesURL API를 사용하려는 경우 코드에 &amp;lt;curl/c">
+<meta name="twitter:image" content="http://jung-max.github.io/images/Thumbnail/curl.png">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2022/02/09/linux-libcurl url api/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Linux/http/">http</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Linux-libcurl URL API" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        libcurl URL API
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2022/02/09/Linux-libcurl URL API/" class="article-date">
+            <time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/buildroot/">buildroot</a>, <a class="tag-link" href="/tags/cURL/">cURL</a>, <a class="tag-link" href="/tags/http/">http</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="URL-API"><a href="#URL-API" class="headerlink" title="URL API"></a>URL API</h1><p>libcurl은 URL을 구문 분석, 업데이트 및 생성하기 위한 API를 제공합니다. 이를 사용하여 응용 프로그램은 자체 목적을 위해 libcurl의 URL 파서를 사용할 수 있습니다. 동일한 파서를 사용함으로써 다른 해석으로 인한 보안 문제를 피할 수 있습니다.</p>
+<h2 id="Include-files"><a href="#Include-files" class="headerlink" title="Include files"></a>Include files</h2><p>URL API를 사용하려는 경우 코드에 <code>&lt;curl/curl.h&gt;</code>를 포함합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;curl/curl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">CURLU *h = curl_url();</span><br><span class="line">rc = curl_url_set(h, CURLUPART_URL, <span class="string">"ftp://example.com/no/where"</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Create-cleanup-duplicate"><a href="#Create-cleanup-duplicate" class="headerlink" title="Create, cleanup, duplicate"></a>Create, cleanup, duplicate</h2><p>이 API를 사용하는 첫 번째 단계는 URL 정보와 리소스를 보유하는 <code>CURLU *</code> 핸들을 만드는 것입니다. 핸들은 단일 URL 및 모든 다른 구성 요소에 대한 정보를 보유하는 연결된 데이터 개체에 대한 참조입니다.</p>
+<p>API를 사용하면 각 URL 구성 요소를 개별적으로 또는 전체 URL로 설정하거나 가져올 수 있습니다.</p>
+<p>다음과 같이 URL 핸들을 만듭니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CURLU *h = curl_url();</span><br></pre></td></tr></table></figure>
+
+<p>완료되면 정리하십시오.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_url_cleanup(h);</span><br></pre></td></tr></table></figure>
+
+<p>핸들 사본이 필요하면 복사하십시오.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CURLU *nh = curl_url_dup(h);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Parse-a-URL"><a href="#Parse-a-URL" class="headerlink" title="Parse a URL"></a>Parse a URL</h2><p>핸들에서 <code>CURLUPART_URL</code> 부분을 설정하여 전체 URL을 구문 분석합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CURLU *h = curl_url();</span><br><span class="line">rc = curl_url_set(h, CURLUPART_URL,</span><br><span class="line">                  <span class="string">"https://example.com:449/foo/bar?name=moo"</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<p>성공하면 rc에 CURLUE_OK가 포함되고 다른 URL 구성 요소가 핸들에 유지됩니다. libcurl에 관한 한 URL이 유효했음을 의미합니다.</p>
+<p>함수 호출의 네 번째 인수는 특정 기능을 변경하기 위한 비트마스크입니다. 파서의 동작을 변경하기 위해 비트를 하나만 더 설정할 수 있습니다.</p>
+<h3 id="CURLU-NON-SUPPORT-SCHEME"><a href="#CURLU-NON-SUPPORT-SCHEME" class="headerlink" title="CURLU_NON_SUPPORT_SCHEME"></a>CURLU_NON_SUPPORT_SCHEME</h3><p><code>curl_url_set()</code>이 지원되지 않는 체계를 허용하도록 합니다. 설정하지 않으면 libcurl이 알고 있고 지원하는 내장 프로토콜에 대한 유일한 구성표가 허용됩니다.</p>
+<h3 id="CURLU-URLENCODE"><a href="#CURLU-URLENCODE" class="headerlink" title="CURLU_URLENCODE"></a>CURLU_URLENCODE</h3><p>공백 또는 “제어 문자”와 같은 이점이 있는 바이트가 있는 경우 함수 URL이 경로 부분을 인코딩하도록 합니다.</p>
+<h3 id="CURLU-DEFAULT-SCHEME"><a href="#CURLU-DEFAULT-SCHEME" class="headerlink" title="CURLU_DEFAULT_SCHEME"></a>CURLU_DEFAULT_SCHEME</h3><p>전달된 문자열이 체계를 사용하지 않는 경우 기본 체계를 의도한 것으로 가정합니다. 기본 체계는 HTTPS입니다. 이것이 설정되지 않으면 스킴 부분이 없는 URL은 유효한 것으로 승인되지 않습니다. 둘 다 설정된 경우 <code>CURLU_GUESS_SCHEME</code> 옵션을 재정의합니다.</p>
+<h3 id="CURLU-GUESS-SCHEME"><a href="#CURLU-GUESS-SCHEME" class="headerlink" title="CURLU_GUESS_SCHEME"></a>CURLU_GUESS_SCHEME</h3><p>libcurl이 URL이 스키마 없이 설정되도록 하고 대신 호스트 이름을 기반으로 의도한 스키마를 “추측”합니다. 가장 바깥쪽 하위 도메인 이름이 DICT, FTP, IMAP, LDAP, POP3 또는 SMTP와 일치하면 해당 체계가 사용되며, 그렇지 않으면 HTTP를 선택합니다. 둘 다 설정된 경우 우선적으로 적용되는 <code>CURLU_DEFAULT_SCHEME</code> 옵션과 충돌합니다.</p>
+<h3 id="CURLU-NO-AUTHORITY"><a href="#CURLU-NO-AUTHORITY" class="headerlink" title="CURLU_NO_AUTHORITY"></a>CURLU_NO_AUTHORITY</h3><p>권한 검사를 건너뜁니다. RFC는 개별 체계가 호스트 부분(일반적으로 권한의 유일한 필수 부분)을 생략하도록 허용하지만 libcurl은 이것이 사용자 지정 체계에 허용되는지 여부를 알 수 없습니다. 플래그를 지정하면 파일 구성표가 처리되는 방식과 유사한 빈 권한 섹션이 허용됩니다. <code>CURLU_NON_SUPPORT_SCHEME</code>와 조합해서만 사용할 수 있습니다.</p>
+<h3 id="CURLU-PATH-AS-IS"><a href="#CURLU-PATH-AS-IS" class="headerlink" title="CURLU_PATH_AS_IS"></a>CURLU_PATH_AS_IS</h3><p>libcurl이 경로의 정규화를 건너뛰게 합니다. 이것은 curl이 점-슬래시 및 점-점 등의 시퀀스를 제거하는 절차입니다. 전송에 사용되는 동일한 옵션을 <code>CURLOPT_PATH_AS_IS</code>라고 합니다.</p>
+<h3 id="CURLU-ALLOW-SPACE"><a href="#CURLU-ALLOW-SPACE" class="headerlink" title="CURLU_ALLOW_SPACE"></a>CURLU_ALLOW_SPACE</h3><p>URL 파서가 가능한 경우 공간(ASCII 32)을 허용하도록 합니다. URL 구문은 일반적으로 공백을 허용하지 않지만 <code>%20</code> 또는 <code>+</code>로 인코딩해야 합니다. 공백이 허용되면 스키마에서 여전히 허용되지 않습니다. URL에서 공간이 사용되고 허용되면 <code>CURLU_URLENCODE</code>도 설정되지 않는 한 그대로 저장됩니다. 그러면 libcurl이 저장하기 전에 공간을 URL로 인코딩합니다. 이는 전체 URL 또는 개별 부분을 추출하기 위해 <code>curl_url_get()</code>을 사용할 때 URL이 구성되는 방식에 영향을 줍니다.</p>
+<h2 id="상대-URL로-리디렉션"><a href="#상대-URL로-리디렉션" class="headerlink" title="상대 URL로 리디렉션"></a>상대 URL로 리디렉션</h2><p>핸들이 이미 URL을 구문 분석한 경우 두 번째 상대 URL을 설정하면 이에 맞게 “리디렉션”됩니다.</p>
+<p>예를 들어, 먼저 원래 URL을 설정한 다음 “리디렉션”할 URL을 다음으로 설정합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CURLU *h = curl_url();</span><br><span class="line">rc = curl_url_set(h, CURLUPART_URL,</span><br><span class="line">                  <span class="string">"https://example.com/foo/bar?name=moo"</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">rc = curl_url_set(h, CURLUPART_URL, <span class="string">"../test?another"</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Get-a-URL"><a href="#Get-a-URL" class="headerlink" title="Get a URL"></a>Get a URL</h2><p><code>CURLU *</code> 핸들은 URL 또는 URL의 일부를 나타내며 언제든지 해당 URL을 쉽게 추출할 수 있습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *url;</span><br><span class="line">rc = curl_url_get(h, CURLUPART_URL, &amp;url, CURLU_NO_DEFAULT_PORT);</span><br><span class="line">curl_free(url);</span><br></pre></td></tr></table></figure>
+
+<p>핸들에 전체 URL을 추가하기에 충분한 정보가 없으면 오류를 반환합니다.<br>반환된 문자열은 작업을 마친 후 <code>curl_free()</code>로 해제해야 합니다.<br>함수 호출의 네 번째 인수에서 0은 특정 기능을 변경하기 위한 플래그 비트마스크입니다.</p>
+<h3 id="CURLU-DEFAULT-PORT"><a href="#CURLU-DEFAULT-PORT" class="headerlink" title="CURLU_DEFAULT_PORT"></a>CURLU_DEFAULT_PORT</h3><p>URL 핸들에 저장된 포트 번호가 없는 경우 이 옵션은 <code>curl_url_get()</code>이 사용된 체계에 대한 기본 포트를 반환하도록 합니다.</p>
+<h3 id="CURLU-DEFAULT-SCHEME-1"><a href="#CURLU-DEFAULT-SCHEME-1" class="headerlink" title="CURLU_DEFAULT_SCHEME"></a>CURLU_DEFAULT_SCHEME</h3><p>핸들에 저장된 체계가 없는 경우 이 옵션은 <code>curl_url_get()</code>이 오류 대신 기본 체계를 반환하도록 합니다.</p>
+<h3 id="CURLU-NO-DEFAULT-PORT"><a href="#CURLU-NO-DEFAULT-PORT" class="headerlink" title="CURLU_NO_DEFAULT_PORT"></a>CURLU_NO_DEFAULT_PORT</h3><p>포트 번호가 스키마에 사용된 기본 포트와 일치하는 경우 생성된 URL에서 포트 번호를 사용하지 않도록 <code>curl_url_get()</code>에 지시합니다. 예를 들어 포트 번호 443이 설정되고 스키마가 https인 경우 추출된 URL에는 포트 번호가 포함되지 않습니다.</p>
+<h3 id="CURLU-URLENCODE-1"><a href="#CURLU-URLENCODE-1" class="headerlink" title="CURLU_URLENCODE"></a>CURLU_URLENCODE</h3><p>설정하면 전체 URL이 검색될 때 <code>curl_url_get()</code> URL이 호스트 이름 부분을 인코딩하도록 합니다. 설정되지 않은 경우(기본값) libcurl은 IDN 이름이 있는 그대로 표시되도록 지원하기 위해 호스트 이름이 “raw”인 URL을 반환합니다. IDN 호스트 이름은 일반적으로 비ASCII 바이트를 사용하며 그렇지 않으면 백분율로 인코딩됩니다.</p>
+<p>URL 인코딩을 요청하지 않는 경우에도 <code>%</code>(바이트 37)는 호스트 이름이 유효한지 확인하기 위해 호스트 이름에서 URL로 인코딩됩니다.</p>
+<h2 id="개별-URL-부분-가져오기"><a href="#개별-URL-부분-가져오기" class="headerlink" title="개별 URL 부분 가져오기"></a>개별 URL 부분 가져오기</h2><p>URL이 구문 분석되었거나 개별 부분이 <code>CURLU</code> 핸들에 설정된 경우 언제든지 핸들에서 해당 부분을 다시 추출할 수 있습니다.</p>
+<p><code>curl_url_get()</code>에 대한 두 번째 인수는 추출할 부분을 지정합니다. 그것들은 모두 null로 끝나는 <code>char *</code> 데이터로 추출되므로 이러한 변수에 대한 포인터를 전달합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *host;</span><br><span class="line">rc = curl_url_get(h, CURLUPART_HOST, &amp;host, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *scheme;</span><br><span class="line">rc = curl_url_get(h, CURLUPART_SCHEME, &amp;scheme, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *user;</span><br><span class="line">rc = curl_url_get(h, CURLUPART_USER, &amp;user, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *password;</span><br><span class="line">rc = curl_url_get(h, CURLUPART_PASSWORD, &amp;password, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *port;</span><br><span class="line">rc = curl_url_get(h, CURLUPART_PORT, &amp;port, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *path;</span><br><span class="line">rc = curl_url_get(h, CURLUPART_PATH, &amp;path, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *query;</span><br><span class="line">rc = curl_url_get(h, CURLUPART_QUERY, &amp;query, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *fragment;</span><br><span class="line">rc = curl_url_get(h, CURLUPART_FRAGMENT, &amp;fragment, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<p>작업이 끝나면 반환된 문자열을 curl_free로 해제하는 것을 잊지 마십시오!</p>
+<p>추출된 부분은 사용자가 <code>CURLU_URLDECODE</code> 플래그로 요청하지 않는 한 URL 디코딩되지 않습니다.</p>
+<h2 id="개별-URL-부분-설정"><a href="#개별-URL-부분-설정" class="headerlink" title="개별 URL 부분 설정"></a>개별 URL 부분 설정</h2><p>API를 사용하면 전체 URL을 구문 분석하거나 구문 분석하는 대신 <code>CURLU</code> 핸들에 보관된 URL의 개별 부분을 애플리케이션에서 설정할 수 있습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">rc = curl_url_set(urlp, CURLUPART_HOST, <span class="string">"www.example.com"</span>, <span class="number">0</span>);</span><br><span class="line">rc = curl_url_set(urlp, CURLUPART_SCHEME, <span class="string">"https"</span>, <span class="number">0</span>);</span><br><span class="line">rc = curl_url_set(urlp, CURLUPART_USER, <span class="string">"john"</span>, <span class="number">0</span>);</span><br><span class="line">rc = curl_url_set(urlp, CURLUPART_PASSWORD, <span class="string">"doe"</span>, <span class="number">0</span>);</span><br><span class="line">rc = curl_url_set(urlp, CURLUPART_PORT, <span class="string">"443"</span>, <span class="number">0</span>);</span><br><span class="line">rc = curl_url_set(urlp, CURLUPART_PATH, <span class="string">"/index.html"</span>, <span class="number">0</span>);</span><br><span class="line">rc = curl_url_set(urlp, CURLUPART_QUERY, <span class="string">"name=john"</span>, <span class="number">0</span>);</span><br><span class="line">rc = curl_url_set(urlp, CURLUPART_FRAGMENT, <span class="string">"anchor"</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<p>API는 항상 세 번째 인수에서 null로 끝나는 <code>char *</code> 문자열을 예상하거나 필드를 지우려면 NULL을 예상합니다. 포트 번호도 이런 식으로 문자열로 제공됩니다.</p>
+<p>사용자가 네 번째 인수에서 <code>CURLU_URLENCODE</code> 플래그를 사용하여 요청하지 않는 한 설정 부분은 URL로 인코딩되지 않습니다.</p>
+<h2 id="쿼리에-추가"><a href="#쿼리에-추가" class="headerlink" title="쿼리에 추가"></a>쿼리에 추가</h2><p>응용 프로그램은 <code>CURLU_APPENDQUERY</code> 플래그를 사용하여 기존 쿼리 부분의 오른쪽 끝에 문자열을 추가할 수 있습니다.</p>
+<p>URL <code>https://example.com/?shoes=2</code>를 보유하는 핸들을 고려하십시오. 그러면 애플리케이션은 다음과 같이 쿼리 부분에 문자열 <code>hat=1</code>을 추가할 수 있습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rc = curl_url_set(urlp, CURLUPART_QUERY, <span class="string">"hat=1"</span>, CURLU_APPENDQUERY);</span><br></pre></td></tr></table></figure>
+
+<p>앰퍼샌드(&amp;) 구분 기호가 없는 경우에도 이를 삽입하므로 핸들의 전체 URL은 <code>https://example.com/?shoes=2&amp;hat=1</code>과 같습니다.</p>
+<p>추가된 문자열은 물론 추가 시 인코딩된 URL을 얻을 수도 있으며, 요청하는 경우 인코딩은 ‘=’ 문자를 건너뜁니다. 예를 들어, 우리가 이미 가지고 있는 것에 <code>candy=M&amp;M</code>을 추가하고 데이터의 앰퍼샌드를 처리하기 위해 그것을 URL 인코딩합니다:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rc = curl_url_set(urlp, CURLUPART_QUERY, <span class="string">"candy=M&amp;M"</span>,</span><br><span class="line">                  CURLU_APPENDQUERY | CURLU_URLENCODE);</span><br></pre></td></tr></table></figure>
+
+<p>이제 URL은 <code>https://example.com/?shoes=2&amp;hat=1&amp;candy=M%26M</code>과 같습니다.</p>
+<h2 id="CURLOPT-CURLU"><a href="#CURLOPT-CURLU" class="headerlink" title="CURLOPT_CURLU"></a>CURLOPT_CURLU</h2><p>응용 프로그램의 편의를 위해 <code>CURLOPT_URL</code>의 대안으로 이미 구문 분석된 URL을 libcurl에 전달할 수 있습니다.</p>
+<p><code>CURLOPT_CURLU</code> 옵션을 사용하여 URL 문자열 대신 <code>CURLU</code> 핸들을 전달합니다.<br>예시:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CURLU *h = curl_url();</span><br><span class="line">rc = curl_url_set(h, CURLUPART_URL, <span class="string">"https://example.com/"</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">CURL *easy = curl_easy_init();</span><br><span class="line">curl_easy_setopt(easy, CURLOPT_CURLU, h);</span><br></pre></td></tr></table></figure>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2022/02/09/Linux-libcurl URL API/" data-id="ckzfaqfse00mpdyuo0cbymsj1" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "libcurl URL API",
+        "image": "http://jung-max.github.io/images/Thumbnail/curl.png",
+        "keywords": "Linux buildroot http cURL",
+        "genre": "Linux http",
+        "datePublished": "2022-02-09",
+        "dateCreated": "2022-02-09",
+        "dateModified": "2022-02-09",
+        "url": "http://jung-max.github.io/2022/02/09/Linux-libcurl URL API/",
+        "description": "URL APIlibcurl은 URL을 구문 분석, 업데이트 및 생성하기 위한 API를 제공합니다. 이를 사용하여 응용 프로그램은 자체 목적을 위해 libcurl의 URL 파서를 사용할 수 있습니다. 동일한 파서를 사용함으로써 다른 해석으로 인한 보안 문제를 피할 수 있습니다.
+Include filesURL API를 사용하려는 경우 코드에 &lt;curl/c"
+        "wordCount": 1260
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2022/02/09/Linux-libcurl example/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            libcurl example
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">libcurl 핸들 간에 데이터 공유</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2022/02/09/Linux-libcurl URL API/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

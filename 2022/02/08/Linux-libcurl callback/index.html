@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>libcurl Callback | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="Linux,buildroot,http,cURL">
+    
+    <meta name="description" content="콜백libcurl 내의 많은 작업은 콜백을 사용하여 제어됩니다. 콜백은 libcurl이 특정 작업을 완료하기 위해 특정 시점에서 호출하는 libcurl에 제공되는 함수 포인터입니다. 각 콜백에는 문서화된 특정 목적이 있으며 올바른 인수를 수락하고 문서화된 반환 코드와 반환 값을 반환하여 libcurl이 원하는 방식으로 수행할 수 있도록 정확한 함수 프로토타">
+<meta name="keywords" content="Linux,buildroot,http,cURL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="libcurl Callback">
+<meta property="og:url" content="http://jung-max.github.io/2022/02/08/Linux-libcurl callback/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="콜백libcurl 내의 많은 작업은 콜백을 사용하여 제어됩니다. 콜백은 libcurl이 특정 작업을 완료하기 위해 특정 시점에서 호출하는 libcurl에 제공되는 함수 포인터입니다. 각 콜백에는 문서화된 특정 목적이 있으며 올바른 인수를 수락하고 문서화된 반환 코드와 반환 값을 반환하여 libcurl이 원하는 방식으로 수행할 수 있도록 정확한 함수 프로토타">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/Thumbnail/curl.png">
+<meta property="og:updated_time" content="2022-02-09T03:59:16.223Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="libcurl Callback">
+<meta name="twitter:description" content="콜백libcurl 내의 많은 작업은 콜백을 사용하여 제어됩니다. 콜백은 libcurl이 특정 작업을 완료하기 위해 특정 시점에서 호출하는 libcurl에 제공되는 함수 포인터입니다. 각 콜백에는 문서화된 특정 목적이 있으며 올바른 인수를 수락하고 문서화된 반환 코드와 반환 값을 반환하여 libcurl이 원하는 방식으로 수행할 수 있도록 정확한 함수 프로토타">
+<meta name="twitter:image" content="http://jung-max.github.io/images/Thumbnail/curl.png">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2022/02/08/linux-libcurl callback/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Linux/http/">http</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Linux-libcurl callback" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        libcurl Callback
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2022/02/08/Linux-libcurl callback/" class="article-date">
+            <time datetime="2022-02-08T06:27:44.000Z" itemprop="datePublished">2022-02-08</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/buildroot/">buildroot</a>, <a class="tag-link" href="/tags/cURL/">cURL</a>, <a class="tag-link" href="/tags/http/">http</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="콜백"><a href="#콜백" class="headerlink" title="콜백"></a>콜백</h1><p>libcurl 내의 많은 작업은 콜백을 사용하여 제어됩니다. 콜백은 libcurl이 특정 작업을 완료하기 위해 특정 시점에서 호출하는 libcurl에 제공되는 함수 포인터입니다.</p>
+<p>각 콜백에는 문서화된 특정 목적이 있으며 올바른 인수를 수락하고 문서화된 반환 코드와 반환 값을 반환하여 libcurl이 원하는 방식으로 수행할 수 있도록 정확한 함수 프로토타입으로 작성해야 합니다.</p>
+<p>각 콜백 옵션에는 연결된 “사용자 포인터”를 설정하는 동반 옵션도 있습니다. 이 사용자 포인터는 libcurl이 만지거나 신경 쓰지 않고 콜백에 대한 인수로 전달하는 포인터입니다. 이를 통해 예를 들어 로컬 데이터에 대한 포인터를 콜백 함수까지 전달할 수 있습니다.</p>
+<p>libcurl 함수 문서에 명시적으로 언급되지 않은 한 libcurl 콜백 내에서 libcurl 함수를 호출하는 것은 불법입니다.</p>
+<h2 id="데이터-쓰기"><a href="#데이터-쓰기" class="headerlink" title="데이터 쓰기"></a>데이터 쓰기</h2><p>쓰기 콜백은 <code>CURLOPT_WRITEFUNCTION</code>으로 설정됩니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, write_callback);</span><br></pre></td></tr></table></figure>
+
+<p>write_callback 함수는 다음 프로토타입과 일치해야 합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">write_callback</span><span class="params">(<span class="keyword">char</span> *ptr, <span class="keyword">size_t</span> <span class="built_in">size</span>, <span class="keyword">size_t</span> nmemb, <span class="keyword">void</span> *userdata)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>이 콜백 함수는 저장해야 하는 데이터가 수신되는 즉시 libcurl에 의해 호출됩니다. ptr은 전달된 데이터를 가리키며 해당 데이터의 크기는 nmemb와 곱한 크기입니다.</p>
+<p>이 콜백이 설정되지 않은 경우 libcurl은 기본적으로 ‘fwrite’를 대신 사용합니다.</p>
+<p>쓰기 콜백은 모든 호출에서 가능한 한 많은 데이터를 전달하지만 어떤 가정도 해서는 안 됩니다. 1바이트일 수도 있고 수천 바이트일 수도 있습니다. 쓰기 콜백에 전달될 본문 데이터의 최대 양은 curl.h 헤더 파일 <code>CURL_MAX_WRITE_SIZE</code>에 정의되어 있습니다(일반적인 기본값은 16KB). 헤더 데이터가 쓰기 콜백으로 전달되도록 이 전송에 대해 <code>CURLOPT_HEADER</code>가 활성화된 경우 전달된 헤더 데이터의 최대 <code>CURL_MAX_HTTP_HEADER</code> 바이트를 얻을 수 있습니다. 이것은 일반적으로 100KB를 의미합니다.</p>
+<p>이 함수는 전송된 파일이 비어 있는 경우 0바이트 데이터로 호출될 수 있습니다.</p>
+<p>이 함수에 전달된 데이터는 0으로 종료되지 않습니다. 예를 들어, printf의 <code>%s</code> 연산자를 사용하여 내용을 표시하거나 strcpy를 사용하여 복사할 수 없습니다.</p>
+<p>이 콜백은 실제로 처리된 바이트 수를 반환해야 합니다. 해당 번호가 콜백 함수에 전달된 번호와 다르면 라이브러리에 오류 상태를 알립니다. 이로 인해 전송이 중단되고 사용된 libcurl 함수는 <code>CURLE_WRITE_ERROR</code>를 반환합니다.</p>
+<p>userdata 인수의 콜백에 전달된 사용자 포인터는 <code>CURLOPT_WRITEDATA</code>로 설정됩니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_easy_setopt(handle, CURLOPT_WRITEDATA, custom_pointer);</span><br></pre></td></tr></table></figure>
+
+<h3 id="메모리에-저장"><a href="#메모리에-저장" class="headerlink" title="메모리에 저장"></a>메모리에 저장</h3><p>인기 있는 요구는 검색된 응답을 메모리에 저장하는 것이며 위에서 설명한 콜백이 이를 지원합니다. 이 작업을 수행할 때 응답이 잠재적으로 엄청날 수 있으므로 주의하십시오.</p>
+<p>다음과 유사한 방식으로 콜백을 구현합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">response</span> &#123;</span></span><br><span class="line">  <span class="keyword">char</span> *memory;</span><br><span class="line">  <span class="keyword">size_t</span> <span class="built_in">size</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">size_t</span></span><br><span class="line">mem_cb(<span class="keyword">void</span> *contents, <span class="keyword">size_t</span> <span class="built_in">size</span>, <span class="keyword">size_t</span> nmemb, <span class="keyword">void</span> *userp)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">size_t</span> realsize = <span class="built_in">size</span> * nmemb;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">repsonse</span> *<span class="title">mem</span> = (<span class="title">struct</span> <span class="title">response</span> *)<span class="title">userp</span>;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">char</span> *ptr = <span class="built_in">realloc</span>(mem-&gt;memory, mem-&gt;<span class="built_in">size</span> + realsize + <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">if</span>(!ptr) &#123;</span><br><span class="line">    <span class="comment">/* out of memory! */</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"not enough memory (realloc returned NULL)\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  mem-&gt;memory = ptr;</span><br><span class="line">  <span class="built_in">memcpy</span>(&amp;(mem-&gt;memory[mem-&gt;<span class="built_in">size</span>]), contents, realsize);</span><br><span class="line">  mem-&gt;<span class="built_in">size</span> += realsize;</span><br><span class="line">  mem-&gt;memory[mem-&gt;<span class="built_in">size</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> realsize;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">response</span> <span class="title">chunk</span>;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* send all data to this function  */</span></span><br><span class="line">  curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, mem_cb);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* we pass our 'chunk' to the callback function */</span></span><br><span class="line">  curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, (<span class="keyword">void</span> *)&amp;chunk);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="데이터-읽기"><a href="#데이터-읽기" class="headerlink" title="데이터 읽기"></a>데이터 읽기</h2><p>읽기 콜백은 <code>CURLOPT_READFUNCTION</code>으로 설정됩니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_easy_setopt(handle, CURLOPT_READFUNCTION, read_callback);</span><br></pre></td></tr></table></figure>
+
+<p>read`_callback 함수는 다음 프로토타입과 일치해야 합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">read_callback</span><span class="params">(<span class="keyword">char</span> *<span class="built_in">buffer</span>, <span class="keyword">size_t</span> <span class="built_in">size</span>, <span class="keyword">size_t</span> nitems, <span class="keyword">void</span> *stream)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>이 콜백 함수는 서버에 데이터를 보내려고 할 때 libcurl에 의해 호출됩니다. 이것은 데이터를 업로드하거나 서버로 보내도록 설정한 전송입니다. 이 콜백은 모든 데이터가 전달되거나 전송이 실패할 때까지 계속해서 호출됩니다.</p>
+<p>스트림 포인터는 <code>CURLOPT_READDATA</code>를 사용하여 개인 데이터 세트를 가리킵니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_easy_setopt(handle, CURLOPT_READDATA, custom_pointer);</span><br></pre></td></tr></table></figure>
+
+<p>이 콜백이 설정되지 않은 경우 libcurl은 기본적으로 ‘fread’를 대신 사용합니다.</p>
+<p>포인터 버퍼가 가리키는 데이터 영역은 함수에 의해 nitems 수를 곱한 최대 크기로 채워져야 합니다. 그런 다음 콜백은 해당 메모리 영역에 저장된 바이트 수를 반환하거나 데이터 끝에 도달한 경우 0을 반환해야 합니다. 콜백은 또한 libcurl이 즉시 실패를 반환하거나 특정 전송을 일시 중지하도록 하는 몇 가지 “마법” 반환 코드를 반환할 수 있습니다. 자세한 내용은 CURLOPT_R<a href="https://curl.se/libcurl/c/CURLOPT_READFUNCTION.html" rel="external nofollow noopener noreferrer" target="_blank">EADFUNCTION 매뉴얼 페이지</a>를 참조하십시오.</p>
+<h2 id="진행-정보"><a href="#진행-정보" class="headerlink" title="진행 정보"></a>진행 정보</h2><p>진행 콜백은 전송의 전체 수명 동안 각 전송에 대해 정기적으로 반복적으로 호출되는 것입니다. 이전 콜백은 <code>CURLOPT_PROGRESSFUNCTION</code>으로 설정되었지만 최신 콜백은 <code>CURLOPT_XFERINFOFUNCTION</code>으로 설정되었습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_easy_setopt(handle, CURLOPT_XFERINFOFUNCTION, xfer_callback);</span><br></pre></td></tr></table></figure>
+
+<p><code>xfer_callback</code> 함수는 다음 프로토타입과 일치해야 합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">xfer_callback</span><span class="params">(<span class="keyword">void</span> *clientp, <span class="keyword">curl_off_t</span> dltotal, <span class="keyword">curl_off_t</span> dlnow,</span></span></span><br><span class="line"><span class="function"><span class="params">                  <span class="keyword">curl_off_t</span> ultotal, <span class="keyword">curl_off_t</span> ulnow)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>이 옵션이 설정되고 <code>CURLOPT_NOPROGRESS</code>가 0(영)으로 설정되면 이 콜백 함수는 libcurl에 의해 빈번한 간격으로 호출됩니다. 데이터가 전송되는 동안에는 자주 호출되며 아무 것도 전송되지 않는 경우와 같이 느린 시간에는 초당 약 1회의 호출로 느려질 수 있습니다.</p>
+<p><strong>clientp</strong> 포인터는 <code>CURLOPT_XFERINFODATA</code>를 사용하여 개인 데이터 세트를 가리킵니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_easy_setopt(handle, CURLOPT_XFERINFODATA, custom_pointer);</span><br></pre></td></tr></table></figure>
+
+<p>콜백은 libcurl이 전송하고 전송한 데이터의 양을 바이트 수로 알려줍니다.</p>
+<ul>
+<li><strong>dltotal</strong>은 libcurl이 이 전송에서 다운로드할 것으로 예상하는 총 바이트 수입니다.</li>
+<li><strong>dlnow</strong>는 지금까지 다운로드한 바이트 수입니다.</li>
+<li><strong>ultotal</strong>은 libcurl이 이 전송에서 업로드할 것으로 예상하는 총 바이트 수입니다.</li>
+<li><strong>ulnow</strong>는 지금까지 업로드된 바이트 수입니다.</li>
+</ul>
+<p>콜백에 전달된 알 수 없거나 사용되지 않은 인수 값은 0으로 설정됩니다(예: 데이터만 다운로드하는 경우 업로드 크기는 0으로 유지됨). 여러 번 콜백은 데이터 크기를 알기 전에 먼저 한 번 이상 호출되므로 이를 처리하도록 프로그램을 만들어야 합니다.</p>
+<p>이 콜백에서 0이 아닌 값을 반환하면 libcurl이 전송을 중단하고 <code>CURLE_ABORTED_BY_CALLBACK</code>을 반환합니다.</p>
+<p>다중 인터페이스로 데이터를 전송하는 경우 전송을 수행하는 적절한 libcurl 함수를 호출하지 않는 한 유휴 기간 동안 이 함수가 호출되지 않습니다.</p>
+<p>(더 이상 사용되지 않는 콜백 <code>CURLOPT_PROGRESSFUNCTION</code>은 동일하게 작동했지만 <code>curl_off_t</code> 유형의 인수를 사용하는 대신 <code>double</code>을 사용했습니다.)</p>
+<h2 id="헤더-데이터"><a href="#헤더-데이터" class="headerlink" title="헤더 데이터"></a>헤더 데이터</h2><p>헤더 콜백은 <code>CURLOPT_HEADERFUNCTION</code>으로 설정됩니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, header_callback);</span><br></pre></td></tr></table></figure>
+
+<p><code>header_callback</code> 함수는 다음 프로토타입과 일치해야 합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">header_callback</span><span class="params">(<span class="keyword">char</span> *ptr, <span class="keyword">size_t</span> <span class="built_in">size</span>, <span class="keyword">size_t</span> nmemb, <span class="keyword">void</span> *userdata)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>이 콜백 함수는 헤더가 수신되는 즉시 libcurl에 의해 호출됩니다. ptr은 전달된 데이터를 가리키며 해당 데이터의 크기는 nmemb와 곱한 크기입니다. libcurl은 헤더를 버퍼링하고 “전체” 헤더만 이 콜백에 하나씩 전달합니다.</p>
+<p>이 함수에 전달된 데이터는 0으로 종료되지 않습니다! 예를 들어, printf의 <code>%s</code> 연산자를 사용하여 내용을 표시하거나 strcpy를 사용하여 복사할 수 없습니다.</p>
+<p>이 콜백은 실제로 처리된 바이트 수를 반환해야 합니다. 해당 번호가 콜백 함수에 전달된 번호와 다르면 라이브러리에 오류 조건을 알립니다. 이로 인해 전송이 중단되고 사용된 libcurl 함수는 <code>CURLE_WRITE_ERROR</code>를 반환합니다.</p>
+<p>userdata 인수의 콜백에 전달된 사용자 포인터는 <code>CURLOPT_HEADERDATA</code>로 설정됩니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_easy_setopt(handle, CURLOPT_HEADERDATA, custom_pointer);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h2><p>디버그 콜백은 <code>CURLOPT_DEBUGFUNCTION</code>으로 설정됩니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_easy_setopt(handle, CURLOPT_DEBUGFUNCTION, debug_callback);</span><br></pre></td></tr></table></figure>
+
+<p><code>debug_callback</code> 함수는 다음 프로토타입과 일치해야 합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">debug_callback</span><span class="params">(CURL *handle,</span></span></span><br><span class="line"><span class="function"><span class="params">                   curl_infotype type,</span></span></span><br><span class="line"><span class="function"><span class="params">                   <span class="keyword">char</span> *data,</span></span></span><br><span class="line"><span class="function"><span class="params">                   <span class="keyword">size_t</span> <span class="built_in">size</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                   <span class="keyword">void</span> *userdata)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>이 콜백 함수는 라이브러리의 기본 상세 출력 함수를 대체하며 모든 디버그 및 추적 메시지에 대해 호출되어 애플리케이션이 무슨 일이 일어나고 있는지 이해하도록 돕습니다. type 인수는 헤더, 데이터 또는 SSL 데이터와 같이 제공되는 데이터의 종류와 흐름 방향을 설명합니다.</p>
+<p>이 콜백의 일반적인 용도는 libcurl이 보내고 받는 모든 데이터의 전체 추적을 가져오는 것입니다. 이 콜백으로 전송되는 데이터는 예를 들어 HTTPS 또는 기타 암호화된 프로토콜이 사용되는 경우에도 항상 암호화되지 않은 버전입니다.<br>이 콜백은 0을 반환하거나 오류 코드와 함께 전송을 중지해야 합니다.</p>
+<p>userdata 인수의 콜백에 전달된 사용자 포인터는 <code>CURLOPT_DEBUGDATA</code>로 설정됩니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_easy_setopt(handle, CURLOPT_DEBUGDATA, custom_pointer);</span><br></pre></td></tr></table></figure>
+
+<h2 id="sockopt"><a href="#sockopt" class="headerlink" title="sockopt"></a>sockopt</h2><p>sockopt 콜백은 <code>CURLOPT_SOCKOPTFUNCTION</code>으로 설정됩니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_easy_setopt(handle, CURLOPT_SOCKOPTFUNCTION, sockopt_callback);</span><br></pre></td></tr></table></figure>
+
+<p><code>sockopt_callback</code> 함수는 다음 프로토타입과 일치해야 합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sockopt_callback</span><span class="params">(<span class="keyword">void</span> *clientp,</span></span></span><br><span class="line"><span class="function"><span class="params">                     <span class="keyword">curl_socket_t</span> curlfd,</span></span></span><br><span class="line"><span class="function"><span class="params">                     curlsocktype purpose)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>이 콜백 함수는 새 소켓이 생성되었지만 연결 호출 전에 응용 프로그램이 특정 소켓 옵션을 변경할 수 있도록 libcurl에 의해 호출됩니다.</p>
+<p>clientp 포인터는 <code>CURLOPT_SOCKOPTDATA</code>를 사용하여 개인 데이터 세트를 가리킵니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_easy_setopt(handle, CURLOPT_SOCKOPTDATA, custom_pointer);</span><br></pre></td></tr></table></figure>
+
+<p>이 콜백은 다음을 반환해야 합니다.</p>
+<ul>
+<li><strong>CURL_SOCKOPT_OK</strong> 성공</li>
+<li>libcurl에 복구할 수 없는 오류를 알리는 <strong>CURL_SOCKOPT_ERROR</strong></li>
+<li><strong>CURL_SOCKOPT_ALREADY_CONNECTED</strong>는 성공을 알리지만 소켓이 실제로 이미 대상에 연결되어 있음을 나타냅니다.</li>
+</ul>
+<h2 id="SSL-context"><a href="#SSL-context" class="headerlink" title="SSL context"></a>SSL context</h2><p>libcurl은 <code>CURLOPT_SSL_CTX_FUNCTION</code>이라는 특수한 TLS 관련 콜백을 제공합니다. 이 옵션은 OpenSSL, wolfSSL 또는 mbedTLS로 구동되는 libcurl에서만 작동하며 libcurl이 다른 TLS 백엔드로 빌드된 경우에는 아무 작업도 수행하지 않습니다.</p>
+<p>이 콜백은 응용 프로그램이 TLS 초기화 동작을 수정할 수 있는 마지막 기회를 제공하기 위해 다른 모든 TLS 관련 옵션을 처리한 후 TLS 연결 초기화 직전에 libcurl에 의해 호출됩니다. 두 번째 인수에서 콜백에 전달된 <code>ssl_ctx</code> 매개변수는 실제로 OpenSSL 또는 wolfSSL의 경우 SSL 라이브러리의 <code>SSL_CTX</code>에 대한 포인터이고 mbedTLS의 경우 <code>mbedtls_ssl_config</code>에 대한 포인터입니다. 콜백에서 오류가 반환되면 연결 설정을 시도하지 않고 작업에서 콜백의 오류 코드를 반환합니다. <code>CURLOPT_SSL_CTX_DATA</code> 옵션으로 userptr 인수를 설정합니다.</p>
+<p>이 함수는 TLS 협상 중에 서버에 대한 모든 새 연결에서 호출됩니다. TLS 컨텍스트는 매번 새로 초기화된 개체를 가리킵니다.</p>
+<h2 id="Seek-and-ioctl"><a href="#Seek-and-ioctl" class="headerlink" title="Seek and ioctl"></a>Seek and ioctl</h2><p>이 콜백은 <code>CURLOPT_SEEKFUNCTION</code>으로 설정됩니다.</p>
+<p>콜백은 입력 스트림의 특정 위치를 찾기 위해 libcurl에 의해 호출되며 재개된 업로드에서 파일을 빨리 전달하는 데 사용할 수 있습니다(일반 읽기 기능/콜백으로 업로드된 모든 바이트를 읽는 대신). 데이터가 이미 서버로 전송되어 다시 전송해야 할 때 스트림을 되감기 위해 호출되기도 합니다. 이는 다중 패스 인증 방법으로 HTTP PUT 또는 POST를 수행할 때 또는 기존 HTTP 연결이 너무 늦게 재사용되어 서버가 연결을 닫을 때 발생할 수 있습니다. 이 함수는 fseek(3) 또는 lseek(3)처럼 작동해야 하며 libcurl이 현재 <code>SEEK_SET</code>만 전달하지만 <code>SEEK_SET</code>, <code>SEEK_CUR</code> 또는 <code>SEEK_END</code>를 원본에 대한 인수로 가져옵니다.</p>
+<p>콜백으로 전송된 사용자 정의 userp는 <code>CURLOPT_SEEKDATA</code>로 설정한 포인터입니다.</p>
+<p>콜백 함수는 성공 시 <code>CURL_SEEKFUNC_OK</code>를 반환해야 하고, 업로드 작업이 실패하도록 하려면 <code>CURL_SEEKFUNC_FAIL</code>을 반환해야 하며, 탐색이 실패한 동안 가능한 경우 libcurl이 자유롭게 문제를 해결할 수 있음을 나타내려면 <code>CURL_SEEKFUNC_CANTSEEK</code>를 반환해야 합니다. 후자는 때때로 입력 또는 이와 유사한 것을 대신 읽어서 수행할 수 있습니다.</p>
+<p>입력 인수를 fseek(3) 또는 lseek(3)에 직접 전달하는 경우 offset의 데이터 유형은 많은 시스템에서 <code>curl_off_t</code>에 대해 정의된 것과 동일하지 않습니다.</p>
+<h2 id="네트워크-데이터-변환"><a href="#네트워크-데이터-변환" class="headerlink" title="네트워크 데이터 변환"></a>네트워크 데이터 변환</h2><h3 id="네트워크-콜백과의-변환"><a href="#네트워크-콜백과의-변환" class="headerlink" title="네트워크 콜백과의 변환"></a>네트워크 콜백과의 변환</h3><p>비 ASCII 플랫폼의 경우 <code>CURLOPT_CONV_FROM_NETWORK_FUNCTION</code>이 제공됩니다. 이 기능은 네트워크 인코딩에서 호스트 인코딩으로 변환되어야 합니다.</p>
+<p><code>CURLOPT_CONV_TO_NETWORK_FUNCTION</code>은 호스트 인코딩에서 네트워크 인코딩으로 변환해야 합니다. 네트워크를 통해 명령이나 ASCII 데이터를 보낼 때 사용합니다.</p>
+<h3 id="UTF-8-콜백에서-변환"><a href="#UTF-8-콜백에서-변환" class="headerlink" title="UTF-8 콜백에서 변환"></a>UTF-8 콜백에서 변환</h3><p><code>CURLOPT_CONV_FROM_UTF8_FUNCTION</code>은 UTF-8 인코딩에서 호스트 인코딩으로 변환해야 합니다. SSL 처리에만 필요합니다.</p>
+<h2 id="Opensocket-and-closesocket"><a href="#Opensocket-and-closesocket" class="headerlink" title="Opensocket and closesocket"></a>Opensocket and closesocket</h2><p>때때로 libcurl이 작업에 사용할 소켓을 보다 정확하게 제어하기를 원하는 상황이 발생합니다. libcurl은 socket()에 대한 libcurl의 자체 호출과 동일한 파일 설명자의 후속 <code>close()</code>를 대체하는 이 콜백 쌍을 제공합니다.</p>
+<h3 id="파일-설명자-제공"><a href="#파일-설명자-제공" class="headerlink" title="파일 설명자 제공"></a>파일 설명자 제공</h3><p><code>CURLOPT_OPENSOCKETFUNCTION</code> 콜백을 설정하여 libcurl이 사용할 파일 설명자를 반환하는 사용자 정의 함수를 제공할 수 있습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_easy_setopt(handle, CURLOPT_OPENSOCKETFUNCTION, opensocket_callback);</span><br></pre></td></tr></table></figure>
+
+<p><code>opensocket_callback</code> 함수는 다음 프로토타입과 일치해야 합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">curl_socket_t</span> <span class="title">opensocket_callback</span><span class="params">(<span class="keyword">void</span> *clientp,</span></span></span><br><span class="line"><span class="function"><span class="params">                                  curlsocktype purpose,</span></span></span><br><span class="line"><span class="function"><span class="params">                                  struct curl_sockaddr *address)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>콜백은 <code>CURLOPT_OPENSOCKETDATA</code>로 설정한 단순히 불투명한 포인터인 clientp를 첫 번째 인수로 가져옵니다.</p>
+<p>다른 두 인수는 소켓을 사용할 목적과 주소를 식별하는 데이터를 전달합니다. 목적은 소켓이 생성되는 상황을 식별하는 <code>CURLSOCKTYPE_IPCXN</code> 또는 <code>CURLSOCKTYPE_ACCEPT</code> 값을 가진 typedef입니다. “수락” 경우는 FTP 활성 모드가 사용될 때 libcurl이 들어오는 FTP 연결을 수락하는 데 사용되며 libcurl이 자체 나가는 연결을 위한 소켓을 만드는 다른 모든 경우에는 IPCXN 값이 전달됩니다.</p>
+<p>주소 포인터는 이 소켓이 생성되는 네트워크 대상의 IP 주소를 설명하는 <code>curl_sockaddr 구조체</code>를 가리킵니다. 예를 들어 콜백은 이 정보를 사용하여 특정 주소 또는 주소 범위를 화이트리스트 또는 블랙리스트에 추가할 수 있습니다.</p>
+<p>어떤 종류의 네트워크 필터 또는 변환 계층을 제공하려는 경우 socketopen 콜백은 해당 구조체의 대상 주소를 수정할 수도 있습니다.</p>
+<p>콜백은 파일 설명자 또는 <code>CURL_SOCKET_BAD</code>를 반환해야 합니다. 그러면 libcurl 내에서 복구할 수 없는 오류가 발생하고 결국에는 수행 함수에서 <code>CURLE_COULDNT_CONNECT</code>를 반환합니다.</p>
+<p>이미 서버에 연결된 파일 설명자를 반환하려면 <a href="#sockopt">sockopt 콜백</a>도 설정하고 올바른 반환 값을 반환하는지 확인해야 합니다.</p>
+<p><code>curl_sockaddress</code> 구조체는 다음과 같습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">curl_sockaddr</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> family;</span><br><span class="line">  <span class="keyword">int</span> socktype;</span><br><span class="line">  <span class="keyword">int</span> protocol;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> addrlen;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr</span> <span class="title">addr</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Socket-close-callback"><a href="#Socket-close-callback" class="headerlink" title="Socket close callback"></a>Socket close callback</h3><p>열린 소켓에 대한 해당 콜백은 물론 닫기 소켓입니다. 일반적으로 파일 설명자를 제공하는 사용자 지정 방법을 제공할 때 자체 정리 버전도 제공하려고 합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_easy_setopt(handle, CURLOPT_CLOSESOCKETFUNCTION, closesocket_callback);</span><br></pre></td></tr></table></figure>
+
+<p><code>closesocket_callback</code> 함수는 다음 프로토타입과 일치해야 합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">closesocket_callback</span><span class="params">(<span class="keyword">void</span> *clientp, <span class="keyword">curl_socket_t</span> item)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2><p>이 콜백은 <code>CURLOPT_SSH_KEYFUNCTION</code>으로 설정됩니다.</p>
+<p>이것은 known_host 매칭이 완료되었을 때 호출되어 애플리케이션이 libcurl을 어떻게 처리할지 결정할 수 있도록 합니다. 콜백은 <code>CURLOPT_SSH_KNOWNHOSTS</code>도 설정된 경우에만 호출됩니다.</p>
+<p>콜백에 대한 인수에는 이전 키와 새 키가 있으며 콜백은 libcurl에게 작동 방법을 알려주는 반환 코드를 반환할 것으로 예상됩니다.</p>
+<ul>
+<li><code>CURLKHSTAT_FINE_REPLACE</code> - 새 호스트 + 키가 수락되고 libcurl은 연결을 계속하기 전에 이전 호스트 + 키를 known_hosts 파일로 바꿉니다. 이것은 또한 새로운 호스트+키 콤보가 이미 존재하지 않는 경우 메모리에 보관된 known_host 풀에 추가됩니다. 파일에 데이터를 추가하는 것은 파일을 새 복사본으로 완전히 교체하여 수행되므로 파일의 권한이 이를 허용해야 합니다.</li>
+<li><code>CURLKHSTAT_FINE_ADD_TO_FILE</code> - 호스트+키가 수락되고 libcurl은 연결을 계속하기 전에 이것을 known_hosts 파일에 추가합니다. 이것은 또한 이미 존재하지 않는 경우 메모리에 보관된 known_host 풀에 host+key 콤보를 추가합니다. 파일에 데이터를 추가하는 것은 파일을 새 복사본으로 완전히 교체하여 수행되므로 파일의 권한이 이를 허용해야 합니다.</li>
+<li><code>CURLKHSTAT_FINE</code> - 호스트 + 키가 수락되면 libcurl이 연결을 계속합니다. 이것은 또한 이미 존재하지 않는 경우 메모리에 보관된 known_host 풀에 host+key 콤보를 추가합니다.</li>
+<li><code>CURLKHSTAT_REJECT</code> - 호스트 + 키가 거부되었습니다. libcurl은 계속하기 위해 연결을 거부하고 닫힙니다.</li>
+<li><code>CURLKHSTAT_DEFER</code> - 호스트 + 키가 거부되지만 SSH 연결은 활성 상태로 유지되도록 요청됩니다. 이 기능은 앱이 어떻게든 호스트+키 상황으로 돌아가서 조치를 취한 다음 처음부터 다시 설정하는 오버헤드 없이 재시도하려고 할 때 사용할 수 있습니다.</li>
+</ul>
+<h2 id="RTSP-interleaved-data"><a href="#RTSP-interleaved-data" class="headerlink" title="RTSP interleaved data"></a>RTSP interleaved data</h2><p><code>CURLOPT_INTERLEAVEFUNCTION</code> 옵션이 있는 콜백.</p>
+<p>이 콜백은 RTSP 전송을 수행할 때 인터리브된 RTP 데이터를 수신하자마자 libcurl에 의해 호출됩니다. 각 $ 블록에 대해 호출되므로 정확히 하나의 상위 계층 프로토콜 단위(예: 하나의 RTP 패킷)를 포함합니다. libcurl은 인터리브 처리된 헤더와 각 호출에 대해 포함된 데이터를 씁니다. 첫 번째 바이트는 항상 ASCII 달러 기호입니다. 달러 기호 다음에 1바이트 채널 식별자가 오고 네트워크 바이트 순서로 2바이트 정수 길이가 옵니다. RTP 인터리빙의 작동 방식에 대한 자세한 내용은 RFC2326 섹션 10.12를 참조하세요. 설정하지 않거나 NULL로 설정하면 curl은 기본 쓰기 기능을 사용합니다.</p>
+<p><code>CURLOPT_INTERLEAVEDATA</code> 포인터는 콜백의 userdata 인수로 전달됩니다.</p>
+<h2 id="FTP-와일드-카드-일치"><a href="#FTP-와일드-카드-일치" class="headerlink" title="FTP 와일드 카드 일치"></a>FTP 와일드 카드 일치</h2><p>libcurl은 FTP 와일드 카드 일치를 지원합니다. <code>CURLOPT_WILDCARDMATCH</code>를 <code>1L</code>로 설정한 다음 URL의 파일 이름 부분에 “와일드 카드 패턴”을 사용하여 이 기능을 사용합니다.</p>
+<h3 id="와일드-카드-패턴"><a href="#와일드-카드-패턴" class="headerlink" title="와일드 카드 패턴"></a>와일드 카드 패턴</h3><p>기본 libcurl 와일드 카드 일치 기능은 다음을 지원합니다.</p>
+<p><code>*</code> - 별표</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ftp://example.com/some/path/*.txt</span><br></pre></td></tr></table></figure>
+
+<p><code>some/path</code> 디렉토리의 모든 txt 파일을 일치시키려면. 동일한 패턴 문자열 내에서는 두 개의 별표만 사용할 수 있습니다.</p>
+<p><code>?</code> - 물음표</p>
+<p>물음표는 모든(정확히 하나의) 문자와 일치합니다. <code>photo1.jpeg</code> 및 <code>photo7.jpeg</code>라는 파일이 있는 경우 이 패턴은 다음과 일치할 수 있습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ftp://example.com/some/path/photo?.jpeg</span><br></pre></td></tr></table></figure>
+
+<p><code>[</code> - BRACKET 표현<br>왼쪽 대괄호는 대괄호 표현식을 엽니다. 대괄호 식에서 물음표와 별표는 특별한 의미가 없습니다. 각 대괄호 표현식은 오른쪽 대괄호(<code>]</code>)로 끝나고 정확히 한 문자와 일치합니다. 몇 가지 예는 다음과 같습니다.</p>
+<p><code>[a-zA-Z0-9]</code> 또는 <code>[f-gF-G]</code> - 문자 간격</p>
+<p><code>[abc]</code> - 문자 열거</p>
+<p><code>[^abc]</code> 또는 <code>[!abc]</code> - 부정</p>
+<p><code>[[:name:]]</code> 클래스 표현식입니다. 지원되는 클래스는 alnum, lower, space, alpha, digit, print, upper, blank, graph, xdigit입니다.</p>
+<p><code>[][-!^]</code> - 특수 케이스, <code>\-</code>, <code>]</code>, <code>[</code>, <code>!</code> 또는 <code>^</code>.</p>
+<p><code>[\\[\\]\\\\]</code> - 이스케이프 구문. <code>[</code>, <code>]</code> 또는 <code>\\</code>와 일치합니다.</p>
+<p>위의 규칙을 사용하여 파일 이름 패턴을 구성할 수 있습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ftp://example.com/some/path/[a-z[:upper:]\\\\].jpeg</span><br></pre></td></tr></table></figure>
+
+<h3 id="FTP-chunk-콜백"><a href="#FTP-chunk-콜백" class="headerlink" title="FTP chunk 콜백"></a>FTP chunk 콜백</h3><p>FTP 와일드 카드 일치가 사용되면 일치하는 파일에 대한 전송이 시작되기 전에 <code>CURLOPT_CHUNK_BGN_FUNCTION</code> 콜백이 호출됩니다.</p>
+<p>콜백은 다음 반환 코드 중 하나를 반환하도록 선택하여 libcurl에게 파일로 무엇을 할 것인지 알릴 수 있습니다.</p>
+<ul>
+<li><code>CURL_CHUNK_BGN_FUNC_OK</code> 파일 전송</li>
+<li><code>CURL_CHUNK_BGN_FUNC_SKIP</code></li>
+<li><code>CURL_CHUNK_BGN_FUNC_FAIL</code> 오류로 인해  중지</li>
+<li>일치하는 파일이 전송되거나 건너뛴 후 <code>CURLOPT_CHUNK_END_FUNCTION</code> 콜백이 호출됩니다.</li>
+</ul>
+<p>끝 chunk 콜백은 성공 또는 오류만 반환할 수 있습니다.</p>
+<h3 id="FTP-매칭-콜백"><a href="#FTP-매칭-콜백" class="headerlink" title="FTP 매칭 콜백"></a>FTP 매칭 콜백</h3><p>기본 패턴 일치 기능이 마음에 들지 않으면 <code>CURLOPT_FNMATCH_FUNCTION</code> 옵션을 대체 기능으로 설정하여 고유한 대체 기능을 제공할 수 있습니다.</p>
+<h2 id="Resolver-시작"><a href="#Resolver-시작" class="headerlink" title="Resolver 시작"></a>Resolver 시작</h2><p><code>CURLOPT_RESOLVER_START_FUNCTION</code>으로 설정된 이 콜백 함수는 새로운 확인 요청이 시작되기 전에 매번 libcurl에 의해 호출되며 어떤 <code>CURL *</code> 핸들이 확인 대상인지 지정합니다.</p>
+<h2 id="트레일러-보내기"><a href="#트레일러-보내기" class="headerlink" title="트레일러 보내기"></a>트레일러 보내기</h2><p>“Trailers”은 전송이 끝날 때 헤더를 전달할 수 있는 HTTP/1 기능입니다. 이 콜백은 업로드가 완료된 후 컬이 있는 트레일러를 보내고 싶을 때 사용됩니다. 청크 인코딩된 POST 형식의 업로드입니다.</p>
+<p><code>CURLOPT_TRAILERFUNCTION</code>으로 설정된 콜백이 호출되고 함수는 목록에 헤더를 추가할 수 있습니다. 하나 또는 여러 개. 완료되면 libcurl은 이를 서버에 트레일러로 보냅니다.</p>
+<h2 id="HSTS"><a href="#HSTS" class="headerlink" title="HSTS"></a>HSTS</h2><p>HSTS, HTTP Strict Transport Security의 경우 libcurl은 할당이 규칙에 대한 저장소를 구현할 수 있도록 두 개의 콜백을 제공합니다. 그런 다음 콜백은 영구 저장소에서 HSTS 정책을 읽고/쓰도록 설정됩니다.</p>
+<p><code>CURLOPT_HSTSREADFUNCTION</code>을 사용하여 응용 프로그램은 libcurl에 있는 HSTS 데이터를 읽는 데 사용하는 기능을 제공합니다. <code>CURLOPT_HSTSWRITEFUNCTION</code>은 libcurl이 데이터를 쓰기 위해 호출하는 해당 함수입니다.</p>
+<h2 id="Prereq"><a href="#Prereq" class="headerlink" title="Prereq"></a>Prereq</h2><p>여기서 “Prereq”는 요청이 발행되기 직전을 의미합니다. 바로 이 콜백이 호출되는 순간입니다.</p>
+<p><code>CURLOPT_PREREQFUNCTION</code>으로 함수를 설정하면 호출되고 인수에 IP 주소와 포트 번호가 전달됩니다. 이를 통해 애플리케이션은 시작 직전에 전송에 대해 알 수 있으며 원할 경우 이 특정 전송을 취소할 수도 있습니다.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2022/02/08/Linux-libcurl callback/" data-id="ckzfaqfu400pjdyuoqc6aw6cm" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "libcurl Callback",
+        "image": "http://jung-max.github.io/images/Thumbnail/curl.png",
+        "keywords": "Linux buildroot http cURL",
+        "genre": "Linux http",
+        "datePublished": "2022-02-08",
+        "dateCreated": "2022-02-08",
+        "dateModified": "2022-02-09",
+        "url": "http://jung-max.github.io/2022/02/08/Linux-libcurl callback/",
+        "description": "콜백libcurl 내의 많은 작업은 콜백을 사용하여 제어됩니다. 콜백은 libcurl이 특정 작업을 완료하기 위해 특정 시점에서 호출하는 libcurl에 제공되는 함수 포인터입니다.
+각 콜백에는 문서화된 특정 목적이 있으며 올바른 인수를 수락하고 문서화된 반환 코드와 반환 값을 반환하여 libcurl이 원하는 방식으로 수행할 수 있도록 정확한 함수 프로토타"
+        "wordCount": 2935
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2022/02/09/Linux-libcurl Cleanup/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            libcurl Cleanup
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2022/02/08/Linux-libcurl Easy handle/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">libcurl Easy handle</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2022/02/08/Linux-libcurl callback/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

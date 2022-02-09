@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>openCv page Dewarp 분석 -7 | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="openCV,pageDewarp">
+    
+    <meta name="description" content="이번 포스트는 굴곡을 펴기 위해서 cv2.solvePnP를 사용하는 것을 알아보겠습니다. get_default_paramssolvePnP 함수는 영상을 획득한 카메라의 위치 및 방향 (camera pzose)을 알아낼 때 유용하게 사용할 수 있습니다.카메라 내부 파라미터 행렬 K와 3D 월드좌표 - 2D 픽셀좌표 매칭쌍들을 입력으로 주면, 카메라 외부 파라">
+<meta name="keywords" content="openCV,pageDewarp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openCv page Dewarp 분석 -7">
+<meta property="og:url" content="http://jung-max.github.io/2020/02/17/openCV-pageDewarp-07/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="이번 포스트는 굴곡을 펴기 위해서 cv2.solvePnP를 사용하는 것을 알아보겠습니다. get_default_paramssolvePnP 함수는 영상을 획득한 카메라의 위치 및 방향 (camera pzose)을 알아낼 때 유용하게 사용할 수 있습니다.카메라 내부 파라미터 행렬 K와 3D 월드좌표 - 2D 픽셀좌표 매칭쌍들을 입력으로 주면, 카메라 외부 파라">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/0039.png">
+<meta property="og:updated_time" content="2022-02-08T02:11:11.814Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openCv page Dewarp 분석 -7">
+<meta name="twitter:description" content="이번 포스트는 굴곡을 펴기 위해서 cv2.solvePnP를 사용하는 것을 알아보겠습니다. get_default_paramssolvePnP 함수는 영상을 획득한 카메라의 위치 및 방향 (camera pzose)을 알아낼 때 유용하게 사용할 수 있습니다.카메라 내부 파라미터 행렬 K와 3D 월드좌표 - 2D 픽셀좌표 매칭쌍들을 입력으로 주면, 카메라 외부 파라">
+<meta name="twitter:image" content="http://jung-max.github.io/images/0039.png">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2020/02/17/opencv-pagedewarp-07/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/openCV/">openCV</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/openCV/pageDewarp/">pageDewarp</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-openCV-pageDewarp-07" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        openCv page Dewarp 분석 -7
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2020/02/17/openCV-pageDewarp-07/" class="article-date">
+            <time datetime="2020-02-17T05:46:20.000Z" itemprop="datePublished">2020-02-17</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/openCV/">openCV</a>, <a class="tag-link" href="/tags/pageDewarp/">pageDewarp</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>이번 포스트는 굴곡을 펴기 위해서 <code>cv2.solvePnP</code>를 사용하는 것을 알아보겠습니다.</p>
+<h2 id="get-default-params"><a href="#get-default-params" class="headerlink" title="get_default_params"></a>get_default_params</h2><p>solvePnP 함수는 영상을 획득한 카메라의 위치 및 방향 (camera pzose)을 알아낼 때 유용하게 사용할 수 있습니다.<br>카메라 내부 파라미터 행렬 K와 3D 월드좌표 - 2D 픽셀좌표 매칭쌍들을 입력으로 주면, 카메라 외부 파라미터인 <code>[R|t]</code> 행렬을 계산해 줍니다. 최소 4개의 좌표쌍을 필요로 합니다.</p>
+<p>기본형은 아래와 같습니다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">retval, rvec, tvec = solvePnP(objectPoints, imagePoints, cameraMatrix, distCoeffs, rvec=<span class="literal">None</span>, tvec=<span class="literal">None</span>, useExtrinsicGuess=<span class="literal">None</span>, flags=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<p>바탕이 되는 이론은 <a href="https://darkpgmr.tistory.com/122" rel="external nofollow noopener noreferrer" target="_blank">블로그</a>와 <a href="https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#solvepnp" rel="external nofollow noopener noreferrer" target="_blank">openCV 사이트</a>를 참고 바랍니다.</p>
+<p>파라미터 설명은 다음과 같습니다.</p>
+<ul>
+<li>objectPoints : 객체 좌표 공간의 객체 포인트 배열, 3xN / Nx3 1 채널 또는 1xN / Nx1 3 채널. 여기서 N은 포인트 수입니다. vector <code>&lt;Point3f&gt;</code>도 여기에 전달할 수 있습니다.<ul>
+<li>월드 좌표계 (World Coordinate System)<br>우리가 사물(물체)의 위치를 표현할 때 기준으로 삼는 좌표계입니다. </li>
+</ul>
+</li>
+</ul>
+<p>월드좌표계는 어디 하늘에서 주어져 있는 것이 아니라 문제에 따라서 우리가 임의로 잡아서 사용할 수 있는 좌표계입니다.</p>
+<p>예를 들어, 자신의 안방 한쪽 모서리를 원점으로 잡고 한쪽 벽면 방향을 X축, 다른쪽 벽면 방향을 Y축, 하늘을 바라보는 방향을 Z축으로 잡을 수 있습니다. 좌표의 단위(unit)는 미터(meter)로 해도 되고 센티미터(centimeter)로 해도 됩니다.</p>
+<p>중요한 점은 좌표계는 일종의 약속(protocol)이기 때문에 (3, 1, -10)이라고 했을 때 이 점이 어떤 위치인지 그 문제 내에서 만큼은 유일하게 결정될 수 있으면 되는 것입니다.</p>
+<ul>
+<li><p>imagePoints  : 해당 이미지 포인트의 배열, 2xN / Nx2 1 채널 또는 1xN / Nx1 2 채널. 여기서 N은 포인트 수입니다. vector <code>&lt;Point2f&gt;</code>도 여기에 전달할 수 있습니다.</p>
+<ul>
+<li>픽셀 좌표계 (Pixel Image Coordinate System)<br>편의상 픽셀 좌표계라고 썼지만, 보통은 영상좌표계(Image Coordinate System)라고 불립니다. </li>
+</ul>
+</li>
+</ul>
+<p>픽셀 좌표계는 우리가 실제 눈으로 보는 영상에 대한 좌표계로서 아래 그림과 같이 이미지의 왼쪽상단(left-top) 모서리를 원점, 오른쪽 방향을 x축 증가방향, 아래쪽 방향을 y축 증가방향으로 합니다. 그리고 픽셀 좌표계의 x축, y축에 의해 결정되는 평면을 이미지 평면 (image plane)이라 부릅니다.</p>
+<p>기하학적으로 볼 때, 3D 공간상의 한 점 P = (X,Y,Z)는 카메라의 초점 (또는 렌즈의 초점)을 지나서 이미지 평면의 한 점 pimg = (x, y)에 투영(projection) 됩니다. 알다시피 점 P와 점 pimg를 잊는 선(ray) 상에 있는 모든 3D 점들은 모두 pimg로 투영됩니다. 따라서 3D 점 P로부터 pimg는 유일하게 결정할 수 있지만, 반대로 영상 픽셀 pimg로부터 P를 구하는 것은 부가적인 정보 없이는 불가능합니다.</p>
+<p>픽셀 좌표계의 단위는 픽셀(pixel)입니다.</p>
+<p><img src="/images/0039.png" alt="좌표계 (Coordinate System)"></p>
+<ul>
+<li>cameraMatrix : Input camera matrix<ul>
+<li>초점거리(focal length): fx, fy<br>흔히 초점거리라 하면 볼록렌즈의 초점을 생각하기 쉬운데, 여기서(카메라 모델) 말하는 초점거리는 렌즈중심과 이미지센서(CCD, CMOS 등)와의 거리를 말합니다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/0037.png" alt="카메라 모델"></p>
+<p>디지털 카메라 등에서 초점거리는 mm 단위로 표현되지만 카메라 모델에서 말하는 초점거리(f)는 픽셀(pixel) 단위로 표현됩니다. 즉, f의 단위로 픽셀이라는 의미입니다.</p>
+<p>이미지의 픽셀(pixel)은 이미지 센서의 셀(cell)에 대응되기 때문에, 초점거리(f)가 픽셀(pixel) 단위라는 의미는 초점거리가 이미지 센서의 셀(cell) 크기에 대한 상대적인 값으로 표현된다는 의미입니다. 예를 들어, 이미지 센서의 셀(cell)의 크기가 0.1 mm이고 카메라의 초점거리가 f = 500 pixel이라고 하면 이 카메라의 렌즈 중심에서 이미지 센서까지의 거리는 이미지 센서 셀(cell) 크기의 500배 즉, 50 mm라는 의미입니다.</p>
+<p>컴퓨터 비전 분야에서 카메라 초점거리를 물리단위(m, cm, mm, …)가 아닌 픽셀단위로 표현하는 이유는 (이미지 픽셀과 동일한 단위로 초점거리를 표현함으로써) 영상에서의 기하학적 해석을 용이하게 하기 위함입니다.</p>
+<p>그런데, 카메라 모델에서 초점거리를 하나의 값으로 f라 표현하지 않고 fx, fy로 구분하여 표현하는 경우가 있는데(실제로 카메라 캘리브레이션을 수행하면 fx, fy를 구분하여 반환한다) 이는 이미지 센서의 물리적인 셀 간격이 가로 방향과 세로 방향이 서로 다를 수 있음을 모델링하기 위함입니다. 이 경우 fx는 초점거리(렌즈중심에서 이미지 센서까지의 거리)가 가로 방향 셀 크기(간격)의 몇 배인지를 나타내고 fy는 초점거리가 세로 방향 센서 셀 크기(간격)의 몇 배인지를 나타냅니다. fx와 fy 모두 단위는 픽셀(pixel)이며 현대의 일반적인 카메라는 가로방향 셀 간격과 세로방향 셀 간격의 차이가 없기 때문에 f = fx = fy라 놓아도 무방합니다.</p>
+<p>참고로, 동일한 카메라로 캘리브레이션을 수행했을 때, 이미지 해상도를 1/2로 낮추면 캘리브레이션 결과의 초점거리도 1/2로 작아집니다. 실제 물리적 초점거리가 변하는 것은 아니지만 카메라 모델에서의 초점거리는 상대적인 개념이기 때문에 해상도를 바꾸면 한 픽셀(pixel)에 대응하는 물리크기가 변하고 따라서 초점거리도 변하게 됩니다. 예컨데, 이미지 해상도를 1/2로 낮추면 이미지 센서의 2 x 2 셀(cell)들이 합쳐서 하나의 이미지 픽셀이 되기 때문에 한 픽셀에 대응하는 물리크기가 2배가 됩니다. 따라서 초점거리는 1/2이 되어야 합니다.</p>
+<p>카메라 모델의 렌즈중심(초점)은 핀홀 카메라 모델(그림 6)에서 핀홀(pinhole)에 해당됩니다. 핀홀 카메라 모델은 모든 빛은 한 점(초점)을 직선으로 통과하여 이미지 평면(센서)에 투영된다는 모델입니다. 이러한 핀홀 모델은 3D 공간과 2D 이미지 평면 사이의 기하학적 투영(projection) 관계를 매우 단순화시켜 줍니다.</p>
+<p>초점으로부터 거리가 1(unit distance)인 평면을 normalized image plane이라고 부르며 이 평면상의 좌표를 보통 normalized image coordinate라고 부릅니다. 물론 이것은 실제는 존재하지 않는 가상의(상상의) 이미지 평면입니다. 카메라 좌표계 상의 한 점 (Xc, Yc, Zc)를 영상좌표계로 변환할 때 먼저 Xc, Yc를 Zc(카메라 초점에서의 거리)로 나누는 것은 이 normalized image plane 상의 좌표로 변환하는 것이며, 여기에 다시 초점거리 f를 곱하면 우리가 원하는 이미지 평면에서의 영상좌표(pixel)가 나옵니다 (그림 4 참조). 그런데, 이미지에서 픽셀좌표는 이미지의 중심이 아닌 이미지의 좌상단 모서리를 기준(원점)으로 하기 때문에 실제 최종적인 영상좌표는 여기에 (cx, cy)를 더한 값이 됩니다. 즉, x = fxX/Z+cx, y = fyY/Z+cy.</p>
+<p><img src="/images/0038.png" alt="카메라 투영(projection)모델"></p>
+<ul>
+<li>주점(principal point): cx, cy<br>주점 cx, cy는 카메라 렌즈의 중심 즉, 핀홀에서 이미지 센서에 내린 수선의 발의 영상좌표(단위는 픽셀)로서 일반적으로 말하는 영상 중심점(image center)과는 다른 의미입니다. 예를 들어서, 카메라 조립과정에서 오차로 인해 렌즈와 이미지 센서가 수평이 어긋나면 주점과 영상중심은 다른 값을 가질 것입니다.</li>
+</ul>
+<p>영상기하학에서는 단순한 이미지 센터보다는 principal point가 훨씬 중요하며  영상의 모든 기하학적 해석은 이 주점을 이용하여 이루어집니다.</p>
+<p><img src="/images/0032.png" alt="cameraMatrix"></p>
+<ul>
+<li>distCoeffs : 4, 5 또는 8 요소의 왜곡 계수 (k_1, k_2, p_1, p_2[, k_3[, k_4, k_5, k_6]])의 입력 벡터 벡터가 NULL / empty이면, 제로 왜곡 계수가 가정됩니다. (<a href="https://darkpgmr.tistory.com/31" rel="external nofollow noopener noreferrer" target="_blank">왜곡 보정 관련 링크</a>)</li>
+<li>rvec : tvec과 함께 모델 좌표계에서 카메라 좌표계로 점을 가져 오는 출력 회전 벡터(Output rotation vector) (<a href="https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html#void%20Rodrigues(InputArray%20src,%20OutputArray%20dst,%20OutputArray%20jacobian)" rel="external nofollow noopener noreferrer" target="_blank">Rodrigues()</a> 참조)<ul>
+<li>Rodrigues’ rotation formula<br>opencv의 solvePnP 함수에서 반환되는 rvec는 Rodrigues를 컴팩트(compact)하게 표현한 벡터입니다. 먼저, Rodrigues가 무엇인지 살펴본 후 opencv에서 사용하는 Rodrigues 표현법에 대해 살펴보겠습니다.</li>
+</ul>
+</li>
+</ul>
+<p>3차원에서 회전변환은 보통 3 × 3 행렬로 표현됩니다. 그런데, Rodrigues를 사용하면 임의의 3차원 회전변환을 4개의 값(회전축 벡터 + 회전각) 만으로 표현할 수 있습니다. 3차원 공간에서 점 p를 회전축 v에 대하여 θ만큼 회전시킨 값은 다음 식에 의해 계산될 수 있는데, 이 식을 Rodrigues’ rotation formula라고 부릅니다 (Rodrigues는 이 식을 만든 프랑스 수학자의 이름).</p>
+<p><img src="/images/0040.png" alt="Rodrigues&#39; rotation formula"></p>
+<p>이 때, v는 단위벡터(unit vector)이어야 하고 회전방향은 오른손 법칙을 따릅니다 (엄지를 펴고 오른손을 쥐었을 때 엄지의 방향이 회전축 방향, 쥔 손가락의 방향이 + 회전방향).</p>
+<p>위식을 행렬 형태로 표현하면 다음과 같습니다.</p>
+<p><img src="/images/0041.png" alt="행렬 표현"></p>
+<p>위식으로부터 Rodrigues v = (vx,vy,vz), θ에 대응하는 회전변환 행렬 R이 다음과 같음을 알 수 있습니다.</p>
+<p><img src="/images/0042.png" alt="회전 변환 행렬 R"></p>
+<p>위식은 우리가 임의의 회전축에 대한 회전을 회전변환 행렬로 표현할 수 있음을 나타냅니다.</p>
+<p>반대의 경우로, 임의의 회전변환 행렬에 대한 Rodrigues 표현은 다음 수식을 이용하여 구할 수 있다고 합니다.</p>
+<p><img src="/images/0043.png" alt="임의의 회전축에 대한 회전을 회전변환 행렬로 표현"></p>
+<p>opencv에서는 회전변환행렬 표현과 Rodrigues 표현 사이의 상호 변환을 위해 <code>Rodrigues()</code>란 함수를 제공합니다. 그런데, opencv에서 사용하는 Rodrigues 표현은 보다 컴팩트(compact)한 형태로서 단 3개의 값만으로 회전변환을 표현합니다.</p>
+<p>opencv API 설명문서에 따르면 원래 회전변환은 3 자유도이기 때문에 opencv에서는 회전변환을 rod2 = [a, b, c]의 3차원 벡터로 컴팩트하게 표현하고 이로부터 회전각(θ) 및 회전축 벡터(v)는 다음과 같이 추출합니다.</p>
+<p><img src="/images/0044.png" alt="회전각(θ) 및 회전축 벡터(v)"></p>
+<p>이와같이 solvePnP 함수에서 반환되는 rvec는 Rodrigues에 대한 3차원의 컴팩트한 표현법이므로 회전각 및 회전축을 알기 위해서는 위식을 이용해야 합니다.</p>
+<ul>
+<li>tvec – 출력 변환 벡터.(Output translation vector.)</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_default_params</span><span class="params">(corners, ycoords, xcoords)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># page width and height</span></span><br><span class="line">    page_width = np.linalg.norm(corners[<span class="number">1</span>] - corners[<span class="number">0</span>])</span><br><span class="line">    page_height = np.linalg.norm(corners[<span class="number">-1</span>] - corners[<span class="number">0</span>])</span><br><span class="line">    rough_dims = (page_width, page_height)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># our initial guess for the cubic has no slope</span></span><br><span class="line">    cubic_slopes = [<span class="number">0.0</span>, <span class="number">0.0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># object points of flat page in 3D coordinates</span></span><br><span class="line">    corners_object3d = np.array([</span><br><span class="line">        [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">        [page_width, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">        [page_width, page_height, <span class="number">0</span>],</span><br><span class="line">        [<span class="number">0</span>, page_height, <span class="number">0</span>]])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># estimate rotation and translation from four 2D-to-3D point</span></span><br><span class="line">    <span class="comment"># correspondences</span></span><br><span class="line">    _, rvec, tvec = cv2.solvePnP(corners_object3d,</span><br><span class="line">                                 corners, K, np.zeros(<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">    span_counts = [len(xc) <span class="keyword">for</span> xc <span class="keyword">in</span> xcoords]</span><br><span class="line"></span><br><span class="line">    params = np.hstack((np.array(rvec).flatten(),</span><br><span class="line">                        np.array(tvec).flatten(),</span><br><span class="line">                        np.array(cubic_slopes).flatten(),</span><br><span class="line">                        ycoords.flatten()) +</span><br><span class="line">                       tuple(xcoords))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> rough_dims, span_counts, params</span><br></pre></td></tr></table></figure>
+
+<p><code>np.hstack</code>은 두 배열을 왼쪽에서 오른쪽으로 붙이는 함수 입니다. 아래 예를 보면 이해가 쉽습니다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">In [<span class="number">2</span>]: a = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: b = np.array([<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line"></span><br><span class="line">In [<span class="number">7</span>]: np.hstack([a, b])</span><br><span class="line"></span><br><span class="line">Out[<span class="number">7</span>]: array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>])</span><br></pre></td></tr></table></figure>
+
+<p>결론적으로 <code>cv2.solvePnP</code>에서 취득한 값들을 배열화해 <code>params</code>라는 배열로 리턴합니다.</p>
+<h2 id="optimize-params"><a href="#optimize-params" class="headerlink" title="optimize_params"></a>optimize_params</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">project_xy</span><span class="params">(xy_coords, pvec)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># get cubic polynomial coefficients given</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#  f(0) = 0, f'(0) = alpha</span></span><br><span class="line">    <span class="comment">#  f(1) = 0, f'(1) = beta</span></span><br><span class="line"></span><br><span class="line">    alpha, beta = tuple(pvec[CUBIC_IDX])</span><br><span class="line"></span><br><span class="line">    poly = np.array([</span><br><span class="line">        alpha + beta,</span><br><span class="line">        <span class="number">-2</span>*alpha - beta,</span><br><span class="line">        alpha,</span><br><span class="line">        <span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">    xy_coords = xy_coords.reshape((<span class="number">-1</span>, <span class="number">2</span>))</span><br><span class="line">    z_coords = np.polyval(poly, xy_coords[:, <span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">    objpoints = np.hstack((xy_coords, z_coords.reshape((<span class="number">-1</span>, <span class="number">1</span>))))</span><br><span class="line"></span><br><span class="line">    image_points, _ = cv2.projectPoints(objpoints,</span><br><span class="line">                                        pvec[RVEC_IDX],</span><br><span class="line">                                        pvec[TVEC_IDX],</span><br><span class="line">                                        K, np.zeros(<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> image_points</span><br></pre></td></tr></table></figure>
+
+<p><code>np.polyval</code>함수는 스칼라 값에서 다항식의 해를 구합니다. 기본형은 <code>polyval(p, x)</code>입니다.</p>
+<ul>
+<li>첫번째 파라미터 p는 다항식을 의미합니다.</li>
+<li>두번째 파라미터 x는 해를 뜻합니다.</li>
+</ul>
+<p>예를 들어 <code>np.polyval([1, -2, 1], 2)</code>가 있다면 [1, -2, 1]은 <code>x²-2x+1</code>을 뜻하고 여기에 2를 대입한 결과 1을 리턴합니다.<br><code>np.polyval([1, -12, 10, 7, -10], 3)</code>가 있다면 [1, -12, 10, 7, -10] 은 <code>x⁴-12x³+10x²+7x-10</code>을 뜻하고 여기에 3을 대입한 결과 -142를 리턴합니다.</p>
+<p><code>cv2.projectPoints</code>는 3차원 공간상의 객체의 Pose(rorcpdml dnlcldhk qkdgid)정보를 2차원 화면상의 이미지의 Pose 정보로 변경해 줍니다. 위에서 설명한 월드 좌표계(3D)의 값을 이미지 좌표계(2D)로 변환합니다.</p>
+<p>기본형은 아래와 같습니다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imagePoints, jacobian = cv2.projectPoints(objectPoints, rvec, tvec, cameraMatrix, distCoeffs[, imagePoints[, jacobian[, aspectRatio]]])</span><br></pre></td></tr></table></figure>
+
+<p>파라미터의 설명은 <code>cv2.solvePnP</code>에서 설명한 파라미터와 같습니다.</p>
+<p>최적화 문제는 함수  f의 값을 최대화 혹은 최소화하는 변수  x의 값  x∗를 찾는 것입니다. 이 값  x∗ 를 최적화 문제의 해(solution)라고 합니다. 만약 최소화 문제를 풀 수 있다면  f(x) 를  −f(x) 로 바꾸어 위아래를 뒤집은 다음 최소화 문제를 풀면  f(x) 의 최대화 문제를 푼 것과 같습니다. 따라서 보통은 최소화 문제만 고려합니다.</p>
+<p>최적화에 대한 설명 리스트입니다.</p>
+<ul>
+<li><a href="https://scipy-lectures.org/advanced/mathematical_optimization/index.html" rel="external nofollow noopener noreferrer" target="_blank">scipy-lectures.org</a></li>
+<li><a href="https://datascienceschool.net/view-notebook/4642b9f187784444b8f3a8309c583007/" rel="external nofollow noopener noreferrer" target="_blank">데이터 사이언스 스쿨</a></li>
+</ul>
+<p><img src="/images/0033.png" alt="최적화 전 이미지"></p>
+<p><img src="/images/0034.png" alt="최적화 후 이미지"></p>
+<p><img src="/images/0035.png" alt="최종 output"></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2020/02/17/openCV-pageDewarp-07/" data-id="ckzfaqfsn00n9dyuo6y3a62lw" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "openCv page Dewarp 분석 -7",
+        "image": "http://jung-max.github.io/images/0039.png",
+        "keywords": "openCV pageDewarp",
+        "genre": "openCV pageDewarp",
+        "datePublished": "2020-02-17",
+        "dateCreated": "2020-02-17",
+        "dateModified": "2022-02-08",
+        "url": "http://jung-max.github.io/2020/02/17/openCV-pageDewarp-07/",
+        "description": "이번 포스트는 굴곡을 펴기 위해서 cv2.solvePnP를 사용하는 것을 알아보겠습니다.
+get_default_paramssolvePnP 함수는 영상을 획득한 카메라의 위치 및 방향 (camera pzose)을 알아낼 때 유용하게 사용할 수 있습니다.카메라 내부 파라미터 행렬 K와 3D 월드좌표 - 2D 픽셀좌표 매칭쌍들을 입력으로 주면, 카메라 외부 파라"
+        "wordCount": 2079
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/03/23/VS 코드-확장-오류-수정/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            VS코드 확장 오류 수정
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2020/02/17/openCV-pageDewarp-06/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">openCv page Dewarp 분석 -6</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2020/02/17/openCV-pageDewarp-07/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

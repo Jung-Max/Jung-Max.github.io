@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>Android MediaPlayer | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="Android,App,MediaPlayer">
+    
+    <meta name="description" content="미디어 플레이어 개요Android 멀티미디어 프레임 워크에는 다양한 일반 미디어 유형의 재생을 지원하므로 오디오, 비디오 및 이미지를 애플리케이션에 쉽게 통합 할 수 있습니다.  응용 프로그램의 리소스 (원시 리소스)에 저장된 미디어 파일, 파일 시스템의 독립형 파일 또는 네트워크 연결을 통해 도착하는 데이터 스트림에서 모두 MediaPlayer API를">
+<meta name="keywords" content="Android,App,MediaPlayer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android MediaPlayer">
+<meta property="og:url" content="http://jung-max.github.io/2019/09/25/Android-MediaPlayer/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="미디어 플레이어 개요Android 멀티미디어 프레임 워크에는 다양한 일반 미디어 유형의 재생을 지원하므로 오디오, 비디오 및 이미지를 애플리케이션에 쉽게 통합 할 수 있습니다.  응용 프로그램의 리소스 (원시 리소스)에 저장된 미디어 파일, 파일 시스템의 독립형 파일 또는 네트워크 연결을 통해 도착하는 데이터 스트림에서 모두 MediaPlayer API를">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/Android-MediaPlayer/01.gif">
+<meta property="og:updated_time" content="2022-02-08T02:11:11.760Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android MediaPlayer">
+<meta name="twitter:description" content="미디어 플레이어 개요Android 멀티미디어 프레임 워크에는 다양한 일반 미디어 유형의 재생을 지원하므로 오디오, 비디오 및 이미지를 애플리케이션에 쉽게 통합 할 수 있습니다.  응용 프로그램의 리소스 (원시 리소스)에 저장된 미디어 파일, 파일 시스템의 독립형 파일 또는 네트워크 연결을 통해 도착하는 데이터 스트림에서 모두 MediaPlayer API를">
+<meta name="twitter:image" content="http://jung-max.github.io/images/Android-MediaPlayer/01.gif">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2019/09/25/android-mediaplayer/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Android-MediaPlayer" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Android MediaPlayer
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/09/25/Android-MediaPlayer/" class="article-date">
+            <time datetime="2019-09-25T00:42:00.000Z" itemprop="datePublished">2019-09-25</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Android/">Android</a>, <a class="tag-link" href="/tags/App/">App</a>, <a class="tag-link" href="/tags/MediaPlayer/">MediaPlayer</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="미디어-플레이어-개요"><a href="#미디어-플레이어-개요" class="headerlink" title="미디어 플레이어 개요"></a>미디어 플레이어 개요</h1><p>Android 멀티미디어 프레임 워크에는 다양한 일반 미디어 유형의 재생을 지원하므로 오디오, 비디오 및 이미지를 애플리케이션에 쉽게 통합 할 수 있습니다. </p>
+<p>응용 프로그램의 리소스 (원시 리소스)에 저장된 미디어 파일, 파일 시스템의 독립형 파일 또는 네트워크 연결을 통해 도착하는 데이터 스트림에서 모두 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a> API를 사용하여 오디오 또는 비디오를 재생할 수 있습니다.</p>
+<blockquote>
+<p>참고 : 오디오 데이터는 표준 출력 장치로만 재생할 수 있습니다. 현재는 모바일 장치 스피커 또는 Bluetooth 헤드셋입니다. 통화 중에는 대화 오디오에서 사운드 파일을 재생할 수 없습니다.</p>
+</blockquote>
+<h1 id="기본"><a href="#기본" class="headerlink" title="기본"></a>기본</h1><p>다음 클래스는 Android 프레임 워크에서 사운드 및 비디오를 재생하는 데 사용됩니다.</p>
+<ul>
+<li><p><a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a><br>이 클래스는 사운드 및 비디오를 재생하기위한 기본 API입니다.</p>
+</li>
+<li><p><a href="https://developer.android.com/reference/android/media/AudioManager.html" rel="external nofollow noopener noreferrer" target="_blank">AudioManager</a><br>이 클래스는 장치의 오디오 소스 및 오디오 출력을 관리합니다.</p>
+</li>
+</ul>
+<h1 id="Manifest-선언"><a href="#Manifest-선언" class="headerlink" title="Manifest 선언"></a>Manifest 선언</h1><p><a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 사용하여 응용 프로그램 개발을 시작하기 전에 매니페스트에 관련 기능을 사용할 수 있는 적절한 선언이 있는지 확인하십시오.</p>
+<ul>
+<li>인터넷 권한 : <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 사용하여 네트워크 기반 컨텐츠를 스트리밍하는 경우 응용 프로그램은 네트워크 액세스를 요청해야합니다.</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.INTERNET"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>잠금 권한 깨우기 : 플레이어 응용 프로그램에서 화면이 어두워 지거나 프로세서가 절전 모드로 전환되지 않도록하거나 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#setScreenOnWhilePlaying(boolean)" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer.setScreenOnWhilePlaying()</a> 또는 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#setWakeMode(android.content.Context,%20int)" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer.setWakeMode()</a> 메서드를 사용하려면이 권한을 요청해야합니다.</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.WAKE_LOCK"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="MediaPlayer-사용"><a href="#MediaPlayer-사용" class="headerlink" title="MediaPlayer 사용"></a>MediaPlayer 사용</h1><p>미디어 프레임 워크의 가장 중요한 구성 요소 중 하나는 MediaPlayer 클래스입니다. 이 클래스의 객체는 최소한의 설정으로 오디오와 비디오를 모두 가져 와서 디코딩하고 재생할 수 있습니다. </p>
+<p>다음과 같은 여러 가지 미디어 소스를 지원합니다.</p>
+<ul>
+<li>지역 자원</li>
+<li>Content Resolver에서 얻을 수있는 것과 같은 내부 URI</li>
+<li>외부 URL (스트리밍)</li>
+</ul>
+<p>Android가 지원하는 미디어 형식 목록은 지원되는 <a href="https://developer.android.com/guide/topics/media/media-formats.html" rel="external nofollow noopener noreferrer" target="_blank">미디어 형식 페이지</a>를 참조하십시오.</p>
+<p>다음은 응용 프로그램의 <code>res/raw/</code> 디렉토리에 저장된 로컬 raw 리소스로 사용 가능한 오디오를 재생하는 방법의 예입니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.sound_file_1);</span><br><span class="line">mediaPlayer.start(); <span class="comment">// no need to call prepare(); create() does that for you</span></span><br></pre></td></tr></table></figure>
+
+<p>이 경우 “raw”리소스는 시스템이 특정 방식으로 구문 분석하지 않는 파일입니다. 그러나이 리소스의 내용은 원본 오디오가 아니어야합니다. </p>
+<p>지원되는 형식 중 하나로 올바르게 인코딩되고 형식화 된 미디어 파일이어야합니다.</p>
+<p>다음은 시스템에서 로컬로 사용 가능한 URI(예 : Content Resolver를 통해 얻은)에서 재생하는 방법입니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Uri myUri = ....; <span class="comment">// initialize Uri here</span></span><br><span class="line">MediaPlayer mediaPlayer = <span class="keyword">new</span> MediaPlayer();</span><br><span class="line">mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);</span><br><span class="line">mediaPlayer.setDataSource(getApplicationContext(), myUri);</span><br><span class="line">mediaPlayer.prepare();</span><br><span class="line">mediaPlayer.start();</span><br></pre></td></tr></table></figure>
+
+<p>HTTP 스트리밍을 통해 원격 URL에서 재생하는 방법은 다음과 같습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String url = <span class="string">"http://........"</span>; <span class="comment">// your URL here</span></span><br><span class="line">MediaPlayer mediaPlayer = <span class="keyword">new</span> MediaPlayer();</span><br><span class="line">mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);</span><br><span class="line">mediaPlayer.setDataSource(url);</span><br><span class="line">mediaPlayer.prepare(); <span class="comment">// might take long! (for buffering, etc)</span></span><br><span class="line">mediaPlayer.start();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>참고 : 온라인 미디어 파일을 스트리밍하기 위해 URL을 전달하는 경우 파일을 점진적으로 다운로드 할 수 있어야합니다.</p>
+</blockquote>
+<blockquote>
+<p>주의 : <code>setDataSource()</code>를 사용하는 경우 참조하는 파일이 없을 수 있으므로 IllegalArgumentException 및 IOException을 catch하거나 pass해야합니다.</p>
+</blockquote>
+<h2 id="비동기-준비"><a href="#비동기-준비" class="headerlink" title="비동기 준비"></a>비동기 준비</h2><p><a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 사용하는 것은 원칙적으로 간단 할 수 있습니다. </p>
+<p>그러나 일반적인 Android 애플리케이션과 올바르게 통합하려면 몇 가지 사항이 더 필요하다는 점을 명심해야합니다. </p>
+<p>예를 들어, 미디어 데이터를 가져오고 디코딩하는 작업이 필요할 수 있으므로 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#prepare()" rel="external nofollow noopener noreferrer" target="_blank">prepare()</a> 호출에 시간이 오래 걸릴 수 있습니다. </p>
+<p>따라서 실행하는 데 시간이 오래 걸릴 수있는 메소드의 경우와 마찬가지로 애플리케이션의 UI 스레드에서 호출하지 않아야합니다. </p>
+<p>이렇게하면 메서드가 반환 될 때까지 UI가 중단됩니다. 이는 매우 나쁜 사용자 경험이며 ANR (Application Not Responding) 오류를 일으킬 수 있습니다. </p>
+<p>리소스가 빠르게로드 될 것으로 예상 되더라도 UI에서 응답하는 데 10 초 이상 걸리는 작업이 눈에 띄게 일시 중지되고 사용자에게 응용 프로그램 속도가 느리다는 인상을줍니다.</p>
+<p>UI 스레드를 중단하지 않으려면 다른 스레드를 생성하여 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 준비하고 완료되면 기본 스레드에 알리십시오. </p>
+<p>그러나 스레딩 로직을 직접 작성할 수는 있지만 MediaPlayer를 사용할 때이 패턴이 일반적이므로 프레임 워크는 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#prepareAsync()" rel="external nofollow noopener noreferrer" target="_blank">prepareAsync()</a> 메소드를 사용하여이 작업을 수행하는 편리한 방법을 제공합니다. </p>
+<p>이 방법은 백그라운드에서 미디어 준비를 시작하고 즉시 돌아옵니다. </p>
+<p>미디어 준비가 끝나면 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#setOnPreparedListener(android.media.MediaPlayer.OnPreparedListener)" rel="external nofollow noopener noreferrer" target="_blank">setOnPreparedListener()</a>를 통해 구성된 <a href="https://developer.android.com/reference/android/media/MediaPlayer.OnPreparedListener.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer.OnPreparedListener</a>의 <a href="https://developer.android.com/reference/android/media/MediaPlayer.OnPreparedListener.html#onPrepared(android.media.MediaPlayer)" rel="external nofollow noopener noreferrer" target="_blank">onPrepared()</a> 메서드가 호출됩니다.</p>
+<h2 id="상태-관리"><a href="#상태-관리" class="headerlink" title="상태 관리"></a>상태 관리</h2><p>명심해야 할 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>의 또 다른 측면은 상태 기반이라는 것입니다. </p>
+<p>즉, <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>에는 코드를 작성할 때 항상 알아야하는 내부 상태가 있습니다. </p>
+<p>특정 작업은 플레이어가 특정 상태에있을 때만 유효하기 때문입니다. </p>
+<p>잘못된 상태에서 작업을 수행하면 시스템에서 예외가 발생하거나 다른 바람직하지 않은 동작이 발생할 수 있습니다.</p>
+<p><img src="/images/Android-MediaPlayer/01.gif" alt="the state diagram"></p>
+<p><a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a> 클래스의 설명서는 어떤 상태에서 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 다른 상태로 옮길지를 설명하는 완전한 상태 다이어그램을 보여줍니다. </p>
+<p>예를 들어 새 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 만들면 유휴 상태입니다. 이 시점에서 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#setDataSource(android.content.Context,%20android.net.Uri)" rel="external nofollow noopener noreferrer" target="_blank">setDataSource()</a>를 호출하여 초기화 상태로 가져 와서 초기화해야합니다. </p>
+<p>그 후, 당신은 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#prepare()" rel="external nofollow noopener noreferrer" target="_blank">prepare()</a> 또는 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#prepareAsync()" rel="external nofollow noopener noreferrer" target="_blank">PrepareAsync()</a> 메소드를 사용하여 그것을 준비해야합니다. </p>
+<p><a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>가 준비를 마치면 준비 됨 상태가되며 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#start()" rel="external nofollow noopener noreferrer" target="_blank">start()</a>를 호출하여 미디어를 재생할 수 있습니다. </p>
+<p>이 시점에서 다이어그램이 보여주는 것처럼 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#start()" rel="external nofollow noopener noreferrer" target="_blank">start()</a>, <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#pause()" rel="external nofollow noopener noreferrer" target="_blank">pause()</a> 및 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#seekTo(int)" rel="external nofollow noopener noreferrer" target="_blank">seekTo()</a>와 같은 메서드를 호출하여 Started, Paused 및 PlaybackCompleted 상태 사이를 이동할 수 있습니다. </p>
+<p>그러나 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#stop()" rel="external nofollow noopener noreferrer" target="_blank">stop()</a>을 호출하면 MediaPlayer를 다시 준비 할 때까지 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#start()" rel="external nofollow noopener noreferrer" target="_blank">start()</a>를 다시 호출 할 수 없습니다.</p>
+<p><a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>객체와 상호 작용하는 코드를 작성할 때는 항상 잘못된 상태에서 메소드를 호출하는 것이 버그의 원인이므로 상태 다이어그램을 명심하십시오.</p>
+<h2 id="미디어-플레이어-릴리즈"><a href="#미디어-플레이어-릴리즈" class="headerlink" title="미디어 플레이어 릴리즈"></a>미디어 플레이어 릴리즈</h2><p><a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>는 귀중한 시스템 리소스를 소비 할 수 있습니다. 따라서 필요 이상으로 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a> 인스턴스에 매달리지 않도록 항상 추가 예방 조치를 취해야합니다. </p>
+<p>작업이 끝나면 항상 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#release()" rel="external nofollow noopener noreferrer" target="_blank">release()</a>를 호출하여 할당 된 시스템 리소스가 올바르게 해제되도록해야합니다. </p>
+<p>예를 들어, <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 사용 중이고 활동이 <a href="https://developer.android.com/reference/android/app/Activity.html#onStop()" rel="external nofollow noopener noreferrer" target="_blank">onStop()</a>에 대한 호출을 수신하는 경우 활동이 사용자와 상호 작용하지 않는 동안 (만약 재생하지 않는 한) <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 보류하는 것이 의미가 없으므로 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 해제해야합니다. </p>
+<p>물론 활동이 재개되거나 다시 시작되면 재생을 다시 시작하기 전에 새 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 생성하고 다시 준비해야합니다.</p>
+<p><a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 해제 한 다음 무효화하는 방법은 다음과 같습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mediaPlayer.release();</span><br><span class="line">mediaPlayer = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
+
+<p>예를 들어, 활동이 중지 될 때 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 해제하는 것을 잊었을 때 발생할 수있는 문제를 고려하지만 활동이 다시 시작될 때 새로 작성하십시오. </p>
+<p>아시다시피, 사용자가 화면 방향을 변경하거나 다른 방식으로 장치 구성을 변경하면 시스템은 활동을 다시 시작하여 (기본적으로)이를 처리하므로 사용자가 회전함에 따라 모든 시스템 리소스를 빠르게 소비 할 수 있습니다. </p>
+<p>각 방향이 바뀔 때마다 절대 해제하지 않는 새 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 생성하기 때문에 세로와 가로 사이의 장치를 앞뒤로 움직입니다. </p>
+<p>런타임 재시작에 대한 자세한 정보는 <a href="https://developer.android.com/guide/topics/resources/runtime-changes.html" rel="external nofollow noopener noreferrer" target="_blank">런타임 변경 처리</a>를 참조하십시오.</p>
+<p>사용자가 활동을 떠날 때에도 내장 음악 응용 프로그램과 같은 방식으로 “백그라운드 미디어”를 계속 재생하려면 어떻게되는지 궁금 할 것입니다. </p>
+<p>이 경우 다음 섹션에서 설명하는 것처럼 서비스가 제어하는 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>가 필요합니다.</p>
+<h1 id="서비스에서-MediaPlayer-사용"><a href="#서비스에서-MediaPlayer-사용" class="headerlink" title="서비스에서 MediaPlayer 사용"></a>서비스에서 MediaPlayer 사용</h1><p>응용 프로그램이 화면에없는 경우에도 백그라운드에서 미디어를 재생하려는 경우 (즉, 사용자가 다른 응용 프로그램과 상호 작용하는 동안 계속 재생하려는 경우) 서비스를 시작하고 거기서부터 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a> 인스턴스를 제어해야합니다. </p>
+<p><a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 <a href="https://developer.android.com/reference/androidx/media/MediaBrowserServiceCompat.html" rel="external nofollow noopener noreferrer" target="_blank">MediaBrowserServiceCompat</a> 서비스에 포함시키고 다른 활동에서 <a href="https://developer.android.com/reference/android/support/v4/media/MediaBrowserCompat.html" rel="external nofollow noopener noreferrer" target="_blank">MediaBrowserCompat</a>와 상호 작용하도록해야합니다.</p>
+<p>이 클라이언트 / 서버 설정에주의해야합니다. 백그라운드 서비스에서 실행중인 플레이어가 나머지 시스템과 상호 작용하는 방식에 대한 기대가 있습니다. </p>
+<p>응용 프로그램이 이러한 기대치를 충족하지 못하면 사용자에게 좋지 않은 경험이있을 수 있습니다. 자세한 내용은 <a href="https://developer.android.com/guide/topics/media-apps/audio-app/building-an-audio-app.html" rel="external nofollow noopener noreferrer" target="_blank">오디오 앱 빌드</a>를 참조하십시오.</p>
+<p>이 섹션에서는 서비스 내부에서 구현 될 때 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 관리하기위한 특별 지침에 대해 설명합니다.</p>
+<h2 id="비동기-적으로-실행"><a href="#비동기-적으로-실행" class="headerlink" title="비동기 적으로 실행"></a>비동기 적으로 실행</h2><p>우선 Activity와 마찬가지로 서비스의 모든 작업은 기본적으로 단일 스레드에서 수행됩니다.</p>
+<p>사실, 동일한 애플리케이션에서 활동 및 서비스를 실행하는 경우 기본적으로 동일한 스레드 (“메인 스레드”)를 사용합니다.</p>
+<p>따라서 서비스는 들어오는 의도를 신속하게 처리해야하며 응답 할 때 긴 계산을 수행하지 않아야합니다. </p>
+<p>과도한 작업이나 호출 차단이 예상되는 경우 직접 구현하는 다른 스레드에서 또는 비동기 처리를 위해 프레임 워크의 많은 기능을 사용하여 이러한 작업을 비동기 적으로 수행해야합니다.</p>
+<p>예를 들어, 메인 스레드에서 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 사용하는 경우, 준비가 완료되고 재생을 시작할 수 있도록 알림을 받으려면 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#prepare()" rel="external nofollow noopener noreferrer" target="_blank">Prepare()</a>가 아니라 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#prepareAsync()" rel="external nofollow noopener noreferrer" target="_blank">PrepareAsync()</a>를 호출하고 <a href="https://developer.android.com/reference/android/media/MediaPlayer.OnPreparedListener.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer.OnPreparedListener</a>를 구현해야합니다. </p>
+<p>예를 들면 다음과 같습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyService</span> <span class="keyword">extends</span> <span class="title">Service</span> <span class="keyword">implements</span> <span class="title">MediaPlayer</span>.<span class="title">OnPreparedListener</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ACTION_PLAY = <span class="string">"com.example.action.PLAY"</span>;</span><br><span class="line">    MediaPlayer mediaPlayer = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">if</span> (intent.getAction().equals(ACTION_PLAY)) &#123;</span><br><span class="line">            mediaPlayer = ... <span class="comment">// initialize it here</span></span><br><span class="line">            mediaPlayer.setOnPreparedListener(<span class="keyword">this</span>);</span><br><span class="line">            mediaPlayer.prepareAsync(); <span class="comment">// prepare async to not block main thread</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Called when MediaPlayer is ready */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPrepared</span><span class="params">(MediaPlayer player)</span> </span>&#123;</span><br><span class="line">        player.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="비동기-오류-처리"><a href="#비동기-오류-처리" class="headerlink" title="비동기 오류 처리"></a>비동기 오류 처리</h2><p>동기 작업의 경우 일반적으로 예외 또는 오류 코드와 함께 오류가 발생하지만 비동기 리소스를 사용할 때마다 응용 프로그램에 오류에 대한 적절한 알림이 표시되어야합니다. </p>
+<p><a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>의 경우 <a href="https://developer.android.com/reference/android/media/MediaPlayer.OnErrorListener.html?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer.OnErrorListener</a>를 구현하고 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a> 인스턴스에서 설정하여이를 수행 할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyService</span> <span class="keyword">extends</span> <span class="title">Service</span> <span class="keyword">implements</span> <span class="title">MediaPlayer</span>.<span class="title">OnErrorListener</span> </span>&#123;</span><br><span class="line">    MediaPlayer mediaPlayer;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initMediaPlayer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...initialize the MediaPlayer here...</span></span><br><span class="line">        mediaPlayer.setOnErrorListener(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onError</span><span class="params">(MediaPlayer mp, <span class="keyword">int</span> what, <span class="keyword">int</span> extra)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ... react appropriately ...</span></span><br><span class="line">        <span class="comment">// The MediaPlayer has moved to the Error state, must be reset!</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>오류가 발생하면 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>가 오류 상태로 이동하고 (전체 상태 다이어그램은 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a> 클래스의 설명서 참조) 다시 사용하기 전에 재설정해야합니다.</p>
+<h2 id="깨우기-잠금-사용"><a href="#깨우기-잠금-사용" class="headerlink" title="깨우기 잠금 사용"></a>깨우기 잠금 사용</h2><p>백그라운드에서 미디어를 재생하는 응용 프로그램을 디자인 할 때 서비스가 실행되는 동안 장치가 절전 모드로 전환 될 수 있습니다. </p>
+<p>Android 시스템은 기기가 절전 모드 일 때 배터리 절약을 시도하기 때문에 시스템은 CPU 및 WiFi 하드웨어를 포함하여 필요하지 않은 전화기 기능을 종료하려고합니다. </p>
+<p>그러나 서비스가 음악을 재생하거나 스트리밍하는 경우 시스템이 재생을 방해하지 못하게하려고합니다.</p>
+<p>이러한 조건에서 서비스가 계속 실행되도록하려면 “깨우기 잠금”을 사용해야합니다. </p>
+<p>깨우기 잠금은 전화가 유휴 상태 인 경우에도 응용 프로그램에서 사용 가능한 일부 기능을 사용하고 있음을 시스템에 알리는 방법입니다.</p>
+<blockquote>
+<p>참고 : 항상 잠금 장치를 사용하지 말고 장치의 배터리 수명을 크게 단축 시키므로 꼭 필요한만큼만 잡아야합니다.</p>
+</blockquote>
+<p><a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>가 재생되는 동안 CPU가 계속 실행되도록하려면 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 초기화 할 때 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#setWakeMode(android.content.Context,%20int)" rel="external nofollow noopener noreferrer" target="_blank">setWakeMode()</a> 메서드를 호출하십시오. </p>
+<p>그렇게하면 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>는 재생하는 동안 지정된 잠금을 유지하고 일시 중지 또는 중지되면 잠금을 해제합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mediaPlayer = <span class="keyword">new</span> MediaPlayer();</span><br><span class="line"><span class="comment">// ... other initialization here ...</span></span><br><span class="line">mediaPlayer.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);</span><br></pre></td></tr></table></figure>
+
+<p>그러나이 위 예제에서 얻은 깨우기 잠금은 CPU가 깨어있는 상태 만 보장합니다. </p>
+<p>네트워크를 통해 미디어를 스트리밍하고 Wi-Fi를 사용하는 경우 <a href="https://developer.android.com/reference/android/net/wifi/WifiManager.WifiLock.html?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">WifiLock</a>도 잡고 싶을 것입니다. </p>
+<p><a href="https://developer.android.com/reference/android/net/wifi/WifiManager.WifiLock.html?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">WifiLock</a>은 수동으로 획득하여 해제해야합니다. 따라서 원격 URL을 사용하여 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 준비하기 시작하면 Wi-Fi 잠금을 생성하고 획득해야합니다. </p>
+<p>예를 들면 다음과 같습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WifiLock wifiLock = ((WifiManager) getSystemService(Context.WIFI_SERVICE))</span><br><span class="line">    .createWifiLock(WifiManager.WIFI_MODE_FULL, <span class="string">"mylock"</span>);</span><br><span class="line"></span><br><span class="line">wifiLock.acquire();</span><br></pre></td></tr></table></figure>
+
+<p>미디어를 일시 중지 또는 중지하거나 더 이상 네트워크가 필요하지 않은 경우 잠금을 해제해야합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wifiLock.release();</span><br></pre></td></tr></table></figure>
+
+<h2 id="정리-수행"><a href="#정리-수행" class="headerlink" title="정리 수행"></a>정리 수행</h2><p>앞에서 언급했듯이 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a> 객체는 상당한 양의 시스템 리소스를 소비 할 수 있으므로 필요한만큼만 유지하고 작업이 끝나면 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#release()" rel="external nofollow noopener noreferrer" target="_blank">release()</a>를 호출해야합니다. </p>
+<p>가비지 수집기가 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 회수하기까지 시간이 걸릴 수 있기 때문에 시스템 가비지 수집에 의존하지 않고이 정리 방법을 명시 적으로 호출하는 것이 중요합니다. </p>
+<p>메모리 요구에만 민감하고 다른 미디어 관련 리소스가 부족하지 않기 때문입니다. </p>
+<p>따라서 서비스를 사용하는 경우 항상 <a href="https://developer.android.com/reference/android/app/Service.html?hl=ko#onDestroy()" rel="external nofollow noopener noreferrer" target="_blank">onDestroy()</a> 메서드를 재정 의하여 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 릴리스해야합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">   MediaPlayer mediaPlayer;</span><br><span class="line">   <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">super</span>.onDestroy()</span><br><span class="line">       <span class="keyword">if</span> (mediaPlayer != <span class="keyword">null</span>) mediaPlayer.release();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>종료 할 때 미디어 플레이어를 해제하는 것 외에 항상 미디어 플레이어를 릴리스 할 수있는 다른 기회를 찾아야합니다. </p>
+<p>예를 들어, 오디오 포커스를 잃은 후 오랫동안 미디어를 재생할 수 없을 것으로 예상되는 경우 기존 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 확실히 해제했다가 나중에 다시 만들어야합니다. </p>
+<p>반면에 아주 짧은 시간 동안 만 재생을 중단 할 것으로 예상되는 경우 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 다시 작성하여 다시 준비해야하는 오버 헤드를 피하기 위해 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>를 기다려야합니다.</p>
+<h1 id="디지털-권한-관리-DRM"><a href="#디지털-권한-관리-DRM" class="headerlink" title="디지털 권한 관리 (DRM)"></a>디지털 권한 관리 (DRM)</h1><p>Android 8.0 (API 레벨 26)부터 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>에는 DRM으로 보호되는 자료의 재생을 지원하는 API가 포함되어 있습니다. </p>
+<p><a href="https://developer.android.com/reference/android/media/MediaDrm.html?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">MediaDrm</a>에서 제공하는 저수준 API와 비슷하지만 더 높은 수준에서 작동하며 기본 추출기, drm 및 암호화 개체를 노출하지 않습니다.</p>
+<p>MediaPlayer DRM API는 <a href="https://developer.android.com/reference/android/media/MediaDrm.html?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">MediaDrm</a>의 모든 기능을 제공하지는 않지만 가장 일반적인 사용 사례를 지원합니다. </p>
+<p>현재 구현은 다음 컨텐츠 유형을 처리 할 수 있습니다.</p>
+<ul>
+<li>Widevine으로 보호되는 로컬 미디어 파일</li>
+<li>광범위하게 보호되는 원격 / 스트리밍 미디어 파일</li>
+</ul>
+<p>다음 코드 스 니펫은 간단한 동기 구현에서 새 DRM MediaPlayer 메소드를 사용하는 방법을 보여줍니다.</p>
+<p>DRM 제어 미디어를 관리하려면 다음과 같이 일반적인 MediaPlayer 호출 흐름과 함께 새로운 방법을 포함해야합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">setDataSource();</span><br><span class="line">setOnDrmConfigHelper(); <span class="comment">// optional, for custom configuration</span></span><br><span class="line">prepare();</span><br><span class="line"><span class="keyword">if</span> (getDrmInfo() != <span class="keyword">null</span>) &#123;</span><br><span class="line">  prepareDrm();</span><br><span class="line">  getKeyRequest();</span><br><span class="line">  provideKeyResponse();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MediaPlayer is now ready to use</span></span><br><span class="line">start();</span><br><span class="line"><span class="comment">// ...play/pause/resume...</span></span><br><span class="line">stop();</span><br><span class="line">releaseDrm();</span><br></pre></td></tr></table></figure>
+
+<p>평소와 같이 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a> 객체를 초기화하고 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#setDataSource(android.content.Context,%20android.net.Uri)" rel="external nofollow noopener noreferrer" target="_blank">setDataSource()</a>를 사용하여 소스를 설정하여 시작합니다. </p>
+<p>그런 다음 DRM을 사용하려면 다음 단계를 수행하십시오.</p>
+<ol>
+<li>앱이 사용자 지정 구성을 수행하도록하려면 <a href="https://developer.android.com/reference/android/media/MediaPlayer.OnDrmConfigHelper.html?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">OnDrmConfigHelper</a> 인터페이스를 정의하고 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#setOnDrmConfigHelper(android.media.MediaPlayer.OnDrmConfigHelper)" rel="external nofollow noopener noreferrer" target="_blank">setOnDrmConfigHelper()</a>를 사용하여 플레이어에 연결하십시오.</li>
+<li><a href="https://developer.android.com/reference/android/media/MediaPlayer.html#prepare()" rel="external nofollow noopener noreferrer" target="_blank">prepare()</a>를 호출하십시오.</li>
+<li><a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#getDrmInfo()" rel="external nofollow noopener noreferrer" target="_blank">getDrmInfo()</a>를 호출하십시오. 소스에 DRM 내용이 있으면이 메서드는 null이 아닌 <a href="https://developer.android.com/reference/android/media/MediaPlayer.DrmInfo.html?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer.DrmInfo</a> 값을 반환합니다.</li>
+</ol>
+<p><a href="https://developer.android.com/reference/android/media/MediaPlayer.DrmInfo.html?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer.DrmInfo</a>가 존재하는 경우 :</p>
+<ol>
+<li>사용 가능한 UUID의 맵을 검사하고 하나를 선택하십시오.</li>
+<li><a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#prepareDrm(java.util.UUID)" rel="external nofollow noopener noreferrer" target="_blank">PrepareDrm()</a>을 호출하여 현재 소스에 대한 DRM 구성을 준비하십시오.<ul>
+<li><a href="https://developer.android.com/reference/android/media/MediaPlayer.OnDrmConfigHelper.html?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">OnDrmConfigHelper</a> 콜백을 작성하고 등록한 경우, <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#prepareDrm(java.util.UUID)" rel="external nofollow noopener noreferrer" target="_blank">PrepareDrm()</a>이 실행되는 동안 호출됩니다. 이를 통해 DRM 세션을 열기 전에 DRM 속성의 사용자 지정 구성을 수행 할 수 있습니다. 콜백은 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#prepareDrm(java.util.UUID)" rel="external nofollow noopener noreferrer" target="_blank">PrepareDrm()</a>을 호출 한 스레드에서 동 기적으로 호출됩니다. DRM 특성에 액세스하려면 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#getDrmPropertyString(java.lang.String)" rel="external nofollow noopener noreferrer" target="_blank">getDrmPropertyString()</a> 및 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#setDrmPropertyString(java.lang.String,%20java.lang.String)" rel="external nofollow noopener noreferrer" target="_blank">setDrmPropertyString()</a>을 호출하십시오. 긴 작업을 수행하지 마십시오.</li>
+<li>장치가 아직 준비되지 않은 경우, <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#prepareDrm(java.util.UUID)" rel="external nofollow noopener noreferrer" target="_blank">PrepareDrm()</a>은 프로비저닝 서버에 액세스하여 장치를 공급합니다. 네트워크 연결에 따라 시간이 달라질 수 있습니다.</li>
+</ul>
+</li>
+<li>라이센스 키로 보낼 불투명 한 키 요청 바이트 배열을 얻으려면 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#getKeyRequest(byte%5B%5D,%20byte%5B%5D,%20java.lang.String,%20int,%20java.util.Map%3Cjava.lang.String,%20java.lang.String%3E)" rel="external nofollow noopener noreferrer" target="_blank">getKeyRequest()</a>를 호출하십시오.</li>
+<li>라이센스 서버로부터받은 키 응답에 대해 DRM 엔진에 알리려면 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#provideKeyResponse(byte%5B%5D,%20byte%5B%5D)" rel="external nofollow noopener noreferrer" target="_blank">provideKeyResponse()</a>를 호출하십시오. 결과는 키 요청 유형에 따라 다릅니다.<ul>
+<li>응답이 오프라인 키 요청에 대한 것이라면 결과는 키 세트 식별자입니다. 이 키 세트 ID를 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#restoreKeys(byte%5B%5D)" rel="external nofollow noopener noreferrer" target="_blank">restoreKeys()</a>와 함께 사용하여 키를 새 세션으로 복원 할 수 있습니다.</li>
+<li>응답이 스트리밍 또는 릴리스 요청에 대한 경우 결과는 널입니다.</li>
+</ul>
+</li>
+</ol>
+<h2 id="PrepareDrm-을-비동기-적으로-실행"><a href="#PrepareDrm-을-비동기-적으로-실행" class="headerlink" title="PrepareDrm()을 비동기 적으로 실행"></a>PrepareDrm()을 비동기 적으로 실행</h2><p>기본적으로 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#prepareDrm(java.util.UUID)" rel="external nofollow noopener noreferrer" target="_blank">PrepareDrm()</a>은 동기적으로 실행되어 준비가 완료 될 때까지 차단됩니다. </p>
+<p>그러나 새 장치에서 처음으로 DRM을 준비하는 경우 공급을 요구할 수도 있는데, 이는 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#prepareDrm(java.util.UUID)" rel="external nofollow noopener noreferrer" target="_blank">PrepareDrm()</a>에 의해 내부적으로 처리되며 관련된 네트워크 작업으로 인해 완료하는 데 시간이 걸릴 수 있습니다. </p>
+<p><a href="https://developer.android.com/reference/android/media/MediaPlayer.OnDrmPreparedListener.html?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer.OnDrmPreparedListener</a>를 정의하고 설정하여 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#prepareDrm(java.util.UUID)" rel="external nofollow noopener noreferrer" target="_blank">PrepareDrm()</a>에서 블로킹을 피할 수 있습니다.</p>
+<p><a href="https://developer.android.com/reference/android/media/MediaPlayer.OnDrmPreparedListener.html?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">OnDrmPreparedListener</a>를 설정하면 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#prepareDrm(java.util.UUID)" rel="external nofollow noopener noreferrer" target="_blank">PrepareDrm()</a>은 백그라운드에서 프로비저닝 (필요한 경우) 및 준비를 수행합니다. </p>
+<p>프로비저닝 및 준비가 완료되면 리스너가 호출됩니다. </p>
+<p>리스너가 핸들러 스레드에 등록되지 않은 경우 호출 시퀀스 또는 리스너가 실행되는 스레드에 대해 가정해서는 안됩니다. </p>
+<p>리스너는 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html?hl=ko#prepareDrm(java.util.UUID)" rel="external nofollow noopener noreferrer" target="_blank">prepareDrm()</a>이 리턴되기 전 또는 후에 호출 될 수 있습니다.</p>
+<h2 id="비동기-적으로-DRM-설정"><a href="#비동기-적으로-DRM-설정" class="headerlink" title="비동기 적으로 DRM 설정"></a>비동기 적으로 DRM 설정</h2><p>DRM 준비를 위해 <a href="https://developer.android.com/reference/android/media/MediaPlayer.OnDrmInfoListener.html?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer.OnDrmInfoListener</a>를 생성하고 등록하여 플레이어를 시작하여 <a href="https://developer.android.com/reference/android/media/MediaPlayer.OnDrmPreparedListener.html?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer.OnDrmPreparedListener</a>를 비동기 적으로 초기화 할 수 있습니다. </p>
+<p>아래 그림과 같이 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html#prepareAsync()" rel="external nofollow noopener noreferrer" target="_blank">prepareAsync()</a>와 함께 작동합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">setOnPreparedListener();</span><br><span class="line">setOnDrmInfoListener();</span><br><span class="line">setDataSource();</span><br><span class="line">prepareAsync();</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// If the data source content is protected you receive a call to the onDrmInfo() callback.</span></span><br><span class="line">onDrmInfo() &#123;</span><br><span class="line">  prepareDrm();</span><br><span class="line">  getKeyRequest();</span><br><span class="line">  provideKeyResponse();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// When prepareAsync() finishes, you receive a call to the onPrepared() callback.</span></span><br><span class="line"><span class="comment">// If there is a DRM, onDrmInfo() sets it up before executing this callback,</span></span><br><span class="line"><span class="comment">// so you can start the player.</span></span><br><span class="line">onPrepared() &#123;</span><br><span class="line"></span><br><span class="line">start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="암호화-된-미디어-처리"><a href="#암호화-된-미디어-처리" class="headerlink" title="암호화 된 미디어 처리"></a>암호화 된 미디어 처리</h1><p>Android 8.0 (API 레벨 26)부터 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>는 기본 스트림 유형 H.264 및 AAC에 대해 CENC (Common Encryption Scheme) 및 HLS 샘플 레벨 암호화 미디어 (METHOD = SAMPLE-AES)를 해독 할 수 있습니다. </p>
+<p>전체 세그먼트 암호화 미디어 (METHOD = AES-128)는 이전에 지원되었습니다.</p>
+<h1 id="ContentResolver에서-미디어-검색"><a href="#ContentResolver에서-미디어-검색" class="headerlink" title="ContentResolver에서 미디어 검색"></a>ContentResolver에서 미디어 검색</h1><p>미디어 플레이어 응용 프로그램에 유용 할 수있는 또 다른 기능은 사용자가 장치에서 가지고있는 음악을 검색하는 기능입니다. </p>
+<p>외부 미디어에 대해 <a href="https://developer.android.com/reference/android/content/ContentResolver.html?hl=ko" rel="external nofollow noopener noreferrer" target="_blank">ContentResolver</a>를 쿼리하여이를 수행 할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ContentResolver contentResolver = getContentResolver();</span><br><span class="line">Uri uri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;</span><br><span class="line">Cursor cursor = contentResolver.query(uri, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line"><span class="keyword">if</span> (cursor == <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="comment">// query failed, handle error.</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (!cursor.moveToFirst()) &#123;</span><br><span class="line">    <span class="comment">// no media on the device</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">int</span> titleColumn = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media.TITLE);</span><br><span class="line">    <span class="keyword">int</span> idColumn = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media._ID);</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">       <span class="keyword">long</span> thisId = cursor.getLong(idColumn);</span><br><span class="line">       String thisTitle = cursor.getString(titleColumn);</span><br><span class="line">       <span class="comment">// ...process entry...</span></span><br><span class="line">    &#125; <span class="keyword">while</span> (cursor.moveToNext());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>이것을 <a href="https://developer.android.com/reference/android/media/MediaPlayer.html" rel="external nofollow noopener noreferrer" target="_blank">MediaPlayer</a>와 함께 사용하려면 다음을 수행하십시오.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> id = <span class="comment">/* retrieve it from somewhere */</span>;</span><br><span class="line">Uri contentUri = ContentUris.withAppendedId(</span><br><span class="line">        android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id);</span><br><span class="line"></span><br><span class="line">mediaPlayer = <span class="keyword">new</span> MediaPlayer();</span><br><span class="line">mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);</span><br><span class="line">mediaPlayer.setDataSource(getApplicationContext(), contentUri);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...prepare and start...</span></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2019/09/25/Android-MediaPlayer/" data-id="ckzfaqfu300pidyuoa6pcl89t" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "Android MediaPlayer",
+        "image": "http://jung-max.github.io/images/Android-MediaPlayer/01.gif",
+        "keywords": "Android App MediaPlayer",
+        "genre": "Android MediaPlayer",
+        "datePublished": "2019-09-25",
+        "dateCreated": "2019-09-25",
+        "dateModified": "2022-02-08",
+        "url": "http://jung-max.github.io/2019/09/25/Android-MediaPlayer/",
+        "description": "미디어 플레이어 개요Android 멀티미디어 프레임 워크에는 다양한 일반 미디어 유형의 재생을 지원하므로 오디오, 비디오 및 이미지를 애플리케이션에 쉽게 통합 할 수 있습니다. 
+응용 프로그램의 리소스 (원시 리소스)에 저장된 미디어 파일, 파일 시스템의 독립형 파일 또는 네트워크 연결을 통해 도착하는 데이터 스트림에서 모두 MediaPlayer API를 "
+        "wordCount": 3450
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/09/27/Web-JavaScript-replace정규식/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            Javascript replace함수 정규식 표현
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/09/19/Github-Pages-마크다운/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">마크다운과 마크다운 문법 설명</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2019/09/25/Android-MediaPlayer/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

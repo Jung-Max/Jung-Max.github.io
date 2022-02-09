@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>Rockchip U-Boot 분석 | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="U-Boot">
+    
+    <meta name="description" content="U-Boot 소개Rockchip U-Boot는 다음을 지원하는 오픈 소스 UBoot 2014.10 공식 버전을 기반으로합니다.  지원 칩 : RK3288, RK3036, RK312X, RK3368, RK322X, RK3366, RK3399, RK3328, RK322XH 등 Android 플랫폼의 펌웨어 시작을 지원합니다. 프로그램에 ROCKUSB 및 Goo">
+<meta name="keywords" content="U-Boot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rockchip U-Boot 분석">
+<meta property="og:url" content="http://jung-max.github.io/2019/11/06/Rockchip_uBoot_분석/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="U-Boot 소개Rockchip U-Boot는 다음을 지원하는 오픈 소스 UBoot 2014.10 공식 버전을 기반으로합니다.  지원 칩 : RK3288, RK3036, RK312X, RK3368, RK322X, RK3366, RK3399, RK3328, RK322XH 등 Android 플랫폼의 펌웨어 시작을 지원합니다. 프로그램에 ROCKUSB 및 Goo">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/Rockchip_uBoot_%EB%B6%84%EC%84%9D/01.png">
+<meta property="og:updated_time" content="2022-02-08T02:11:11.819Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rockchip U-Boot 분석">
+<meta name="twitter:description" content="U-Boot 소개Rockchip U-Boot는 다음을 지원하는 오픈 소스 UBoot 2014.10 공식 버전을 기반으로합니다.  지원 칩 : RK3288, RK3036, RK312X, RK3368, RK322X, RK3366, RK3399, RK3328, RK322XH 등 Android 플랫폼의 펌웨어 시작을 지원합니다. 프로그램에 ROCKUSB 및 Goo">
+<meta name="twitter:image" content="http://jung-max.github.io/images/Rockchip_uBoot_%EB%B6%84%EC%84%9D/01.png">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2019/11/06/rockchip_uboot_분석/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Rockchip_uBoot_분석" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Rockchip U-Boot 분석
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/11/06/Rockchip_uBoot_분석/" class="article-date">
+            <time datetime="2019-11-06T00:59:34.000Z" itemprop="datePublished">2019-11-06</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/U-Boot/">U-Boot</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="U-Boot-소개"><a href="#U-Boot-소개" class="headerlink" title="U-Boot 소개"></a>U-Boot 소개</h1><p>Rockchip U-Boot는 다음을 지원하는 오픈 소스 UBoot 2014.10 공식 버전을 기반으로합니다.</p>
+<ul>
+<li>지원 칩 : RK3288, RK3036, RK312X, RK3368, RK322X, RK3366, RK3399, RK3328, RK322XH 등</li>
+<li>Android 플랫폼의 펌웨어 시작을 지원합니다.</li>
+<li>프로그램에 ROCKUSB 및 Google Fastboot 지원;</li>
+<li>보안 부팅 펌웨어 서명 암호화 보호 메커니즘을 지원합니다.</li>
+<li>LVDS, EDP, MIPI, HDMI, CVBS와 같은 디스플레이 장치 지원;</li>
+<li>SDCard, Emmc, Nand Flash 및 U 디스크와 같은 저장 장치를 지원합니다.</li>
+<li>부팅 로고 디스플레이, 충전 애니메이션 디스플레이, 저전력 관리, 전원 관리를 지원합니다.</li>
+<li>I2C, SPI, PMIC, CHARGE, GUAGE, USB, GPIO, PWM, DMA, GMAC, EMMC, NAND 인터럽트 및 기타 드라이버 지원;</li>
+</ul>
+<h1 id="플랫폼-아키텍처-지원"><a href="#플랫폼-아키텍처-지원" class="headerlink" title="플랫폼 아키텍처 지원"></a>플랫폼 아키텍처 지원</h1><p>Rockchip U-Boot는 U-Boot 2014.10의 공식 버전을 기반으로하며 주요 지점의 일부 주요 업데이트를 업데이트하고 새로운 구성 및 컴파일 아키텍처를 지원하며 여러 플랫폼을 동시에 개발할 수 있도록합니다.</p>
+<h2 id="컴파일과-설정"><a href="#컴파일과-설정" class="headerlink" title="컴파일과 설정"></a>컴파일과 설정</h2><h3 id="툴체인-구성"><a href="#툴체인-구성" class="headerlink" title="툴체인 구성"></a>툴체인 구성</h3><p>Rockchip U-Boot는 U-BOOT 루트 디렉토리의 Makefile에 지정된 Google Android에서 제공하는 GCC ToolChain으로 기본 설정됩니다.</p>
+<p><img src="/images/Rockchip_uBoot_%EB%B6%84%EC%84%9D/01.png" alt="GCC ToolChain"></p>
+<p>참고 : ARCHV는 64 비트와 32 비트 GCC 툴체인을 구별하고 ARCHV = aarch64 매개 변수를 추가 할 때 추가합니다.</p>
+<h3 id="플랫폼-구성"><a href="#플랫폼-구성" class="headerlink" title="플랫폼 구성"></a>플랫폼 구성</h3><p>플랫폼 구성 파일은 U-Boot 루트 디렉토리 아래의 configs 폴더에 있으며 Rockchip 관련은 RK로 시작하며 제품 형태에 따라 MID와 BOX로 나뉩니다.</p>
+<p><code>rk3288_defconfig</code><br><code>rk3126_defconfig</code><br><code>rk3128_defconfig</code><br><code>rk3368_defconfig</code><br><code>rk3288_box_defconfig</code><br><code>rk3128_box_defconfig</code><br><code>rk3036_box_defconfig</code><br><code>rk3368_box_defconfig</code><br><code>rk322x_box_defconfig</code><br><code>rk322xh_box_defconfig</code><br><code>rk3328_box_defconfig</code></p>
+<p>Rockchip 칩 플랫폼의 구성은 주로 칩 유형이며 Rockchip의 일부 주요 구성은 savedefconfig 모드로 저장됩니다.</p>
+<p><code>rk322x_box_defconfig</code>를 예로 들어 관련 구성의 의미를 설명하십시오.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CONFIG_SYS_EXTRA_OPTIONS=&quot;RKCHIP_RK322X,PRODUCT_BOX,NORMAL_WORLD,SECOND_LEVEL_BOOTLOADER,BAUDRATE=1500000&quot; </span><br><span class="line">CONFIG_ARM=y </span><br><span class="line">CONFIG_ROCKCHIP=y </span><br><span class="line">CONFIG_ROCKCHIP_ARCH32=y </span><br><span class="line">CONFIG_SYS_EXTRA_OPTIONS=&quot;RKCHIP_RK322X,PRODUCT_BOX,NORMAL_WORLD,SECOND_LEVEL_BOOTLOADER, BAUDRATE=1500000&quot;</span><br></pre></td></tr></table></figure>
+
+<p>이 옵션의 구성은 매크로 정의로 컴파일되고 관련 항목 앞에 자동으로 CONFIG_가 추가됩니다 U-BOOT 자동 생성 구성 파일 (include/config.h)에서 생성 된 매크로 정의를 볼 수 있습니다. 시스템의 구성 파일을 관리하는 구성 파일.</p>
+<p><strong>RKCHIP_RK322X</strong> : RK322x의 칩 유형을 정의하고 컴파일하고 CONFIG_ RKCHIP_RK322X로 확장하십시오.</p>
+<p><strong>PRODUCT_BOX</strong> : BOX 제품을 정의합니다. 현재 제품 양식에는 MID 및 BOX가 있으며, 컴파일하고 CONFIG_PRODUCT_BOX로 확장합니다.</p>
+<p><strong>NORMAL_WORLD</strong> : U-BOOT가 일반 세계에서 실행되도록 정의합니다.</p>
+<p><strong>SECOND_LEVEL_BOOTLOADER</strong> : U-BOOT를 보조 로더 모드로 정의이 옵션은 NAND Flash 프로젝트 및 보안 프레임 워크 드라이버를 사용할 때 정의해야합니다. CONFIG_SECOND_LEVEL_BOOTLOADER 로의 확장 확장;</p>
+<p><strong>BAUDRATE = 1500000</strong> : 디버그 직렬 포트의 전송 속도를 정의하며 기본값은 115200이며 1.5M으로 구성됩니다. CONFIG_BAUDRATE = 1500000으로 확장을 컴파일하십시오.</p>
+<p><code>CONFIG_ARM = y</code><br>ARM 플랫폼을 정의하십시오.</p>
+<p><code>CONFIG_ROCKCHIP = y</code><br>Rockchip의 플랫폼을 정의하십시오.</p>
+<p><code>CONFIG_ROCKCHIP_ARCH32 = y</code><br>RK 칩 시리즈 유형 플랫폼, RK30 시리즈, RK32 시리즈 및 기타 32 비트 칩을 정의하십시오.</p>
+<p><code>CONFIG_ROCKCHIP_ARCH64 = y</code><br>RK33 시리즈와 같은 64 비트 칩인 RK 칩 시리즈 유형의 플랫폼을 정의하십시오.</p>
+<h3 id="시스템-구성"><a href="#시스템-구성" class="headerlink" title="시스템 구성"></a>시스템 구성</h3><p>시스템 구성 파일은 U-Boot 루트 디렉토리 아래의 <code>include\configs</code> 폴더에 있으며 RK로 시작합니다.</p>
+<p><code>rk_default_config.h</code><br><code>rk30plat.h</code><br><code>rk32plat.h</code><br><code>rk33plat.h</code></p>
+<ul>
+<li><code>Rk_default_config.h</code> : RK 플랫폼의 공개 구성으로 기본적으로 모든 필수 기능이 열립니다.</li>
+<li><code>RK30plat.h</code> : RK30 시리즈 플랫폼 구성, 메모리 주소, 일부 기능 모듈의 간단한 구성과 같은 다른 칩 구성에 따라 RK30 시리즈에는 RK3036, RK3126, RK3128, RK322x 및 기타 칩이 포함됩니다.</li>
+<li><code>RK32plat.h</code> : RK32 시리즈 플랫폼 구성, 메모리 주소, 일부 기능 모듈의 간단한 구성과 같은 다른 칩 구성에 따라 RK32 시리즈에는 RK3288이 포함됩니다.</li>
+<li><code>RK33plat.h</code> : RK33 시리즈 플랫폼 구성, 메모리 주소, 일부 기능 모듈의 간단한 구성과 같은 다른 칩 구성에 따라 RK33 시리즈에는 RK3368, RK3366, RK3399, RK3328, RK322XH 등이 포함됩니다.</li>
+</ul>
+<p>참고 :이 파일에서는 //를 주석으로 사용할 수 없으므로 U-BOOT에서 lds 파일을 구문 분석 할 수 있습니다. 관련 모듈을 정의하지 않으려면 /* */ 또는 #undef를 직접 사용할 수 있습니다.</p>
+<p>주요 시스템 구성 지침 :</p>
+<figure class="highlight h"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * UBOOT memory map </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * CONFIG_SYS_TEXT_BASE is the default address which maskrom loader UBOOT code. </span></span><br><span class="line"><span class="comment"> * CONFIG_RKNAND_API_ADDR is the address which maskrom loader miniloader code. </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * kernel load address: CONFIG_SDRAM_PHY_START + 32M, size 16M, </span></span><br><span class="line"><span class="comment"> * miniloader code load address: CONFIG_SDRAM_PHY_START + 48M, size 8M, </span></span><br><span class="line"><span class="comment"> * total reverse memory is CONFIG_LMB_RESERVE_MEMORY_SIZE. </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> *|---------------------------------------------------------------------------| </span></span><br><span class="line"><span class="comment"> *|START - KERNEL LOADER - NAND LOADER - LMB - UBOOT - END| </span></span><br><span class="line"><span class="comment"> *|SDRAM - START 32M - START 48M - START 56M - START 80M - 128M| </span></span><br><span class="line"><span class="comment"> *| - kernel - nand code - fdt - UBOOT/ramdisk | </span></span><br><span class="line"><span class="comment"> *|---------------------------------------------------------------------------| </span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"> <span class="comment">/* rk kernel load address */</span> </span><br><span class="line"> <span class="meta">#<span class="meta-keyword">define</span> CONFIG_KERNEL_LOAD_ADDR (CONFIG_RAM_PHY_START + SZ_32M) <span class="comment">/* 32M offset */</span> </span></span><br><span class="line"> </span><br><span class="line"> <span class="comment">/* rk nand api function code address */</span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">define</span> CONFIG_RKNAND_API_ADDR (CONFIG_RAM_PHY_START + SZ_32M + SZ_16M) <span class="comment">/* 48M offset */</span> </span></span><br><span class="line"> </span><br><span class="line"> <span class="comment">/* rk UBOOT reserve size */</span> </span><br><span class="line"> <span class="meta">#<span class="meta-keyword">define</span> CONFIG_LMB_RESERVE_SIZE (SZ_32M + SZ_16M + SZ_8M) <span class="comment">/* 56M offset */</span></span></span><br></pre></td></tr></table></figure>
+
+<p><code>CONFIG_KERNEL_LOAD_ADDR</code> 커널에서로드 한 주소를 32M의 DDR 오프셋으로 구성합니다.<br><code>CONFIG_RKNAND_API_ADDR</code> DDR 오프셋 48M으로 Nand Flash 드라이버 API 인터페이스 주소를 구성합니다.<br><code>CONFIG_LMB_RESERVE_SIZE</code> U-BOOT 예약 공간의 크기를 구성합니다.</p>
+<figure class="highlight h"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* rk ddr information */</span> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_RK_MAX_DRAM_BANKS 8 <span class="comment">/* rk ddr max banks */</span> </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_RKDDR_PARAM_ADDR (CONFIG_RAM_PHY_START + SZ_32M) <span class="comment">/* rk ddr banks address and size */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_RKTRUST_PARAM_ADDR (CONFIG_RAM_PHY_START + SZ_32M + SZ_2M) <span class="comment">/* rk trust os banks address and size */</span> </span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* rk hdmi device information buffer (start: 128M - size: 8K) */</span> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_RKHDMI_PARAM_ADDR CONFIG_RAM_PHY_END</span></span><br></pre></td></tr></table></figure>
+
+<p><code>CONFIG_RK_MAX_DRAM_BANKS</code> DDR 용량 정보를 전달하는 DDR 드라이브의 뱅크 수를 구성합니다.<br><code>CONFIG_RKDDR_PARAM_ADDR</code> 32M 오프셋 된 용량 정보를 전송하도록 DDR 드라이브의 주소를 구성합니다.<br><code>CONFIG_RKTRUST_PARAM_ADDR</code> ARM Trusted Firmware 사용시 커널이 예약 한 공간 정보를 구성합니다.<br><code>CONFIG_RKHDMI_PARAM_ADDR</code> HDMI 구성에 대한 일부 정보에는 커널이 얻은 주소가 필요합니다.</p>
+<figure class="highlight h"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_RAM_PHY_START 0x00000000 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_RAM_PHY_SIZE SZ_128M </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_RAM_PHY_END (CONFIG_RAM_PHY_START + CONFIG_RAM_PHY_SIZE)</span></span><br></pre></td></tr></table></figure>
+
+<p>위의 세 매크로는 전체 U-Boot에서 사용하는 SDRAM의 공간 범위를 정의합니다.</p>
+<figure class="highlight h"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_BOOTDELAY 0 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_BOARD_DEMO </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_RK_IO_TOOL</span></span><br></pre></td></tr></table></figure>
+
+<p><code>CONFIG_BOOTDELAY</code> U-Boot가 셸에서 시작 지연을 활성화할지 여부를 구성합니다. 기본값 0은 직접 시작하는 지연이 없음을 의미하며 3 초 지연해야하는 경우 3으로 정의됩니다.<br><code>CONFIG_RK_IO_TOOL</code> U-Boot Shell에서 간단한 IO 도구 도구를 구성하십시오.<br><code>CONFIG_BOARD_DEMO</code> 간단한 테스트 데모 프로그램 사용 여부를 구성하십시오.</p>
+<figure class="highlight h"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_MAX_MEM_ADDR RKIO_IOMEMORYMAP_START</span></span><br></pre></td></tr></table></figure>
+
+<p><code>CONFIG_MAX_MEM_ADDR</code>은 SOC가 DDR에 액세스 할 수있는 최대 주소 물리적 공간을 정의합니다 .DDR의 실제 용량이이 값보다 크면 매크로가 작동하여 결국 DTB에 의해 커널로 전달됩니다.</p>
+<figure class="highlight h"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_SYS_TEXT_BASE 0x00200000 <span class="comment">/* Resersed 2M space Runtime Firmware bin. */</span></span></span><br></pre></td></tr></table></figure>
+
+<p><code>CONFIG_SYS_TEXT_BASE</code>는 U-BOOT 작업을위한 시작 공간을 정의합니다.</p>
+<figure class="highlight h"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_KERNEL_RUNNING_ADDR (CONFIG_SYS_TEXT_BASE + SZ_512K)</span></span><br></pre></td></tr></table></figure>
+
+<p><code>CONFIG_KERNEL_RUNNING_ADDR</code>은 지정된 복사 커널의 주소입니다.이 매크로가 정의되면 U-BOOT는 커널을이 위치로 직접 복사하고 시작시 시작합니다. 그렇지 않으면 기본적으로 DDR 오프셋 32M에 복사됩니다. 압축되지 않은 커널을 사용하여 부팅 속도를 높이십시오.</p>
+<p><code>CONFIG_RK_SDCARD_BOOT_EN</code><br><code>CONFIG_RK_SDMMC_BOOT_EN</code><br><code>CONFIG_RK_SDHCI_BOOT_EN</code><br><code>CONFIG_RK_FLASH_BOOT_EN</code><br><code>CONFIG_RK_UMS_BOOT_EN</code><br>이 매크로는 SOC에서 지원하는 저장 장치를 정의하고 활성화 및 undef 닫기를 정의합니다.</p>
+<p><code>CONFIG_MERGER_TRUSTOS</code><br><code>CONFIG_RK_TOS_WITH_TA</code><br><code>CONFIG_MERGER_TRUSTOS</code> UBOOT가 신뢰 이미지를 병합할지 여부를 구성하십시오.<br><code>CONFIG_RK_TOS_WITH_TA</code> 구성 신뢰 이미지는 ta가있는 펌웨어이며 armv7 플랫폼은 매크로를 사용합니다.</p>
+<figure class="highlight h"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_SECUREBOOT_CRYPTO </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_SECUREBOOT_SHA256</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>CONFIG_SECUREBOOT_CRYPTO</strong> 암호화 하드웨어 암호 해독 기능 활성화 여부를 설정하십시오 이제 칩에 암호화 모듈이있는 한 기본적으로이 칩을 열어 부팅 이미지의 SHA 확인 속도를 높입니다.<br><strong>CONFIG_SECUREBOOT_SHA256</strong>은 SHA256 기능을 활성화하는 것으로, 이후의 일부 제품 보안 요구 사항이 점점 높아지고 있으며 sha256을 소개하겠습니다.</p>
+<figure class="highlight h"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_NORMAL_WORLD </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_SECURE_RSA_KEY_IN_RAM </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_SECURE_RSA_KEY_ADDR (CONFIG_RKNAND_API_ADDR + SZ_2K)</span></span><br></pre></td></tr></table></figure>
+
+<p>Rockchip SOC가 ARM Trusted Fireware를 출시 한 후 U-BOOT는 일반적인 단어로 작동하므로 안전한 efuse에 직접 액세스 할 수 없으므로, 미니 로더는 DDR의 펌웨어 확인을 위해 공개 키를 U-BOOT에 전달해야합니다.</p>
+<p><code>CONFIG_LCD</code><br><code>CONFIG_RK_POWER</code><br><code>CONFIG_PM_SUBSYSTEM</code><br><code>CONFIG_RK_CLOCK</code><br><code>CONFIG_RK_IOMUX</code><br><code>CONFIG_RK_I2C</code><br><code>CONFIG_RK_KEY</code><br><code>CONFIG_RK_EFUSE</code><br><code>CONFIG_CMD_ROCKUSB</code><br><code>CONFIG_CMD_FASTBOOT</code><br><code>CONFIG_RK_MCU</code></p>
+<p>해당 모듈의 활성화 여부를 구성하십시오.</p>
+<h3 id="시스템-컴파일"><a href="#시스템-컴파일" class="headerlink" title="시스템 컴파일"></a>시스템 컴파일</h3><p>32 비트 플랫폼은 RK3288을 예로 사용합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make rk3288_defconfig </span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<p>64 비트 플랫폼은 RK3368을 예로 사용합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make rk3368_defconfig </span><br><span class="line">make ARCHV=aarch64</span><br></pre></td></tr></table></figure>
+
+<p>Rockchip U-BOOT는 두 가지 빌드 스크립트를 제공합니다. mkv7.sh-32 비트 SOC 컴파일 및 mkv8.sh-64 비트 SOC 컴파일</p>
+<h2 id="스키마-파일"><a href="#스키마-파일" class="headerlink" title="스키마 파일"></a>스키마 파일</h2><p>Rockchip SOC 아키텍처 관련 파일 디렉토리 :<br><code>arch\arm\include\asm\arch-rk32xx\</code><br><code>arch\arm\cpu\armv7\rk32xx\</code><br><code>arch\arm\include\asm\arch-rk33xx\</code><br><code>arch\arm\cpu\armv8\rk33xx\</code><br><code>board\rockchip\</code><br><code>common\</code></p>
+<p>드라이버 관련 파일 디렉토리 :<br><code>drivers\</code></p>
+<p>툴 관련 파일 디렉토리 :<br><code>tools\</code><br><code>tools\rk_tools\</code></p>
+<h2 id="펌웨어-생성"><a href="#펌웨어-생성" class="headerlink" title="펌웨어 생성"></a>펌웨어 생성</h2><p>Rockchip 플랫폼 로더는 첫 번째 모드와 두 번째 모드로 구분되며 해당 로더 펌웨어는 다른 플랫폼 구성에 따라 생성됩니다. 보조 로더 모드는 매크로 CONFIG_SECOND_LEVEL_BOOTLOADER에 의해 정의됩니다.</p>
+<h3 id="레벨-1-로더-모드"><a href="#레벨-1-로더-모드" class="headerlink" title="레벨 1 로더 모드"></a>레벨 1 로더 모드</h3><p>U-BOOT는 Level 1 로더 모드로 EMMC 저장 장치 만 지원하며 컴파일 완료 후 생성 된 이미지는 다음과 같습니다.<br><code>RK3288LoaderU-BOOT_V2.17.01.bin</code></p>
+<p>V2.17.01은 출시 된 버전 번호이며 Rockchip은 U-Boot 로더 버전을 정의하고 2.17은 스토리지 버전에 따라 정의됩니다. 고객은이 버전을 수정해서는 안됩니다 .01은 U-Boot에 의해 정의 된 작은 버전입니다. Makefile에서 수정되었습니다.</p>
+<h3 id="보조-로더-모드"><a href="#보조-로더-모드" class="headerlink" title="보조 로더 모드"></a>보조 로더 모드</h3><p>U-Boot는 보조 로더 모드이며 펌웨어는 모든 저장 장치를 지원하며이 모드에서는 MiniLoader 지원이 필요하며 매크로는 CONFIG_MERGER_MINILOADER 매크로에 의해 생성됩니다. Arm Trusted Firmware를 도입하면 매크로 CONFIG_MERGER_TRUSTIMAGE에 의해 생성 된 신뢰 이미지가 생성됩니다.</p>
+<p>예를 들어, 생성 된 이미지를 컴파일하는 Rk322x :<br><code>RK322XMiniLoaderAll_V2.31.bin</code><br><code>UBOOT.img</code><br><code>trust.img</code></p>
+<p>V2.31은 출시 된 버전 번호이고 rockchip은 U-Boot 로더 버전을 정의하고 2.31은 스토리지 버전에 따라 정의되므로 고객은이 버전을 수정해서는 안됩니다.</p>
+<p><code>UBOOT.img</code>는 보조 로더로서 U-Boot 패키지입니다.</p>
+<p><code>trust.img</code>는 보조 로더로서 U-Boot 패키지입니다.</p>
+<p>RK3036, RK3126, RK3128, RK322x, RK3368, RK3366, RK3399, RK3328, RK322XH 등은 2 차 로더 모드를 사용합니다.</p>
+<h1 id="캐시-메커니즘"><a href="#캐시-메커니즘" class="headerlink" title="캐시 메커니즘"></a>캐시 메커니즘</h1><p>Rockchip 시리즈 칩 캐시 인터페이스는 U-Boot에서 제공하는 표준 인터페이스를 사용하므로 자세한 내용은 공식 U-Boot 설명서를 참조하십시오.</p>
+<p>캐시와 관련된 일부 구성 지침 :</p>
+<ul>
+<li><code>CONFIG_SYS_ICACHE_OFF</code><br>icache 스위치는 정의 된 경우 icache 기능을 비활성화하는 것을 의미합니다.</li>
+<li><code>CONFIG_SYS_DCACHE_OFF</code><br>dcache 스위치는 정의 된 경우 dcache 기능이 꺼져 있음을 의미합니다. 참고 : dcache를 시작하기 전에 mmu를 구성하십시오.</li>
+<li><code>CONFIG_SYS_L2CACHE_OFF</code><br>L2 캐시 스위치.</li>
+<li><code>dcache 모드 구성</code><br><code>CONFIG_SYS_ARM_CACHE_WRITETHROUGH</code> 구성 dcache writethrouch 모드;<br><code>CONFIG_SYS_ARM_CACHE_WRITEALLOC</code> dcache writealloc 모드 구성; 기본값은 dcache 쓰기 저장 모드입니다.</li>
+</ul>
+<p><code>icache</code>의 일반적인 인터페이스는 다음과 같습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">icache_enable</span> <span class="params">(<span class="keyword">void</span>)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">icache_disable</span> <span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>dcache</code>의 일반적인 인터페이스는 다음과 같습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dcache_enable</span> <span class="params">(<span class="keyword">void</span>)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dcache_disable</span> <span class="params">(<span class="keyword">void</span>)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">flush_cache</span> <span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span>, <span class="keyword">unsigned</span> <span class="keyword">long</span>)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">flush_dcache_all</span><span class="params">(<span class="keyword">void</span>)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">flush_dcache_range</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span> start, <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="built_in">stop</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">invalidate_dcache_range</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span> start, <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="built_in">stop</span>)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">invalidate_dcache_all</span><span class="params">(<span class="keyword">void</span>)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">invalidate_icache_all</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>Rockchip은 i2c, spi, pmic, charge, guage, usb, gpio, pwm, dma, gmac, emmc, nand 인터럽트 및 기타 드라이버를 지원합니다.</p>
+<h2 id="인터럽트-메커니즘"><a href="#인터럽트-메커니즘" class="headerlink" title="인터럽트 메커니즘"></a>인터럽트 메커니즘</h2><p>Rockhip 플랫폼은 표준 U-Boot 인터럽트 인터페이스 기능을 지원합니다 :</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">enable_interrupts</span> <span class="params">(<span class="keyword">void</span>)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">disable_interrupts</span> <span class="params">(<span class="keyword">void</span>)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">irq_install_handler</span><span class="params">(<span class="keyword">int</span> irq, <span class="keyword">interrupt_handler_t</span> *handler, <span class="keyword">void</span> *data)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">irq_uninstall_handler</span><span class="params">(<span class="keyword">int</span> irq)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">irq_set_irq_type</span><span class="params">(<span class="keyword">int</span> irq, <span class="keyword">unsigned</span> <span class="keyword">int</span> type)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">irq_handler_enable</span><span class="params">(<span class="keyword">int</span> irq)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">irq_handler_disable</span><span class="params">(<span class="keyword">int</span> irq)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">gpio_to_irq</span><span class="params">(<span class="keyword">unsigned</span> gpio)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Clock-드라이버"><a href="#Clock-드라이버" class="headerlink" title="Clock 드라이버"></a>Clock 드라이버</h2><p>Rockchip Clock 관련 코드는 다음 위치에 있습니다.<br><code>arch\arm\include\asm\arch-rk32xx\clock.h</code><br><code>arch\arm\cpu\armv7\rk32xx\clock.c</code><br><code>arch\arm\cpu\armv7\rk32xx\clock-rk3288.c</code><br><code>arch\arm\cpu\armv7\rk32xx\clock-rk3036.c</code><br><code>arch\arm\cpu\armv7\rk32xx\clock-rk312x.c</code><br><code>arch\arm\include\asm\arch-rk33xx\clock.h</code><br><code>arch\arm\cpu\armv8\rk33xx\clock.c</code><br><code>arch\arm\cpu\armv8\rk33xx\clock-rk3368.c</code></p>
+<p>기본 인터페이스 기능 정의는 <code>arch\arm\include\asm\arch-rk32xx\clock.h</code>에 있으며 자세한 내용은 주석을 참조하십시오.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * rkplat clock set pll mode </span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rkclk_pll_mode</span><span class="params">(<span class="keyword">int</span> pll_id, <span class="keyword">int</span> pll_mode)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>pll 모드를 느리게 또는 보통으로 설정.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * rkplat clock set for arm and general pll </span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">rkclk_set_pll</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+<p> rk 칩의 관련 pll 구성</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * rkplat clock get arm pll, general pll and so on </span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">rkclk_get_pll</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>rk 칩 구성의 pll 가져 오기</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * rkplat clock pll dump </span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">rkclk_dump_pll</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * rkplat set sd clock src </span></span><br><span class="line"><span class="comment"> * 0: codec pll; 1: general pll; 2: 24M </span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">rkclk_set_sdclk_src</span><span class="params">(uint32 sdid, uint32 src)</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * rkplat set sd/sdmmc/emmc clock src </span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">rkclk_get_sdclk_src_freq</span><span class="params">(uint32 sdid)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * rkplat set sd clock div, from source input </span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rkclk_set_sdclk_div</span><span class="params">(uint32 sdid, uint32 div)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rkclk_emmc_set_clk</span><span class="params">(<span class="keyword">int</span> div)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * rkplat get PWM clock, PWM01 from pclk_cpu, PWM23 from pclk_periph </span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">rkclk_get_pwm_clk</span><span class="params">(uint32 id)</span></span>; </span><br><span class="line">  </span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * rkplat get I2C clock, I2c0 and i2c1 from pclk_cpu, I2c2 and i2c3 frompclk_periph </span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">rkclk_get_i2c_clk</span><span class="params">(uint32 i2c_bus_id)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * rkplat get spi clock, spi0 and spi1 from pclk_periph </span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">rkclk_get_spi_clk</span><span class="params">(uint32 spi_bus)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * rkplat lcdc aclk config</span></span><br><span class="line"><span class="comment"> * lcdc_id (lcdc id select) : 0 - lcdc0, 1 - lcdc1 </span></span><br><span class="line"><span class="comment"> * pll_sel (lcdc aclk source pll select) : 0 - codec pll, 1 - general pll </span></span><br><span class="line"><span class="comment"> * div (lcdc aclk div from pll) : 0x00 - 0x1f </span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rkclk_lcdc_aclk_set</span><span class="params">(uint32 lcdc_id, uint32 pll_sel, uint32 div)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * rkplat lcdc dclk config</span></span><br><span class="line"><span class="comment"> * lcdc_id (lcdc id select) : 0 - lcdc0, 1 - lcdc1</span></span><br><span class="line"><span class="comment"> * pll_sel (lcdc dclk source pll select) : 0 - codec pll, 1 - general pll</span></span><br><span class="line"><span class="comment"> * div (lcdc dclk div from pll) : 0x00 - 0xff</span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rkclk_lcdc_dclk_set</span><span class="params">(uint32 lcdc_id, uint32 pll_sel, uint32 div)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * rkplat lcdc dclk and aclk parent pll source</span></span><br><span class="line"><span class="comment"> * lcdc_id (lcdc id select) : 0 - lcdc0, 1 - lcdc1</span></span><br><span class="line"><span class="comment"> * dclk_hz: dclk rate * return dclk rate</span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rkclk_lcdc_clk_set</span><span class="params">(uint32 lcdc_id, uint32 dclk_hz)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * rkplat pll select by clock</span></span><br><span class="line"><span class="comment"> * clock: device request freq HZ</span></span><br><span class="line"><span class="comment"> * return value:</span></span><br><span class="line"><span class="comment"> * high 16bit: 0 - codec pll, 1 - general pll</span></span><br><span class="line"><span class="comment"> * low 16bit : div</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">uint32 <span class="title">rkclk_select_pll_source</span><span class="params">(uint32 clock, uint32 even)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>정상적인 상황에서는 시계의 내용을 수정할 필요가 없으며 권장 구성을 사용할 수 있습니다.</p>
+<h2 id="GPIO-드라이버"><a href="#GPIO-드라이버" class="headerlink" title="GPIO 드라이버"></a>GPIO 드라이버</h2><p><code>drivers\gpio\rk_gpio.c</code> 파일의 Rockip 플랫폼 gpio 인터페이스 기능은 다음과 같습니다. RK GPIO 정의 규칙은 다음과 같습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * rk gpio api define the gpio format as:</span></span><br><span class="line"><span class="comment"> * using 32 bit for rk gpio value,</span></span><br><span class="line"><span class="comment"> * the high 24bit of gpio is bank id, the low 8bit of gpio is pin number</span></span><br><span class="line"><span class="comment"> * eg: gpio = 0x00010008, it mean gpio1_b0, 0x00010000 is bank id of GPIO_BANK1, 0x00000008 is GPIO_B0 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> </span><br><span class="line"> <span class="comment">/* bank and pin bit mask */</span> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RK_GPIO_BANK_MASK 0xFFFFFF00 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RK_GPIO_BANK_OFFSET 8 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RK_GPIO_PIN_MASK 0x000000FF </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RK_GPIO_PIN_OFFSET 0</span></span><br></pre></td></tr></table></figure>
+
+<p>32 비트 정의를 사용하면 상위 24 비트가 뱅크이고 하위 8 비트는 다음과 같은 특정 핀입니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpio_direction_output(GPIO_BANK7 | GPIO_A4, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>특정 뱅크 및 핀은 다음 관련 문서에 정의되어 있습니다.<br><code>arch\arm\include\asm\arch-rk32xx\gpio.h</code><br><code>arch\arm\include\asm\arch-rk32xx\gpio-rk3036.h</code><br><code>arch\arm\include\asm\arch-rk32xx\gpio-rk312X.h</code><br><code>arch\arm\include\asm\arch-rk32xx\gpio-rk3288.h</code><br><code>arch\arm\include\asm\arch-rk33xx\gpio.h</code><br><code>arch\arm\include\asm\arch-rk33xx\gpio-rk3368.h</code></p>
+<p>인터페이스 기능은 다음과 같습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Set gpio direction as input </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gpio_direction_input</span><span class="params">(<span class="keyword">unsigned</span> gpio)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>해당 GPIO를 입력 포트로 구성하십시오.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Set gpio direction as output</span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gpio_direction_output</span><span class="params">(<span class="keyword">unsigned</span> gpio, <span class="keyword">int</span> value)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>해당 GPIO를 출력 포트로 구성하십시오.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Get value of the specified gpio </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gpio_get_value</span><span class="params">(<span class="keyword">unsigned</span> gpio)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>GPIO 관련 IO의 입력 레벨을 가져옵니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Set value of the specified gpio </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gpio_set_value</span><span class="params">(<span class="keyword">unsigned</span> gpio, <span class="keyword">int</span> value)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>GPIO 관련 IO의 출력 레벨을 구성하십시오.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Set gpio pull up or down mode</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gpio_pull_updown</span><span class="params">(<span class="keyword">unsigned</span> gpio, <span class="keyword">enum</span> GPIOPullType type)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>GPIO 관련 IO의 상하 풀을 구성하십시오.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * gpio drive strength slector </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gpio_drive_slector</span><span class="params">(<span class="keyword">unsigned</span> gpio, <span class="keyword">enum</span> GPIODriveSlector slector)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>GPIO 관련 IO의 드라이브 기능을 구성하십시오.</p>
+<h2 id="IOMUX-드라이버"><a href="#IOMUX-드라이버" class="headerlink" title="IOMUX 드라이버"></a>IOMUX 드라이버</h2><p>Rockchip 플랫폼 GPIO 멀티플렉싱 기능 구성, 드라이버 파일</p>
+<p><code>arch\arm\include\asm\arch-rk32xx\iomux.h</code><br><code>arch\arm\cpu\armv7\rk32xx\iomux.c</code><br><code>arch\arm\cpu\armv7\rk32xx\iomux-rk3036.c</code><br><code>arch\arm\cpu\armv7\rk32xx\iomux-rk312X.c</code><br><code>arch\arm\cpu\armv7\rk32xx\iomux-rk3288.c</code><br><code>arch\arm\include\asm\arch-rk33xx\iomux.h</code><br><code>arch\arm\cpu\armv8\rk33xx\iomux.c</code><br><code>arch\arm\cpu\armv8\rk33xx\iomux-rk3368.c</code><br><code>void rk_iomux_config(int iomux_id);</code></p>
+<p>ID는 <code>arch\arm\include\asm\arch-rk32xx\iomux.h</code>에 정의되어 있습니다.</p>
+<h2 id="I2C-드라이버"><a href="#I2C-드라이버" class="headerlink" title="I2C 드라이버"></a>I2C 드라이버</h2><p>Rk I2C는 표준 U-Boot 아키텍처를 지원합니다 자세한 내용은 U-Boot 설명서를 참조하십시오 관련 코드는 다음 위치에 있습니다.<br><code>drivers\i2c\rk_i2c.c</code></p>
+<p>참고 : 현재 i2c 읽기 및 쓰기의 최대 길이는 32 바이트이므로 드라이버가 향상됩니다.</p>
+<p><code>int i2c_set_bus_num(unsigned bus_idx)</code><br>i2c 버스가 작동하도록 설정하십시오. 먼저 구성해야합니다.</p>
+<p><code>void i2c_init(int speed, int unused)</code><br>해당 버스의 i2c를 초기화하십시오.</p>
+<p><code>int i2c_set_bus_speed(unsigned int speed)</code><br>필요한 i2c 버스 주파수 구성</p>
+<p><code>int i2c_probe(uchar chip)</code><br>지정된 i2c 주소를 감지하는 장치가 존재하는지 여부</p>
+<p><code>int i2c_read(uchar chip, uint addr, int alen, uchar *buf, int len)</code><br>I2C 읽기 작업</p>
+<p><code>int i2c_write(uchar chip, uint addr, int alen, uchar *buf, int len)</code><br>I2C 쓰기 작업</p>
+<h2 id="SPI-드라이버"><a href="#SPI-드라이버" class="headerlink" title="SPI 드라이버"></a>SPI 드라이버</h2><p>RK SPI는 표준 U-Boot 아키텍처를 지원합니다 자세한 내용은 U-Boot 설명서를 참조하십시오 관련 코드는 다음 위치에 있습니다.<br><code>drivers\spi\rk_spi.c</code></p>
+<h2 id="LCD-드라이버"><a href="#LCD-드라이버" class="headerlink" title="LCD 드라이버"></a>LCD 드라이버</h2><p>디스플레이 모듈 관련 코드는 다음과 같습니다.</p>
+<p><code>drivers/video/rockchip_fb.c</code><br><code>drivers/video/rockchip_fb.h</code><br><code>drivers/video/rk32_lcdc.c</code><br><code>drivers/video/rk3036_lcdc.c</code><br><code>drivers/video/rk3368_lcdc.c</code></p>
+<p>화면의 전원 제어 정보 : <code>rockhip_fb.c</code>에서 <code>rk_fb_pwr_ctr_prase_dt</code>는 전원 제어 인터페이스를 dts로 구문 분석하고 rk_fb_pwr_enable/disable 기능은 각각 디스플레이 모듈의 전원을 전환합니다. 화면의 전원 켜기 순서를 다시 조정해야하는 경우이 기능을 수정할 수 있습니다.</p>
+<p>U-Boot에서 사용하는 로고는 커널의 루트 디렉토리에 저장되며 컴파일 과정에서 resource.img 파일로 패키지됩니다 로고의 U-Boot 확인에 대해서는 <code>common/lcd.c</code>의 <code>rk_bitmap_from_resource()</code> 함수를 참조하십시오.<br>부팅 로고 로딩 과정 :</p>
+<ol>
+<li>rk_bitmap_from_resource에서 리소스 파티션의 로고를 구문 분석하십시오.</li>
+<li>리소스 파티션을로드하지 못하면 부트 파티션의 리소스에서 로고가로드됩니다.</li>
+<li>U-Boot의 기본 로고 표시 프로세스이므로 logo.bmp 이미지가 커널 디렉토리에 포함되어 있지 않더라도 U-Boot는 화면 중간에 다음과 같은 그림을 표시합니다.</li>
+</ol>
+<p><img src="/images/Rockchip_uBoot_%EB%B6%84%EC%84%9D/02.png" alt="logo"></p>
+<p><code>rockchip.bmp</code>라는이 맵은 <code>/u-boot/tools/logos</code> 디렉토리에 저장됩니다 <code>UBOOT.bin</code>의 크기를 최소화하기 위해 이이미지는 매우 작습니다 (200x500, 8 비트 bmp 이미지 만). 부팅 로고를 바꾸려면 U-Boot의 <code>rockchip.bmp</code>를 수정하는 대신 커널에서 <code>logo.bmp</code>를 수정하는 것이 좋습니다.</p>
+<ol start="4">
+<li>logo_kernel.bmp가 리소스 파티션에 존재하면 U-Boot는 이미지를 ddr에로드하고 명령 줄을 통해 위치를로드하도록 커널에 알리고 새 로고 이미지를 표시합니다.<br> 또한 bmp에 대한 U-Boot의 지원이 약하다는 점을 강조해야하며 현재 다음과 같은 제한 사항을 알고 있습니다.<br> 균일 한 해상도의 이미지 만 지원<br> 모든 bmp 이미지는 다음 명령으로 처리하는 것이 좋으며 처리 된 logo_rle8.bmp가 표시에 사용됩니다.<br> <code>convert -compress rle -colors 256 logo.bmp logo_rle8.bmp</code></li>
+<li>지원 24 비트 bmp 부팅 로고 디스플레이, 지원 커널 업데이트 24 비트 로고 디스플레이.<br>참고 : MID 관련 프로젝트의 경우 U-Boot에서 HDMI 관련 구성을 열지 마십시오.</li>
+</ol>
+<h2 id="PMIC-드라이버"><a href="#PMIC-드라이버" class="headerlink" title="PMIC 드라이버"></a>PMIC 드라이버</h2><p>U-Boot에서 부팅 로고, 충전 애니메이션 및 기타 기능을 구현하려면 시스템의 전원을 제어해야합니다. 이러한 기능은 PMU 드라이버에서 구현됩니다.<br>현재 RK U-Boot는 Ricoh 619, ACT8846 및 RK808과 자동으로 호환됩니다. RK312X 프로젝트의 경우 ADC 전력 감지 및 충전 애니메이션 표시가 현재 지원됩니다. 관련 코드는 다음과 같습니다.<br><code>drivers/power/power_core.c</code><br><code>drivers/power/power_rockchip.c</code><br><code>drivers/power/pmic/pmic_act8846.c</code><br><code>drivers/power/pmic/pmic_ricoh619.c</code><br><code>drivers/power/pmic/pmic_rk808.c</code><br><code>drivers/power/pmic/pmic_rk818.c</code><br><code>drivers/power/fuel_gauge/fg_adc.c</code></p>
+<p><code>power_core.c</code>는 U-Boot 전원 하위 시스템의 핵심 코드이며 pmic, 충전기 및 연료 게이지를 관리하기위한 인터페이스를 제공합니다. <code>power_rockchip.c</code>는 Rockchip 플랫폼 pmic, 충전기 및 연료 게이지와 호환되는 프레임 워크 계층 코드입니다. 시스템 호출을 위해 통합 인터페이스가 위쪽으로 제공되며 다양한 전원 IC가 아래쪽으로 관리됩니다. 다른 PMIC마다 구동됩니다.<br>시스템이 시작되면 <code>pmic_init</code> 시스템 호출을 통해 <code>rk32xx.c</code> 파일의 <code>board_late_init(void)</code>에서 PMIC가 초기화됩니다.</p>
+<h2 id="연료-게이지-드라이브"><a href="#연료-게이지-드라이브" class="headerlink" title="연료 게이지 드라이브"></a>연료 게이지 드라이브</h2><p>U-Boot 충전과 같은 기능을 구현하려면 연료 게이지 (<code>fuel_gauge</code>)에 대한 지원을 추가해야합니다. 현재 RK U-Boot는 2 개의 Ricoh619 및 cw201x 연료 게이지를 지원합니다.<br><code>drivers/power/fuel_gauge/fg_cw201x.c</code><br><code>drivers/power/fuel_gauge/fg_cw201x.c</code></p>
+<p>시스템이 시작되면 <code>rk32xx.c</code> <code>board_late_init</code>에서 <code>fg_init</code> 인터페이스를 호출하여 연료 게이지가 초기화됩니다.<br><code>fg_init</code>는 <code>power_rockchip.c</code>에서 구현됩니다.</p>
+<p><img src="/images/Rockchip_uBoot_%EB%B6%84%EC%84%9D/03.png" alt="fg_init"></p>
+<p>연료 게이지 드라이버의 경우 다음과 같은 중요한 인터페이스를 구현해야합니다.<br><code>fg_xxx_init()</code> :이 함수는 기본 연료 게이지 초기화 및 등록을 수행합니다.</p>
+<p><img src="/images/Rockchip_uBoot_%EB%B6%84%EC%84%9D/04.png" alt="fg_xxx_init"></p>
+<p>이름은 PMIC를 검색하는 데 사용됩니다 (U-Boot의 전원 시스템에서 pmic, charger 및 fuel_gauge는 pmic 장치로 추상화 됨). 여기에있는 이름은 시스템 검색을 위해 <code>fg_names of power_rockchip.c</code>에도 등록되어 있습니다.</p>
+<p><img src="/images/Rockchip_uBoot_%EB%B6%84%EC%84%9D/05.png" alt="fg_names"></p>
+<p>FG의 ops 인터페이스 : 주로 배터리의 전원 및 충전 상태를 얻는 데 사용</p>
+<p><img src="/images/Rockchip_uBoot_%EB%B6%84%EC%84%9D/06.png" alt="FG의 ops 인터페이스"></p>
+<p><code>fg_battery_update</code> 인터페이스는 배터리의 전원, 전압 및 기타 정보를 업데이트하는 데 사용되며 <code>fg_battery_check</code> 인터페이스는 배터리 충전 여부를 확인하는 데 사용됩니다.<br>충전 애니메이션을 구현하려면 <code>rk32plat.h</code>/<code>rk30plat.h</code>에서 다음 스위치를 열어야합니다. 기본적으로이 기능은 해제되어 있습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_UBOOT_CHARGE </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_CMD_CHARGE_ANIM </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_CHARGE_DEEP_SLEEP <span class="comment">//ricoch619의 PMU 및 ADC 감지를 사용하십시오.이 옵션을 열지 마십시오</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_SCREEN_ON_VOL_THRESD 3550 <span class="comment">//3.55v </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONFIG_SYSTEM_ON_VOL_THRESD 3650 <span class="comment">//3.65v</span></span></span><br></pre></td></tr></table></figure>
+
+<p>그 중 <code>CONFIG_SCREEN_ON_VOL_THRESD</code>는 시스템 조명 화면의 전압 임계 값이며이 전압 아래에서는 시스템이 밝아지지 않습니다. <code>CONFIG_SYSTEM_ON_VOL_THRESD</code>는 시스템이 정상적으로 시작하기위한 전압 임계 값이며이 전압 이하에서는 U-Boot가 커널을 시작할 수 없습니다. 이 두 전압은 특정 제품 설계에 따라 유연하게 조정할 수 있습니다.<br>이 두 임계 값의 판단은 <code>power_rockchip.c</code>에서 구현됩니다.</p>
+<p><img src="/images/Rockchip_uBoot_%EB%B6%84%EC%84%9D/07.png" alt="power_rockchip.c"></p>
+<p>또한 충전 애니메이션 및 부팅 로고를 표시하려면 dts에서 UBOOT-logo-on 속성을 설정하십시오.</p>
+<p><img src="/images/Rockchip_uBoot_%EB%B6%84%EC%84%9D/08.png" alt="DTS"></p>
+<h2 id="스토리지-드라이버"><a href="#스토리지-드라이버" class="headerlink" title="스토리지 드라이버"></a>스토리지 드라이버</h2><p>U-Boot는 emmc, nand flash, sdcard 및 USB 플래시 드라이브와 같은 저장 장치를 지원합니다 nand 플래시 드라이버가 열려 있지 않음 인터페이스가 미니 로더를 통해 U-Boot로 전달되므로 nand 플래시 장치를 지원해야하는 경우 <code>CONFIG_SECOND_LEVEL_BOOTLOADER</code>를 정의하고 그렇지 않으면 U-Boot를 정의해야합니다. emmc 만 지원됩니다.<br>저장소의 Rockchip 저장 장치 추상화, 코드는 <code>board/rockchip/common/storage/storage.c</code>에 있으며 해당 API 인터페이스는 다음과 같습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">int32 <span class="title">StorageInit</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">uint16 <span class="title">StorageGetBootMedia</span><span class="params">(<span class="keyword">void</span>)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StorageReadLba</span><span class="params">(uint32 LBA, <span class="keyword">void</span> *pbuf, uint32 nSec)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StorageWriteLba</span><span class="params">(uint32 LBA, <span class="keyword">void</span> *pbuf, uint32 nSec, uint16 mode)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StorageReadPba</span><span class="params">(uint32 PBA, <span class="keyword">void</span> *pbuf, uint32 nSec)</span></span>; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StorageWritePba</span><span class="params">(uint32 PBA, <span class="keyword">void</span> *pbuf, uint32 nSec)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Google-Fastboot"><a href="#Google-Fastboot" class="headerlink" title="Google Fastboot"></a>Google Fastboot</h1><p>Google Fastboot는 로더에서 제공하는 rockusb/adb와 같은 대화식 모드입니다. Fastboot 상호 작용에서 사용되는 PC 도구 소스는 Android 소스 코드 (<code>system/core/fastboot/</code>)에 있으며 Windows 버전과 Linux 버전으로 나뉩니다 (Windows 쪽에서 사용하는 장치 드라이버는 adb와 동일).</p>
+<h2 id="Fastboot로-들어가는-방법"><a href="#Fastboot로-들어가는-방법" class="headerlink" title="Fastboot로 들어가는 방법"></a>Fastboot로 들어가는 방법</h2><ol>
+<li>시작하는 동안 부팅 프로그램 시작 단계에서 버튼을 누릅니다 (3288sdk 보드는 vol-key입니다).</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   checkKey((uint32 *)&amp;boot_rockusb, (uint32 *)&amp;boot_recovery, (uint32 *)&amp;boot_fastboot);</span><br><span class="line">.... </span><br><span class="line">   &#125; <span class="keyword">else</span> <span class="keyword">if</span>(boot_fastboot &amp;&amp; (vbus!=<span class="number">0</span>))&#123;</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">"fastboot key pressed.\n"</span>); </span><br><span class="line">       frt = FASTBOOT_REBOOT_FASTBOOT; </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>fastboot 매개 변수가있는 reboot 명령 (reboot fastboot, PMU_SYS_REG0 레지스터를 통해 전달됨)</li>
+</ol>
+<h2 id="Fastboot에서-지원하는-명령"><a href="#Fastboot에서-지원하는-명령" class="headerlink" title="Fastboot에서 지원하는 명령"></a>Fastboot에서 지원하는 명령</h2><h3 id="정보-얻기"><a href="#정보-얻기" class="headerlink" title="정보 얻기"></a>정보 얻기</h3><ul>
+<li>Fastboot getvar version 버전 얻기</li>
+<li>fastboot getvar version-bootloader 버전 얻기 </li>
+<li>fastboot getvar unlocked 잠금 해제 상태 얻기</li>
+<li>fastboot getvar secure 잠금 해제 상태 (unlocked와 반대로) 얻기</li>
+<li>fastboot getvar product 제품 정보 얻기 </li>
+<li>fastboot getvar serialno 일련 번호 얻기 </li>
+<li>fastboot getvar partition-type:<partition_name> 지정된 파티션 유형을 얻습니다. </partition_name></li>
+<li>fastboot getvar partition-size:<partition_name> 지정된 파티션 크기를 가져옵니다. </partition_name></li>
+<li>fastboot getvar partition-offset:<partition_name> 지정된 파티션 오프셋을 가져옵니다.</partition_name></li>
+</ul>
+<h3 id="이미지-레코딩"><a href="#이미지-레코딩" class="headerlink" title="이미지 레코딩"></a>이미지 레코딩</h3><p><code>fastboot flash &lt;partition_name&gt; &lt;filename&gt;</code> 펌웨어 레코딩<br>(예 : fastboot flash system system.img.<br>parameter/loader를 레코딩 할 때 파티션 이름을 “parameter”/“loader”로 지정)<br><code>fastboot update &lt;filename&gt;</code> burn 업그레이드 패키지 작성<br>(업그레이드 패키지는 android 소스 코드에서 updatepackage를 작성하여 생성됨)</p>
+<h3 id="다시-시작"><a href="#다시-시작" class="headerlink" title="다시 시작"></a>다시 시작</h3><p><code>fastboot oem recovery</code>  recovery로 재부팅<br><code>fastboot oem recovery:wipe_data</code>  공장 설정 재시작 및 복원<br><code>fastboot reboot</code> 다시 시작<br><code>fastboot reboot-bootloader</code> rockusb 프로그래밍 모드로 다시 시작<br><code>fastboot continue</code> 다시 시작</p>
+<h3 id="장치-잠금-해제-및-잠금"><a href="#장치-잠금-해제-및-잠금" class="headerlink" title="장치 잠금 해제 및 잠금"></a>장치 잠금 해제 및 잠금</h3><p><code>fastboot oem unlock</code> 잠금 해제<br><code>fastboot oem unlock_accept</code> 잠금 해제 확인 (fastboot oem unlock 명령 후 5 초 이내에 입력 필요)<br><code>fastboot oem lock</code> 잠금 장치</p>
+<h3 id="특별-주문"><a href="#특별-주문" class="headerlink" title="특별 주문"></a>특별 주문</h3><p><code>fastboot boot &lt;kernel&gt; [ &lt;ramdisk&gt; ]</code> 지정된 펌웨어에서 일시적으로 부팅 (커널은 현재 Image / zImage를 지원하며 커널 끝 또는 리소스 파티션에 dtb를 저장해야 함)<br><code>fastboot oem log</code> 직렬 포트 로그 정보 얻기<br><code>fastboot oem ucmd &lt;UBOOT cmds&gt;</code> UBOOT 명령을 실행하십시오.</p>
+<h2 id="fastboot-잠금-해제"><a href="#fastboot-잠금-해제" class="headerlink" title="fastboot 잠금 해제"></a>fastboot 잠금 해제</h2><p>fastboot가 잠기면 oem 명령을 프로그래밍하고 실행할 수 없으며 초기 상태는 잠 깁니다.<br>잠금 해제 프로세스는 대략 다음과 같습니다.</p>
+<ol>
+<li>패스트 부트 OEM 잠금 해제 실행</li>
+<li>5 초 이내에 fastboot oem unlock_accept를 계속 실행하십시오.</li>
+<li>기계는 복구로 재부팅하고 공장 설정으로 복원</li>
+<li>fastboot를 다시 입력하십시오. fastboot getvar 잠금 해제는 “yes”를 리턴해야합니다 (장치 잠금 해제)</li>
+</ol>
+<p>fastboot 명령이 fastboot 상태로 들어간 후 장치를 찾을 수 없다는 메시지를 표시하면 명령에 -i 매개 변수를 추가하여 장치 vid를 지정해야합니다 (예 : fastboot -i 0x2207 getvar unlocked).</p>
+<h1 id="펌웨어-로딩"><a href="#펌웨어-로딩" class="headerlink" title="펌웨어 로딩"></a>펌웨어 로딩</h1><p>펌웨어로드에는 boot, recovery, kernel, resource 파티션 및 dtb 파일이 포함됩니다.</p>
+<h2 id="Boot-Recovery-파티션"><a href="#Boot-Recovery-파티션" class="headerlink" title="Boot/Recovery 파티션"></a>Boot/Recovery 파티션</h2><p>Boot 및 Recovery 펌웨어는 두 가지 형태로 나뉩니다.</p>
+<ol>
+<li>안드로이드 표준 형식<br>표준 펌웨어 형식은 ramdisk와 kernel을 함께 패키징합니다 이미지 파일의 마법 번호는 “ANDROID!”입니다.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">00000000 41 4E 44 52 4F 49 44 21 24 10 74 00 00 80 40 60 ANDROID!$.t...@` </span><br><span class="line">00000010 F9 31 CD 00 00 00 00 62 00 00 00 00 00 00 F0 60 .1.....b.......`</span><br></pre></td></tr></table></figure>
+
+<p>표준 형식에는 서명, 체크섬 및 dtb 파일과 같은 추가 데이터와 같은 정보가있을 수 있습니다. 펌웨어를 패키징 할 때 복구 이미지의 기본값은 표준 형식이며 표준 형식 부팅 이미지는 ./mkimage.sh ota로 생성해야합니다.</p>
+<ol start="2">
+<li>RK 형식<br>Rk 형식 이미지는 파일 (ramdisk / kernel)과 별도로 패키지되어 있습니다. 이미지 파일의 매직 번호는 “KRNL”입니다.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">00000000 4B 52 4E 4C 42 97 0F 00 1F 8B 08 00 00 00 00 00 KRNLB........... </span><br><span class="line">00000010 00 03 A4 BC 0B 78 53 55 D6 37 BE 4F 4E D2 A4 69 .....xSU.7.ON..i</span><br></pre></td></tr></table></figure>
+
+<p>패키지에서 생성 된 kernel.img 및 기본 패키징 방법으로 생성 된 boot.img는 모두 Rk 형식입니다.</p>
+<h2 id="커널-파티션"><a href="#커널-파티션" class="headerlink" title="커널 파티션"></a>커널 파티션</h2><p>커널 파티션은 커널 정보를 포함합니다. Boot/Recovery 파티션 자체에 시작시 커널 (Android 표준 형식)이있는 경우 커널 파티션이 무시되고 포함 된 커널이 먼저 사용됩니다.</p>
+<h2 id="Resource-파티션"><a href="#Resource-파티션" class="headerlink" title="Resource 파티션"></a>Resource 파티션</h2><p>Resource 이미지 형식은 여러 리소스 파일에 쉽게 액세스 할 수 있도록 설계된 간단한 이미지 형식입니다. 매직 번호는 “RSCE”입니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">00000000 52 53 43 45 00 00 00 00 01 01 01 00 01 00 00 00 RSCE............ </span><br><span class="line">00000010 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................</span><br></pre></td></tr></table></figure>
+
+<p>U-Boot는 리소스 파티션에서 커널에 필요한 dtb 패키징을 지원합니다.</p>
+<h2 id="Dtb-파일"><a href="#Dtb-파일" class="headerlink" title="Dtb 파일"></a>Dtb 파일</h2><p>Dtb 파일은 새로운 버전의 커널 dts 구성 파일의 이진화 된 파일입니다.<br>현재 dtb 파일은 Android 표준 형식의 Boot/Recovery 파티션에 저장하거나 리소스 파티션에 저장할 수 있습니다. U-Boot는 커널이 dtb 파일을로드해야한다고 가정합니다.</p>
+<h2 id="펌웨어-로딩-프로세스"><a href="#펌웨어-로딩-프로세스" class="headerlink" title="펌웨어 로딩 프로세스"></a>펌웨어 로딩 프로세스</h2><p>U-Boot로드 펌웨어 프로세스는 다음과 같습니다.</p>
+<ol>
+<li>시작해야하는 boot/recovery 파티션의 램 디스크 내용을로드하십시오.</li>
+<li>부팅 파티션의 커널 내용을로드하십시오. 실패하면 (Rk 형식으로) 커널 파티션로드를 계속하십시오</li>
+<li>부팅 파티션의 dtb 파일을로드하십시오. 실패하면 계속해서 자원 파티션에서로드를 시도하십시오.</li>
+</ol>
+<p>Dtb 파일 (fdt) 및 램 디스크는 U-Boot 동적 응용 프로그램의 메모리에로드됩니다. 커널은 메모리 32M 오프셋에로드되어 실행됩니다.</p>
+<h1 id="Boot-merger-도구"><a href="#Boot-merger-도구" class="headerlink" title="Boot_merger 도구"></a>Boot_merger 도구</h1><p>Boot_merger는 로더, ddr bin, usb plug bin 및 기타 파일을 패키징하여 프로그래밍 도구에 필요한 로더 형식을 생성하는 Linux 버전 도구입니다. 소스 코드는 U-Boot 소스 코드에 있습니다.</p>
+<p><code>UBOOT# ls ./tools/boot_merger.*</code><br><code>./tools/boot_merger.c ./tools/boot_merger.h</code></p>
+<h2 id="Loader-패키징-및-패키징-풀기-지원"><a href="#Loader-패키징-및-패키징-풀기-지원" class="headerlink" title="Loader 패키징 및 패키징 풀기 지원"></a>Loader 패키징 및 패키징 풀기 지원</h2><h3 id="패키징"><a href="#패키징" class="headerlink" title="패키징 :"></a>패키징 :</h3><p><code>./tools/boot_merger [--pack] &lt;config.ini&gt;</code><br>패키징은 패키징 매개 변수를 설명하는 ini 구성 파일의 경로를 전달해야합니다.<br>(현재 사용되는 구성 파일은 다음과 같은 U-Boot 소스 코드 (tools/rk_tools/RKBOOT)에 저장됩니다)<br><code>./tools/boot_merger ./tools/rk_tools/RKBOOT/RK3288.ini</code><br><code>out:RK3288Loader_UBOOT.bin</code><br><code>fix opt:RK3288Loader_UBOOT_V2.15.bin</code><br><code>merge success(RK3288Loader_UBOOT_V2.15.bin)</code></p>
+<h3 id="패키징-풀기"><a href="#패키징-풀기" class="headerlink" title="패키징 풀기 :"></a>패키징 풀기 :</h3><p><code>./tools/boot_merger --unpack &lt;loader.bin&gt;</code></p>
+<h2 id="매개-변수-구성-파일"><a href="#매개-변수-구성-파일" class="headerlink" title="매개 변수 구성 파일"></a>매개 변수 구성 파일</h2><p>3288 구성 파일을 예로 들어 보겠습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[CHIP_NAME] </span><br><span class="line">NAME=RK320A ----칩 이름 : &quot;RK&quot;+ 4B 칩 모델과 maskrom 합의</span><br><span class="line">[VERSION] </span><br><span class="line">MAJOR=2 ----주요 버전 번호 </span><br><span class="line">MINOR=15 ----부 버전 번호 </span><br><span class="line">[CODE471_OPTION] ----Code471, 현재 ddr bin으로 설정</span><br><span class="line">NUM=1 </span><br><span class="line">Path1=tools/rk_tools/32_LPDDR2_300MHz_LPDDR3_300MHz_DDR3_300MHz_20140404.bin </span><br><span class="line">[CODE472_OPTION] ---Code472, 현재 usbplug bin으로 설정</span><br><span class="line">NUM=1 Path1=tools/rk_tools/rk32xxusbplug.bin </span><br><span class="line">[LOADER_OPTION] </span><br><span class="line">NUM=2 </span><br><span class="line">LOADER1=FlashData ----flash data，현재 ddr bin으로 설정 </span><br><span class="line">LOADER2=FlashBoot ----flash boot，현재 UBOOT bin으로 설정 </span><br><span class="line">FlashData=tools/rk_tools/32_LPDDR2_300MHz_LPDDR3_300MHz_DDR3_300MHz_20140404.bin FlashBoot=u-boot.bin </span><br><span class="line">[OUTPUT] ----출력 경로, 현재 파일 이름은 자동으로 버전 번호를 추가합니다 </span><br><span class="line">PATH=RK3288Loader_UBOOT.bin</span><br></pre></td></tr></table></figure>
+
+<h1 id="Resource-tool-도구"><a href="#Resource-tool-도구" class="headerlink" title="Resource_tool 도구"></a>Resource_tool 도구</h1><p>Resource_tool은 임의의 리소스 파일을 패키징하고 리소스 이미지를 생성하는 Linux 도구입니다.<br>소스 코드는 U-Boot 소스 코드 (tools/resource_tool/)에 있습니다.</p>
+<h2 id="리소스-이미지-패키징-및-언-패킹-지원"><a href="#리소스-이미지-패키징-및-언-패킹-지원" class="headerlink" title="리소스 이미지 패키징 및 언 패킹 지원"></a>리소스 이미지 패키징 및 언 패킹 지원</h2><h3 id="패키징-1"><a href="#패키징-1" class="headerlink" title="패키징"></a>패키징</h3><p><code>./tools/resource_tool [--pack] [--image=&lt;resource.img&gt;] &lt;file list&gt;</code></p>
+<p>같은 :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UBOOT/tools/resource_tool/resources# ../resource_tool `find . -type f` </span><br><span class="line">Pack to resource.img successed!</span><br></pre></td></tr></table></figure>
+
+<p>pack_resource.sh 스크립트는 기존 이미지에 자원 파일을 추가 할 수 있습니다.</p>
+<p><code>./pack_resource &lt;resources dir&gt; &lt;old image&gt; &lt;dst image&gt; &lt;resource_tool path&gt;</code></p>
+<p>같은 :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    UBOOT# sudo ./tools/resource_tool/pack_resource.sh </span><br><span class="line">tools/resource_tool/resources/ ../kernel/resource.img resource.img </span><br><span class="line">tools/resource_tool/resource_tool </span><br><span class="line">    Pack tools/resource_tool/resources/ &amp; ../kernel/resource.img to resource.img ... </span><br><span class="line">    </span><br><span class="line">    Unpacking old image(../kernel/resource.img): </span><br><span class="line">    rk-kernel.dtb </span><br><span class="line">    </span><br><span class="line">    Pack to resource.img successed!</span><br><span class="line"></span><br><span class="line">    Packed resources: </span><br><span class="line">    rk-kernel.dtb charge_anim_desc.txt </span><br><span class="line">images/battery_4.bmp images/battery_0.bmp images/battery_1.bmp images/battery_2.bmp </span><br><span class="line">images/battery_3.bmp images/battery_5.bmp images/battery_fail.bmp resource.img</span><br></pre></td></tr></table></figure>
+
+<h3 id="언패킹"><a href="#언패킹" class="headerlink" title="언패킹"></a>언패킹</h3><p><code>./tools/resource_tool --unpack [--image=&lt;resource.img&gt;] [output dir]</code></p>
+<h1 id="Trust-merger-툴"><a href="#Trust-merger-툴" class="headerlink" title="Trust_merger 툴"></a>Trust_merger 툴</h1><p>Trust_merger는 프로그래밍 도구에 필요한 TrustImage 형식을 생성하기 위해 bl30, bl31 bin, bl32 bin 및 기타 파일을 패키징하기위한 Linux 버전 도구입니다. 소스 코드는 U-Boot 소스 코드에 있습니다.</p>
+<p><code>UBOOT# ls ./tools/trust_merger.*</code><br><code>./tools/trust_merger.c ./tools/trust_merger.h</code></p>
+<p>신뢰 패키징 및 언패킹 지원</p>
+<p>패키징 :<br><code>./tools/trust_merger [--pack] &lt;config.ini&gt;</code></p>
+<p>패키징은 패키징 매개 변수를 설명하는 ini 구성 파일의 경로를 전달해야합니다.<br>(현재 사용되는 구성 파일은 다음과 같은 U-Boot 소스 코드 (tools/rk_tools/RKTRUST)에 저장됩니다)</p>
+<p><code>./tools/trust_merger ./tools/rk_tools/RKTRUST/RK3368.ini</code><br><code>out:trust.img</code><br><code>merge success(trust.img)</code></p>
+<h2 id="언패킹-1"><a href="#언패킹-1" class="headerlink" title="언패킹"></a>언패킹</h2><p><code>./tools/trust_merger --unpack &lt;trust.img&gt;</code></p>
+<h2 id="매개-변수-구성-파일-1"><a href="#매개-변수-구성-파일-1" class="headerlink" title="매개 변수 구성 파일"></a>매개 변수 구성 파일</h2><p>3368 구성 파일을 예로 들어 보겠습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[VERSION] </span><br><span class="line">MAJOR=0 ----주요 버전 번호 </span><br><span class="line">MINOR=1 ----부 버전 번호 </span><br><span class="line">[BL30_OPTION] ----bl30，현재 mcu bin으로 설정</span><br><span class="line">SEC=1 ----BL30 bin이 존재</span><br><span class="line">PATH=tools/rk_tools/bin/rk33/rk3368bl30_v2.00.bin ----출력 bin 경로 지정 </span><br><span class="line">ADDR=0xff8c0000 ----펌웨어 DDR에서로드 및 실행 주소 </span><br><span class="line">[BL31_OPTION] ----Bl31, 현재 멀티 코어 및 전원 관리 관련 bin으로 설정 </span><br><span class="line">SEC=1 ----BL31 bin이 존재</span><br><span class="line">PATH=tools/rk_tools/bin/rk33/rk3368bl31-20150401-v0.1.bin----출력 bin 경로 지정  </span><br><span class="line">ADDR=0x00008000 ----펌웨어 DDR에서로드 및 실행 주소 </span><br><span class="line">[BL32_OPTION] </span><br><span class="line">SEC=0 ----BL32 bin이 없습니다</span><br><span class="line">[BL33_OPTION] </span><br><span class="line">SEC=0 ----BL33 bin이 없습니다 </span><br><span class="line">[OUTPUT] </span><br><span class="line">PATH=trust.img [OUTPUT] ----출력 펌웨어 이름</span><br></pre></td></tr></table></figure>
+
+<h1 id="SDCard-및-U-디스크-부팅-업그레이드"><a href="#SDCard-및-U-디스크-부팅-업그레이드" class="headerlink" title="SDCard 및 U 디스크 부팅 업그레이드"></a>SDCard 및 U 디스크 부팅 업그레이드</h1><p>Rockchip 장비는 RK 생산 도구로 사용자 정의 된 sdcard, u 디스크 등의 시작 및 업그레이드 기능을 지원합니다.</p>
+<h2 id="SDCard-부팅-및-업그레이드-구성"><a href="#SDCard-부팅-및-업그레이드-구성" class="headerlink" title="SDCard 부팅 및 업그레이드 구성"></a>SDCard 부팅 및 업그레이드 구성</h2><p>SDCard 업그레이드 및 부팅 기능은 매크로 CONFIG_RK_SDCARD_BOOT_EN으로 구성되고 rk_default_config.h는 기본적으로 해제되어 있습니다.이 기능을 사용해야하는 경우 rkxxplat.h 관련 플랫폼 구성 파일에서 정의하십시오.</p>
+<p>UBoot는 업그레이드 된 sdcard를 인식하고 직렬 포트는 다음 메시지를 인쇄합니다.<br><code>SDCard Update.</code></p>
+<p>시작된 sdcard 인 경우 다음 메시지를 인쇄합니다.<br><code>SDCard Boot.</code></p>
+<h2 id="U-디스크-부팅-및-업그레이드-구성"><a href="#U-디스크-부팅-및-업그레이드-구성" class="headerlink" title="U 디스크 부팅 및 업그레이드 구성"></a>U 디스크 부팅 및 업그레이드 구성</h2><p>U 디스크 업그레이드 및 부팅 기능은 매크로 CONFIG_RK_UMS_BOOT_EN으로 구성되고 rk_default_config.h는 기본적으로 비활성화되어 있습니다.이 기능을 사용해야하는 경우 rkxxplat.h 관련 플랫폼 구성 파일에서 정의하십시오.</p>
+<p>UBoot는 업그레이드 된 U 디스크를 인식하고 직렬 포트는 다음 메시지를 인쇄합니다.<br><code>UMS Update.</code></p>
+<p>시작된 sdcard 인 경우 다음 메시지를 인쇄합니다.<br><code>UMS Boot.</code></p>
+<h3 id="기능적-구성"><a href="#기능적-구성" class="headerlink" title="기능적 구성"></a>기능적 구성</h3><p>UMS 관련 매크로는 해당 rkxxplat.h에 정의되어 있습니다.<br><code>CONFIG_RK_UMS_BOOT_EN</code></p>
+<p>U 디스크 부팅 및 업그레이드 기능을 지원하도록 U-Boot를 구성하고 open undef를 닫아 정의하십시오.<br><code>RKUSB_UMS_BOOT_FROM_DWC2_OTG</code><br><code>RKUSB_UMS_BOOT_FROM_DWC2_HOST</code><br><code>RKUSB_UMS_BOOT_FROM_EHCI_HOST1</code><br><code>RKUSB_UMS_BOOT_FROM_EHCI_HOST2</code><br><code>RKUSB_UMS_BOOT_FROM_EHCI_HOST3</code></p>
+<p>U-Boot USB 프레임 워크의 한계로 인해 5 개의 선택 사항 중 하나의 USB 컨트롤러 만 켜서 USB 플래시 드라이브 기능을 활성화 할 수 있습니다.<br>다음은 rk32plat.h 관련 코드의 예입니다.</p>
+<figure class="highlight h"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> CONFIG_RK_UMS_BOOT_EN </span></span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">    * USB Host support, default no using </span></span><br><span class="line"><span class="comment">    * Please first select USB host controller if you want to use UMS Boot </span></span><br><span class="line"><span class="comment">    * Up to one USB host controller could be selected to enable for booting </span></span><br><span class="line"><span class="comment">    * from USB Mass Storage device. </span></span><br><span class="line"><span class="comment">    * </span></span><br><span class="line"><span class="comment">    * PLS define a host controler from: </span></span><br><span class="line"><span class="comment">    * RKUSB_UMS_BOOT_FROM_DWC2_OTG </span></span><br><span class="line"><span class="comment">    * RKUSB_UMS_BOOT_FROM_EHCI_HOST1 </span></span><br><span class="line"><span class="comment">    * RKUSB_UMS_BOOT_FROM_DWC2_HOST </span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * First define the host controller here </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Check UMS Boot Host define */</span> </span><br><span class="line">    <span class="meta">#<span class="meta-keyword">define</span> RKUSB_UMS_BOOT_CNT </span></span><br><span class="line">    (defined(RKUSB_UMS_BOOT_FROM_DWC2_OTG) + \</span><br><span class="line">    defined(RKUSB_UMS_BOOT_FROM_EHCI_HOST1) + \</span><br><span class="line">    defined(RKUSB_UMS_BOOT_FROM_DWC2_HOST)) </span><br><span class="line">    </span><br><span class="line">    <span class="meta">#<span class="meta-keyword">if</span> (RKUSB_UMS_BOOT_CNT == 0) </span></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">error</span> <span class="meta-string">"PLS Select a USB host controller!"</span> </span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">elif</span> (RKUSB_UMS_BOOT_CNT &gt; 1) </span></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">error</span> <span class="meta-string">"Only one USB host controller can be selected!"</span> </span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">else</span> </span></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">define</span> CONFIG_CMD_USB </span></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">define</span> CONFIG_USB_STORAGE </span></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">define</span> CONFIG_PARTITIONS </span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">endif</span> </span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">    * USB Host support, default no using </span></span><br><span class="line"><span class="comment">    * please first check plat if you want to using usb host </span></span><br><span class="line"><span class="comment">    */</span> </span><br><span class="line">    <span class="meta">#<span class="meta-keyword">if</span> defined(RKUSB_UMS_BOOT_FROM_EHCI_HOST1) </span></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">define</span> CONFIG_USB_EHCI </span></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">define</span> CONFIG_USB_EHCI_RK </span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">elif</span> defined(RKUSB_UMS_BOOT_FROM_DWC2_HOST) || </span></span><br><span class="line">    defined(RKUSB_UMS_BOOT_FROM_DWC2_OTG) </span><br><span class="line">        <span class="meta">#<span class="meta-keyword">define</span> CONFIG_USB_DWC_HCD </span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* CONFIG_RK_UMS_BOOT_EN */</span></span></span><br></pre></td></tr></table></figure>
+
+<p><code>CONFIG_RK_UMS_BOOT_EN</code>이 활성화되면 특정 칩 정의에 따라 해당 HOST 포트를 정의해야합니다. 정의가 없거나 정의가 너무 많으면 컴파일시 오류가보고됩니다.</p>
+<h3 id="컨트롤러-구성-테이블"><a href="#컨트롤러-구성-테이블" class="headerlink" title="컨트롤러 구성 테이블"></a>컨트롤러 구성 테이블</h3><p><code>board\rockchip\common\mediaboot\UMSBoot.c</code> 특정 칩 플랫폼 및 컨트롤러에 따라 rkusb_hcd 구성 테이블을 채우면 USB Mass_storage가 구성에 따라 초기화됩니다.</p>
+<figure class="highlight h"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rkusb_hcd_cfg</span> &#123;</span> </span><br><span class="line">    <span class="keyword">bool</span> enable; <span class="comment">//확장 기능을 위해 예약되어 있으며 기본값은 True이며 수정이 필요하지 않습니다. </span></span><br><span class="line">    <span class="keyword">void</span>* regbase; <span class="comment">//UBOOT 관리자가 작성한 기본 주소 등록 </span></span><br><span class="line">    <span class="keyword">int</span> gpio_vbus; <span class="comment">//회로 구성에 따라 사용자가 입력하는 USB 전원 공급 장치 제어 GPIO </span></span><br><span class="line">    <span class="keyword">char</span> *name; <span class="comment">//UBOOT 유지 보수 담당자가 입력 한 컨트롤러 이름 </span></span><br><span class="line">    <span class="keyword">void</span> (*hw_init)(<span class="keyword">void</span>); <span class="comment">//UBOOT 관리자로 채워진 콜백 함수 초기화 </span></span><br><span class="line">    <span class="keyword">void</span> (*hw_deinit)(<span class="keyword">void</span>); <span class="comment">//UBOOT 관리자로 채워진 역 초기화 콜백 기능</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2019/11/06/Rockchip_uBoot_분석/" data-id="ckzfaqfux00qldyuonlz8iee8" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "Rockchip U-Boot 분석",
+        "image": "http://jung-max.github.io/images/Rockchip_uBoot_%EB%B6%84%EC%84%9D/01.png",
+        "keywords": "U-Boot",
+        "genre": "Android Platform U-Boot",
+        "datePublished": "2019-11-06",
+        "dateCreated": "2019-11-06",
+        "dateModified": "2022-02-08",
+        "url": "http://jung-max.github.io/2019/11/06/Rockchip_uBoot_분석/",
+        "description": "U-Boot 소개Rockchip U-Boot는 다음을 지원하는 오픈 소스 UBoot 2014.10 공식 버전을 기반으로합니다.
+
+지원 칩 : RK3288, RK3036, RK312X, RK3368, RK322X, RK3366, RK3399, RK3328, RK322XH 등
+Android 플랫폼의 펌웨어 시작을 지원합니다.
+프로그램에 ROCKUSB 및 Goo"
+        "wordCount": 5886
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/11/12/Android-부팅시동작하는-service앱/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            Android 부팅시 동작하는 service app
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/10/30/Android-rk3328-관련문서정리/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">Android rk3328 관련 문서 정리</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2019/11/06/Rockchip_uBoot_분석/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

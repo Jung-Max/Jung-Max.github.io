@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>Bluetooth low energy | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="Android,App,BLE">
+    
+    <meta name="description" content="Bluetooth low energy 개요Android 4.3 (API 레벨 18)부터 중심 역할에 BLE (Bluetooth Low Energy)에 대한 기본 제공 플랫폼 지원을 도입하고 앱이 장치를 검색하고 서비스를 쿼리하고 정보를 전송하는 데 사용할 수있는 API를 제공합니다. 클래식 Bluetooth와 달리 BLE (Bluetooth Low Ener">
+<meta name="keywords" content="Android,App,BLE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bluetooth low energy">
+<meta property="og:url" content="http://jung-max.github.io/2019/09/06/Android-BLE-overview/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="Bluetooth low energy 개요Android 4.3 (API 레벨 18)부터 중심 역할에 BLE (Bluetooth Low Energy)에 대한 기본 제공 플랫폼 지원을 도입하고 앱이 장치를 검색하고 서비스를 쿼리하고 정보를 전송하는 데 사용할 수있는 API를 제공합니다. 클래식 Bluetooth와 달리 BLE (Bluetooth Low Ener">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/Android-Bluetooth-low-energy/01.png">
+<meta property="og:updated_time" content="2022-02-08T02:11:11.731Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bluetooth low energy">
+<meta name="twitter:description" content="Bluetooth low energy 개요Android 4.3 (API 레벨 18)부터 중심 역할에 BLE (Bluetooth Low Energy)에 대한 기본 제공 플랫폼 지원을 도입하고 앱이 장치를 검색하고 서비스를 쿼리하고 정보를 전송하는 데 사용할 수있는 API를 제공합니다. 클래식 Bluetooth와 달리 BLE (Bluetooth Low Ener">
+<meta name="twitter:image" content="http://jung-max.github.io/images/Android-Bluetooth-low-energy/01.png">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2019/09/06/android-ble-overview/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Android/BLE/">BLE</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Android-BLE-overview" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Bluetooth low energy
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/09/06/Android-BLE-overview/" class="article-date">
+            <time datetime="2019-09-06T02:50:00.000Z" itemprop="datePublished">2019-09-06</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Android/">Android</a>, <a class="tag-link" href="/tags/App/">App</a>, <a class="tag-link" href="/tags/BLE/">BLE</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="Bluetooth-low-energy-개요"><a href="#Bluetooth-low-energy-개요" class="headerlink" title="Bluetooth low energy 개요"></a>Bluetooth low energy 개요</h1><p>Android 4.3 (API 레벨 18)부터 중심 역할에 BLE (Bluetooth Low Energy)에 대한 기본 제공 플랫폼 지원을 도입하고 앱이 장치를 검색하고 서비스를 쿼리하고 정보를 전송하는 데 사용할 수있는 API를 제공합니다.</p>
+<p>클래식 Bluetooth와 달리 BLE (Bluetooth Low Energy)는 전력 소비를 크게 줄 이도록 설계되었습니다. </p>
+<p>이를 통해 Android 앱은 근접 센서, 심박수 모니터 및 피트니스 장치와 같이 더 엄격한 전원 요구 사항이있는 BLE 장치와 통신 할 수 있습니다.</p>
+<h2 id="GATT-Generic-Attribute-Profile"><a href="#GATT-Generic-Attribute-Profile" class="headerlink" title="GATT(Generic Attribute Profile)"></a>GATT(Generic Attribute Profile)</h2><p>GATT 프로파일은 BLE 링크를 통해 “attributes”라고하는 짧은 데이터 조각을 송수신하기위한 일반 사양입니다.</p>
+<p>현재 모든 저에너지 애플리케이션 프로파일은 GATT를 기반으로합니다.</p>
+<p>Bluetooth SIG는 저에너지 장치에 대한 많은 프로파일을 정의합니다.</p>
+<p>프로파일은 장치가 특정 응용 프로그램에서 작동하는 방식에 대한 사양입니다.</p>
+<p>장치는 둘 이상의 프로필을 구현할 수 있습니다. 예를 들어, 장치에는 심박수 모니터와 배터리 수준 감지기가 포함될 수 있습니다.</p>
+<h2 id="Attribute-Protocol-ATT"><a href="#Attribute-Protocol-ATT" class="headerlink" title="Attribute Protocol (ATT)"></a>Attribute Protocol (ATT)</h2><p>GATT는 ATT (Attribute Protocol) 위에 구축됩니다. 이것을 GATT / ATT라고도합니다.</p>
+<p>ATT는 BLE 장치에서 실행되도록 최적화되었습니다. 이를 위해 가능한 적은 바이트를 사용합니다.</p>
+<p>각 attributes는 정보를 고유하게 식별하는 데 사용되는 문자열 ID의 표준화 된 128 비트 형식 인 UUID (Universally Unique Identifier)로 고유하게 식별됩니다.</p>
+<p>ATT에 의해 전송 된 attributes는 characteristics 및 services로 형식화됩니다.</p>
+<p><img src="/images/Android-Bluetooth-low-energy/01.png" alt="GATT level"></p>
+<h2 id="Characteristic"><a href="#Characteristic" class="headerlink" title="Characteristic"></a>Characteristic</h2><p>Characteristic에는 단일 값과 특성 값을 설명하는 0-n 설명자가 포함됩니다.</p>
+<p>Characteristic은 클래스와 유사한 유형으로 생각할 수 있습니다.</p>
+<h2 id="Descriptor"><a href="#Descriptor" class="headerlink" title="Descriptor"></a>Descriptor</h2><p>Descriptor는 특성 값을 설명하는 정의 된 속성입니다. </p>
+<p>예를 들어 Descriptor는 사람이 읽을 수있는 설명, 특성 값의 허용 가능한 범위 또는 특성 값에 특정한 측정 단위를 지정할 수 있습니다.</p>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>서비스는 characteristics의 모음입니다. 예를 들어 “심박수 측정”과 같은 characteristics을 포함하는 “심박수 모니터”라는 서비스가있을 수 있습니다. </p>
+<p>bluetooth.org에서 기존 GATT 기반 프로파일 및 서비스 목록을 찾을 수 있습니다.</p>
+<h1 id="Roles-and-responsibilities"><a href="#Roles-and-responsibilities" class="headerlink" title="Roles and responsibilities"></a>Roles and responsibilities</h1><h2 id="Central-vs-peripheral-주변장치"><a href="#Central-vs-peripheral-주변장치" class="headerlink" title="Central vs. peripheral(주변장치)"></a>Central vs. peripheral(주변장치)</h2><p>이것은 BLE 연결 자체에 적용됩니다. </p>
+<p>중앙 역할의 장치가 advertisement를 검색하고 주변 역할의 장치가 advertisement를 만듭니다.</p>
+<h2 id="GATT-server-vs-GATT-client"><a href="#GATT-server-vs-GATT-client" class="headerlink" title="GATT server vs. GATT client"></a>GATT server vs. GATT client</h2><p>연결이 설정되면 두 장치가 서로 통신하는 방법을 결정합니다.</p>
+<p>차이점을 이해하려면 Android 전화와 BLE 장치 인 활동 추적기가 있다고 가정하세요. </p>
+<p>전화는 중심적인 역할을 지원합니다. 활동 추적기는 주변 장치 역할을 지원합니다.<br>(BLE 연결을 설정하려면 주변 장치 만 지원하는 두 가지 또는 중앙 통신 장치 만 지원하는 두 가지 중 하나).</p>
+<p>전화와 활동 추적기가 연결되면 GATT 메타 데이터를 서로에게 전송하기 시작합니다. </p>
+<p>전송하는 데이터의 종류에 따라 하나 또는 다른 서버가 서버로 작동 할 수 있습니다. </p>
+<p>예를 들어, 활동 추적기가 센서 데이터를 전화로보고하려는 경우 활동 추적기가 서버 역할을하는 것이 적합 할 수 있습니다. </p>
+<p>활동 추적기가 전화기에서 업데이트를 수신하려는 경우 전화기가 서버 역할을하는 것이 좋습니다.</p>
+<h1 id="BLE-permissions"><a href="#BLE-permissions" class="headerlink" title="BLE permissions"></a>BLE permissions</h1><p>응용 프로그램에서 Bluetooth 기능을 사용하려면 Bluetooth 권한 BLUETOOTH를 선언해야합니다. </p>
+<p>연결 요청, 연결 수락 및 데이터 전송과 같은 Bluetooth 통신을 수행하려면이 권한이 필요합니다.</p>
+<p>앱이 장치 검색을 시작하거나 Bluetooth 설정을 조작하도록하려면 BLUETOOTH_ADMIN 권한도 선언해야합니다. </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.BLUETOOTH"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.BLUETOOTH_ADMIN"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>앱을 BLE 지원 장치에서만 사용할 수 있다고 선언하려면 앱 매니페스트에 다음을 포함하십시오.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-feature</span> <span class="attr">android:name</span>=<span class="string">"android.hardware.bluetooth_le"</span> <span class="attr">android:required</span>=<span class="string">"true"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>그러나 BLE를 지원하지 않는 장치에서 앱을 사용하려면 앱의 매니페스트에이 요소를 포함시켜야하지만 required = “false”를 설정해야합니다. </p>
+<p>그런 다음 런타임에 PackageManager.hasSystemFeature ()를 사용하여 BLE 가용성을 확인할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Use this check to determine whether BLE is supported on the device. Then</span></span><br><span class="line"><span class="comment">// you can selectively disable BLE-related features.</span></span><br><span class="line"><span class="keyword">if</span> (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) &#123;</span><br><span class="line">    Toast.makeText(<span class="keyword">this</span>, R.string.ble_not_supported, Toast.LENGTH_SHORT).show();</span><br><span class="line">    finish();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Set-up-BLE"><a href="#Set-up-BLE" class="headerlink" title="Set up BLE"></a>Set up BLE</h1><p>애플리케이션이 BLE를 통해 통신하기 전에 디바이스에서 BLE가 지원되는지 확인하고, 가능하면 사용 가능해야합니다. </p>
+<p>이 점검은 &lt;uses-feature … /&gt;가 false로 설정된 경우에만 필요합니다.</p>
+<p>BLE가 지원되지 않으면 BLE 기능을 정상적으로 비활성화해야합니다. </p>
+<p>BLE가 지원되지만 비활성화 된 경우 응용 프로그램을 종료하지 않고 사용자에게 Bluetooth를 활성화하도록 요청할 수 있습니다.</p>
+<p>이 설정은 BluetoothAdapter를 사용하여 두 단계로 수행됩니다.</p>
+<h2 id="Get-the-BluetoothAdapter"><a href="#Get-the-BluetoothAdapter" class="headerlink" title="Get the BluetoothAdapter"></a>Get the BluetoothAdapter</h2><p>BluetoothAdapter는 모든 Bluetooth 활동에 필요합니다. BluetoothAdapter는 장치 자체의 Bluetooth 어댑터 (Bluetooth 라디오)를 나타냅니다. </p>
+<p>전체 시스템에 하나의 Bluetooth 어댑터가 있으며이 객체를 사용하여 응용 프로그램과 상호 작용할 수 있습니다. </p>
+<p>아래는 어댑터를 얻는 방법을 보여줍니다. 이 접근 방식은 getSystemService ()를 사용하여 BluetoothManager 인스턴스를 리턴 한 다음 어댑터를 얻는 데 사용됩니다. </p>
+<p>Android 4.3 (API 레벨 18)에 BluetoothManager가 도입되었습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> BluetoothAdapter bluetoothAdapter;</span><br><span class="line">...</span><br><span class="line"><span class="comment">// Initializes Bluetooth adapter.</span></span><br><span class="line"><span class="keyword">final</span> BluetoothManager bluetoothManager =</span><br><span class="line">        (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);</span><br><span class="line">bluetoothAdapter = bluetoothManager.getAdapter();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Enable-Bluetooth"><a href="#Enable-Bluetooth" class="headerlink" title="Enable Bluetooth"></a>Enable Bluetooth</h2><p>다음으로, 블루투스가 활성화되어 있는지 확인해야합니다. </p>
+<p>isEnabled ()를 호출하여 현재 Bluetooth가 활성화되어 있는지 확인하십시오. </p>
+<p>이 방법이 false를 반환하면 Bluetooth가 비활성화 된 것입니다. </p>
+<p>다음은 블루투스가 활성화되어 있는지 확인합니다. 그렇지 않은 경우 사용자가 설정으로 이동하여 Bluetooth를 활성화하라는 오류 메시지가 표시됩니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Ensures Bluetooth is available on the device and it is enabled. If not,</span></span><br><span class="line"><span class="comment">// displays a dialog requesting user permission to enable Bluetooth.</span></span><br><span class="line"><span class="keyword">if</span> (bluetoothAdapter == <span class="keyword">null</span> || !bluetoothAdapter.isEnabled()) &#123;</span><br><span class="line">    Intent enableBtIntent = <span class="keyword">new</span> Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);</span><br><span class="line">    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="BLE-장치-찾기"><a href="#BLE-장치-찾기" class="headerlink" title="BLE 장치 찾기"></a>BLE 장치 찾기</h1><p>BLE 장치를 찾으려면 startLeScan() 메소드를 사용하십시오. </p>
+<p>이 메소드는 BluetoothAdapter.LeScanCallback을 매개 변수로 사용합니다. </p>
+<p>이 콜백은 스캔 결과가 리턴되는 방식이므로 구현해야합니다. </p>
+<p>스캔은 배터리를 많이 사용하므로 다음 지침을 준수해야합니다.</p>
+<ul>
+<li><p>원하는 장치를 찾으면 스캔을 중지하십시오.</p>
+</li>
+<li><p>루프를 스캔하지 말고 스캔 시간 제한을 설정하십시오. 이전에 사용 가능했던 장치가 범위를 벗어 났으며 스캔을 계속하면 배터리가 소진됩니다.</p>
+</li>
+</ul>
+<p>다음은 스캔을 시작하고 중지하는 방법을 보여줍니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Activity for scanning and displaying available BLE devices.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeviceScanActivity</span> <span class="keyword">extends</span> <span class="title">ListActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> BluetoothAdapter bluetoothAdapter;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> mScanning;</span><br><span class="line">    <span class="keyword">private</span> Handler handler;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Stops scanning after 10 seconds.</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> SCAN_PERIOD = <span class="number">10000</span>;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">scanLeDevice</span><span class="params">(<span class="keyword">final</span> <span class="keyword">boolean</span> enable)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (enable) &#123;</span><br><span class="line">            <span class="comment">// Stops scanning after a pre-defined scan period.</span></span><br><span class="line">            handler.postDelayed(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                    mScanning = <span class="keyword">false</span>;</span><br><span class="line">                    bluetoothAdapter.stopLeScan(leScanCallback);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, SCAN_PERIOD);</span><br><span class="line"></span><br><span class="line">            mScanning = <span class="keyword">true</span>;</span><br><span class="line">            bluetoothAdapter.startLeScan(leScanCallback);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            mScanning = <span class="keyword">false</span>;</span><br><span class="line">            bluetoothAdapter.stopLeScan(leScanCallback);</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>특정 유형의 주변 장치 만 검색하려는 경우 대신 startLeScan (UUID [], BluetoothAdapter.LeScanCallback)을 호출하여 앱이 지원하는 GATT 서비스를 지정하는 UUID 객체 배열을 제공 할 수 있습니다.</p>
+<p>다음은 BLE 스캔 결과를 제공하는 데 사용되는 인터페이스 인 BluetoothAdapter.LeScanCallback의 구현입니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> LeDeviceListAdapter leDeviceListAdapter;</span><br><span class="line">...</span><br><span class="line"><span class="comment">// Device scan callback.</span></span><br><span class="line"><span class="keyword">private</span> BluetoothAdapter.LeScanCallback leScanCallback =</span><br><span class="line">        <span class="keyword">new</span> BluetoothAdapter.LeScanCallback() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLeScan</span><span class="params">(<span class="keyword">final</span> BluetoothDevice device, <span class="keyword">int</span> rssi,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">byte</span>[] scanRecord)</span> </span>&#123;</span><br><span class="line">        runOnUiThread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">               leDeviceListAdapter.addDevice(device);</span><br><span class="line">               leDeviceListAdapter.notifyDataSetChanged();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> Bluetooth에 설명 된대로 Bluetooth LE 장치 만 검색하거나 Classic Bluetooth 장치 만 검색 할 수 있습니다. Bluetooth LE와 클래식 장치를 동시에 검색 할 수 없습니다.</p>
+</blockquote>
+<h1 id="Connect-to-a-GATT-server"><a href="#Connect-to-a-GATT-server" class="headerlink" title="Connect to a GATT server"></a>Connect to a GATT server</h1><p>BLE 장치와 상호 작용하는 첫 번째 단계는 장치, 특히 장치의 GATT 서버에 연결하는 것입니다.</p>
+<p>BLE 장치의 GATT 서버에 연결하려면 connectGatt() 메소드를 사용하십시오. </p>
+<p>이 메소드는 Context 객체, autoConnect(BLE 장치가 사용 가능 해지면 자동으로 연결할지 여부를 나타내는 부울) 및 BluetoothGattCallback에 대한 참조의 세 가지 매개 변수를 사용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bluetoothGatt = device.connectGatt(<span class="keyword">this</span>, <span class="keyword">false</span>, gattCallback);</span><br></pre></td></tr></table></figure>
+
+<p>이것은 BLE 장치가 호스팅하는 GATT 서버에 연결하고 BluetoothGatt 인스턴스를 반환 한 다음 GATT 클라이언트 작업을 수행하는 데 사용할 수 있습니다. </p>
+<p>발신자 (Android 앱)는 GATT 클라이언트입니다. </p>
+<p>BluetoothGattCallback은 연결 상태 및 추가 GATT 클라이언트 작업과 같은 결과를 클라이언트에 전달하는 데 사용됩니다.</p>
+<p>아래 예에서 BLE 앱은 장치에서 지원하는 GATT 서비스 및 특성을 연결, 표시 및 표시하는 활동 (DeviceControlActivity)을 제공합니다. </p>
+<p>사용자 입력에 따라이 활동은 BluetoothLeService라는 서비스와 통신하며, 이 서비스는 Android BLE API를 통해 BLE 장치와 상호 작용합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A service that interacts with the BLE device via the Android BLE API.</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BluetoothLeService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String TAG = BluetoothLeService<span class="class">.<span class="keyword">class</span>.<span class="title">getSimpleName</span>()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> BluetoothManager bluetoothManager;</span><br><span class="line">    <span class="keyword">private</span> BluetoothAdapter bluetoothAdapter;</span><br><span class="line">    <span class="keyword">private</span> String bluetoothDeviceAddress;</span><br><span class="line">    <span class="keyword">private</span> BluetoothGatt bluetoothGatt;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> connectionState = STATE_DISCONNECTED;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> STATE_DISCONNECTED = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> STATE_CONNECTING = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> STATE_CONNECTED = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String ACTION_GATT_CONNECTED =</span><br><span class="line">            <span class="string">"com.example.bluetooth.le.ACTION_GATT_CONNECTED"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String ACTION_GATT_DISCONNECTED =</span><br><span class="line">            <span class="string">"com.example.bluetooth.le.ACTION_GATT_DISCONNECTED"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String ACTION_GATT_SERVICES_DISCOVERED =</span><br><span class="line">            <span class="string">"com.example.bluetooth.le.ACTION_GATT_SERVICES_DISCOVERED"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String ACTION_DATA_AVAILABLE =</span><br><span class="line">            <span class="string">"com.example.bluetooth.le.ACTION_DATA_AVAILABLE"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String EXTRA_DATA =</span><br><span class="line">            <span class="string">"com.example.bluetooth.le.EXTRA_DATA"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> UUID UUID_HEART_RATE_MEASUREMENT =</span><br><span class="line">            UUID.fromString(SampleGattAttributes.HEART_RATE_MEASUREMENT);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Various callback methods defined by the BLE API.</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> BluetoothGattCallback gattCallback =</span><br><span class="line">            <span class="keyword">new</span> BluetoothGattCallback() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onConnectionStateChange</span><span class="params">(BluetoothGatt gatt, <span class="keyword">int</span> status,</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span> newState)</span> </span>&#123;</span><br><span class="line">            String intentAction;</span><br><span class="line">            <span class="keyword">if</span> (newState == BluetoothProfile.STATE_CONNECTED) &#123;</span><br><span class="line">                intentAction = ACTION_GATT_CONNECTED;</span><br><span class="line">                connectionState = STATE_CONNECTED;</span><br><span class="line">                broadcastUpdate(intentAction);</span><br><span class="line">                Log.i(TAG, <span class="string">"Connected to GATT server."</span>);</span><br><span class="line">                Log.i(TAG, <span class="string">"Attempting to start service discovery:"</span> +</span><br><span class="line">                        bluetoothGatt.discoverServices());</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (newState == BluetoothProfile.STATE_DISCONNECTED) &#123;</span><br><span class="line">                intentAction = ACTION_GATT_DISCONNECTED;</span><br><span class="line">                connectionState = STATE_DISCONNECTED;</span><br><span class="line">                Log.i(TAG, <span class="string">"Disconnected from GATT server."</span>);</span><br><span class="line">                broadcastUpdate(intentAction);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="comment">// New services discovered</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServicesDiscovered</span><span class="params">(BluetoothGatt gatt, <span class="keyword">int</span> status)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (status == BluetoothGatt.GATT_SUCCESS) &#123;</span><br><span class="line">                broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                Log.w(TAG, <span class="string">"onServicesDiscovered received: "</span> + status);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="comment">// Result of a characteristic read operation</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCharacteristicRead</span><span class="params">(BluetoothGatt gatt,</span></span></span><br><span class="line"><span class="function"><span class="params">                BluetoothGattCharacteristic characteristic,</span></span></span><br><span class="line"><span class="function"><span class="params">                <span class="keyword">int</span> status)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (status == BluetoothGatt.GATT_SUCCESS) &#123;</span><br><span class="line">                broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     ...</span><br><span class="line">    &#125;;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>특정 콜백이 트리거되면 적절한 broadcastUpdate() 헬퍼 메소드를 호출하고 액션을 전달합니다. </p>
+<p>이 섹션의 데이터 구문 분석은 Bluetooth 심박수 측정 프로파일 사양에 따라 수행됩니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">broadcastUpdate</span><span class="params">(<span class="keyword">final</span> String action)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Intent intent = <span class="keyword">new</span> Intent(action);</span><br><span class="line">    sendBroadcast(intent);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">broadcastUpdate</span><span class="params">(<span class="keyword">final</span> String action,</span></span></span><br><span class="line"><span class="function"><span class="params">                             <span class="keyword">final</span> BluetoothGattCharacteristic characteristic)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Intent intent = <span class="keyword">new</span> Intent(action);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// This is special handling for the Heart Rate Measurement profile. Data</span></span><br><span class="line">    <span class="comment">// parsing is carried out as per profile specifications.</span></span><br><span class="line">    <span class="keyword">if</span> (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) &#123;</span><br><span class="line">        <span class="keyword">int</span> flag = characteristic.getProperties();</span><br><span class="line">        <span class="keyword">int</span> format = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> ((flag &amp; <span class="number">0x01</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">            format = BluetoothGattCharacteristic.FORMAT_UINT16;</span><br><span class="line">            Log.d(TAG, <span class="string">"Heart rate format UINT16."</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            format = BluetoothGattCharacteristic.FORMAT_UINT8;</span><br><span class="line">            Log.d(TAG, <span class="string">"Heart rate format UINT8."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> heartRate = characteristic.getIntValue(format, <span class="number">1</span>);</span><br><span class="line">        Log.d(TAG, String.format(<span class="string">"Received heart rate: %d"</span>, heartRate));</span><br><span class="line">        intent.putExtra(EXTRA_DATA, String.valueOf(heartRate));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// For all other profiles, writes the data formatted in HEX.</span></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">byte</span>[] data = characteristic.getValue();</span><br><span class="line">        <span class="keyword">if</span> (data != <span class="keyword">null</span> &amp;&amp; data.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">final</span> StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder(data.length);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">byte</span> byteChar : data)</span><br><span class="line">                stringBuilder.append(String.format(<span class="string">"%02X "</span>, byteChar));</span><br><span class="line">            intent.putExtra(EXTRA_DATA, <span class="keyword">new</span> String(data) + <span class="string">"\n"</span> +</span><br><span class="line">                    stringBuilder.toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sendBroadcast(intent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>DeviceControlActivity로 돌아 가면이 이벤트는 BroadcastReceiver에 의해 처리됩니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Handles various events fired by the Service.</span></span><br><span class="line"><span class="comment">// ACTION_GATT_CONNECTED: connected to a GATT server.</span></span><br><span class="line"><span class="comment">// ACTION_GATT_DISCONNECTED: disconnected from a GATT server.</span></span><br><span class="line"><span class="comment">// ACTION_GATT_SERVICES_DISCOVERED: discovered GATT services.</span></span><br><span class="line"><span class="comment">// ACTION_DATA_AVAILABLE: received data from the device. This can be a</span></span><br><span class="line"><span class="comment">// result of read or notification operations.</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> BroadcastReceiver gattUpdateReceiver = <span class="keyword">new</span> BroadcastReceiver() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> String action = intent.getAction();</span><br><span class="line">        <span class="keyword">if</span> (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) &#123;</span><br><span class="line">            connected = <span class="keyword">true</span>;</span><br><span class="line">            updateConnectionState(R.string.connected);</span><br><span class="line">            invalidateOptionsMenu();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) &#123;</span><br><span class="line">            connected = <span class="keyword">false</span>;</span><br><span class="line">            updateConnectionState(R.string.disconnected);</span><br><span class="line">            invalidateOptionsMenu();</span><br><span class="line">            clearUI();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (BluetoothLeService.</span><br><span class="line">                ACTION_GATT_SERVICES_DISCOVERED.equals(action)) &#123;</span><br><span class="line">            <span class="comment">// Show all the supported services and characteristics on the</span></span><br><span class="line">            <span class="comment">// user interface.</span></span><br><span class="line">            displayGattServices(bluetoothLeService.getSupportedGattServices());</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) &#123;</span><br><span class="line">            displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Read-BLE-attributes"><a href="#Read-BLE-attributes" class="headerlink" title="Read BLE attributes"></a>Read BLE attributes</h1><p>Android 앱이 GATT 서버에 연결되고 서비스를 발견하면 지원되는 경우 속성을 읽고 쓸 수 있습니다. </p>
+<p>예를 들어 아래 예는 서버의 서비스와 특성을 반복하여 UI에 표시합니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeviceControlActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// Demonstrates how to iterate through the supported GATT</span></span><br><span class="line">    <span class="comment">// Services/Characteristics.</span></span><br><span class="line">    <span class="comment">// In this sample, we populate the data structure that is bound to the</span></span><br><span class="line">    <span class="comment">// ExpandableListView on the UI.</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">displayGattServices</span><span class="params">(List&lt;BluetoothGattService&gt; gattServices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (gattServices == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        String uuid = <span class="keyword">null</span>;</span><br><span class="line">        String unknownServiceString = getResources().</span><br><span class="line">                getString(R.string.unknown_service);</span><br><span class="line">        String unknownCharaString = getResources().</span><br><span class="line">                getString(R.string.unknown_characteristic);</span><br><span class="line">        ArrayList&lt;HashMap&lt;String, String&gt;&gt; gattServiceData =</span><br><span class="line">                <span class="keyword">new</span> ArrayList&lt;HashMap&lt;String, String&gt;&gt;();</span><br><span class="line">        ArrayList&lt;ArrayList&lt;HashMap&lt;String, String&gt;&gt;&gt; gattCharacteristicData</span><br><span class="line">                = <span class="keyword">new</span> ArrayList&lt;ArrayList&lt;HashMap&lt;String, String&gt;&gt;&gt;();</span><br><span class="line">        mGattCharacteristics =</span><br><span class="line">                <span class="keyword">new</span> ArrayList&lt;ArrayList&lt;BluetoothGattCharacteristic&gt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Loops through available GATT Services.</span></span><br><span class="line">        <span class="keyword">for</span> (BluetoothGattService gattService : gattServices) &#123;</span><br><span class="line">            HashMap&lt;String, String&gt; currentServiceData =</span><br><span class="line">                    <span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">            uuid = gattService.getUuid().toString();</span><br><span class="line">            currentServiceData.put(</span><br><span class="line">                    LIST_NAME, SampleGattAttributes.</span><br><span class="line">                            lookup(uuid, unknownServiceString));</span><br><span class="line">            currentServiceData.put(LIST_UUID, uuid);</span><br><span class="line">            gattServiceData.add(currentServiceData);</span><br><span class="line"></span><br><span class="line">            ArrayList&lt;HashMap&lt;String, String&gt;&gt; gattCharacteristicGroupData =</span><br><span class="line">                    <span class="keyword">new</span> ArrayList&lt;HashMap&lt;String, String&gt;&gt;();</span><br><span class="line">            List&lt;BluetoothGattCharacteristic&gt; gattCharacteristics =</span><br><span class="line">                    gattService.getCharacteristics();</span><br><span class="line">            ArrayList&lt;BluetoothGattCharacteristic&gt; charas =</span><br><span class="line">                    <span class="keyword">new</span> ArrayList&lt;BluetoothGattCharacteristic&gt;();</span><br><span class="line">           <span class="comment">// Loops through available Characteristics.</span></span><br><span class="line">            <span class="keyword">for</span> (BluetoothGattCharacteristic gattCharacteristic :</span><br><span class="line">                    gattCharacteristics) &#123;</span><br><span class="line">                charas.add(gattCharacteristic);</span><br><span class="line">                HashMap&lt;String, String&gt; currentCharaData =</span><br><span class="line">                        <span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">                uuid = gattCharacteristic.getUuid().toString();</span><br><span class="line">                currentCharaData.put(</span><br><span class="line">                        LIST_NAME, SampleGattAttributes.lookup(uuid,</span><br><span class="line">                                unknownCharaString));</span><br><span class="line">                currentCharaData.put(LIST_UUID, uuid);</span><br><span class="line">                gattCharacteristicGroupData.add(currentCharaData);</span><br><span class="line">            &#125;</span><br><span class="line">            mGattCharacteristics.add(charas);</span><br><span class="line">            gattCharacteristicData.add(gattCharacteristicGroupData);</span><br><span class="line">         &#125;</span><br><span class="line">    ...</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Receive-GATT-notifications"><a href="#Receive-GATT-notifications" class="headerlink" title="Receive GATT notifications"></a>Receive GATT notifications</h1><p>장치의 특정 characteristic가 변경 될 때 BLE 앱에 알림을 요청하는 것이 일반적입니다.</p>
+<p>아래 예는 setCharacteristicNotification() 메소드를 사용하여 특성에 대한 알림을 설정하는 방법을 보여줍니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> BluetoothGatt bluetoothGatt;</span><br><span class="line">BluetoothGattCharacteristic characteristic;</span><br><span class="line"><span class="keyword">boolean</span> enabled;</span><br><span class="line">...</span><br><span class="line">bluetoothGatt.setCharacteristicNotification(characteristic, enabled);</span><br><span class="line">...</span><br><span class="line">BluetoothGattDescriptor descriptor = characteristic.getDescriptor(</span><br><span class="line">        UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));</span><br><span class="line">descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);</span><br><span class="line">bluetoothGatt.writeDescriptor(descriptor);</span><br></pre></td></tr></table></figure>
+
+<p>특성에 대한 알림이 활성화되면 원격 장치에서 특성이 변경되면 onCharacteristicChanged() 콜백이 트리거됩니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="comment">// Characteristic notification</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCharacteristicChanged</span><span class="params">(BluetoothGatt gatt,</span></span></span><br><span class="line"><span class="function"><span class="params">        BluetoothGattCharacteristic characteristic)</span> </span>&#123;</span><br><span class="line">    broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Close-the-client-app"><a href="#Close-the-client-app" class="headerlink" title="Close the client app"></a>Close the client app</h1><p>앱이 BLE 장치 사용을 마치면 close ()를 호출하여 시스템에서 리소스를 적절하게 해제 할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (bluetoothGatt == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    bluetoothGatt.close();</span><br><span class="line">    bluetoothGatt = <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2019/09/06/Android-BLE-overview/" data-id="ckzfaqftc00pcdyuocxava0bi" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "Bluetooth low energy",
+        "image": "http://jung-max.github.io/images/Android-Bluetooth-low-energy/01.png",
+        "keywords": "Android App BLE",
+        "genre": "Android BLE",
+        "datePublished": "2019-09-06",
+        "dateCreated": "2019-09-06",
+        "dateModified": "2022-02-08",
+        "url": "http://jung-max.github.io/2019/09/06/Android-BLE-overview/",
+        "description": "Bluetooth low energy 개요Android 4.3 (API 레벨 18)부터 중심 역할에 BLE (Bluetooth Low Energy)에 대한 기본 제공 플랫폼 지원을 도입하고 앱이 장치를 검색하고 서비스를 쿼리하고 정보를 전송하는 데 사용할 수있는 API를 제공합니다.
+클래식 Bluetooth와 달리 BLE (Bluetooth Low Ener"
+        "wordCount": 4824
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/09/09/Android-BLE-GattServer로부터-알림받기/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            Gatt Server로 부터 알림 받기
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">Android Kernel 가상 마우스 드라이버 구현하기</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2019/09/06/Android-BLE-overview/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

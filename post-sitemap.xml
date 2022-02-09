@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>http://jung-max.github.io</loc>
+        <changefreq>daily</changefreq>
+        <priority>1</priority>
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/08/Linux-libcurl/</loc>
+        <lastmod>2022-02-09T07:56:25.582Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20example/</loc>
+        <lastmod>2022-02-09T07:47:19.971Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20for%20C++%20programmers/</loc>
+        <lastmod>2022-02-09T07:37:22.903Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20%EC%9E%90%EC%84%B8%ED%95%9C%20%EC%9E%91%EC%97%85/</loc>
+        <lastmod>2022-02-09T07:27:04.900Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20%ED%95%B8%EB%93%A4%20%EA%B0%84%EC%97%90%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EA%B3%B5%EC%9C%A0/</loc>
+        <lastmod>2022-02-09T07:17:51.946Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20CURL%EC%BD%94%EB%93%9C%20%EB%A6%AC%ED%84%B4%20%EC%BD%94%EB%93%9C/</loc>
+        <lastmod>2022-02-09T07:17:43.342Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20curl%20easy%20options/</loc>
+        <lastmod>2022-02-09T07:14:13.503Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20multi-threading/</loc>
+        <lastmod>2022-02-09T06:27:38.335Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20%EC%A0%84%EC%97%AD%20%EC%B4%88%EA%B8%B0%ED%99%94/</loc>
+        <lastmod>2022-02-09T06:26:57.507Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20Header%20files/</loc>
+        <lastmod>2022-02-09T06:25:59.847Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20--libcurl/</loc>
+        <lastmod>2022-02-09T06:25:12.192Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20API%20%ED%98%B8%ED%99%98%EC%84%B1/</loc>
+        <lastmod>2022-02-09T06:22:09.752Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20URL%20API/</loc>
+        <lastmod>2022-02-09T06:18:43.996Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/06/15/Python-serial/</loc>
+        <lastmod>2022-02-09T04:53:25.654Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20Post%20transfer%20info/</loc>
+        <lastmod>2022-02-09T04:49:11.175Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20Proxies/</loc>
+        <lastmod>2022-02-09T04:31:32.988Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20%EC%9D%B4%EB%A6%84%20%ED%99%95%EC%9D%B8/</loc>
+        <lastmod>2022-02-09T04:18:24.935Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20Cleanup/</loc>
+        <lastmod>2022-02-09T04:01:41.557Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/08/Linux-libcurl%20Easy%20handle/</loc>
+        <lastmod>2022-02-09T03:59:17.256Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/08/Linux-libcurl%20callback/</loc>
+        <lastmod>2022-02-09T03:59:16.223Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/08/Linux-libcurl%20%EC%97%B0%EA%B2%B0%20%EC%9E%AC%EC%82%AC%EC%9A%A9/</loc>
+        <lastmod>2022-02-09T03:59:14.298Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/08/Linux-libcurl%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C%20%EC%A0%84%EC%86%A1/</loc>
+        <lastmod>2022-02-09T03:54:13.787Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/08/Linux-http%20%ED%86%B5%EC%8B%A0(curl)/</loc>
+        <lastmod>2022-02-08T04:31:04.897Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/10/21/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4%EB%9D%BC%EC%9D%B4%EC%84%BC%EC%8A%A4/</loc>
+        <lastmod>2022-02-08T02:11:11.833Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2021/04/08/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4-%EC%88%A8%EA%B2%A8%EC%A7%84(%ED%9E%88%EB%93%A0)%EC%99%80%EC%9D%B4%ED%8C%8C%EC%9D%B4-%EC%84%A4%EC%A0%95/</loc>
+        <lastmod>2022-02-08T02:11:11.832Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2021/04/28/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4-%ED%81%AC%EB%A1%9C%EB%AF%B8%EC%97%84%20%ED%82%A4%EC%98%A4%EC%8A%A4%ED%81%AC%20%EB%AA%A8%EB%93%9C%20%EB%B0%8F%20%EB%B6%80%ED%8C%85%EC%8B%9C%20%EC%9E%90%EB%8F%99%20%EC%8B%A4%ED%96%89/</loc>
+        <lastmod>2022-02-08T02:11:11.831Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2021/04/16/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4-%EC%9C%A0%EC%9A%A9%ED%95%9C%EC%84%A4%EC%A0%95%EB%93%A4/</loc>
+        <lastmod>2022-02-08T02:11:11.831Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2021/04/30/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4-tp%20link%20t2u%20plus(ac600)%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84%20%EC%84%A4%EC%B9%98(8812au)/</loc>
+        <lastmod>2022-02-08T02:11:11.828Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2021/04/16/%EB%9D%BC%EC%A6%88%EB%B2%A0%EB%A6%AC%ED%8C%8C%EC%9D%B4-pyWebView/</loc>
+        <lastmod>2022-02-08T02:11:11.827Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/27/Web-Javascript-MarkDown%EA%B5%AC%ED%98%84/</loc>
+        <lastmod>2022-02-08T02:11:11.825Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/27/Web-JavaScript-replace%EC%A0%95%EA%B7%9C%EC%8B%9D/</loc>
+        <lastmod>2022-02-08T02:11:11.824Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/07/20/Web-CentOs7%EC%97%90-%ED%99%98%EA%B2%BD%EA%B5%AC%EC%84%B1/</loc>
+        <lastmod>2022-02-08T02:11:11.823Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/06/24/Web-7_SpringBoot-%EA%B2%8C%EC%8B%9C%ED%8C%90%EB%A7%8C%EB%93%A4%EA%B8%B0-3/</loc>
+        <lastmod>2022-02-08T02:11:11.822Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/06/24/Web-5_SpringBoot-%EA%B2%8C%EC%8B%9C%ED%8C%90%EB%A7%8C%EB%93%A4%EA%B8%B0-1/</loc>
+        <lastmod>2022-02-08T02:11:11.821Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/06/24/Web-6_SpringBoot-%EA%B2%8C%EC%8B%9C%ED%8C%90%EB%A7%8C%EB%93%A4%EA%B8%B0-2/</loc>
+        <lastmod>2022-02-08T02:11:11.821Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/06/24/Web-4_SpringBoot-Mybatis%EC%97%B0%EB%8F%99/</loc>
+        <lastmod>2022-02-08T02:11:11.820Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/06/24/Web-2_SpringBoot%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%83%9D%EC%84%B1/</loc>
+        <lastmod>2022-02-08T02:11:11.820Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/06/24/Web-3_SpringBoot-MariaDb%EC%97%B0%EA%B2%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.820Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/06/23/Web-1_SpringBoot-%ED%99%98%EA%B2%BD%EC%84%A4%EC%A0%95/</loc>
+        <lastmod>2022-02-08T02:11:11.819Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/11/06/Rockchip_uBoot_%EB%B6%84%EC%84%9D/</loc>
+        <lastmod>2022-02-08T02:11:11.819Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/03/23/VS%20%EC%BD%94%EB%93%9C-%ED%99%95%EC%9E%A5-%EC%98%A4%EB%A5%98-%EC%88%98%EC%A0%95/</loc>
+        <lastmod>2022-02-08T02:11:11.818Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/06/15/Python-pip3%20%EC%9D%B8%EC%8A%A4%ED%86%A8%EC%8B%9C%20SSL%EC%97%90%EB%9F%AC/</loc>
+        <lastmod>2022-02-08T02:11:11.817Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/06/16/Python-pyqt5-%EC%9D%B4%EB%AF%B8%EC%A7%80%ED%81%B4%EB%A6%AD/</loc>
+        <lastmod>2022-02-08T02:11:11.817Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/04/09/opencv-PageDewarping-%EC%B1%85%20%EB%B0%98%EC%9C%BC%EB%A1%9C%20%EC%9E%90%EB%A5%B4%EA%B8%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.817Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/04/09/opencv-PageDewarping-%EB%8F%99%EC%A0%81%EB%A7%88%EC%8A%A4%ED%82%B9/</loc>
+        <lastmod>2022-02-08T02:11:11.816Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/04/29/opencv-PageDewarping-%EA%B7%B8%EB%A6%BC%EC%B1%85-%ED%85%8D%EC%8A%A4%ED%8A%B8%EC%B1%85-%EA%B5%AC%EB%B6%84%EB%B0%A9%EB%B2%95/</loc>
+        <lastmod>2022-02-08T02:11:11.816Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/04/22/openCV-pageDewarp-%EC%82%AC%EB%8B%A4%EB%A6%AC%EA%BC%B4%20%EA%B2%B0%EA%B3%BC%EB%AC%BC%20%EB%B3%B4%EC%A0%95/</loc>
+        <lastmod>2022-02-08T02:11:11.815Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/04/17/openCV-pageDewarp-%EC%A4%91%EC%8B%AC%EC%9D%B4%EB%A1%A0%EC%84%A4%EB%AA%85/</loc>
+        <lastmod>2022-02-08T02:11:11.815Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/04/29/openCV-pageDewarp-remapping%EC%9D%84%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%B3%B4%EC%A0%95/</loc>
+        <lastmod>2022-02-08T02:11:11.814Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/04/23/openCV-pageDewarp-remapping/</loc>
+        <lastmod>2022-02-08T02:11:11.814Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/02/17/openCV-pageDewarp-07/</loc>
+        <lastmod>2022-02-08T02:11:11.814Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/02/14/openCV-pageDewarp-05/</loc>
+        <lastmod>2022-02-08T02:11:11.813Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/02/12/openCV-pageDewarp-04/</loc>
+        <lastmod>2022-02-08T02:11:11.813Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/02/17/openCV-pageDewarp-06/</loc>
+        <lastmod>2022-02-08T02:11:11.813Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/02/12/openCV-pageDewarp-02/</loc>
+        <lastmod>2022-02-08T02:11:11.812Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/02/12/openCV-pageDewarp-03/</loc>
+        <lastmod>2022-02-08T02:11:11.812Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/12/13/Linux-ADC-Battery/</loc>
+        <lastmod>2022-02-08T02:11:11.811Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/02/12/openCV-pageDewarp-01/</loc>
+        <lastmod>2022-02-08T02:11:11.811Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/04/08/opencv%20%EC%9C%A4%EA%B3%BD%EC%84%A0(Contours)%EA%B0%92%EC%9D%98%20%EC%9D%98%EB%AF%B8(%EB%82%B4%EC%9A%A9)%20%EC%B5%9C%EB%8C%80%EA%B0%92%20%EC%B5%9C%EC%86%8C%EA%B0%92%20%EA%B5%AC%ED%95%98%EA%B8%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.810Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/19/Github-Pages-%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4/</loc>
+        <lastmod>2022-02-08T02:11:11.810Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/29/Github-Pages-Hexo/</loc>
+        <lastmod>2022-02-08T02:11:11.809Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/17/Github-Pages-Hexo-%EA%B2%80%EC%83%89%EC%97%94%EC%A7%84%EC%B5%9C%EC%A0%81%ED%99%94/</loc>
+        <lastmod>2022-02-08T02:11:11.800Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/29/Github-Pages-Hexo-Theme/</loc>
+        <lastmod>2022-02-08T02:11:11.790Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/11/13/Git-%ED%95%98%EC%9C%84%ED%8F%B4%EB%8D%94%EC%9D%98-git%EC%A7%80%EC%9A%B0%EA%B8%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.789Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-%EC%88%98%EC%A0%95%EB%90%9C%EC%96%B4%ED%94%8C%ED%83%91%EC%9E%AC/</loc>
+        <lastmod>2022-02-08T02:11:11.788Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/10/22/Device_Tree_%EB%AC%B8%EB%B2%95/</loc>
+        <lastmod>2022-02-08T02:11:11.788Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-%EC%BB%A4%EC%8A%A4%ED%84%B0%EB%A7%88%EC%9D%B4%EC%A6%88/</loc>
+        <lastmod>2022-02-08T02:11:11.787Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-%ED%99%88%EB%9F%B0%EC%B3%90App/</loc>
+        <lastmod>2022-02-08T02:11:11.786Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/08/13/Centos%EC%97%90%EC%84%9C-smb%EB%A7%88%EC%9A%B4%ED%8A%B8%ED%95%98%EA%B8%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.786Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-%EC%95%B1%EB%B6%84%ED%95%B4/</loc>
+        <lastmod>2022-02-08T02:11:11.785Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/01/03/Android-Tablayout-background-color/</loc>
+        <lastmod>2022-02-08T02:11:11.780Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/11/12/Android-%EB%B6%80%ED%8C%85%EC%8B%9C%EB%8F%99%EC%9E%91%ED%95%98%EB%8A%94-service%EC%95%B1/</loc>
+        <lastmod>2022-02-08T02:11:11.780Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-%EB%B6%80%ED%8A%B8%EB%A1%9C%EA%B7%B8/</loc>
+        <lastmod>2022-02-08T02:11:11.780Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-SystemApp/</loc>
+        <lastmod>2022-02-08T02:11:11.779Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/01/03/Android-Thread%EC%95%88%EC%97%90%EC%84%9C_Toast%EC%82%AC%EC%9A%A9/</loc>
+        <lastmod>2022-02-08T02:11:11.779Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-%EA%B8%B0%EB%B0%98-Kernel/</loc>
+        <lastmod>2022-02-08T02:11:11.779Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/16/Android-SEAndroid%EC%A0%81%EC%9A%A9/</loc>
+        <lastmod>2022-02-08T02:11:11.778Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2020/01/16/Android-Surfaceflinger/</loc>
+        <lastmod>2022-02-08T02:11:11.778Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD/</loc>
+        <lastmod>2022-02-08T02:11:11.777Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/10/30/Android-rk3328-%EA%B4%80%EB%A0%A8%EB%AC%B8%EC%84%9C%EC%A0%95%EB%A6%AC/</loc>
+        <lastmod>2022-02-08T02:11:11.777Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/10/14/Android-Platform-%EB%B0%B0%ED%84%B0%EB%A6%AC/</loc>
+        <lastmod>2022-02-08T02:11:11.773Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-%EB%B6%80%EB%B6%84%EB%B9%8C%EB%93%9C%EB%B0%A9%EB%B2%95/</loc>
+        <lastmod>2022-02-08T02:11:11.771Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-Architecture/</loc>
+        <lastmod>2022-02-08T02:11:11.770Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Platform-Architecture-overview/</loc>
+        <lastmod>2022-02-08T02:11:11.770Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/01/11/Android-OTA%20Update/</loc>
+        <lastmod>2022-02-08T02:11:11.770Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/02/Android-NDK%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%84%9C-kernel%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.769Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/30/Android-Mouse-x,y%EC%B6%95-%EC%9D%B4%EB%8F%99%EC%9D%84-%ED%8C%A8%ED%82%B7%ED%99%94%ED%95%B4%EC%84%9C-bluetooth%EB%A1%9C-%EB%B3%B4%EB%82%B4%EA%B8%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.769Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-NDK/</loc>
+        <lastmod>2022-02-08T02:11:11.768Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/02/Android-KeyEvent-%EB%B0%9C%EC%83%9D%ED%95%98%EA%B8%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.761Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-GIPO-%EC%A0%9C%EC%96%B4-ROCK64/</loc>
+        <lastmod>2022-02-08T02:11:11.760Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/25/Android-MediaPlayer/</loc>
+        <lastmod>2022-02-08T02:11:11.760Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel_Module/</loc>
+        <lastmod>2022-02-08T02:11:11.754Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Kernel-%EC%A3%BC%EC%9A%94-%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC/</loc>
+        <lastmod>2022-02-08T02:11:11.753Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-%EB%B9%8C%EB%93%9C-%EC%98%B5%EC%85%98/</loc>
+        <lastmod>2022-02-08T02:11:11.752Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/02/Android-kernel-%EA%B0%80%EC%83%81-%EB%A7%88%EC%9A%B0%EC%8A%A4-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.751Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/29/Android-Kernel-compile/</loc>
+        <lastmod>2022-02-08T02:11:11.750Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Kernel-Message/</loc>
+        <lastmod>2022-02-08T02:11:11.750Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Kernel-System-Memory-Model/</loc>
+        <lastmod>2022-02-08T02:11:11.750Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/11/20/Android-kernel-powerKey-%EC%9D%B8%ED%84%B0%EB%9F%BD%ED%8A%B8/</loc>
+        <lastmod>2022-02-08T02:11:11.750Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/16/Android-JNI-%EB%8F%99%EC%9E%91%EA%B5%AC%EC%A1%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.749Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/02/Android-bluetooth%EB%A1%9C-%EB%B0%9B%EC%9D%80-string-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D%ED%95%98%EA%B8%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.748Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/02/Android-bluetooth%EB%A1%9C-%EB%B0%9B%EC%9D%80-byte-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EC%84%9D%ED%95%98%EA%B8%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.748Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/27/Android-Bluetooth/</loc>
+        <lastmod>2022-02-08T02:11:11.747Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/30/Android-bluetooth%EB%A1%9C-string%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%B4%EB%82%B4%EA%B8%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.738Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/30/Android-Bluetooth-%EB%94%94%EB%B0%94%EC%9D%B4%EC%8A%A4-%EC%97%B0%EA%B2%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.737Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/02/Android-bluetooth-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EC%AA%BD-%EC%8A%A4%EB%A0%88%EB%93%9C-%EA%B5%AC%ED%98%84/</loc>
+        <lastmod>2022-02-08T02:11:11.737Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/11/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B002/</loc>
+        <lastmod>2022-02-08T02:11:11.736Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/16/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B003/</loc>
+        <lastmod>2022-02-08T02:11:11.735Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/09/Android-Bluetooth-HID-%EC%9E%A5%EC%B9%98%EB%A7%8C%EB%93%A4%EA%B8%B001/</loc>
+        <lastmod>2022-02-08T02:11:11.735Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/06/Android-BLE-overview/</loc>
+        <lastmod>2022-02-08T02:11:11.731Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Characteristics-%EC%9D%BD%EA%B3%A0%EC%93%B0%EA%B8%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.730Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Gatt%EC%84%9C%EB%B2%84-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.729Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-GattServer%EB%A1%9C%EB%B6%80%ED%84%B0-%EC%95%8C%EB%A6%BC%EB%B0%9B%EA%B8%B0/</loc>
+        <lastmod>2022-02-08T02:11:11.729Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Finding-Devices/</loc>
+        <lastmod>2022-02-08T02:11:11.728Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/09/Android-BLE-Connecting-GATT-Server/</loc>
+        <lastmod>2022-02-08T02:11:11.728Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/02/Android-App%EC%97%90%EC%84%9C-%EC%84%9C%EB%B9%84%EC%8A%A4-%EA%B5%AC%EB%8F%99/</loc>
+        <lastmod>2022-02-08T02:11:11.720Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/30/Android-App%EA%B5%AC%EB%8F%99%EC%8B%9C-%EC%8B%9C%EC%9E%91%ED%99%94%EB%A9%B4%EC%9D%84-%EB%82%98%EC%98%A4%EA%B2%8C-%ED%95%98%EC%9E%90/</loc>
+        <lastmod>2022-02-08T02:11:11.719Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/30/Android-AlertDialog-seekbar-%EC%82%AC%EC%9A%A9-%EB%B0%A9%EB%B2%95/</loc>
+        <lastmod>2022-02-08T02:11:11.715Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/09/09/Android-Advertising-BLE-Device/</loc>
+        <lastmod>2022-02-08T02:11:11.712Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2019/08/30/Android-ActionBar.TabListener-Fragment%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C/</loc>
+        <lastmod>2022-02-08T02:11:11.712Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+</urlset>
+<!-- XML Sitemap generated by Hexo SEO Friendly Sitemap Generator -->

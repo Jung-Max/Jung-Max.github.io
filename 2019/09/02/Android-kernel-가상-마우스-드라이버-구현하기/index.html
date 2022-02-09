@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>Android Kernel 가상 마우스 드라이버 구현하기 | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="Android Platform,Kernel,Linux">
+    
+    <meta name="description" content="개요 가상 마우스 동작 방식은 다음과 같다. App이 마우스 동작의 좌표 정보를 sysfs노드인 /sys/devices/platform/virmouse/vmevent를 거쳐 가상 마우스 드라이버(virmouse.c)에 통지한다. 가상 마우스 드라이버는 evdev를 거쳐 이동 정보를 사용자 영역으로 보낸다. evdev란 범용 입력 이벤트 드라이버를 뜻한다.">
+<meta name="keywords" content="Android Platform,Kernel,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Kernel 가상 마우스 드라이버 구현하기">
+<meta property="og:url" content="http://jung-max.github.io/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="개요 가상 마우스 동작 방식은 다음과 같다. App이 마우스 동작의 좌표 정보를 sysfs노드인 /sys/devices/platform/virmouse/vmevent를 거쳐 가상 마우스 드라이버(virmouse.c)에 통지한다. 가상 마우스 드라이버는 evdev를 거쳐 이동 정보를 사용자 영역으로 보낸다. evdev란 범용 입력 이벤트 드라이버를 뜻한다.">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/Android-kernel-%EA%B0%80%EC%83%81-%EB%A7%88%EC%9A%B0%EC%8A%A4-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/01.png">
+<meta property="og:updated_time" content="2022-02-08T02:11:11.751Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Kernel 가상 마우스 드라이버 구현하기">
+<meta name="twitter:description" content="개요 가상 마우스 동작 방식은 다음과 같다. App이 마우스 동작의 좌표 정보를 sysfs노드인 /sys/devices/platform/virmouse/vmevent를 거쳐 가상 마우스 드라이버(virmouse.c)에 통지한다. 가상 마우스 드라이버는 evdev를 거쳐 이동 정보를 사용자 영역으로 보낸다. evdev란 범용 입력 이벤트 드라이버를 뜻한다.">
+<meta name="twitter:image" content="http://jung-max.github.io/images/Android-kernel-%EA%B0%80%EC%83%81-%EB%A7%88%EC%9A%B0%EC%8A%A4-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/01.png">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2019/09/02/android-kernel-가상-마우스-드라이버-구현하기/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Android-kernel-가상-마우스-드라이버-구현하기" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Android Kernel 가상 마우스 드라이버 구현하기
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/" class="article-date">
+            <time datetime="2019-09-02T07:17:00.000Z" itemprop="datePublished">2019-09-02</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Android-Platform/">Android Platform</a>, <a class="tag-link" href="/tags/Kernel/">Kernel</a>, <a class="tag-link" href="/tags/Linux/">Linux</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h1><p><img src="/images/Android-kernel-%EA%B0%80%EC%83%81-%EB%A7%88%EC%9A%B0%EC%8A%A4-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/01.png" alt="가상 마우스 개요"></p>
+<p>가상 마우스 동작 방식은 다음과 같다.</p>
+<p>App이 마우스 동작의 좌표 정보를 sysfs노드인 <code>/sys/devices/platform/virmouse/vmevent</code>를 거쳐 가상 마우스 드라이버(virmouse.c)에 통지한다.</p>
+<p>가상 마우스 드라이버는 evdev를 거쳐 이동 정보를 사용자 영역으로 보낸다.</p>
+<p>evdev란 범용 입력 이벤트 드라이버를 뜻한다.</p>
+<p>evdev가 생섯하는 각 이벤트 패킷은 <code>include/linux/input.h</code>에 정의되어 있다.</p>
+<p>gpm(general-purpose mouse)은 X 서버의 도움 없이 텍스트 환경에서 마우스 사용을 가능하게 하는 서버다.</p>
+<p>gpm이 evdev 메시지를 이해하므로 가상 마우스 드라이버는 gpm과 직접 의사소통이 가능하다.</p>
+<h1 id="초기화"><a href="#초기화" class="headerlink" title="초기화"></a>초기화</h1><p>초기화 과정에서 가상마우스 드라이버는 자신을 입력장치 드라이버로 등록한다.</p>
+<p>이를 위해 먼저 핵심 API인 <code>input_allocate_device()</code>를 사용해 input_dev 구조체를 할당한다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Allocate an input device data structure */</span></span><br><span class="line">virmouse_input_dev = input_allocate_device();</span><br><span class="line"><span class="keyword">if</span> (!virmouse_input_dev) &#123;</span><br><span class="line">        printk(<span class="string">"Bad input_allocate_device()\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> -ENOMEM;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>그리고 상대적인 이벤트를 생성하는 주체가 가상 마우스라고 선언한다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 이벤트 형식은 EV_REL */</span></span><br><span class="line">set_bit(EV_REL, virmouse_input_dev-&gt;evbit);</span><br></pre></td></tr></table></figure>
+
+<p>다음으로 가상 마우스가 만드는 이벤트 코드를 선언한다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set_bit(REL_X, virmouse_input_dev-&gt;relbit); <span class="comment">//상대적인 x 움직임</span></span><br><span class="line">set_bit(REL_Y, virmouse_input_dev-&gt;relbit); <span class="comment">//상대적인 y 움직임</span></span><br><span class="line">set_bit(REL_WHEEL, virmouse_input_dev-&gt;relbit); <span class="comment">//휠 움직임</span></span><br></pre></td></tr></table></figure>
+
+<p>다음은 가상마우스가 만드는 버튼 클릭이다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set_bit(EV_KEY, virmouse_input_dev-&gt;evbit); <span class="comment">//이벤트 형식은 EV_KEY</span></span><br><span class="line">set_bit(BTN_LEFT, virmouse_input_dev-&gt;keybit); <span class="comment">//좌클릭</span></span><br><span class="line">set_bit(BTN_MIDDLE, virmouse_input_dev-&gt;keybit); <span class="comment">//가운데 클릭</span></span><br><span class="line">set_bit(BTN_RIGHT, virmouse_input_dev-&gt;keybit); <span class="comment">//우클릭</span></span><br></pre></td></tr></table></figure>
+
+<p>최종적으로 다음과 같이 등록한다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Register with the input subsystem */</span></span><br><span class="line">ret = input_register_device(virmouse_input_dev);</span><br></pre></td></tr></table></figure>
+
+<h1 id="write"><a href="#write" class="headerlink" title="write"></a>write</h1><p><code>write_virmouse()</code>는 <code>/sys/devices/platform/virmouse/vmevent</code>에 붙어있는 sysfs의 store() 메소드이다.<br>App이 <code>x y key</code>값을 쓸때 다음 작업을 수행한다.</p>
+<p>x,y값 입력시 상대적 좌표 이동값을 입력한다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">input_report_rel(virmouse_input_dev, REL_X, tmpx);</span><br><span class="line">input_report_rel(virmouse_input_dev, REL_Y, tmpy);</span><br><span class="line">input_sync(virmouse_input_dev);</span><br></pre></td></tr></table></figure>
+
+<p>key입력시(여기선 좌클릭) key입력을 구현한다.</p>
+<p>좌,우,가운에 클릭은 클릭시 1, 때었을때 0값이 들어간다.</p>
+<p>그러므로 가상 마우스 클릭을 구현하려면 1,0파라미터 값이 순차적으로 들어가야 한다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">input_report_key(virmouse_input_dev, BTN_LEFT, <span class="number">1</span>);</span><br><span class="line">input_sync(virmouse_input_dev);</span><br><span class="line">msleep(<span class="number">10</span>);</span><br><span class="line">input_report_key(virmouse_input_dev, BTN_LEFT, <span class="number">0</span>);</span><br><span class="line">input_sync(virmouse_input_dev);</span><br></pre></td></tr></table></figure>
+
+<p>이후 <code>input_sync()</code>가 이 이벤트가 끝났음을 가리킨다.</p>
+<p>입력 하위시스템은 입력된 이벤트를 evdev 패킷 하나로 모아 <code>/dev/input/eventX</code>를 거쳐 밖으로 내보낸다.</p>
+<p>X는 가상 마우스 드라이버에 할당된 인터페이스 번호를 의미한다.</p>
+<h1 id="최종-구현-소스"><a href="#최종-구현-소스" class="headerlink" title="최종 구현 소스"></a>최종 구현 소스</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * A Virtual Mouse Driver to send fake events from userspace.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">#include &lt;linux/fs.h&gt;</span><br><span class="line">#include &lt;asm/uaccess.h&gt;</span><br><span class="line">#include &lt;linux/pci.h&gt;</span><br><span class="line">#include &lt;linux/input.h&gt;</span><br><span class="line">#include &lt;linux/platform_device.h&gt;</span><br><span class="line">#include &lt;linux/delay.h&gt;</span><br><span class="line"></span><br><span class="line">struct input_dev *virmouse_input_dev;</span><br><span class="line"><span class="keyword">static</span> struct platform_device *virmouse_dev; <span class="comment">/* Device structure */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Sysfs method to input simulated coordinates */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> ssize_t <span class="title">write_virmouse</span><span class="params">(struct device *dev,</span></span></span><br><span class="line"><span class="function"><span class="params">                              struct device_attribute *attr,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="keyword">const</span> <span class="keyword">char</span> *buffer, size_t count)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> x, y, key, tmpx, tmpy, i;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* parsing input data */</span></span><br><span class="line">        sscanf(buffer, <span class="string">"%d%d%d"</span>, &amp;x, &amp;y, &amp;key);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Report relative coordinates */</span></span><br><span class="line"></span><br><span class="line">        printk (<span class="string">"virmouse_event!!: X:%d Y:%d %d\n"</span>, x, y, key);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Report key event */</span></span><br><span class="line">        <span class="keyword">if</span> (key == <span class="number">4</span>) &#123;</span><br><span class="line">                input_report_rel(virmouse_input_dev, REL_WHEEL, y);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(key==<span class="number">1</span>)&#123;</span><br><span class="line">                input_report_key(virmouse_input_dev, BTN_LEFT, <span class="number">1</span>);</span><br><span class="line">                input_sync(virmouse_input_dev);</span><br><span class="line">                msleep(<span class="number">10</span>);</span><br><span class="line">                input_report_key(virmouse_input_dev, BTN_LEFT, <span class="number">0</span>);</span><br><span class="line">                input_sync(virmouse_input_dev);                        </span><br><span class="line">                &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (key==<span class="number">2</span>)&#123;</span><br><span class="line">                input_report_key(virmouse_input_dev, BTN_MIDDLE, <span class="number">1</span>);</span><br><span class="line">                input_sync(virmouse_input_dev);</span><br><span class="line">                msleep(<span class="number">10</span>);</span><br><span class="line">                input_report_key(virmouse_input_dev, BTN_MIDDLE, <span class="number">0</span>);</span><br><span class="line">                input_sync(virmouse_input_dev);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (key==<span class="number">3</span>)&#123;</span><br><span class="line">                input_report_key(virmouse_input_dev, BTN_RIGHT, <span class="number">1</span>);</span><br><span class="line">                input_sync(virmouse_input_dev);</span><br><span class="line">                msleep(<span class="number">10</span>);</span><br><span class="line">                input_report_key(virmouse_input_dev, BTN_RIGHT, <span class="number">0</span>);</span><br><span class="line">                input_sync(virmouse_input_dev);</span><br><span class="line">        &#125;       </span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(key==<span class="number">0</span>)&#123;</span><br><span class="line">                tmpx = x/<span class="number">3</span>;</span><br><span class="line">                tmpy = y/<span class="number">3</span>;</span><br><span class="line">                <span class="keyword">for</span>(i = <span class="number">0</span>; i&lt;<span class="number">3</span>; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                        input_report_rel(virmouse_input_dev, REL_X, tmpx);</span><br><span class="line">                        input_report_rel(virmouse_input_dev, REL_Y, tmpy);</span><br><span class="line">                        input_sync(virmouse_input_dev);</span><br><span class="line">                        msleep(<span class="number">5</span>);                                </span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Attach the sysfs write method */</span></span><br><span class="line">DEVICE_ATTR(vmevent, <span class="number">0644</span>, NULL, write_virmouse);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Attribute Descriptor */</span></span><br><span class="line"><span class="keyword">static</span> struct attribute *virmouse_attrs[] = &#123;</span><br><span class="line">        &amp;dev_attr_vmevent.attr,</span><br><span class="line">        NULL</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Attribute group */</span></span><br><span class="line"><span class="keyword">static</span> struct attribute_group virmouse_attr_group = &#123;</span><br><span class="line">        .attrs = virmouse_attrs,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Driver Initializing */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> __init <span class="title">virmouse_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    	<span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">/* Register a platform device */</span></span><br><span class="line">        virmouse_dev = platform_device_register_simple(<span class="string">"virmouse"</span>, -<span class="number">1</span>, NULL, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (IS_ERR(virmouse_dev))&#123;</span><br><span class="line">                printk (<span class="string">"virmouse_init: error\n"</span>);</span><br><span class="line">                <span class="keyword">return</span> PTR_ERR(virmouse_dev);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Create a sysfs node to read simulated coordinates */</span></span><br><span class="line">        ret = sysfs_create_group(&amp;virmouse_dev-&gt;dev.kobj, &amp;virmouse_attr_group);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Allocate an input device data structure */</span></span><br><span class="line">        virmouse_input_dev = input_allocate_device();</span><br><span class="line">        <span class="keyword">if</span> (!virmouse_input_dev) &#123;</span><br><span class="line">                printk(<span class="string">"Bad input_allocate_device()\n"</span>);</span><br><span class="line">                <span class="keyword">return</span> -ENOMEM;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Announce that the virtual mouse will generate relative coordinates */</span></span><br><span class="line">        set_bit(EV_REL, virmouse_input_dev-&gt;evbit);</span><br><span class="line">        set_bit(REL_X, virmouse_input_dev-&gt;relbit);</span><br><span class="line">        set_bit(REL_Y, virmouse_input_dev-&gt;relbit);</span><br><span class="line">        set_bit(REL_WHEEL, virmouse_input_dev-&gt;relbit);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Announce key event */</span></span><br><span class="line">        set_bit(EV_KEY, virmouse_input_dev-&gt;evbit);</span><br><span class="line">        set_bit(BTN_LEFT, virmouse_input_dev-&gt;keybit);</span><br><span class="line">        set_bit(BTN_MIDDLE, virmouse_input_dev-&gt;keybit);</span><br><span class="line">        set_bit(BTN_RIGHT, virmouse_input_dev-&gt;keybit);</span><br><span class="line">        set_bit(BTN_0, virmouse_input_dev-&gt;keybit);</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        <span class="comment">/* Register with the input subsystem */</span></span><br><span class="line">        ret = input_register_device(virmouse_input_dev);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* print messages in the dmesg */</span></span><br><span class="line">        printk(<span class="string">"Virtual Mouse Driver Initialized.\n"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Driver Uninitializing */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">virmouse_uninit</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="comment">/* Unregister from the input subsystem */</span></span><br><span class="line">        input_unregister_device(virmouse_input_dev);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Remove sysfs node */</span></span><br><span class="line">        sysfs_remove_group(&amp;virmouse_dev-&gt;dev.kobj, &amp;virmouse_attr_group);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Unregister driver */</span></span><br><span class="line">        platform_device_unregister(virmouse_dev);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(virmouse_init);</span><br><span class="line">module_exit(virmouse_uninit);</span><br></pre></td></tr></table></figure>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/" data-id="ckzfaqfs600m9dyuo3xfkzmg9" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "Android Kernel 가상 마우스 드라이버 구현하기",
+        "image": "http://jung-max.github.io/images/Android-kernel-%EA%B0%80%EC%83%81-%EB%A7%88%EC%9A%B0%EC%8A%A4-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/01.png",
+        "keywords": "Android Platform Kernel Linux",
+        "genre": "Android Platform Kernel",
+        "datePublished": "2019-09-02",
+        "dateCreated": "2019-09-02",
+        "dateModified": "2022-02-08",
+        "url": "http://jung-max.github.io/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/",
+        "description": "개요
+가상 마우스 동작 방식은 다음과 같다.
+App이 마우스 동작의 좌표 정보를 sysfs노드인 /sys/devices/platform/virmouse/vmevent를 거쳐 가상 마우스 드라이버(virmouse.c)에 통지한다.
+가상 마우스 드라이버는 evdev를 거쳐 이동 정보를 사용자 영역으로 보낸다.
+evdev란 범용 입력 이벤트 드라이버를 뜻한다.
+"
+        "wordCount": 2036
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/09/06/Android-BLE-overview/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            Bluetooth low energy
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/09/02/Android-NDK를-사용해서-kernel드라이버-사용하기/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">Android NDK를 사용해서 kernel드라이버 사용하기</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2019/09/02/Android-kernel-가상-마우스-드라이버-구현하기/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

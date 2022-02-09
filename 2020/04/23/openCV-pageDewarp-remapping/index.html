@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>openCv page Dewarp remapping 분석 | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="openCV,pageDewarp">
+    
+    <meta name="description" content="개요해당 작업은 최적화 작업 후 기울기 α, β를 취득 한 후 어떻게 이미지가 remmaping 되는가에 대한 설명이다. get_page_dimsget_page_dims 전체 소스12345678910111213141516def get_page_dims(corners, rough_dims, params):    dst_br = corners[2].flatte">
+<meta name="keywords" content="openCV,pageDewarp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openCv page Dewarp remapping 분석">
+<meta property="og:url" content="http://jung-max.github.io/2020/04/23/openCV-pageDewarp-remapping/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="개요해당 작업은 최적화 작업 후 기울기 α, β를 취득 한 후 어떻게 이미지가 remmaping 되는가에 대한 설명이다. get_page_dimsget_page_dims 전체 소스12345678910111213141516def get_page_dims(corners, rough_dims, params):    dst_br = corners[2].flatte">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/0071.png">
+<meta property="og:updated_time" content="2022-02-08T02:11:11.814Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openCv page Dewarp remapping 분석">
+<meta name="twitter:description" content="개요해당 작업은 최적화 작업 후 기울기 α, β를 취득 한 후 어떻게 이미지가 remmaping 되는가에 대한 설명이다. get_page_dimsget_page_dims 전체 소스12345678910111213141516def get_page_dims(corners, rough_dims, params):    dst_br = corners[2].flatte">
+<meta name="twitter:image" content="http://jung-max.github.io/images/0071.png">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2020/04/23/opencv-pagedewarp-remapping/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/openCV/">openCV</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/openCV/pageDewarp/">pageDewarp</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-openCV-pageDewarp-remapping" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        openCv page Dewarp remapping 분석
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2020/04/23/openCV-pageDewarp-remapping/" class="article-date">
+            <time datetime="2020-04-23T01:58:59.000Z" itemprop="datePublished">2020-04-23</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/openCV/">openCV</a>, <a class="tag-link" href="/tags/pageDewarp/">pageDewarp</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h2><p>해당 작업은 최적화 작업 후 기울기 α, β를 취득 한 후 어떻게 이미지가 remmaping 되는가에 대한 설명이다.</p>
+<h2 id="get-page-dims"><a href="#get-page-dims" class="headerlink" title="get_page_dims"></a>get_page_dims</h2><h3 id="get-page-dims-전체-소스"><a href="#get-page-dims-전체-소스" class="headerlink" title="get_page_dims 전체 소스"></a>get_page_dims 전체 소스</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_page_dims</span><span class="params">(corners, rough_dims, params)</span>:</span></span><br><span class="line"></span><br><span class="line">    dst_br = corners[<span class="number">2</span>].flatten()</span><br><span class="line"></span><br><span class="line">    dims = np.array(rough_dims)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">objective</span><span class="params">(dims)</span>:</span></span><br><span class="line">        proj_br = project_xy(dims, params)</span><br><span class="line">        <span class="keyword">return</span> np.sum((dst_br - proj_br.flatten())**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    res = scipy.optimize.minimize(objective, dims, method=<span class="string">'Powell'</span>)</span><br><span class="line">    dims = res.x</span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"got page dims"</span>, dims[<span class="number">0</span>], <span class="string">'x'</span>, dims[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dims</span><br></pre></td></tr></table></figure>
+
+<h3 id="get-page-dims-분석"><a href="#get-page-dims-분석" class="headerlink" title="get_page_dims 분석"></a>get_page_dims 분석</h3><p>input parameter는 다음과 같다.</p>
+<ul>
+<li>corners : PCA를 통해 결정된 remapping될 이미지의 4개의 꼭지점의 좌표. debugmode에서 붉은 사각형으로 표시된다.</li>
+<li>rough_dims : corners의 넓이와 높이 값</li>
+<li>params : 최적화를 통해 기울기 α, β값등이 들어있는 리스트</li>
+</ul>
+<p><img src="/images/0071.png" alt="corners 표시한 사각형"></p>
+<p>해당 작업의 진행은 아래와 같다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">objective</span><span class="params">(dims)</span>:</span></span><br><span class="line">    proj_br = project_xy(dims, params)</span><br><span class="line">    <span class="keyword">return</span> np.sum((dst_br - proj_br.flatten())**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">res = scipy.optimize.minimize(objective, dims, method=<span class="string">'Powell'</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="proj-br-project-xy-dims-params"><a href="#proj-br-project-xy-dims-params" class="headerlink" title="proj_br = project_xy(dims, params)"></a>proj_br = project_xy(dims, params)</h4><p>dims(이미지를 만들 4개의 꼭지점 좌표)를 최적화를 통해 구한 α, β를 이용해 재투영하여 2D 좌표를 얻는다.</p>
+<h4 id="scipy-optimize-minimize-objective-dims-method-’Powell’"><a href="#scipy-optimize-minimize-objective-dims-method-’Powell’" class="headerlink" title="scipy.optimize.minimize(objective, dims, method=’Powell’)"></a>scipy.optimize.minimize(objective, dims, method=’Powell’)</h4><p>4개의 꼭지점에 대해서 재투영된 좌표와 원래의 좌표를 비교한다. 비교 후 재투영 오류가 가장 작은 꼭지점의 좌표를 찾는다.</p>
+<p>최종적으로 재투영 오류가 가장 적은 dims(넓이, 높이)값을 찾는 것이 목표이다.</p>
+<h2 id="remap-image"><a href="#remap-image" class="headerlink" title="remap_image"></a>remap_image</h2><h3 id="remap-image-전체-소스"><a href="#remap-image-전체-소스" class="headerlink" title="remap_image 전체 소스"></a>remap_image 전체 소스</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">remap_image</span><span class="params">(name, img, small, page_dims, params)</span>:</span></span><br><span class="line"></span><br><span class="line">    height = <span class="number">0.5</span> * page_dims[<span class="number">1</span>] * OUTPUT_ZOOM * img.shape[<span class="number">0</span>]</span><br><span class="line">    height = round_nearest_multiple(height, REMAP_DECIMATE)</span><br><span class="line"></span><br><span class="line">    width = round_nearest_multiple(height * page_dims[<span class="number">0</span>] / page_dims[<span class="number">1</span>],</span><br><span class="line">                                   REMAP_DECIMATE)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'  output will be &#123;&#125;x&#123;&#125;'</span>.format(width, height)</span><br><span class="line"></span><br><span class="line">    height_small = height / REMAP_DECIMATE</span><br><span class="line">    width_small = width / REMAP_DECIMATE</span><br><span class="line"></span><br><span class="line">    page_x_range = np.linspace(<span class="number">0</span>, page_dims[<span class="number">0</span>], width_small)</span><br><span class="line">    page_y_range = np.linspace(<span class="number">0</span>, page_dims[<span class="number">1</span>], height_small)</span><br><span class="line"></span><br><span class="line">    page_x_coords, page_y_coords = np.meshgrid(page_x_range, page_y_range)</span><br><span class="line"></span><br><span class="line">    page_xy_coords = np.hstack((page_x_coords.flatten().reshape((<span class="number">-1</span>, <span class="number">1</span>)),</span><br><span class="line">                                page_y_coords.flatten().reshape((<span class="number">-1</span>, <span class="number">1</span>))))</span><br><span class="line"></span><br><span class="line">    page_xy_coords = page_xy_coords.astype(np.float32)</span><br><span class="line"></span><br><span class="line">    image_points = project_xy(page_xy_coords, params)</span><br><span class="line">    image_points = norm2pix(img.shape, image_points, <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    image_x_coords = image_points[:, <span class="number">0</span>, <span class="number">0</span>].reshape(page_x_coords.shape)</span><br><span class="line">    image_y_coords = image_points[:, <span class="number">0</span>, <span class="number">1</span>].reshape(page_y_coords.shape)</span><br><span class="line"></span><br><span class="line">    image_x_coords = cv2.resize(image_x_coords, (width, height),</span><br><span class="line">                                interpolation=cv2.INTER_CUBIC)</span><br><span class="line"></span><br><span class="line">    image_y_coords = cv2.resize(image_y_coords, (width, height),</span><br><span class="line">                                interpolation=cv2.INTER_CUBIC)</span><br><span class="line"></span><br><span class="line">    img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)</span><br><span class="line"></span><br><span class="line">    remapped = cv2.remap(img_gray, image_x_coords, image_y_coords,</span><br><span class="line">                         cv2.INTER_CUBIC,</span><br><span class="line">                         <span class="literal">None</span>, cv2.BORDER_REPLICATE)</span><br></pre></td></tr></table></figure>
+
+<h3 id="remap-image-분석"><a href="#remap-image-분석" class="headerlink" title="remap_image 분석"></a>remap_image 분석</h3><h4 id="height-0-5-page-dims-1-OUTPUT-ZOOM-img-shape-0"><a href="#height-0-5-page-dims-1-OUTPUT-ZOOM-img-shape-0" class="headerlink" title="height = 0.5 * page_dims[1] * OUTPUT_ZOOM * img.shape[0]"></a><code>height = 0.5 * page_dims[1] * OUTPUT_ZOOM * img.shape[0]</code></h4><p>여기서 page_dims[1]의 값은 remapping될 이미지의 높이의 값이다.</p>
+<p>여기서 값은 픽셀이 아닌 <code>scl = 2.0/(max(height, width))</code>을 나눈 값으로 대략 1.x의 값을 가진다.</p>
+<p>해당 값(비율)과 원래의 이미지 높이를 곱하고 2를 나누어줘 높이를 구한다.</p>
+<h4 id="height-round-nearest-multiple-height-REMAP-DECIMATE"><a href="#height-round-nearest-multiple-height-REMAP-DECIMATE" class="headerlink" title="height = round_nearest_multiple(height, REMAP_DECIMATE)"></a>height = round_nearest_multiple(height, REMAP_DECIMATE)</h4><p>높이를 다운 스케일링을 위한 요소의 배수와 가장 가까운 값으로 올림한다.</p>
+<p>다운스케일링시 나머지가 생기지 않도록 하기 위해서다.</p>
+<h4 id="width-round-nearest-multiple-height-page-dims-0-page-dims-1-REMAP-DECIMATE"><a href="#width-round-nearest-multiple-height-page-dims-0-page-dims-1-REMAP-DECIMATE" class="headerlink" title="width = round_nearest_multiple(height * page_dims[0] / page_dims[1], REMAP_DECIMATE)"></a>width = round_nearest_multiple(height * page_dims[0] / page_dims[1], REMAP_DECIMATE)</h4><p>넓이는 높이를 구했으므로 앞서 구한 리맵핑될 이미지의 넓이와 높이의 비를 곱해 간단히 구한다.</p>
+<p>여기서도 다운스케일링을 위한 올림을 한다.</p>
+<p><img src="/images/0072.png" alt="이미지에서 width, height"></p>
+<h4 id="np-linspace"><a href="#np-linspace" class="headerlink" title="np.linspace"></a>np.linspace</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">height_small = height // REMAP_DECIMATE</span><br><span class="line">width_small = width // REMAP_DECIMATE</span><br><span class="line"></span><br><span class="line">page_x_range = np.linspace(<span class="number">0</span>, page_dims[<span class="number">0</span>], width_small)</span><br><span class="line">page_y_range = np.linspace(<span class="number">0</span>, page_dims[<span class="number">1</span>], height_small)</span><br></pre></td></tr></table></figure>
+
+<p>다운스케일링을 한 높이와 넓이를 구한다. 기본 REMAP_DECIMATE의 값은 16이다.</p>
+<p><code>np.linspace</code>는 등간격을 뜻한다. <code>numpy.linspace(start, end, num=개수, endpoint=True, retstep=False, dtype=자료형)</code>을 사용하여 start ~ end 사이의 값을 개수만큼 생성하여 배열로 반환한다.</p>
+<p>endpoint가 True일 경우 end의 값이 마지막 값이 되며, False일 경우 end의 값을 마지막 값으로 사용하지 않는다.</p>
+<p>retstep이 True일 경우 값들의 간격을 배열에 포함된다.</p>
+<h4 id="page-x-coords-page-y-coords-np-meshgrid-page-x-range-page-y-range"><a href="#page-x-coords-page-y-coords-np-meshgrid-page-x-range-page-y-range" class="headerlink" title="page_x_coords, page_y_coords = np.meshgrid(page_x_range, page_y_range)"></a>page_x_coords, page_y_coords = np.meshgrid(page_x_range, page_y_range)</h4><p>numpy의 meshgrid 명령을 통해 행단위와 열단위로 각각 해당 배열을 정방(square) 행렬로 선언한다.</p>
+<p>page_x_range.shape = (102,), page_y_range.shape = (170,)라면</p>
+<p>page_x_coords.shape = (170, 102), page_y_coords.shape = (170, 102)의 형태로 변경시켜준다.</p>
+<h4 id="np-hstack"><a href="#np-hstack" class="headerlink" title="np.hstack"></a>np.hstack</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">page_x_coords.flatten().reshape((<span class="number">-1</span>, <span class="number">1</span>)) =  [[<span class="number">0.</span>        ]</span><br><span class="line"> [<span class="number">0.00928807</span>]</span><br><span class="line"> [<span class="number">0.01857613</span>]</span><br><span class="line"> ...</span><br><span class="line"> [<span class="number">0.91951848</span>]</span><br><span class="line"> [<span class="number">0.92880654</span>]</span><br><span class="line"> [<span class="number">0.93809461</span>]]</span><br></pre></td></tr></table></figure>
+
+<p> 형태 변환을 통해 위와 같은 형태로 변경시켜 준다.</p>
+<p> <code>np.hstack</code>은 배열을 위에서 아래로 붙이는 작업이다.</p>
+<p>해당 작업의 결과물은 아래와 같다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">page_xy_coords =  [[<span class="number">0.</span>         <span class="number">0.</span>        ]</span><br><span class="line"> [<span class="number">0.00928807</span> <span class="number">0.</span>        ]</span><br><span class="line"> [<span class="number">0.01857613</span> <span class="number">0.</span>        ]</span><br><span class="line"> ...</span><br><span class="line"> [<span class="number">0.91951848</span> <span class="number">1.57070085</span>]</span><br><span class="line"> [<span class="number">0.92880654</span> <span class="number">1.57070085</span>]</span><br><span class="line"> [<span class="number">0.93809461</span> <span class="number">1.57070085</span>]]</span><br></pre></td></tr></table></figure>
+
+<h4 id="image-points-취득"><a href="#image-points-취득" class="headerlink" title="image_points 취득"></a>image_points 취득</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">image_points = project_xy(page_xy_coords, params)</span><br><span class="line">image_points = norm2pix(img.shape, image_points, <span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<p>이제 위에서 얻은 좌표를 통해 재투영 작업을 한다. 재투영한 값은 norm의 값이므로 norm2pix 함수를 통해 실제 좌표로 변경한다.</p>
+<p>이를 그림으로 표현하면 아래와 같다.</p>
+<p><img src="/images/0073.png" alt="이미지에서 결과물 설명"></p>
+<p>위 그림에서 초록색 점은 <code>page_xy_coords</code>의 좌표를 표현한 것이다. 개념 설명을 위한 것으로 점의 갯수는 무시한다.</p>
+<p>점의 간격은 높이는 height_small, 넓이는 width_small만큼 떨어져 있다.</p>
+<p>이 좌표는 결과물의 좌표를 표시하기 위한것이다. 그러므로 좌측 상단의 좌표는 (0,0), 우측하단은 (page_dims[0], page_dims[1])의 좌표로 매칭된다.</p>
+<p>결과적으로 remapping을 위한 좌표 표시를 위한 행렬을 만든 결과가 <code>page_xy_coords</code>인 것이다.</p>
+<p>여기서 page의 기준점 (0,0)의 좌표가 어디서 결정되는지 보면 main()함수에 아래와 같은 소스가 존재한다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dstpoints = np.vstack((corners[<span class="number">0</span>].reshape((<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>)),) +</span><br><span class="line">                    tuple(span_points))</span><br></pre></td></tr></table></figure>
+
+<p>여기서 coners[0]은 page_dims의 좌측 상단 좌표이다. 이점을 span point의 가장 처음에 넣고 해당 점의 포인트가 (0,0)으로 매칭되서 최적화 되도록 아래 함수에서 설정한다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">project_keypoints</span><span class="params">(pvec, keypoint_index)</span>:</span></span><br><span class="line"></span><br><span class="line">    xy_coords = pvec[keypoint_index]</span><br><span class="line">    xy_coords[<span class="number">0</span>, :] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> project_xy(xy_coords, pvec)</span><br></pre></td></tr></table></figure>
+
+<p>여기서 <code>xy_coords[0, :] = 0</code>이 앞서 <code>dstpoints</code>의 첫번째 값인 <code>coners[0]</code>값과 대응된다.</p>
+<p>결과적으로 coners[0]값이 remapping 후 (0,0)이 되도록 결정되는 것이다.</p>
+<p>remapping시 기준은 coners[0]값 (0,0)이되게 하고 coners의 높이와 넓이만큼 remapping을 하기 때문에 자동으로 우리가 원하는 지점에 대한 output을 얻을 수 있다.</p>
+<p>해당 점은 디버그 모드시 확인할 수 있다.</p>
+<p><img src="/images/0074.png" alt="coners[0]"></p>
+<h2 id="resize"><a href="#resize" class="headerlink" title="resize"></a>resize</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">image_x_coords = image_points[:, <span class="number">0</span>, <span class="number">0</span>].reshape(page_x_coords.shape)</span><br><span class="line">image_y_coords = image_points[:, <span class="number">0</span>, <span class="number">1</span>].reshape(page_y_coords.shape)</span><br><span class="line"></span><br><span class="line">image_x_coords = cv2.resize(image_x_coords, (width, height),</span><br><span class="line">                            interpolation=cv2.INTER_CUBIC)</span><br><span class="line"></span><br><span class="line">image_y_coords = cv2.resize(image_y_coords, (width, height),</span><br><span class="line">                            interpolation=cv2.INTER_CUBIC)</span><br></pre></td></tr></table></figure>
+
+<p>현재까지 좌표 image_x_coords, image_y_coords는 원본이미지가 <code>small = resize_to_screen(img)</code>로 축소된 이미지를 대상으로 변경한 것이다.</p>
+<p>원본 이미지의 좌표에 대한 것으로 remapping을 하기 위해 cv2.resize를 통해 좌표를 변환해준다.</p>
+<h2 id="cv2-remap"><a href="#cv2-remap" class="headerlink" title="cv2.remap"></a>cv2.remap</h2><p>이제 이동할 좌표를 모두 특정하였다. remap 함수에 대해서 설명하면 기본형은 다음과 같다.</p>
+<p><code>cv2.remap(src, map1, map2, interpolation[, dst[, borderMode[, borderValue]]]) → dst</code></p>
+<p>input 파라미터를 설명하면 아래와 같다.</p>
+<ul>
+<li>src : 원본 이미지</li>
+<li>map1 : (x,y) 포인트 또는 x 값</li>
+<li>map2 : y값</li>
+<li>interpolation  : 보간법<ul>
+<li>INTER_NEAREST - a nearest-neighbor interpolation</li>
+<li>INTER_LINEAR - a bilinear interpolation (used by default)</li>
+<li>INTER_AREA - resampling using pixel area relation. It may be a preferred method for image decimation, as it gives moire’-free   results. But when the image is zoomed, it is similar to the INTER_NEAREST method.</li>
+<li>INTER_CUBIC - a bicubic interpolation over 4x4 pixel neighborhood</li>
+<li>INTER_LANCZOS4 - a Lanczos interpolation over 8x8 pixel neighborhood</li>
+</ul>
+</li>
+<li>borderMode : 픽셀 외삽 법(Pixel extrapolation method).<ul>
+<li>BORDER_TRANSPARENT` : 소스 이미지의 “특이치(outliers)”에 해당하는 대상 이미지의 픽셀이 함수에 의해 수정되지 않음을 의미.</li>
+<li>BORDER_CONSTANT : 이미지를 일정한 값으로 채움 (예 : 검은 색 또는 0)</li>
+<li>BORDER_REPLICATE : 원본의 가장 자리에있는 행 또는 열이 추가 테두리에 복제</li>
+</ul>
+</li>
+<li>borderValue : 경계가 일정한 경우에 사용되는 값. 기본적으로 0.</li>
+</ul>
+<p><code>remapped = cv2.remap(img, image_x_coords, image_y_coords, cv2.INTER_CUBIC, None, cv2.BORDER_REPLICATE)</code></p>
+<p>해당 함수를 보면 보간법은 INTER_CUBIC, 픽셀 외삽법은 BORDER_REPLICATE로 가장자리에 있는 행 또는 열이 복제가 되는 것을 지정하였다.</p>
+<p>remapping에서 가장 중요한 것은 map1과 map2이다.</p>
+<p>map은 map1에 x좌표 또는 x,y좌표, map2에는 y좌표가 들어가 있다.</p>
+<p>map의 내용을 분석하기 위해서 image_x_coords을 print로 하면 다음과 같다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">image_x_coords = [[<span class="number">1082.8455</span> <span class="number">1082.7078</span> <span class="number">1082.647</span>  ... <span class="number">2433.1545</span> <span class="number">2433.1294</span> <span class="number">2433.0715</span>]</span><br><span class="line"> [<span class="number">1082.8472</span> <span class="number">1082.7097</span> <span class="number">1082.6489</span> ... <span class="number">2433.164</span>  <span class="number">2433.139</span>  <span class="number">2433.0808</span>]</span><br><span class="line"> [<span class="number">1082.848</span>  <span class="number">1082.7104</span> <span class="number">1082.6497</span> ... <span class="number">2433.1682</span> <span class="number">2433.143</span>  <span class="number">2433.085</span> ]</span><br><span class="line"> ...</span><br><span class="line"> [<span class="number">1058.0674</span> <span class="number">1057.9417</span> <span class="number">1057.8861</span> ... <span class="number">2305.5059</span> <span class="number">2305.4805</span> <span class="number">2305.4229</span>]</span><br><span class="line"> [<span class="number">1058.0681</span> <span class="number">1057.9423</span> <span class="number">1057.8867</span> ... <span class="number">2305.5093</span> <span class="number">2305.4841</span> <span class="number">2305.4263</span>]</span><br><span class="line"> [<span class="number">1058.0697</span> <span class="number">1057.9438</span> <span class="number">1057.8884</span> ... <span class="number">2305.5176</span> <span class="number">2305.4922</span> <span class="number">2305.4346</span>]]</span><br><span class="line"></span><br><span class="line">image_x_coords.shape = (<span class="number">1920</span>, <span class="number">1488</span>)</span><br><span class="line"></span><br><span class="line">remapped.shape =  (<span class="number">1920</span>, <span class="number">1488</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<p>일단 shape를 보면 image_x_coords와 remapping 결과물인 remapped의 shape가 같은 것을 볼 수 있다.</p>
+<p>remapped.shape의 마지막 3은 RGB의 값이므로 높이=1920, 넓이=1488의 지도를 나타내는 것이 image_x_coords라고 할 수 있다.</p>
+<p>그럼 image_x_coords의 내용의 의미는 무엇일까?</p>
+<p>바로 원본 이미지의 좌표값이다.</p>
+<p>image_x_coords[0][0] = 1082.8455 이다. 해당 값은 resizing등 여러 계산에 의한 결과이기 때문에 실수로 표현되었다. 실제적으로 좌표의 값은 정수이다.</p>
+<p>그러므로 image_x_coords[0][0] = 1082로 보면 된다.</p>
+<p>이 뜻은 remapped의 이미지의 (0,0)의 좌표의 값의 x값이 원본 소스의 x값 1082와 매칭된다는 것을 뜻한다.</p>
+<p>똑같은 의미로 image_y_coords[0][0]의 값의 의미는 remapped의 이미지의 (0,0)의 좌표의 값의 y값이 원본 소스의 y값 image_y_coords[0][0]의 값과 매칭된다는 것을 뜻한다.</p>
+<p>실제적으로 remapped 이미지의 (0,0)의 RGB값은 원본 소스의 (image_x_coords[0][0],image_y_coords[0][0])의 RGB값이라는 의미이다.</p>
+<p>image_x_coords[0][0] = 1082, image_y_coords[0][0] = 1003이고 해당 좌표의 원본이미지의 RGB값이 (125,23,25)일때 remapping의 결과물은 아래 그림과 같다.</p>
+<p><img src="/images/0075.png" alt="remapping"></p>
+<h2 id="convertMaps"><a href="#convertMaps" class="headerlink" title="convertMaps"></a>convertMaps</h2><p>remap에서 x,y좌표가 따로 있기 때문에 파악이 힘든 경우가 있다. 이와 같은 경우 <code>cv2.convertMaps</code>을 사용할 수 있다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">mapXY, _ = cv2.convertMaps(image_x_coords, image_y_coords, cv2.CV_16SC2)</span><br><span class="line"></span><br><span class="line">print(mapXY)</span><br><span class="line"></span><br><span class="line">[[[<span class="number">1082</span> <span class="number">1003</span>]</span><br><span class="line">  [<span class="number">1082</span> <span class="number">1003</span>]</span><br><span class="line">  [<span class="number">1082</span> <span class="number">1003</span>]</span><br><span class="line">  ...</span><br><span class="line">  [<span class="number">2433</span> <span class="number">1070</span>]</span><br><span class="line">  [<span class="number">2433</span> <span class="number">1070</span>]</span><br><span class="line">  [<span class="number">2433</span> <span class="number">1070</span>]]</span><br><span class="line"></span><br><span class="line"> [[<span class="number">1082</span> <span class="number">1003</span>]</span><br><span class="line">  [<span class="number">1082</span> <span class="number">1003</span>]</span><br><span class="line">  [<span class="number">1082</span> <span class="number">1003</span>]</span><br><span class="line">  ...</span><br><span class="line">  [<span class="number">2433</span> <span class="number">1070</span>]</span><br><span class="line">  [<span class="number">2433</span> <span class="number">1070</span>]</span><br><span class="line">  [<span class="number">2433</span> <span class="number">1070</span>]]</span><br><span class="line"></span><br><span class="line"> [[<span class="number">1082</span> <span class="number">1003</span>]</span><br><span class="line">  [<span class="number">1082</span> <span class="number">1003</span>]</span><br><span class="line">  [<span class="number">1082</span> <span class="number">1003</span>]</span><br><span class="line">  ...</span><br><span class="line">  [<span class="number">2433</span> <span class="number">1070</span>]</span><br><span class="line">  [<span class="number">2433</span> <span class="number">1070</span>]</span><br><span class="line">  [<span class="number">2433</span> <span class="number">1070</span>]]</span><br><span class="line"></span><br><span class="line"> ...</span><br><span class="line"></span><br><span class="line"> [[<span class="number">1058</span> <span class="number">2804</span>]</span><br><span class="line">  [<span class="number">1057</span> <span class="number">2804</span>]</span><br><span class="line">  [<span class="number">1057</span> <span class="number">2804</span>]</span><br><span class="line">  ...</span><br><span class="line">  [<span class="number">2305</span> <span class="number">2726</span>]</span><br><span class="line">  [<span class="number">2305</span> <span class="number">2726</span>]</span><br><span class="line">  [<span class="number">2305</span> <span class="number">2726</span>]]</span><br><span class="line"></span><br><span class="line"> [[<span class="number">1058</span> <span class="number">2804</span>]</span><br><span class="line">  [<span class="number">1057</span> <span class="number">2804</span>]</span><br><span class="line">  [<span class="number">1057</span> <span class="number">2804</span>]</span><br><span class="line">  ...</span><br><span class="line">  [<span class="number">2305</span> <span class="number">2726</span>]</span><br><span class="line">  [<span class="number">2305</span> <span class="number">2726</span>]</span><br><span class="line">  [<span class="number">2305</span> <span class="number">2726</span>]]</span><br><span class="line"></span><br><span class="line"> [[<span class="number">1058</span> <span class="number">2804</span>]</span><br><span class="line">  [<span class="number">1057</span> <span class="number">2804</span>]</span><br><span class="line">  [<span class="number">1057</span> <span class="number">2804</span>]</span><br><span class="line">  ...</span><br><span class="line">  [<span class="number">2305</span> <span class="number">2726</span>]</span><br><span class="line">  [<span class="number">2305</span> <span class="number">2726</span>]</span><br><span class="line">  [<span class="number">2305</span> <span class="number">2726</span>]]]</span><br></pre></td></tr></table></figure>
+
+<p>  위와 같이 x,y의 좌표가 매칭되서 결과를 확인할 수 있다.</p>
+<p>  mapXY[0][0]의 값 [1082 1003]은 remaping 이미지의 (0,0)의 RGB값이 원본 소스 (1082,1003)의 RGB와 매칭된다는 것을 뜻한다.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2020/04/23/openCV-pageDewarp-remapping/" data-id="ckzfaqfsl00n3dyuop2eg1g6k" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "openCv page Dewarp remapping 분석",
+        "image": "http://jung-max.github.io/images/0071.png",
+        "keywords": "openCV pageDewarp",
+        "genre": "openCV pageDewarp",
+        "datePublished": "2020-04-23",
+        "dateCreated": "2020-04-23",
+        "dateModified": "2022-02-08",
+        "url": "http://jung-max.github.io/2020/04/23/openCV-pageDewarp-remapping/",
+        "description": "개요해당 작업은 최적화 작업 후 기울기 α, β를 취득 한 후 어떻게 이미지가 remmaping 되는가에 대한 설명이다.
+get_page_dimsget_page_dims 전체 소스12345678910111213141516def get_page_dims(corners, rough_dims, params):    dst_br = corners[2].flatte"
+        "wordCount": 2295
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/04/29/openCV-pageDewarp-remapping을이용한-보정/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            openCv page Dewarp remapping을 이용한 가장자리 보정
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2020/04/22/openCV-pageDewarp-사다리꼴 결과물 보정/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">openCv page Dewarp 사다리꼴 결과물 보정</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2020/04/23/openCV-pageDewarp-remapping/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

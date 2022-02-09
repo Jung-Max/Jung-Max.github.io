@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>Android-Bluetooth | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="Android,Bluetooth">
+    
+    <meta name="description" content="블루투스 개요 10m 정도의 가까운 거리에 있는 컴퓨터와 휴대폰, 가전제품등을 무선으로 연결하는 기술  블루투스 장점 비교적 저렴한 저전력 근거리 무선 솔루션 다른 무선 기술들에 비해 전자파 간섭 현상에 강함 여러 대의 블루투스 디바이스들과 동시에 접속 가능 무선랜과 달리 데이터와 음성 채널을 모두 가지고 있음 크기가 작아 이동 통신용 단말기 등에 탑재가">
+<meta name="keywords" content="Android,Bluetooth">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android-Bluetooth">
+<meta property="og:url" content="http://jung-max.github.io/2019/08/27/Android-Bluetooth/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="블루투스 개요 10m 정도의 가까운 거리에 있는 컴퓨터와 휴대폰, 가전제품등을 무선으로 연결하는 기술  블루투스 장점 비교적 저렴한 저전력 근거리 무선 솔루션 다른 무선 기술들에 비해 전자파 간섭 현상에 강함 여러 대의 블루투스 디바이스들과 동시에 접속 가능 무선랜과 달리 데이터와 음성 채널을 모두 가지고 있음 크기가 작아 이동 통신용 단말기 등에 탑재가">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/Android-Bluetooth/01.jpg">
+<meta property="og:updated_time" content="2022-02-08T02:11:11.747Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android-Bluetooth">
+<meta name="twitter:description" content="블루투스 개요 10m 정도의 가까운 거리에 있는 컴퓨터와 휴대폰, 가전제품등을 무선으로 연결하는 기술  블루투스 장점 비교적 저렴한 저전력 근거리 무선 솔루션 다른 무선 기술들에 비해 전자파 간섭 현상에 강함 여러 대의 블루투스 디바이스들과 동시에 접속 가능 무선랜과 달리 데이터와 음성 채널을 모두 가지고 있음 크기가 작아 이동 통신용 단말기 등에 탑재가">
+<meta name="twitter:image" content="http://jung-max.github.io/images/Android-Bluetooth/01.jpg">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2019/08/27/android-bluetooth/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Android/지식/">지식</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Android-Bluetooth" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Android-Bluetooth
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/08/27/Android-Bluetooth/" class="article-date">
+            <time datetime="2019-08-27T07:59:12.000Z" itemprop="datePublished">2019-08-27</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Android/">Android</a>, <a class="tag-link" href="/tags/Bluetooth/">Bluetooth</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="/images/Android-Bluetooth/01.jpg" alt="Bluetooth"></p>
+<h1 id="블루투스-개요"><a href="#블루투스-개요" class="headerlink" title="블루투스 개요"></a>블루투스 개요</h1><ul>
+<li>10m 정도의 가까운 거리에 있는 컴퓨터와 휴대폰, 가전제품등을 무선으로 연결하는 기술</li>
+</ul>
+<h2 id="블루투스-장점"><a href="#블루투스-장점" class="headerlink" title="블루투스 장점"></a>블루투스 장점</h2><ul>
+<li>비교적 저렴한 저전력 근거리 무선 솔루션</li>
+<li>다른 무선 기술들에 비해 전자파 간섭 현상에 강함</li>
+<li>여러 대의 블루투스 디바이스들과 동시에 접속 가능</li>
+<li>무선랜과 달리 데이터와 음성 채널을 모두 가지고 있음</li>
+<li>크기가 작아 이동 통신용 단말기 등에 탑재가 용이</li>
+</ul>
+<h2 id="블루투스의-특징"><a href="#블루투스의-특징" class="headerlink" title="블루투스의 특징"></a>블루투스의 특징</h2><ul>
+<li>데이터 전송 속도 : 25Mbps(블루투스 4.0 버전)</li>
+<li>부품의 크기 : 1.2cm²의 크기</li>
+<li>저렴한 가격 : 5~10$</li>
+<li>작은 전력 소모 : 100mV 미만</li>
+<li>무선 주파수 : 2.4GHz 주파수 대역</li>
+</ul>
+<h2 id="블루투스-4-0-버전-부터-나누어진-기능"><a href="#블루투스-4-0-버전-부터-나누어진-기능" class="headerlink" title="블루투스 4.0 버전 부터 나누어진 기능"></a>블루투스 4.0 버전 부터 나누어진 기능</h2><ul>
+<li><strong>클래식 블루투스</strong> : 기존 블루투스 3.0 이하와 같은 기능 지원</li>
+<li><strong>블루투스 하이 스피드</strong> : 와이파이와 블루투스의 혼합칩을 사용, 와이파이의 속도로 수미터~수백미터의 원거리 통신이 가능</li>
+<li><strong>블루투스 저전력</strong> : 비교적 낮은 전력으로 블루투스 기능 지원</li>
+</ul>
+<h2 id="안드로이드-History"><a href="#안드로이드-History" class="headerlink" title="안드로이드 History"></a>안드로이드 History</h2><h3 id="안드로이드-2-0"><a href="#안드로이드-2-0" class="headerlink" title="안드로이드 2.0"></a>안드로이드 2.0</h3><ul>
+<li>android.bluetooth 패키지 제공<h3 id="안드로이드-3-0"><a href="#안드로이드-3-0" class="headerlink" title="안드로이드 3.0"></a>안드로이드 3.0</h3></li>
+<li>BluetoothProfile 인터페이스와 함께 BluetoothA2dp 클래스와 BluetoothHeadset 클래스 추가<h3 id="안드로이드-4-0"><a href="#안드로이드-4-0" class="headerlink" title="안드로이드 4.0"></a>안드로이드 4.0</h3></li>
+<li>BluetoothHealth 클래스 추가<h3 id="안드로이드-4-3"><a href="#안드로이드-4-3" class="headerlink" title="안드로이드 4.3"></a>안드로이드 4.3</h3></li>
+<li>블루투스의 저전력 기능 지원을 위한 BluetoothGatt, BluetoothGattCallback, BluetoothGattCharacteristic, BluetoothGattService 클래스를 제공</li>
+<li>저전력 기능은 색다른 기능이 아닌 블루투스 검색시 비교적 저전력으로 수행할 수 있도록 만들어 준다.</li>
+</ul>
+<h2 id="블루투스-프로파일-Profile"><a href="#블루투스-프로파일-Profile" class="headerlink" title="블루투스 프로파일(Profile)"></a>블루투스 프로파일(Profile)</h2><p><strong>프로파일이란 블루투스 디바이스사이의 통신 규약(또는 프로토콜)을 말한다.</strong><br>예를 들어 헤드셋이나 핸즈 프리 프로파일은 휴대전화에 연결된 헤드셋으로 통화할 수 있는 규약을 이야기함</p>
+<h3 id="중요-프로파일의-종류"><a href="#중요-프로파일의-종류" class="headerlink" title="중요 프로파일의 종류"></a>중요 프로파일의 종류</h3><ul>
+<li><strong>A2DP</strong>(Advanced Audio Distribution Profile) : 스테레오 음질 수준의 오디오가 스트리밍될 수있는 방법을 설명합니다.</li>
+<li><strong>AVRCP</strong>(Audio/Video Remote Control Profile) : 텔레비전, 스테레오 오디오 장비 (Stereo Audio Equipment) 또는 다른 A/V 기기를 제어하기 위한 표준 인터페이스 (Standard Interface)를 제공하기 위해 설계되었습니다. 이 프로파일은 하나의 리모컨 (또는 다른 장치)로 사용자가 액세스할 수 있는 모든 A/V 기기를 제어 가능하게 합니다. </li>
+<li><strong>BPP</strong> (Basic Printing Profile) : 장치가 인쇄 작업에 따라 프린터에 텍스트, 이메일, V-카드, 이미지 또는 기타 정보를 보낼 수 있게 해줍니다</li>
+<li><strong>FTP</strong> (File Transfer Profile) : 서버 장치의 폴더 및 파일을 클라이언트 장치에 의해 탐색될 수 있는 방법을 정의합니다 </li>
+<li><strong>GAP</strong>(Generic Access Profile) : 모든 블루투스 프로파일에 있어 기본적으로 적용되는 프로파일이다. GAP 프로파일은 블루투스 검색이나 디바이스간의 연결 처리를 정의하고 있다.</li>
+<li><strong>GATT</strong>(Generic Attribute Profile)블루투스 저전력 사용을 위한 프로파일이다. 저전력은 별도 속성 프로토콜(ATT)를 사용하기 때문에 경우에 따라 GATT/ATT라고 표현하기도 한다.</li>
+<li><strong>HFP</strong>(Hands-Free-Profile) : 휴대 전화의 음성 통신을 송수신 및 제어하는 프로파일이다.</li>
+<li><strong>HID</strong>(Human Interface Device Profile) : 키보드, 마우스, 멀티미디어, 조이스틱을 지원하는 프로파일이다.</li>
+<li><strong>HSP</strong>(Headset Profile) : 오디오를 지원하는 프로파일이다.</li>
+<li><strong>SPP</strong>(Serial Port Profile) : 시리얼 통신으로 데이터를 송수신하는 프로파일이다.</li>
+<li><strong>SDAP</strong>(Service Discovery Application Profile) : 블루투스 장치가 제공하는 서비스 정보를 파악할 때 사용하는 프로파일이다.</li>
+<li><strong>HDP</strong>(Health Device Profile) : 건강과 관련된 장치를 지원하는 프로파일이다.</li>
+</ul>
+<p><strong>위 프로파일 가운데 반드시 존재해야 하는 블루투스의 프로파일은 GAP와 SDAP이다.</strong></p>
+<h4 id="GAP-프로파일"><a href="#GAP-프로파일" class="headerlink" title="GAP 프로파일"></a>GAP 프로파일</h4><p>안드로이드를 포함하여 모든 블루투스 단말기는 GAP 프로파일을 지원하기 위해서 4가지 주요 작업들을 순차적으로 수행한다.</p>
+<ol>
+<li>블루투스 디바이스의 활성화 작업</li>
+<li>블루투스 디바이스를 검색하는 작업(옵션)</li>
+<li>블루투스 디바이스들간에 연결하는 작업</li>
+<li>블루투스 디바이스가 지원하는 서비스 정보의 전송과 수신 작업</li>
+</ol>
+<h2 id="안드로이드의-블루투스-권한"><a href="#안드로이드의-블루투스-권한" class="headerlink" title="안드로이드의 블루투스 권한"></a>안드로이드의 블루투스 권한</h2><p>개발자가 안드로이드의 블루투스 기능을 사용하려면 <code>AndroidManifest.xml</code>파일에 다음과 같이 권한을 주어야 한다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.BLUETOOTH"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.BLUETOOTH_ADMIN"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>BLUETOOTH 권한은 블루투스간의 연결 요구, 연결 승인, 데이터 전송등의 블루투스 통신을 하기 위해 필요한 권한이다.</li>
+<li>BLUETOOTH_ADMIN 권한은 디바이스 검색을 시작하거나, 블루투스 설정 작업을 할 때 필요한 권한이다.</li>
+</ul>
+<p>저전력 블루투스를 사용하려면 다음과 같은 사용 권한 역시 추가시켜 주어야 한다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-feature</span> <span class="attr">android:name</span>=<span class="string">"android.hardware.bluetooth_le"</span> <span class="attr">android:required</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.ACCESS_COARSE_LOCATION"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.ACCESS_FINE_LOCATION"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="블루투스-활성화"><a href="#블루투스-활성화" class="headerlink" title="블루투스 활성화"></a>블루투스 활성화</h1><p>블루투스를 사용하여 통신하려면 블루투스가 기기에서 지원되는지 확인하고, 지원되는 경우 활성화해야 합니다.</p>
+<h2 id="1-BluetoothAdapter-가져오기"><a href="#1-BluetoothAdapter-가져오기" class="headerlink" title="1. BluetoothAdapter 가져오기"></a>1. <strong>BluetoothAdapter</strong> 가져오기</h2><ul>
+<li>모든 블루투스 액티비티를 위해 BluetoothAdapter가 필요.</li>
+<li>BluetoothAdapter를 가져오려면 정적 getDefaultAdapter() 메서드를 호출. </li>
+<li>getDefaultAdapter()가 null을 반환하는 경우 기기는 블루투스를 지원하지 않음.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();</span><br><span class="line"><span class="keyword">if</span> (mBluetoothAdapter == <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="comment">// Device does not support Bluetooth</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="BluetoothAdapter"><a href="#BluetoothAdapter" class="headerlink" title="BluetoothAdapter"></a>BluetoothAdapter</h3><ul>
+<li>로컬 블루투스 어댑터(블루투스 송수신 장치)</li>
+<li>BluetoothAdapter는 블루투스 상호작용에 대한 진입점</li>
+<li>이를 사용하여 다른 블루투스 기기를 검색하고 연결된(페어링된) 기기 목록을 쿼리할 수 있음</li>
+<li>또한 알려진 MAC 주소로 <strong>BluetoothDevice</strong>를 인스턴스화하고, 다른 기기로부터 통신을 수신 대기하는 <strong>BluetoothServerSocket</strong>을 만들 수 있음</li>
+</ul>
+<h2 id="2-블루투스-활성화"><a href="#2-블루투스-활성화" class="headerlink" title="2. 블루투스 활성화"></a>2. 블루투스 활성화</h2><ul>
+<li><code>isEnabled()</code>를 호출하여 블루투스가 현재 활성화되었는지 확인. </li>
+</ul>
+<p><img src="/images/Android-Bluetooth/02.png" alt="bt enable request"></p>
+<ul>
+<li>이 메서드가 false를 반환하는 경우 블루투스는 비활성화를 뜻함.</li>
+<li>블루투스 활성화를 요청하려면 <code>ACTION_REQUEST_ENABLE</code> 작업 인텐트를 사용하여 <code>startActivityForResult()</code>를 호출.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!mBluetoothAdapter.isEnabled()) &#123;</span><br><span class="line">    Intent enableBtIntent = <span class="keyword">new</span> Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);</span><br><span class="line">    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//or</span></span><br><span class="line"><span class="keyword">if</span> (!mBluetoothAdapter.isEnabled()) &#123;</span><br><span class="line">    mBluetoothAdapter.enable(); <span class="comment">//강제 활성화</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="블루투스-상태변화-브로드캐스트-수신"><a href="#블루투스-상태변화-브로드캐스트-수신" class="headerlink" title="블루투스 상태변화 브로드캐스트 수신"></a>블루투스 상태변화 브로드캐스트 수신</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Register for broadcasts on BluetoothAdapter state change</span></span><br><span class="line">    IntentFilter filter = <span class="keyword">new</span> IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);</span><br><span class="line">    registerReceiver(mReceiver, filter);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onDestroy();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Unregister broadcast listeners</span></span><br><span class="line">    unregisterReceiver(mReceiver);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> BroadcastReceiver mReceiver = <span class="keyword">new</span> BroadcastReceiver() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> String action = intent.getAction();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,</span><br><span class="line">                                                 BluetoothAdapter.ERROR); <span class="comment">// EXTRA_STATE가 존재하지 않는다면 ERROR를 반환</span></span><br><span class="line">            <span class="keyword">switch</span> (state) &#123;</span><br><span class="line">            <span class="keyword">case</span> BluetoothAdapter.STATE_OFF: <span class="comment">//블루투스 비활성화</span></span><br><span class="line">                setButtonText(<span class="string">"Bluetooth off"</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> BluetoothAdapter.STATE_TURNING_OFF: <span class="comment">//비활성화 되어가고있음</span></span><br><span class="line">                setButtonText(<span class="string">"Turning Bluetooth off..."</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> BluetoothAdapter.STATE_ON: <span class="comment">//활성화</span></span><br><span class="line">                setButtonText(<span class="string">"Bluetooth on"</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> BluetoothAdapter.STATE_TURNING_ON: <span class="comment">//활성화 중</span></span><br><span class="line">                setButtonText(<span class="string">"Turning Bluetooth on..."</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="블루투스-검색과-페어링"><a href="#블루투스-검색과-페어링" class="headerlink" title="블루투스 검색과 페어링"></a>블루투스 검색과 페어링</h1><ul>
+<li>BluetoothAdapter를 사용하면 기기 검색을 통해 또는 페어링된(연결된) 기기의 목록을 쿼리하여 원격 블루투스 기기를 찾을 수 있다.</li>
+<li>기기 검색은 블루투스 사용 기기에 대해 로컬 영역을 검색하고 각각에 대한 정보를 요청하는 검색 절차</li>
+<li>로컬 영역 내의 블루투스 기기는 검색 가능하도록 현재 활성화된 경우에만 검색 요청에 응답</li>
+<li>기기는 검색 가능한 경우 기기 이름, 클래스 및 고유 MAC 주소와 같은 정보를 공유</li>
+</ul>
+<h2 id="페어링"><a href="#페어링" class="headerlink" title="페어링"></a>페어링</h2><ul>
+<li>원격 기기와 처음으로 연결되면 페어링 요청이 자동으로 사용자에게 제공</li>
+<li>기기가 페어링되면 해당 기기에 대한 기본 정보(예: 기기 이름, 클래스 및 MAC 주소)는 저장되고 Bluetooth API를 사용하여 읽을 수 있다.</li>
+<li>원격 기기에 대해 알려진 MAC 주소를 사용하면 (기기가 범위 내에 있다고 가정하여) 검색을 수행하지 않고 언제든지 연결을 시작할 수 있다.</li>
+<li>페어링은 두 기기가 서로의 존재를 알고 있고 인증에 사용할 수 있는 공유 링크 키를 가지고 있으며 서로 암호화된 연결을 설정할 수 있음을 의미</li>
+<li>연결은 기기가 현재 RFCOMM 채널을 공유하고 있고 데이터를 서로 전송할 수 있음을 의미</li>
+</ul>
+<h3 id="Android에서-페어링"><a href="#Android에서-페어링" class="headerlink" title="Android에서 페어링"></a>Android에서 페어링</h3><ul>
+<li>현재 Android Bluetooth API는 RFCOMM 연결을 설정할 수 있기 전에 기기를 페어링하도록 요청</li>
+<li>Bluetooth API와 암호화된 연결을 시작하면 페어링이 자동으로 수행</li>
+</ul>
+<p><img src="/images/Android-Bluetooth/03.png" alt="페어링"></p>
+<h3 id="페어링된-기기-쿼리"><a href="#페어링된-기기-쿼리" class="headerlink" title="페어링된 기기 쿼리"></a>페어링된 기기 쿼리</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;BluetoothDevice&gt; pairedDevices = mBluetoothAdapter.getBondedDevices(); <span class="comment">//페어링된 기기를 나타내는 BluetoothDevice 집합</span></span><br><span class="line"><span class="comment">// If there are paired devices</span></span><br><span class="line"><span class="keyword">if</span> (pairedDevices.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// Loop through paired devices</span></span><br><span class="line">    <span class="keyword">for</span> (BluetoothDevice device : pairedDevices) &#123;</span><br><span class="line">        <span class="comment">// Add the name and address to an array adapter to show in a ListView</span></span><br><span class="line">        mArrayAdapter.add(device.getName() + <span class="string">"\n"</span> + device.getAddress()); <span class="comment">//ArrayAdapter를 사용하여 각 기기의 이름을 사용자에게 표시</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="페어링-요청"><a href="#페어링-요청" class="headerlink" title="페어링 요청"></a>페어링 요청</h3><p><img src="/images/Android-Bluetooth/04.png" alt="페어링 요청"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pairDevice</span><span class="params">(BluetoothDevice device)</span> </span>&#123;</span><br><span class="line">        String ACTION_PAIRING_REQUEST = <span class="string">"android.bluetooth.device.action.PAIRING_REQUEST"</span>;</span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent(ACTION_PAIRING_REQUEST);</span><br><span class="line"></span><br><span class="line">        intent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);</span><br><span class="line"></span><br><span class="line">        String EXTRA_PAIRING_VARIANT = <span class="string">"android.bluetooth.device.extra.PAIRING_VARIANT"</span>;</span><br><span class="line">        <span class="keyword">int</span> PAIRING_VARIANT_PIN = <span class="number">0</span>; <span class="comment">//핀코드를 0으로 함</span></span><br><span class="line">        intent.putExtra(EXTRA_PAIRING_VARIANT, PAIRING_VARIANT_PIN);</span><br><span class="line">        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="기기-검색"><a href="#기기-검색" class="headerlink" title="기기 검색"></a>기기 검색</h2><ul>
+<li>기기 검색을 시작하려면 <code>startDiscovery()</code>를 호출</li>
+<li>이는 비동기 프로세스이며 해당 메서드는 검색이 성공적으로 시작했는지 여부를 나타내는 bool을 즉시 반환</li>
+<li>검색 프로세스는 일반적으로 12초 정도의 조회 스캔과, 블루투스 이름을 가져오는 검색된 각 기기의 페이지 스캔을 포함</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 현재 검색 진행중이면 검색을 취소시킴</span></span><br><span class="line"><span class="keyword">if</span>(mBluetoothAdapter.isDiscovering())&#123;</span><br><span class="line">    mBluetoothAdapter.cancelDiscovery();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//BluetoothAdapter를 사용하여 검색 작업을 수행</span></span><br><span class="line">mBluetoothAdapter.startDiscovery();</span><br></pre></td></tr></table></figure>
+
+<h3 id="기기-검색에-따른-브로드캐스트"><a href="#기기-검색에-따른-브로드캐스트" class="headerlink" title="기기 검색에 따른 브로드캐스트"></a>기기 검색에 따른 브로드캐스트</h3><h4 id="ACTION-DISCOVERY-STARTED-amp-ACTION-DISCOVERY-FINISHED"><a href="#ACTION-DISCOVERY-STARTED-amp-ACTION-DISCOVERY-FINISHED" class="headerlink" title="ACTION_DISCOVERY_STARTED &amp; ACTION_DISCOVERY_FINISHED"></a>ACTION_DISCOVERY_STARTED &amp; ACTION_DISCOVERY_FINISHED</h4><ul>
+<li>ACTION_DISCOVERY_FINISHED : 장치 검색 시작 </li>
+<li>ACTION_DISCOVERY_FINISHED : 장치 검색 완료</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">BroadcastReceiver discoveryMonitor = <span class="keyword">new</span> BroadcastReceiver() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (intent.getAction() == BluetoothAdapter.ACTION_DISCOVERY_STARTED ) &#123;</span><br><span class="line">      ...  <span class="comment">// 장치 검색 시작 </span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (intent.getAction() == BluetoothAdapter.ACTION_DISCOVERY_FINISHED ) &#123;</span><br><span class="line">      ... <span class="comment">// 장치 검색 완료</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">registerReceiver(discoveryMonitor, <span class="keyword">new</span> IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_STARTED));</span><br><span class="line">registerReceiver(discoveryMonitor, <span class="keyword">new</span> IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED));</span><br></pre></td></tr></table></figure>
+
+<h4 id="ACTION-FIOUND"><a href="#ACTION-FIOUND" class="headerlink" title="ACTION_FIOUND"></a>ACTION_FIOUND</h4><ul>
+<li>검색된 각 기기에 대한 정보를 수신</li>
+<li>getName() : 블루투스 디바이스의 이름을 얻는다.</li>
+<li>getAddress() : 블루투스 디바이스의 MAC 주소를 얻는다.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create a BroadcastReceiver for ACTION_FOUND</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> BroadcastReceiver mReceiver = <span class="keyword">new</span> BroadcastReceiver() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">        String action = intent.getAction();</span><br><span class="line">        <span class="comment">// When discovery finds a device</span></span><br><span class="line">        <span class="keyword">if</span> (BluetoothDevice.ACTION_FOUND.equals(action)) &#123;</span><br><span class="line">            <span class="comment">// Get the BluetoothDevice object from the Intent</span></span><br><span class="line">            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);</span><br><span class="line">            <span class="comment">// Add the name and address to an array adapter to show in a ListView</span></span><br><span class="line">            mArrayAdapter.add(device.getName() + <span class="string">"\n"</span> + device.getAddress());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// Register the BroadcastReceiver</span></span><br><span class="line">IntentFilter filter = <span class="keyword">new</span> IntentFilter(BluetoothDevice.ACTION_FOUND);</span><br><span class="line">registerReceiver(mReceiver, filter); <span class="comment">// Don't forget to unregister during onDestroy</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="기기-검색기능-활성화"><a href="#기기-검색기능-활성화" class="headerlink" title="기기 검색기능 활성화"></a>기기 검색기능 활성화</h3><ul>
+<li>로컬 기기를 다른 기기가 검색할 수 있게 하려면 <code>ACTION_REQUEST_DISCOVERABLE</code> 작업 인텐트를 사용하여 <code>startActivityForResult(Intent, int)</code>을 호출</li>
+</ul>
+<p><img src="/images/Android-Bluetooth/05.png" alt="검색 요청 허용 팝업"></p>
+<ul>
+<li>기본적으로 기기가 120초 동안 검색 가능</li>
+<li>EXTRA_DISCOVERABLE_DURATION 인텐트 엑스트라를 추가하여 다른 기간을 정의할 수 있다.</li>
+<li>앱이 설정할 수 있는 최대 기간은 3600초이며 값이 0인 경우 기기가 항상 검색 가능.</li>
+<li>0 미만 또는 3600 초과 값은 120초로 자동 설정</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Intent discoverableIntent = <span class="keyword">new</span></span><br><span class="line">Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);</span><br><span class="line">discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, <span class="number">300</span>); <span class="comment">//300초 의미</span></span><br><span class="line">startActivity(discoverableIntent);</span><br></pre></td></tr></table></figure>
+
+<h1 id="블루투스-데이터-통신"><a href="#블루투스-데이터-통신" class="headerlink" title="블루투스 데이터 통신"></a>블루투스 데이터 통신</h1><ul>
+<li><p>두 기기에서 애플리케이션 간 연결을 생성하려면 서버측 메커니즘과 클라이언트측 메커니즘을 모두 구현해야</p>
+</li>
+<li><p>한 기기는 서버 소켓을 열고 다른 기기는 (서버 기기의 <code>MAC</code> 주소를 사용하여) 연결을 시작해야 하기 때문</p>
+</li>
+<li><p>서버와 클라이언트는 각각 동일한 RFCOMM(프로토콜) 채널에 연결된 BluetoothSocket이 있는 경우 서로 연결된 것으로 간주</p>
+</li>
+<li><p>서버는 들어오는 연결을 수락할 때 BluetoothSocket를 수신.</p>
+</li>
+<li><p>클라이언트는 서버에 대한 RFCOMM 채널을 열 때 BluetoothSocket를 수신</p>
+</li>
+</ul>
+<h2 id="블루투스-데이터-통신-서버"><a href="#블루투스-데이터-통신-서버" class="headerlink" title="블루투스 데이터 통신 서버"></a>블루투스 데이터 통신 서버</h2><ul>
+<li>두 기기를 연결하려면 한 기기는 열린 <code>BluetoothServerSocket</code>을 제공하여 서버로 작동해야</li>
+<li>서버 소켓의 목적은 들어오는 연결 요청을 수신 대기하고 수락 시 연결된 BluetoothSocket을 제공하는 것</li>
+</ul>
+<h3 id="BluetoothServerSocket-생성"><a href="#BluetoothServerSocket-생성" class="headerlink" title="BluetoothServerSocket 생성"></a>BluetoothServerSocket 생성</h3><ul>
+<li>listenUsingRfcommWithServiceRecord(String, UUID)를 호출하여 BluetoothServerSocket을 가져옴</li>
+<li>클라이언트는 이 기기와 연결을 시도할 때 연결할 서비스를 고유하게 식별하는 UUID를 제공</li>
+<li>UUID는 클라이언트와 서버가 서로 일치해야함</li>
+</ul>
+<h4 id="UUID"><a href="#UUID" class="headerlink" title="UUID"></a>UUID</h4><ul>
+<li>TCP/UDP 프로토콜의 포트 번호처럼 블루투스가 제공하는 서비스를 식별하는 하나의 아이디로 사용</li>
+<li><a href="https://www.bluetooth.com/ko-kr/specifications/assigned-numbers/service-discovery/" rel="external nofollow noopener noreferrer" target="_blank">UUID 목록</a></li>
+<li>사용법은 BASE_UUID의 앞자리를 프로토콜 식별자에 맞게 바꾸어 준다.<br>ex&gt; 핸즈프리    0x111E    핸즈프리 프로파일(HFP)<br>→ 0000111E-0000-1000-8000-00805F9B34FB </li>
+</ul>
+<h3 id="연결-요청에-대한-응답"><a href="#연결-요청에-대한-응답" class="headerlink" title="연결 요청에 대한 응답"></a>연결 요청에 대한 응답</h3><ul>
+<li>accept()를 호출하여 연결 요청에 대한 수신 대기를 시작</li>
+<li>이는 호출 차단이며, 연결이 수락되거나 예외가 발생한 경우 반환</li>
+<li>원격 기기가 이 수신 대기 서버 소켓에 등록된 것과 일치하는 UUID를 사용하여 연결 요청을 보내는 경우에만 연결이 수락</li>
+<li>성공적으로 수행된 경우 accept()는 연결된 BluetoothSocket을 반환</li>
+</ul>
+<h3 id="서버-소켓-close"><a href="#서버-소켓-close" class="headerlink" title="서버 소켓 close"></a>서버 소켓 close</h3><ul>
+<li>추가 연결을 수락하지 않으려면 close()를 호출</li>
+<li>그러면 서버 소켓과 모든 리소스가 해제되지만 accept()가 반환한 연결된 BluetoothSocket이 닫히지 않음</li>
+<li>대부분의 경우에 연결된 소켓을 수락한 직후에 BluetoothServerSocket에서 close()를 호출하는 것이 합당</li>
+</ul>
+<h3 id="연결을-수락하는-서버-구성-요소에-대한-간단한-스레드"><a href="#연결을-수락하는-서버-구성-요소에-대한-간단한-스레드" class="headerlink" title="연결을 수락하는 서버 구성 요소에 대한 간단한 스레드"></a>연결을 수락하는 서버 구성 요소에 대한 간단한 스레드</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">AcceptThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> BluetoothServerSocket mmServerSocket;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AcceptThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Use a temporary object that is later assigned to mmServerSocket,</span></span><br><span class="line">        <span class="comment">// because mmServerSocket is final</span></span><br><span class="line">        BluetoothServerSocket tmp = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// MY_UUID is the app's UUID string, also used by the client code</span></span><br><span class="line">            tmp = mBluetoothAdapter.listenUsingRfcommWithServiceRecord(NAME, MY_UUID);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123; &#125;</span><br><span class="line">        mmServerSocket = tmp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        BluetoothSocket socket = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">// Keep listening until exception occurs or a socket is returned</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                socket = mmServerSocket.accept();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// If a connection was accepted</span></span><br><span class="line">            <span class="keyword">if</span> (socket != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// Do work to manage the connection (in a separate thread)</span></span><br><span class="line">                manageConnectedSocket(socket);</span><br><span class="line">                mmServerSocket.close();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Will cancel the listening socket, and cause the thread to finish */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cancel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            mmServerSocket.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="클라이언트로-연결"><a href="#클라이언트로-연결" class="headerlink" title="클라이언트로 연결"></a>클라이언트로 연결</h2><ul>
+<li>원격 기기(열린 서버 소켓을 제공하는 기기)와의 연결을 시작하려면 먼저 원격 기기를 나타내는 BluetoothDevice 객체를 가져와함</li>
+<li>그리고 나서 BluetoothDevice를 사용하여 BluetoothSocket을 가져오고 연결을 시작</li>
+</ul>
+<h3 id="BluetoothSocket-객체-얻기"><a href="#BluetoothSocket-객체-얻기" class="headerlink" title="BluetoothSocket 객체 얻기"></a>BluetoothSocket 객체 얻기</h3><ul>
+<li>BluetoothDevice를 통해 createRfcommSocketToServiceRecord(UUID)를 호출하여 BluetoothSocket을 가져온다.</li>
+<li>connect()를 호출하여 연결을 시작</li>
+<li>connect()를 호출할 때 기기 검색을 수행하지 않도록 해야 한다.</li>
+</ul>
+<h3 id="클라이언트로-예"><a href="#클라이언트로-예" class="headerlink" title="클라이언트로 예"></a>클라이언트로 예</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ConnectThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> BluetoothSocket mmSocket;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> BluetoothDevice mmDevice;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConnectThread</span><span class="params">(BluetoothDevice device)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Use a temporary object that is later assigned to mmSocket,</span></span><br><span class="line">        <span class="comment">// because mmSocket is final</span></span><br><span class="line">        BluetoothSocket tmp = <span class="keyword">null</span>;</span><br><span class="line">        mmDevice = device;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Get a BluetoothSocket to connect with the given BluetoothDevice</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// MY_UUID is the app's UUID string, also used by the server code</span></span><br><span class="line">            tmp = device.createRfcommSocketToServiceRecord(MY_UUID);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123; &#125;</span><br><span class="line">        mmSocket = tmp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Cancel discovery because it will slow down the connection</span></span><br><span class="line">        mBluetoothAdapter.cancelDiscovery();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// Connect the device through the socket. This will block</span></span><br><span class="line">            <span class="comment">// until it succeeds or throws an exception</span></span><br><span class="line">            mmSocket.connect();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException connectException) &#123;</span><br><span class="line">            <span class="comment">// Unable to connect; close the socket and get out</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                mmSocket.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException closeException) &#123; &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Do work to manage the connection (in a separate thread)</span></span><br><span class="line">        manageConnectedSocket(mmSocket);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Will cancel an in-progress connection, and close the socket */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cancel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            mmSocket.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="블루투스-서비스-검색"><a href="#블루투스-서비스-검색" class="headerlink" title="블루투스 서비스 검색"></a>블루투스 서비스 검색</h1><p>안드로이드 4.0.3 버전 이상부터 UUID를 취득하기 위해 아래와 같은 함수들을 제공한다.</p>
+<h2 id="public-boolean-fetchUuidsWithSdp"><a href="#public-boolean-fetchUuidsWithSdp" class="headerlink" title="public boolean fetchUuidsWithSdp()"></a>public boolean fetchUuidsWithSdp()</h2><ul>
+<li>위 메소드 호출시 안드로이드 프레임워크는 BluetoothDevice 객체가 가리키는 외부 블루투스의 SDP(Service Discovery Protocol) 내 데이터베이스로 저장하고 있는 서비스 이름과 UUID의 제공을 요청</li>
+<li>검색된 UUID는 ACTION_UUID라는 액션과 BluetoothDevice.EXTRA_UUID라는 엑스트라와 함께 브로드캐스트 인텐트를 통해 제공<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.main);</span><br><span class="line"></span><br><span class="line">    Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);</span><br><span class="line">    setSupportActionBar(myToolbar);</span><br><span class="line"></span><br><span class="line">    btnScanDevice = (Button)findViewById(R.id.scandevice);</span><br><span class="line">    out = (TextView) findViewById(R.id.out);</span><br><span class="line"></span><br><span class="line">    IntentFilter filter = <span class="keyword">new</span> IntentFilter(BluetoothDevice.ACTION_FOUND);</span><br><span class="line">    filter.addAction(BluetoothDevice.ACTION_UUID);</span><br><span class="line">    filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);</span><br><span class="line">    filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);</span><br><span class="line">    registerReceiver(ActionFoundReceiver, filter); </span><br><span class="line"></span><br><span class="line">    bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();</span><br><span class="line">    <span class="keyword">if</span>(bluetoothAdapter==<span class="keyword">null</span>) &#123; </span><br><span class="line">        out.append(<span class="string">"Bluetooth NOT supported. Aborting.\n"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    out.append(<span class="string">"Adapter: "</span> + bluetoothAdapter);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (bluetoothAdapter.isEnabled())&#123;</span><br><span class="line">           <span class="keyword">if</span>(bluetoothAdapter.isDiscovering())&#123;</span><br><span class="line">               out.append(<span class="string">"블루투스는 현재 검색 진행중이다."</span>);</span><br><span class="line">           &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">               out.append(<span class="string">"블루투스는 이미 활성화되어 있습니다."</span>);</span><br><span class="line">               btnScanDevice.setEnabled(<span class="keyword">true</span>);</span><br><span class="line">           &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        out.append(<span class="string">"블루투스를 활성화시킵니다.!"</span>);</span><br><span class="line">        Intent enableBtIntent = <span class="keyword">new</span> Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);</span><br><span class="line">        startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    btnScanDevice.setOnClickListener(ScanDevice);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onDestroy();</span><br><span class="line">    <span class="keyword">if</span> (bluetoothAdapter != <span class="keyword">null</span> &amp;&amp; bluetoothAdapter.isDiscovering()) &#123;</span><br><span class="line">        bluetoothAdapter.cancelDiscovery();</span><br><span class="line">    &#125;</span><br><span class="line">    unregisterReceiver(ActionFoundReceiver);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> BroadcastReceiver ActionFoundReceiver = <span class="keyword">new</span> BroadcastReceiver()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">        String action = intent.getAction();</span><br><span class="line">        <span class="keyword">if</span> (BluetoothDevice.ACTION_FOUND.equals(action)) &#123;</span><br><span class="line">            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);</span><br><span class="line">            out.append(<span class="string">"\n  Device: "</span> + device.getName() + <span class="string">", "</span> + device);</span><br><span class="line">            btDeviceList.add(device);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (BluetoothDevice.ACTION_UUID.equals(action)) &#123;</span><br><span class="line">            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);</span><br><span class="line">            Parcelable[] uuidExtra = intent.getParcelableArrayExtra(BluetoothDevice.EXTRA_UUID);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;uuidExtra.length; i++) &#123;</span><br><span class="line">                out.append(<span class="string">"\n  Device: "</span> + device.getName() + <span class="string">", "</span> + device + <span class="string">", Service: "</span> + uuidExtra[i].toString());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125; </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) &#123;</span><br><span class="line">            out.append(<span class="string">"\nDiscovery Started..."</span>);</span><br><span class="line">            mProgressItem.setVisible(<span class="keyword">true</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125; </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) &#123;</span><br><span class="line">            out.append(<span class="string">"\nDiscovery Finished"</span>);</span><br><span class="line">            Iterator&lt;BluetoothDevice&gt; itr = btDeviceList.iterator();</span><br><span class="line">            <span class="keyword">while</span> (itr.hasNext()) &#123;</span><br><span class="line">                <span class="comment">//    Get Services for paired devices</span></span><br><span class="line">                BluetoothDevice device = itr.next();</span><br><span class="line">                out.append(<span class="string">"\nGetting Services for "</span> + device.getName() + <span class="string">", "</span> + device);</span><br><span class="line">                <span class="keyword">if</span>(!device.fetchUuidsWithSdp()) &#123;</span><br><span class="line">                    out.append(<span class="string">"\nSDP Failed for "</span> + device.getName());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            out.append(<span class="string">"\n페이링 디바이스로부터 UUID를 얻습니다."</span>);</span><br><span class="line">            Set&lt;BluetoothDevice&gt; pairedDevices = bluetoothAdapter.getBondedDevices();</span><br><span class="line">            <span class="keyword">for</span>(BluetoothDevice device : pairedDevices) &#123;</span><br><span class="line">                out.append(<span class="string">"\nGetting Services for "</span> + device.getName() + <span class="string">", "</span> + device);</span><br><span class="line">                <span class="keyword">if</span>(!device.fetchUuidsWithSdp()) &#123;</span><br><span class="line">                    out.append(<span class="string">"\nSDP Failed for "</span> + device.getName());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            mProgressItem.setVisible(<span class="keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="public-ParcelUuid-getUUids"><a href="#public-ParcelUuid-getUUids" class="headerlink" title="public ParcelUuid[] getUUids()"></a>public ParcelUuid[] getUUids()</h2><ul>
+<li>getUUID() 메소드를 사용하여 다음과 같은 방법으로 블루투스 디바이스로부터 UUID를 얻을 수 있다.<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BluetoothDevice phoneDevice = bluetoothAdapter.getRemoteDevice(phoneAddress);</span><br><span class="line">ParcelUuid[] phoneUuids = phoneDevice.getUuids();</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="연결-관리"><a href="#연결-관리" class="headerlink" title="연결 관리"></a>연결 관리</h1><ul>
+<li>두 대 이상의 기기를 성공적으로 연결한 경우 각 기기는 연결된 BluetoothSocket을 갖는다.</li>
+<li>BluetoothSocket을 사용하여 임의의 데이터를 전송하는 일반적인 절차는 다음과 같다.<ul>
+<li>getInputStream() 및 getOutputStream()을 각각 사용하여 소켓을 통한 전송을 처리하는 InputStream 및 OutputStream을 가져온다.</li>
+<li>read(byte[]) 및 write(byte[])을 사용하여 스트림에 데이터를 읽고 쓴다.</li>
+</ul>
+</li>
+<li>모든 스트림 읽기 및 쓰기를 위한 전용 스레드를 사용해야 한다.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ConnectedThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> BluetoothSocket mmSocket;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> InputStream mmInStream;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> OutputStream mmOutStream;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConnectedThread</span><span class="params">(BluetoothSocket socket)</span> </span>&#123;</span><br><span class="line">        mmSocket = socket;</span><br><span class="line">        InputStream tmpIn = <span class="keyword">null</span>;</span><br><span class="line">        OutputStream tmpOut = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Get the input and output streams, using temp objects because</span></span><br><span class="line">        <span class="comment">// member streams are final</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            tmpIn = socket.getInputStream();</span><br><span class="line">            tmpOut = socket.getOutputStream();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123; &#125;</span><br><span class="line"></span><br><span class="line">        mmInStream = tmpIn;</span><br><span class="line">        mmOutStream = tmpOut;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];  <span class="comment">// buffer store for the stream</span></span><br><span class="line">        <span class="keyword">int</span> bytes; <span class="comment">// bytes returned from read()</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Keep listening to the InputStream until an exception occurs</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// Read from the InputStream</span></span><br><span class="line">                bytes = mmInStream.read(buffer);</span><br><span class="line">                <span class="comment">// Send the obtained bytes to the UI activity</span></span><br><span class="line">                mHandler.obtainMessage(MESSAGE_READ, bytes, -<span class="number">1</span>, buffer)</span><br><span class="line">                        .sendToTarget();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Call this from the main activity to send data to the remote device */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">byte</span>[] bytes)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            mmOutStream.write(bytes);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123; &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Call this from the main activity to shutdown the connection */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cancel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            mmSocket.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="블루투스-프로필"><a href="#블루투스-프로필" class="headerlink" title="블루투스 프로필"></a>블루투스 프로필</h1><ul>
+<li><p>Bluetooth 프로필은 기기 간 블루투스 기반 통신에 대한 무선 인터페이스 사양</p>
+<ul>
+<li>예로 Hands-Free 프로필이 있음.</li>
+<li>휴대폰이 무선 헤드셋에 연결하려면 두 기기가 Hands-Free 프로필을 지원해야 한다.</li>
+</ul>
+</li>
+<li><p>인터페이스 <code>BluetoothProfile</code>을 구현하여 특정 Bluetooth 프로필을 지원하는 자신만의 클래스를 작성할 수 있다.</p>
+</li>
+<li><p>Android Bluetooth API는 다음 Bluetooth 프로필에 대한 구현을 제공</p>
+<ul>
+<li>Android는 프로세스 간 통신(IPC)을 통해 블루투스 헤드셋 서비스를 제어하는 프록시인 <code>BluetoothHeadset</code> 클래스를 제공</li>
+<li>Android는 IPC를 통해 블루투스 A2DP(Advanced Audio Distribution Profile) 서비스를 제어하는 프록시인 <code>BluetoothA2dp</code> 클래스를 제공(고품질 오디오가 기기 간 스트리밍)</li>
+<li>의료 기기 프로필 <ul>
+<li>Bluetooth Health API는 BluetoothHealth, BluetoothHealthCallback 및 BluetoothHealthAppConfiguration 클래스를 포함</li>
+<li>이를 사용하면 블루투스를 사용하여 블루투스를 지원하는 의료 기기(예: 심박측정기, 혈압계, 체온계, 체중계)와 통신하는 애플리케이션을 만들 수 있음.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>기본적인 프로필 작업 단계</p>
+<ol>
+<li>블루투스 설정에서 설명한 기본 어댑터를 가져온다.</li>
+<li><code>getProfileProxy()</code>를 사용하여 프로필에 연결된 프로필 프록시 객체에 대한 연결을 설정.</li>
+<li><code>BluetoothProfile.ServiceListener</code>를 설정.</li>
+</ol>
+<ul>
+<li>이 리스너는 서비스에 연결되었거나 연결이 끊어진 경우 BluetoothProfile IPC 클라이언트에 알린다.</li>
+</ul>
+<ol start="4">
+<li><code>onServiceConnected()</code>에서 프로필 프록시 객체에 대한 핸들을 가져온다.</li>
+<li>프로필 프록시 객체가 있는 경우 해당 객체를 사용하여 연결 상태를 모니터링하고 해당 프로필과 관련된 다른 작업을 수행.</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.android.btprofiles;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.app.Activity;</span><br><span class="line"><span class="keyword">import</span> android.bluetooth.BluetoothA2dp;</span><br><span class="line"><span class="keyword">import</span> android.bluetooth.BluetoothAdapter;</span><br><span class="line"><span class="keyword">import</span> android.bluetooth.BluetoothDevice;</span><br><span class="line"><span class="keyword">import</span> android.bluetooth.BluetoothHeadset;</span><br><span class="line"><span class="keyword">import</span> android.bluetooth.BluetoothHealth;</span><br><span class="line"><span class="keyword">import</span> android.bluetooth.BluetoothProfile;</span><br><span class="line"><span class="keyword">import</span> android.content.BroadcastReceiver;</span><br><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.content.Intent;</span><br><span class="line"><span class="keyword">import</span> android.content.IntentFilter;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.util.Log;</span><br><span class="line"><span class="keyword">import</span> android.view.Menu;</span><br><span class="line"><span class="keyword">import</span> android.view.MenuItem;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.widget.AdapterView;</span><br><span class="line"><span class="keyword">import</span> android.widget.ArrayAdapter;</span><br><span class="line"><span class="keyword">import</span> android.widget.ListView;</span><br><span class="line"><span class="keyword">import</span> android.widget.TextView;</span><br><span class="line"><span class="keyword">import</span> android.widget.Toast;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BluetoothProfiles</span> <span class="keyword">extends</span> <span class="title">Activity</span> <span class="keyword">implements</span> <span class="title">AdapterView</span>.<span class="title">OnItemClickListener</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String TAG = getClass().getSimpleName();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> REQUEST_ENABLE_BT = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> ArrayAdapter&lt;String&gt; mConnectedDevices;</span><br><span class="line">    <span class="keyword">private</span> ListView mList;</span><br><span class="line">    <span class="keyword">private</span> BluetoothHeadset mBluetoothHeadset;</span><br><span class="line">    <span class="keyword">private</span> BluetoothA2dp mBluetoothA2dp;</span><br><span class="line">    <span class="keyword">private</span> BluetoothHealth mBluetoothHealth;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;BluetoothDevice&gt; mVoicerecognizing = Collections.synchronizedList(<span class="keyword">new</span> ArrayList&lt;BluetoothDevice&gt;());</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> BroadcastReceiver mReceiver = <span class="keyword">new</span> BroadcastReceiver() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">            String action = intent.getAction();</span><br><span class="line">            Bundle extras = intent.getExtras();</span><br><span class="line">            <span class="keyword">int</span> state = extras.getInt(BluetoothProfile.EXTRA_STATE);</span><br><span class="line">            <span class="keyword">int</span> prevState = extras.getInt(BluetoothProfile.EXTRA_PREVIOUS_STATE);</span><br><span class="line">            BluetoothDevice device = extras.getParcelable(BluetoothDevice.EXTRA_DEVICE);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (action.equals(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED)) &#123;</span><br><span class="line">                String stateStr = state == BluetoothProfile.STATE_CONNECTED ? <span class="string">"CONNECTED"</span></span><br><span class="line">                        : state == BluetoothProfile.STATE_CONNECTING ? <span class="string">"CONNECTING"</span></span><br><span class="line">                        : state == BluetoothProfile.STATE_DISCONNECTED ? <span class="string">"DISCONNECTED"</span></span><br><span class="line">                        : state == BluetoothProfile.STATE_DISCONNECTING ? <span class="string">"DISCONNECTING"</span></span><br><span class="line">                        : <span class="string">"Unknown"</span>;</span><br><span class="line">                String prevStateStr = prevState == BluetoothProfile.STATE_CONNECTED ? <span class="string">"CONNECTED"</span></span><br><span class="line">                        : prevState == BluetoothProfile.STATE_CONNECTING ? <span class="string">"CONNECTING"</span></span><br><span class="line">                        : prevState == BluetoothProfile.STATE_DISCONNECTED ? <span class="string">"DISCONNECTED"</span></span><br><span class="line">                        : prevState == BluetoothProfile.STATE_DISCONNECTING ? <span class="string">"DISCONNECTING"</span></span><br><span class="line">                        : <span class="string">"Unknown"</span>;</span><br><span class="line">                Log.d(TAG, <span class="string">"BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED: EXTRA_DEVICE="</span> + device.getName() + <span class="string">" EXTRA_STATE="</span> + stateStr + <span class="string">" EXTRA_PREVIOUS_STATE="</span> + prevStateStr);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (action.equals(BluetoothA2dp.ACTION_PLAYING_STATE_CHANGED)) &#123;</span><br><span class="line">                String stateStr = state == BluetoothA2dp.STATE_NOT_PLAYING ? <span class="string">"NOT_PLAYING"</span></span><br><span class="line">                        : state == BluetoothA2dp.STATE_PLAYING ? <span class="string">"PLAYING"</span></span><br><span class="line">                        : <span class="string">"Unknown"</span>;</span><br><span class="line">                String prevStateStr = prevState == BluetoothA2dp.STATE_NOT_PLAYING ? <span class="string">"NOT_PLAYING"</span></span><br><span class="line">                        : prevState == BluetoothA2dp.STATE_PLAYING ? <span class="string">"PLAYING"</span></span><br><span class="line">                        : <span class="string">"Unknown"</span>;</span><br><span class="line">                Log.d(TAG, <span class="string">"BluetoothA2dp.ACTION_PLAYING_STATE_CHANGED: EXTRA_DEVICE="</span> + device.getName() + <span class="string">" EXTRA_STATE="</span> + stateStr + <span class="string">" EXTRA_PREVIOUS_STATE="</span> + prevStateStr);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (action.equals(BluetoothHeadset.ACTION_AUDIO_STATE_CHANGED)) &#123;</span><br><span class="line">                String stateStr = state == BluetoothHeadset.STATE_AUDIO_CONNECTED ? <span class="string">"AUDIO_CONNECTED"</span></span><br><span class="line">                        : state == BluetoothHeadset.STATE_AUDIO_CONNECTING ? <span class="string">"AUDIO_CONNECTING"</span></span><br><span class="line">                        : state == BluetoothHeadset.STATE_AUDIO_DISCONNECTED ? <span class="string">"AUDIO_DISCONNECTED"</span></span><br><span class="line">                        : <span class="string">"Unknown"</span>;</span><br><span class="line">                String prevStateStr = prevState == BluetoothHeadset.STATE_AUDIO_CONNECTED ? <span class="string">"AUDIO_CONNECTED"</span></span><br><span class="line">                        : prevState == BluetoothHeadset.STATE_AUDIO_CONNECTING ? <span class="string">"AUDIO_CONNECTING"</span></span><br><span class="line">                        : prevState == BluetoothHeadset.STATE_AUDIO_DISCONNECTED ? <span class="string">"AUDIO_DISCONNECTED"</span></span><br><span class="line">                        : <span class="string">"Unknown"</span>;</span><br><span class="line">                Log.d(TAG, <span class="string">"BluetoothHeadset.ACTION_AUDIO_STATE_CHANGED: EXTRA_DEVICE="</span> + device.getName() + <span class="string">" EXTRA_STATE="</span> + stateStr + <span class="string">" EXTRA_PREVIOUS_STATE="</span> + prevStateStr);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (action.equals(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED)) &#123;</span><br><span class="line">                String stateStr = state == BluetoothHeadset.STATE_CONNECTED ? <span class="string">"CONNECTED"</span></span><br><span class="line">                        : state == BluetoothHeadset.STATE_CONNECTING ? <span class="string">"CONNECTING"</span></span><br><span class="line">                        : state == BluetoothHeadset.STATE_DISCONNECTED ? <span class="string">"DISCONNECTED"</span></span><br><span class="line">                        : state == BluetoothHeadset.STATE_DISCONNECTING ? <span class="string">"DISCONNECTING"</span></span><br><span class="line">                        : <span class="string">"Unknown"</span>;</span><br><span class="line">                String prevStateStr = prevState == BluetoothHeadset.STATE_CONNECTED ? <span class="string">"CONNECTED"</span></span><br><span class="line">                        : prevState == BluetoothHeadset.STATE_CONNECTING ? <span class="string">"CONNECTING"</span></span><br><span class="line">                        : prevState == BluetoothHeadset.STATE_DISCONNECTED ? <span class="string">"DISCONNECTED"</span></span><br><span class="line">                        : prevState == BluetoothHeadset.STATE_DISCONNECTING ? <span class="string">"DISCONNECTING"</span></span><br><span class="line">                        : <span class="string">"Unknown"</span>;</span><br><span class="line">                Log.d(TAG, <span class="string">"BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED: EXTRA_DEVICE="</span> + device.getName() + <span class="string">" EXTRA_STATE="</span> + stateStr + <span class="string">" EXTRA_PREVIOUS_STATE="</span> + prevStateStr);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (action.equals(BluetoothHeadset.ACTION_VENDOR_SPECIFIC_HEADSET_EVENT)) &#123;</span><br><span class="line">                String cmd = extras.getString(BluetoothHeadset.EXTRA_VENDOR_SPECIFIC_HEADSET_EVENT_CMD);</span><br><span class="line">                <span class="keyword">int</span> type = extras.getInt(BluetoothHeadset.EXTRA_VENDOR_SPECIFIC_HEADSET_EVENT_CMD_TYPE);</span><br><span class="line">                String[] args = extras.getStringArray(BluetoothHeadset.EXTRA_VENDOR_SPECIFIC_HEADSET_EVENT_ARGS);</span><br><span class="line">                String typeStr = type == BluetoothHeadset.AT_CMD_TYPE_READ ? <span class="string">"AT_CMD_TYPE_READ"</span></span><br><span class="line">                    : type == BluetoothHeadset.AT_CMD_TYPE_TEST ? <span class="string">"AT_CMD_TYPE_TEST"</span></span><br><span class="line">                    : type == BluetoothHeadset.AT_CMD_TYPE_SET ? <span class="string">"AT_CMD_TYPE_SET"</span></span><br><span class="line">                    : type == BluetoothHeadset.AT_CMD_TYPE_BASIC ? <span class="string">"AT_CMD_TYPE_BASIC"</span></span><br><span class="line">                    : type == BluetoothHeadset.AT_CMD_TYPE_ACTION ? <span class="string">"AT_CMD_TYPE_ACTION"</span></span><br><span class="line">                    : <span class="string">"Unknown"</span>;</span><br><span class="line">                String log = <span class="string">"BluetoothHeadset.ACTION_VENDOR_SPECIFIC_HEADSET_EVENT:"</span>;</span><br><span class="line">                log += <span class="string">" CMD="</span> + cmd;</span><br><span class="line">                log += <span class="string">" type="</span> + typeStr;</span><br><span class="line">                log += <span class="string">" args="</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; args.length; i++) &#123;</span><br><span class="line">                    log += args[i];</span><br><span class="line">                    <span class="keyword">if</span> (i != args.length - <span class="number">1</span>) &#123;</span><br><span class="line">                        log += <span class="string">","</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                Log.d(TAG, log);</span><br><span class="line">            &#125;    </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> BluetoothProfile.ServiceListener mProfileListener = <span class="keyword">new</span> BluetoothProfile.ServiceListener() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceConnected</span><span class="params">(<span class="keyword">int</span> profile, BluetoothProfile proxy)</span> </span>&#123;</span><br><span class="line">            String kind = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">if</span> (profile == BluetoothProfile.HEADSET) &#123;</span><br><span class="line">                mBluetoothHeadset = (BluetoothHeadset) proxy;</span><br><span class="line">                kind = <span class="string">"Headset"</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (profile == BluetoothProfile.A2DP) &#123;</span><br><span class="line">                mBluetoothA2dp = (BluetoothA2dp) proxy;</span><br><span class="line">                kind = <span class="string">"A2DP"</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (profile == BluetoothProfile.HEALTH) &#123;</span><br><span class="line">                mBluetoothHealth= (BluetoothHealth) proxy;</span><br><span class="line">                kind = <span class="string">"Health"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            List&lt;BluetoothDevice&gt; devices = proxy.getConnectedDevices();</span><br><span class="line">            String[] names = <span class="keyword">new</span> String[devices.size()];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; names.length; i++) &#123;</span><br><span class="line">                BluetoothDevice device = devices.get(i);</span><br><span class="line">                names[i] = kind + <span class="string">"\n"</span> + device.getName() + <span class="string">"\n"</span> + device.getAddress();</span><br><span class="line">            &#125;</span><br><span class="line">            mConnectedDevices.addAll(names);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceDisconnected</span><span class="params">(<span class="keyword">int</span> profile)</span> </span>&#123;</span><br><span class="line">            List&lt;String&gt; names = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mConnectedDevices.getCount(); i++) &#123;</span><br><span class="line">                String name = mConnectedDevices.getItem(i);</span><br><span class="line">                <span class="keyword">if</span> (profile == BluetoothProfile.HEADSET &amp;&amp; name.startsWith(<span class="string">"Headset"</span>)) &#123;</span><br><span class="line">                    names.add(name);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (profile == BluetoothProfile.A2DP &amp;&amp; name.startsWith(<span class="string">"A2DP"</span>)) &#123;</span><br><span class="line">                    names.add(name);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (profile == BluetoothProfile.HEALTH &amp;&amp; name.startsWith(<span class="string">"Health"</span>)) &#123;</span><br><span class="line">                    names.add(name);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (String name : names) &#123;</span><br><span class="line">                mConnectedDevices.remove(name);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (profile == BluetoothProfile.HEADSET) &#123;</span><br><span class="line">                mBluetoothHeadset = <span class="keyword">null</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (profile == BluetoothProfile.A2DP) &#123;</span><br><span class="line">                mBluetoothA2dp = <span class="keyword">null</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (profile == BluetoothProfile.HEALTH) &#123;</span><br><span class="line">                mBluetoothHealth = <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.main);</span><br><span class="line"></span><br><span class="line">        mConnectedDevices = <span class="keyword">new</span> ArrayAdapter&lt;String&gt;(<span class="keyword">this</span>, android.R.layout.simple_list_item_1);</span><br><span class="line"></span><br><span class="line">        mList = (ListView) findViewById(R.id.connected);</span><br><span class="line">        mList.setAdapter(mConnectedDevices);</span><br><span class="line">        mList.setOnItemClickListener(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onResume();</span><br><span class="line">        <span class="keyword">if</span> (!mBluetoothAdapter.isEnabled()) &#123;</span><br><span class="line">            Intent intent = <span class="keyword">new</span> Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);</span><br><span class="line">            startActivityForResult(intent, REQUEST_ENABLE_BT);</span><br><span class="line">        &#125;</span><br><span class="line">        IntentFilter filter = <span class="keyword">new</span> IntentFilter();</span><br><span class="line">        filter.addAction(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED);</span><br><span class="line">        filter.addAction(BluetoothA2dp.ACTION_PLAYING_STATE_CHANGED);</span><br><span class="line">        filter.addAction(BluetoothHeadset.ACTION_AUDIO_STATE_CHANGED);</span><br><span class="line">        filter.addAction(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED);</span><br><span class="line">        filter.addAction(BluetoothHeadset.ACTION_VENDOR_SPECIFIC_HEADSET_EVENT);</span><br><span class="line">        registerReceiver(mReceiver, filter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onPause();</span><br><span class="line">        unregisterReceiver(mReceiver);</span><br><span class="line">        closeProfiles();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onCreateOptionsMenu</span><span class="params">(Menu menu)</span> </span>&#123;</span><br><span class="line">        getMenuInflater().inflate(R.menu.activity_main, menu);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onMenuItemSelected</span><span class="params">(<span class="keyword">int</span> featureId, MenuItem item)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> itemId = item.getItemId();</span><br><span class="line">        <span class="keyword">if</span> (itemId == R.id.menu_get_profiles) &#123;</span><br><span class="line">            getProfiles();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (itemId == R.id.menu_close_profiles) &#123;</span><br><span class="line">            closeProfiles();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemClick</span><span class="params">(AdapterView&lt;?&gt; parent, View view, <span class="keyword">int</span> position, <span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        String text = ((TextView) view).getText().toString();</span><br><span class="line">        String kind= text.substring(<span class="number">0</span>, text.indexOf(<span class="string">"\n"</span>));</span><br><span class="line">        String addr = text.substring(text.lastIndexOf(<span class="string">"\n"</span>) + <span class="number">1</span>);</span><br><span class="line">        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(addr);</span><br><span class="line">        <span class="keyword">if</span> (kind.equals(<span class="string">"Headset"</span>)) &#123;</span><br><span class="line">            <span class="keyword">boolean</span> isAudioConnected = mBluetoothHeadset.isAudioConnected(device);</span><br><span class="line">            <span class="keyword">if</span> (mVoicerecognizing.contains(device)) &#123;</span><br><span class="line">                mVoicerecognizing.remove(device);</span><br><span class="line">                <span class="keyword">boolean</span> result = mBluetoothHeadset.stopVoiceRecognition(device);</span><br><span class="line">                Toast.makeText(<span class="keyword">this</span>, <span class="string">"isAudioConnected:"</span> + isAudioConnected + <span class="string">" stopVoiceRecognition:"</span> + result, Toast.LENGTH_LONG).show();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">boolean</span> result = mBluetoothHeadset.startVoiceRecognition(device);</span><br><span class="line">                <span class="keyword">if</span> (result) &#123;</span><br><span class="line">                    mVoicerecognizing.add(device);</span><br><span class="line">                &#125;</span><br><span class="line">                Toast.makeText(<span class="keyword">this</span>, <span class="string">"isAudioConnected:"</span> + isAudioConnected + <span class="string">" startVoiceRecognition:"</span> + result, Toast.LENGTH_LONG).show();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (kind.equals(<span class="string">"A2DP"</span>)) &#123;</span><br><span class="line">            Toast.makeText(<span class="keyword">this</span>, <span class="string">"isA2dpPlaying:"</span> + mBluetoothA2dp.isA2dpPlaying(device), Toast.LENGTH_LONG).show();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (kind.equals(<span class="string">"Health"</span>)) &#123;</span><br><span class="line">            Toast.makeText(<span class="keyword">this</span>, <span class="string">"Unsupported on this application"</span>, Toast.LENGTH_LONG).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getProfiles</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mBluetoothAdapter.getProfileProxy(<span class="keyword">this</span>, mProfileListener, BluetoothProfile.HEADSET);</span><br><span class="line">        mBluetoothAdapter.getProfileProxy(<span class="keyword">this</span>, mProfileListener, BluetoothProfile.A2DP);</span><br><span class="line">        mBluetoothAdapter.getProfileProxy(<span class="keyword">this</span>, mProfileListener, BluetoothProfile.HEALTH);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">closeProfiles</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mBluetoothHeadset != <span class="keyword">null</span>) &#123;</span><br><span class="line">            mBluetoothAdapter.closeProfileProxy(BluetoothProfile.HEADSET, mBluetoothHeadset);</span><br><span class="line">            mBluetoothHeadset = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (mBluetoothA2dp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            mBluetoothAdapter.closeProfileProxy(BluetoothProfile.A2DP, mBluetoothA2dp);</span><br><span class="line">            mBluetoothA2dp = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (mBluetoothHealth != <span class="keyword">null</span>) &#123;</span><br><span class="line">            mBluetoothAdapter.closeProfileProxy(BluetoothProfile.HEALTH, mBluetoothHealth);</span><br><span class="line">            mBluetoothHealth = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        mConnectedDevices.clear();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2019/08/27/Android-Bluetooth/" data-id="ckzfaqfuw00qidyuo5sr6oi8z" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "Android-Bluetooth",
+        "image": "http://jung-max.github.io/images/Android-Bluetooth/01.jpg",
+        "keywords": "Android Bluetooth",
+        "genre": "Android 지식",
+        "datePublished": "2019-08-27",
+        "dateCreated": "2019-08-27",
+        "dateModified": "2022-02-08",
+        "url": "http://jung-max.github.io/2019/08/27/Android-Bluetooth/",
+        "description": "
+블루투스 개요
+10m 정도의 가까운 거리에 있는 컴퓨터와 휴대폰, 가전제품등을 무선으로 연결하는 기술
+
+블루투스 장점
+비교적 저렴한 저전력 근거리 무선 솔루션
+다른 무선 기술들에 비해 전자파 간섭 현상에 강함
+여러 대의 블루투스 디바이스들과 동시에 접속 가능
+무선랜과 달리 데이터와 음성 채널을 모두 가지고 있음
+크기가 작아 이동 통신용 단말기 등에 탑재가"
+        "wordCount": 10294
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/08/27/Android-Platform-부분빌드방법/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            Android Platform 부분 빌드 방법
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2019/08/27/Android-Bluetooth/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>openCv page Dewarp 분석 -4 | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="openCV,pageDewarp">
+    
+    <meta name="description" content="저번 포스트에 이어서 계속 윤곽선 정보 검출에 대해서 알아보겠습니다. 1234567891011121314151617181920212223242526272829303132def get_contours(name, small, pagemask, masktype):    mask = get_mask(name, small, pagemask, masktype)">
+<meta name="keywords" content="openCV,pageDewarp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openCv page Dewarp 분석 -4">
+<meta property="og:url" content="http://jung-max.github.io/2020/02/12/openCV-pageDewarp-04/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="저번 포스트에 이어서 계속 윤곽선 정보 검출에 대해서 알아보겠습니다. 1234567891011121314151617181920212223242526272829303132def get_contours(name, small, pagemask, masktype):    mask = get_mask(name, small, pagemask, masktype)">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/0018.png">
+<meta property="og:updated_time" content="2022-02-08T02:11:11.813Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openCv page Dewarp 분석 -4">
+<meta name="twitter:description" content="저번 포스트에 이어서 계속 윤곽선 정보 검출에 대해서 알아보겠습니다. 1234567891011121314151617181920212223242526272829303132def get_contours(name, small, pagemask, masktype):    mask = get_mask(name, small, pagemask, masktype)">
+<meta name="twitter:image" content="http://jung-max.github.io/images/0018.png">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2020/02/12/opencv-pagedewarp-04/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/openCV/">openCV</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/openCV/pageDewarp/">pageDewarp</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-openCV-pageDewarp-04" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        openCv page Dewarp 분석 -4
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2020/02/12/openCV-pageDewarp-04/" class="article-date">
+            <time datetime="2020-02-12T06:21:07.000Z" itemprop="datePublished">2020-02-12</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/openCV/">openCV</a>, <a class="tag-link" href="/tags/pageDewarp/">pageDewarp</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>저번 포스트에 이어서 계속 윤곽선 정보 검출에 대해서 알아보겠습니다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_contours</span><span class="params">(name, small, pagemask, masktype)</span>:</span></span><br><span class="line"></span><br><span class="line">    mask = get_mask(name, small, pagemask, masktype)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> DEBUG_LEVEL &gt;= <span class="number">3</span>:</span><br><span class="line">        debug_show(name, <span class="number">0.7</span>, <span class="string">'get_mask'</span>, mask)</span><br><span class="line"></span><br><span class="line">    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)</span><br><span class="line"></span><br><span class="line">    contours_out = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> contour <span class="keyword">in</span> contours:</span><br><span class="line"></span><br><span class="line">        rect = cv2.boundingRect(contour)</span><br><span class="line">        xmin, ymin, width, height = rect</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (width &lt; TEXT_MIN_WIDTH <span class="keyword">or</span></span><br><span class="line">                height &lt; TEXT_MIN_HEIGHT <span class="keyword">or</span></span><br><span class="line">                width &lt; TEXT_MIN_ASPECT*height):</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        tight_mask = make_tight_mask(contour, xmin, ymin, width, height)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> tight_mask.sum(axis=<span class="number">0</span>).max() &gt; TEXT_MAX_THICKNESS:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        contours_out.append(ContourInfo(contour, rect, tight_mask))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> DEBUG_LEVEL &gt;= <span class="number">2</span>:</span><br><span class="line">        visualize_contours(name, small, contours_out)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> contours_out</span><br></pre></td></tr></table></figure>
+
+<h3 id="윤곽선-검출"><a href="#윤곽선-검출" class="headerlink" title="윤곽선 검출"></a>윤곽선 검출</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)</span><br></pre></td></tr></table></figure>
+
+<p>openCV에서 윤곽선 검출은 <code>cv2.findContours</code>함수를 통해 이루어집니다.</p>
+<p>기본형은 <code>contours, hierarchy = findContours(image, mode, method, contours=None, hierarchy=None, offset=None)</code>입니다.</p>
+<p>리턴형은 다음을 뜻합니다.</p>
+<ul>
+<li>contours : 검출된 윤곽선</li>
+<li>hierarchy : 계층 구조</li>
+</ul>
+<p>파라미터는 다음을 뜻합니다.</p>
+<ul>
+<li>image : 이미지</li>
+<li>mode : 윤곽선을 검출해 어떤 계층 구조의 형태를 사용할지 설정<ul>
+<li>cv2.RETR_EXTERNAL : 최외곽 윤곽선만 검색</li>
+</ul>
+</li>
+<li>method : 윤곽점의 표시 방법을 설정<ul>
+<li>cv2.CHAIN_APPROX_NONE : 검출된 윤곽선의 모든 윤곽점들을 좌푯값으로 반환한다. 반환된 좌푯값을 중심으로 8개의 이웃 중 하나 이상의 윤곽점들이 포함되 있습니다.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> contour <span class="keyword">in</span> contours:</span><br><span class="line"></span><br><span class="line">    rect = cv2.boundingRect(contour)</span><br><span class="line">    xmin, ymin, width, height = rect</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (width &lt; TEXT_MIN_WIDTH <span class="keyword">or</span></span><br><span class="line">            height &lt; TEXT_MIN_HEIGHT <span class="keyword">or</span></span><br><span class="line">            width &lt; TEXT_MIN_ASPECT*height):</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>for문을 통해서 윤곽선 정보를 하나식 처리합니다.</p>
+<p>첫번째로 <code>cv2.boundingRect</code>함수를 통해 윤곽선 경계의 사각형을 그립니다.</p>
+<p>윤곽선의 경계면을 둘러싸는 사각형을 구합니다. 반환되는 결과는 회전이 고려되지 않은 직사각형 형태를 띠는데, 경계면의 윤곽점들을 둘러싸는 최소 사각형의 형태를 뜁니다.</p>
+<p><img src="/images/0018.png" alt="boundingRect 예"></p>
+<p>openCV에서 좌표는 좌측 상단이 0,0 x축이 늘어나면 오른쪽으로, y축이 늘어나면 아래쪽으로 좌표가 이동됩니다. 따라서 사각형은 아래와 같이 표현할 수 있습니다.</p>
+<ul>
+<li>xmin, ymin : 사각형 좌측 상단 좌표</li>
+<li>xmin + width, ymin + height : 사각형 우측 하단 좌표</li>
+</ul>
+<p>다음 조건문을 통해서 외곽선을 분석해서 너무 길거나(15이상 또는 높이의 1.5배 이상) 텍스트가 되기엔 너무 두꺼운(2이상) 얼룩은 무시합니다.</p>
+<h3 id="윤곽선을-담은-최소크기의-이미지를-생성"><a href="#윤곽선을-담은-최소크기의-이미지를-생성" class="headerlink" title="윤곽선을 담은 최소크기의 이미지를 생성"></a>윤곽선을 담은 최소크기의 이미지를 생성</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tight_mask = make_tight_mask(contour, xmin, ymin, width, height)</span><br></pre></td></tr></table></figure>
+
+<p><code>make_tight_mask</code>을 통해서 윤곽선만을 담은 그림을 생성합니다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_tight_mask</span><span class="params">(contour, xmin, ymin, width, height)</span>:</span></span><br><span class="line"></span><br><span class="line">    tight_mask = np.zeros((height, width), dtype=np.uint8)</span><br><span class="line"></span><br><span class="line">    tight_contour = contour - np.array((xmin, ymin)).reshape((<span class="number">-1</span>, <span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">    cv2.drawContours(tight_mask, [tight_contour], <span class="number">0</span>,</span><br><span class="line">                     (<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>), <span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> tight_mask</span><br></pre></td></tr></table></figure>
+
+<p><code>np.zeros((height, width), dtype=np.uint8)</code>를 통해 높이, 넓이 만큼의 0으로 채워진 배열을 생성합니다.(윤곽선을 감싼 사각형 만큼의 캔버스 느낌으로)</p>
+<p><code>tight_contour = contour - np.array((xmin, ymin)).reshape((-1, 1, 2))</code>에서 <code>reshape</code>는 새로운 차원의 배열을 생성합니다. 여기서 새로운 형태의 배열은 데이터의 총 갯수가 같아야합니다.</p>
+<p>-1의 의미는 다른 요소를 먼저 설정하고 거기에 최적화된 값으로 자동 선택 됩니다. 여기서는 (x, 1, 2)가 선정되고 x값은 자동 선택됩니다.</p>
+<p><code>tight_contour</code>는 윤곽선을 좌측 상단(0,0)을 기준으로 한 좌표로 최대한 이동해서 그린 선의 좌표가 됩니다.</p>
+<p><code>cv2.drawContours(tight_mask, [tight_contour], 0, (1, 1, 1), -1)</code>은 윤곽선을 그리는 함수입니다.</p>
+<p>기본형은 <code>drawContours(image, contours, contourIdx, color, thickness=None, lineType=None, hierarchy=None, maxLevel=None, offset=None)</code>입니다.</p>
+<p>여기서 <code>contourIdx</code>는 지정된 윤곽선 번호만 그림니다. 음수면 모든 윤곽선을 그립니다. 여기서는 0이기 때문에 첫번째 윤곽선을 그립니다.</p>
+<p>결론적으로 윤곽선을 담은 최소크기의 이미지를 생성해서 리턴합니다.</p>
+<h3 id="윤곽선-결과-리턴"><a href="#윤곽선-결과-리턴" class="headerlink" title="윤곽선 결과 리턴"></a>윤곽선 결과 리턴</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> tight_mask.sum(axis=<span class="number">0</span>).max() &gt; TEXT_MAX_THICKNESS:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">    contours_out.append(ContourInfo(contour, rect, tight_mask))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> DEBUG_LEVEL &gt;= <span class="number">2</span>:</span><br><span class="line">    visualize_contours(name, small, contours_out)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> contours_out</span><br></pre></td></tr></table></figure>
+
+<p>sum(axis=0)의 뜻은 x축의 모든 요소를 더해서 배열로 만드는 것입다. </p>
+<p>여기서는 x=0의 모든 y값을 더함. x=1의 모든 y값을 더함 …. 결국 같은 x축의 y값의 합이므로 두께가 됩니다.</p>
+<p>max는 요소중 최댓값을 구합니다. 결국 제일 두꺼운 값을 구합니다.</p>
+<p>text의 제일 두꺼운 길이를 10을 기준으로 했기 때문에 이보다 두꺼우면 text라 보지 않고 무시합니다.</p>
+<p>최종적으로 <code>append</code>를 사용해서 <code>contours_out</code>에 자료를 추가한 후 리턴하게 됩니다.</p>
+<h4 id="ContourInfo"><a href="#ContourInfo" class="headerlink" title="ContourInfo"></a>ContourInfo</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ContourInfo</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, contour, rect, mask)</span>:</span></span><br><span class="line"></span><br><span class="line">        self.contour = contour</span><br><span class="line">        self.rect = rect</span><br><span class="line">        self.mask = mask</span><br><span class="line"></span><br><span class="line">        self.center, self.tangent = blob_mean_and_tangent(contour)</span><br><span class="line"></span><br><span class="line">        self.angle = np.arctan2(self.tangent[<span class="number">1</span>], self.tangent[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        clx = [self.proj_x(point) <span class="keyword">for</span> point <span class="keyword">in</span> contour]</span><br><span class="line"></span><br><span class="line">        lxmin = min(clx)</span><br><span class="line">        lxmax = max(clx)</span><br><span class="line"></span><br><span class="line">        self.local_xrng = (lxmin, lxmax)</span><br><span class="line"></span><br><span class="line">        self.point0 = self.center + self.tangent * lxmin</span><br><span class="line">        self.point1 = self.center + self.tangent * lxmax</span><br><span class="line"></span><br><span class="line">        self.pred = <span class="literal">None</span></span><br><span class="line">        self.succ = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">proj_x</span><span class="params">(self, point)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> np.dot(self.tangent, point.flatten()-self.center)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">local_overlap</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        xmin = self.proj_x(other.point0)</span><br><span class="line">        xmax = self.proj_x(other.point1)</span><br><span class="line">        <span class="keyword">return</span> interval_measure_overlap(self.local_xrng, (xmin, xmax))</span><br></pre></td></tr></table></figure>
+
+<p><code>ContourInfo</code>클래스는 윤곽선의 정보를 담은 클래스입니다.</p>
+<p>input으로는 <code>contour</code>(윤곽선), <code>rect</code>(윤곽선을 둘러싼 사각형), <code>mask</code>(윤곽선만을 담은 작은 그림(배경은 검정(0))을 받습니다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">blob_mean_and_tangent</span><span class="params">(contour)</span>:</span></span><br><span class="line"></span><br><span class="line">    moments = cv2.moments(contour)</span><br><span class="line"></span><br><span class="line">    area = moments[<span class="string">'m00'</span>]</span><br><span class="line"></span><br><span class="line">    mean_x = moments[<span class="string">'m10'</span>] / area</span><br><span class="line">    mean_y = moments[<span class="string">'m01'</span>] / area</span><br><span class="line"></span><br><span class="line">    moments_matrix = np.array([</span><br><span class="line">        [moments[<span class="string">'mu20'</span>], moments[<span class="string">'mu11'</span>]],</span><br><span class="line">        [moments[<span class="string">'mu11'</span>], moments[<span class="string">'mu02'</span>]]</span><br><span class="line">    ]) / area</span><br><span class="line"></span><br><span class="line">    _, svd_u, _ = cv2.SVDecomp(moments_matrix)</span><br><span class="line"></span><br><span class="line">    center = np.array([mean_x, mean_y])</span><br><span class="line">    tangent = svd_u[:, <span class="number">0</span>].flatten().copy()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> center, tangent</span><br></pre></td></tr></table></figure>
+
+<p><code>blob_mean_and_tangent</code>은 무게중심과 탄젠트값을 구하기 위한 함수입니다.</p>
+<p><code>cv2.moments(contour)</code>를 통해서 윤곽선의 모멘트값을 구합니다. 모멘트는 1XN 또는 Nx1의 형태, contour는 1xN입니다.</p>
+<p>이미지 모멘트는 컨투어에 관한 특징값을 뜻합니다. OpenCV에서는 moments 함수로 이미지 모멘트를 구합니다. 컨투어 포인트 배열을 입력하면 해당 컨투어의 모멘트를 딕셔너리 타입으로 반환합니다. 반환하는 모멘트는 총 24개로 10개의 위치 모멘트, 7개의 중심 모멘트, 7개의 정규화된 중심 모멘트로 이루어져 있습니다.</p>
+<ul>
+<li>Spatial Moments : M00, M01, M02, M03, M10, M11, M12, M20, M21, M30</li>
+<li>Central Moments : Mu02, Mu03, Mu11, Mu12, Mu20, Mu21, Mu30</li>
+<li>Central Normalized Moments : Nu02, Nu03, Nu11, Nu12, Nu20, Nu21, Nu30</li>
+</ul>
+<p><code>moments[&#39;m00&#39;]</code>는 0차 모멘트로서 폐곡선의 면적을 뜻합니다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mean_x = moments[<span class="string">'m10'</span>] / area  </span><br><span class="line">mean_y = moments[<span class="string">'m01'</span>] / area</span><br></pre></td></tr></table></figure>
+
+<p>위 부분은 윤곽선의 무게 중심을 구합니다.</p>
+<p>다음은 2차 중심 모멘트의 covariance matrix(공분산 행렬)를 구합니다.<br>해당 설명은 <a href="https://alyssaq.github.io/2015/computing-the-axes-or-orientation-of-a-blob/" rel="external nofollow noopener noreferrer" target="_blank">여기</a>를 참조하세요.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">moments_matrix = np.array([</span><br><span class="line">    [moments[<span class="string">'mu20'</span>], moments[<span class="string">'mu11'</span>]],</span><br><span class="line">    [moments[<span class="string">'mu11'</span>], moments[<span class="string">'mu02'</span>]]</span><br><span class="line">]) / area</span><br></pre></td></tr></table></figure>
+
+<p><code>_, svd_u, _ = cv2.SVDecomp(moments_matrix)</code>를 사용해서 계산된 왼쪽 특이 벡터값을 구합니다.(calculated left singular vectors)</p>
+<p><a href="https://docs.opencv.org/3.4/d2/de8/group__core__array.html#gab477b5b7b39b370bb03e75b19d2d5109" rel="external nofollow noopener noreferrer" target="_blank">cv2.SVDecomp</a>의 설명은 링크를 참조하세요.<br><a href="https://datascienceschool.net/view-notebook/30055dc68e8f4db0b7f6e4b56a571d52/" rel="external nofollow noopener noreferrer" target="_blank">SVD 특이값 분해</a>설명입니다. <a href="https://ko.wikipedia.org/wiki/%ED%8A%B9%EC%9D%B4%EA%B0%92_%EB%B6%84%ED%95%B4" rel="external nofollow noopener noreferrer" target="_blank">위키 설명</a><br><a href="https://docs.opencv.org/3.4/d1/dee/tutorial_introduction_to_pca.html" rel="external nofollow noopener noreferrer" target="_blank">openCV의 PCA설명</a>입니다.<br><a href="https://pathmind.com/kr/wiki/eigenvector" rel="external nofollow noopener noreferrer" target="_blank">PCA 설명</a>입니다.</p>
+<p>간단히 설명하면 PCA란 분포되어 있는 여러 데이터(좌표)의 의미있는 선 또는 축을 찾는 것 입니다.<br>공분산 행렬은 데이터의 분포 형태를 나타냅니다. x축과 y축의 분산은 각 변수의 분산으로 표현되고, 대각선 방향의 분산은 공분산으로 표현됩니다.</p>
+<p><img src="/images/0024.png" alt="공분산을 SVD했을때"></p>
+<p>위 그림은 <a href="https://darkpgmr.tistory.com/110" rel="external nofollow noopener noreferrer" target="_blank">여기</a>를 참조했습니다. 위 그림에서 <code>e₁ = svd_u</code>으로 보면 가장 분산이 큰 방향의 벡터입니다.</p>
+<p><code>tangent = svd_u[:, 0].flatten().copy()</code>에서 <code>svd_u[:, 0]</code>의 의미는 열에서 인덱스가 0인 값을 추출하는 것입니다.<br><code>flatten()</code>은 배열을 1차원으로 만들어 줍니다. 결과적으로 <code>[[x₁, y₁] [x₂, y₂]]</code>를 <code>[x₁, x₂]</code>로 변환합니다.</p>
+<p>다음은 실제적인 한 윤곽선에 대한 결과값입니다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">moments_matrix =  [[<span class="number">86.45154677</span>  <span class="number">2.15778746</span>]</span><br><span class="line"> [ <span class="number">2.15778746</span>  <span class="number">1.94461791</span>]]</span><br><span class="line">svd_u =  [[ <span class="number">0.99967459</span> <span class="number">-0.02550892</span>]</span><br><span class="line"> [ <span class="number">0.02550892</span>  <span class="number">0.99967459</span>]]</span><br><span class="line">tangent =  [<span class="number">0.99967459</span> <span class="number">0.02550892</span>]</span><br></pre></td></tr></table></figure>
+
+<p><code>self.angle = np.arctan2(self.tangent[1], self.tangent[0])</code> 아크탄젠트를 통해서 각도를 구합니다.<br>아크탄젠트의 기본형은 <code>p = np.arctan2(y,x)</code>입니다.</p>
+<p><img src="/images/0025.png" alt="아크탄젠트로 각도 구하기"></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">proj_x</span><span class="params">(self, point)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> np.dot(self.tangent, point.flatten()-self.center)</span><br></pre></td></tr></table></figure>
+
+<p><code>np.dot()</code>은 행렬의 곱을 뜻합니다. input으로 받는 point는 윤곽선의 좌표를 뜻합니다.<br>함수를 풀어보면 tangent와 윤곽선 좌표에서 무게중심을 뺀 좌표값을 핼렬의 곱 연산을 합니다. 그후 나온 결과를 <code>proj_x</code>로 돌려줍니다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">self.point0 = self.center + self.tangent * lxmin</span><br><span class="line"></span><br><span class="line">self.point1 = self.center + self.tangent * lxmax</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>point0은 x축은 contour의 좌측끝, y축은 contour의 중간을 뜻합니다.</li>
+<li>point1은 x축은 contour의 우측끝, y축은 contour의 중간을 뜻합니다.</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">local_overlap</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        xmin = self.proj_x(other.point0)</span><br><span class="line">        xmax = self.proj_x(other.point1)</span><br><span class="line">        <span class="keyword">return</span> interval_measure_overlap(self.local_xrng, (xmin, xmax))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">interval_measure_overlap</span><span class="params">(int_a, int_b)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> min(int_a[<span class="number">1</span>], int_b[<span class="number">1</span>]) - max(int_a[<span class="number">0</span>], int_b[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+<p><code>local_overlap</code>은 input값 두개의 차이값을 돌려줍니다. 여기서 차이 값은 x좌표에 한합니다.</p>
+<h4 id="visualize-contours"><a href="#visualize-contours" class="headerlink" title="visualize_contours"></a>visualize_contours</h4><p>디버그를 위해 이미지에서 윤곽선을 보여주기 위해서 사용하는 함수입니다.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">visualize_contours</span><span class="params">(name, small, cinfo_list)</span>:</span></span><br><span class="line"></span><br><span class="line">    regions = np.zeros_like(small)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> j, cinfo <span class="keyword">in</span> enumerate(cinfo_list):</span><br><span class="line"></span><br><span class="line">        cv2.drawContours(regions, [cinfo.contour], <span class="number">0</span>,</span><br><span class="line">                         CCOLORS[j % len(CCOLORS)], <span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">    mask = (regions.max(axis=<span class="number">2</span>) != <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    display = small.copy()</span><br><span class="line">    display[mask] = (display[mask]/<span class="number">2</span>) + (regions[mask]/<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> j, cinfo <span class="keyword">in</span> enumerate(cinfo_list):</span><br><span class="line">        color = CCOLORS[j % len(CCOLORS)]</span><br><span class="line">        color = tuple([c/<span class="number">4</span> <span class="keyword">for</span> c <span class="keyword">in</span> color])</span><br><span class="line"></span><br><span class="line">        cv2.circle(display, fltp(cinfo.center), <span class="number">3</span>,</span><br><span class="line">                   (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">1</span>, cv2.LINE_AA)</span><br><span class="line"></span><br><span class="line">        cv2.line(display, fltp(cinfo.point0), fltp(cinfo.point1),</span><br><span class="line">                 (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">1</span>, cv2.LINE_AA)</span><br><span class="line"></span><br><span class="line">    debug_show(name, <span class="number">1</span>, <span class="string">'contours'</span>, display)</span><br></pre></td></tr></table></figure>
+
+<p><code>regions = np.zeros_like(small)</code> : np.zeros_like는 input array와 같은 크기를 가지는 0으로 채워진 배열을 생성합니다.</p>
+<p><code>enumerate</code> : 반복문을 사용할때 몇번째 반복문인지 알 필요가 있을때 사용합니다. j값은 0~ 순서를 나타냅니다.</p>
+<p><code>cv2.drawContours(regions, [cinfo.contour], 0, CCOLORS[j % len(CCOLORS)], -1)</code> : for문을 통해 윤곽선에 색깔을 입힙니다. 결과는 아래와 같습니다.</p>
+<p><img src="/images/0023.png" alt="regions"></p>
+<p><code>mask = (regions.max(axis=2) != 0)</code> : max(axis=2) : z축 기준으로 각열의 요소를 그룹으로 해서 그중 제일 큰 값을 나타냅니다.</p>
+<p>axis에 관해서 더 알아보고 싶으면 <a href="http://taewan.kim/post/numpy_sum_axis/" rel="external nofollow noopener noreferrer" target="_blank">여기</a>를 참고 바랍니다.</p>
+<p><code>display[mask] = (display[mask]/2) + (regions[mask]/2)</code> : 색깔을 입히는 작업을 합니다. 아래 그림을 참고 하세요.</p>
+<p><img src="/images/0019.png" alt="regions[mask]/2"></p>
+<p><img src="/images/0020.png" alt="display[mask]/2"></p>
+<p><img src="/images/0021.png" alt="display[mask]"></p>
+<p>마지막으로 <code>cv2.circle</code>을 통해 무게 중심점을 찍고 <code>cv2.line</code>을 통해 하얀 선을 그립니다.</p>
+<p><img src="/images/0022.png" alt="윤곽선 표시"></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2020/02/12/openCV-pageDewarp-04/" data-id="ckzfaqfsm00n6dyuounoa6osb" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "openCv page Dewarp 분석 -4",
+        "image": "http://jung-max.github.io/images/0018.png",
+        "keywords": "openCV pageDewarp",
+        "genre": "openCV pageDewarp",
+        "datePublished": "2020-02-12",
+        "dateCreated": "2020-02-12",
+        "dateModified": "2022-02-08",
+        "url": "http://jung-max.github.io/2020/02/12/openCV-pageDewarp-04/",
+        "description": "저번 포스트에 이어서 계속 윤곽선 정보 검출에 대해서 알아보겠습니다.
+1234567891011121314151617181920212223242526272829303132def get_contours(name, small, pagemask, masktype):    mask = get_mask(name, small, pagemask, masktype)    "
+        "wordCount": 2278
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/02/14/openCV-pageDewarp-05/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            openCv page Dewarp 분석 -5
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2020/02/12/openCV-pageDewarp-03/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">openCv page Dewarp 분석 -3</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2020/02/12/openCV-pageDewarp-04/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

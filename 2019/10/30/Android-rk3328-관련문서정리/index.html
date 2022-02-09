@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>Android rk3328 관련 문서 정리 | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="Android Platform,Kernel,Linux">
+    
+    <meta name="description" content="Camera_for_RockChipSDK 참조 _v4.1 카메라 관련 드라이버위치 : drivers/media/video 현재 카메라는 관심외이므로 일단 스킵하기로 한다.  RealTek WiFi 드라이버 포팅 지침 _V1.1 RealTek wifi 드라이버 입력 기능 수정SDIO 또는 USB 방식 RealTek wifi 드라이버 Makefile 수정">
+<meta name="keywords" content="Android Platform,Kernel,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android rk3328 관련 문서 정리">
+<meta property="og:url" content="http://jung-max.github.io/2019/10/30/Android-rk3328-관련문서정리/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="Camera_for_RockChipSDK 참조 _v4.1 카메라 관련 드라이버위치 : drivers/media/video 현재 카메라는 관심외이므로 일단 스킵하기로 한다.  RealTek WiFi 드라이버 포팅 지침 _V1.1 RealTek wifi 드라이버 입력 기능 수정SDIO 또는 USB 방식 RealTek wifi 드라이버 Makefile 수정">
+<meta property="og:locale" content="ko">
+<meta property="og:updated_time" content="2022-02-08T02:11:11.777Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android rk3328 관련 문서 정리">
+<meta name="twitter:description" content="Camera_for_RockChipSDK 참조 _v4.1 카메라 관련 드라이버위치 : drivers/media/video 현재 카메라는 관심외이므로 일단 스킵하기로 한다.  RealTek WiFi 드라이버 포팅 지침 _V1.1 RealTek wifi 드라이버 입력 기능 수정SDIO 또는 USB 방식 RealTek wifi 드라이버 Makefile 수정">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2019/10/30/android-rk3328-관련문서정리/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Android-rk3328-관련문서정리" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Android rk3328 관련 문서 정리
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/10/30/Android-rk3328-관련문서정리/" class="article-date">
+            <time datetime="2019-10-30T06:16:52.000Z" itemprop="datePublished">2019-10-30</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Android-Platform/">Android Platform</a>, <a class="tag-link" href="/tags/Kernel/">Kernel</a>, <a class="tag-link" href="/tags/Linux/">Linux</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="Camera-for-RockChipSDK-참조-v4-1"><a href="#Camera-for-RockChipSDK-참조-v4-1" class="headerlink" title="Camera_for_RockChipSDK 참조 _v4.1"></a>Camera_for_RockChipSDK 참조 _v4.1</h1><ul>
+<li>카메라 관련 드라이버위치 : <code>drivers/media/video</code></li>
+<li>현재 카메라는 관심외이므로 일단 스킵하기로 한다.</li>
+</ul>
+<h1 id="RealTek-WiFi-드라이버-포팅-지침-V1-1"><a href="#RealTek-WiFi-드라이버-포팅-지침-V1-1" class="headerlink" title="RealTek WiFi 드라이버 포팅 지침 _V1.1"></a>RealTek WiFi 드라이버 포팅 지침 _V1.1</h1><ol>
+<li>RealTek wifi 드라이버 입력 기능 수정<br><br>SDIO 또는 USB 방식</li>
+<li>RealTek wifi 드라이버 Makefile 수정   </li>
+<li>RealTek WiFi 드라이버 디버그 로그 스위치</li>
+<li>커널에 통합 된 RealTek WiFi 드라이버<br><br><code>drivers/net/wireless/</code>의 <code>Makefile, Kconfig</code> 수정<br><br><code>drivers/net/wireless rockchip_wlan</code> 디렉토리에 드라이버 추가</li>
+</ol>
+<h1 id="Rockchip-오디오-개발-가이드-V1-0-20170215-linux3-10"><a href="#Rockchip-오디오-개발-가이드-V1-0-20170215-linux3-10" class="headerlink" title="Rockchip 오디오 개발 가이드 V1.0-20170215-linux3.10"></a>Rockchip 오디오 개발 가이드 V1.0-20170215-linux3.10</h1><ul>
+<li>오디오 관련 개념과 코드 구조</li>
+<li>사운드 카드 추가, 사운드 카드 디버그 및 액세스 방법</li>
+<li>디버깅 방법</li>
+</ul>
+<h1 id="Rockchip-CPUFreq-DVFS-개발-가이드-V1-0-20170221"><a href="#Rockchip-CPUFreq-DVFS-개발-가이드-V1-0-20170221" class="headerlink" title="Rockchip CPUFreq-DVFS 개발 가이드 V1.0-20170221"></a>Rockchip CPUFreq-DVFS 개발 가이드 V1.0-20170221</h1><p>Dynamic voltage and frequency scaling</p>
+<ul>
+<li>CMOS 회로의 전력 소비 소개</li>
+<li>DVFS 노드 소개(DTS)<ul>
+<li>CPU DVFS 노드(DTS)</li>
+<li>GPU DVFS 노드(DTS)</li>
+<li>DDR DVFS 노드(DTS)</li>
+</ul>
+</li>
+<li>코드 사용 인터페이스 : <code>include/linux/rockchip/dvfs.h</code></li>
+<li>디버그 인터페이스</li>
+</ul>
+<h1 id="Rockchip-gmac-모듈-개발-안내서-V1-0-20170221"><a href="#Rockchip-gmac-모듈-개발-안내서-V1-0-20170221" class="headerlink" title="Rockchip gmac 모듈 개발 안내서 V1.0-20170221"></a>Rockchip gmac 모듈 개발 안내서 V1.0-20170221</h1><h2 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h2><p>이더넷 MAC 컨트롤러는 RK 시리즈의 SoC에 내장되어 있으므로 이더넷 카드 기능을 구현하기 위해 하나의 이더넷 PHY 칩만 사용하면됩니다. 사양에 따르면, 다른 제조업체의 PHY가 레지스터 정의의 일부를 가지고 있더라도 이러한 범용 레지스터가 구성되어 있으면 기본적으로 PHY가 정상적으로 작동 할 수 있습니다. 따라서 Linux 드라이버에는 범용 PHY 드라이버가 있으며 현재 칩에 사용되는 SDK는 모두 범용 드라이버이므로 SoC의 MAC 드라이버를 구현해야합니다. 10 / 100M 이더넷 PHY와 MAC 사이의 인터페이스는 주로 MII와 RMII를 포함합니다. 10 / 100 / 1000M 이더넷 PHY와 MAC 간의 인터페이스는 주로 RGMII입니다.</p>
+<h2 id="GMAC模块"><a href="#GMAC模块" class="headerlink" title="GMAC模块"></a>GMAC模块</h2><ul>
+<li>DTS 설정법</li>
+<li>MAC주소 취득법</li>
+<li>GMAC FQA</li>
+<li>PHY 레지스터 읽기 및 쓰기 디버깅</li>
+</ul>
+<h1 id="Rockchip-I2C-개발-가이드-V1-0-20170220-수정-후"><a href="#Rockchip-I2C-개발-가이드-V1-0-20170220-수정-후" class="headerlink" title="Rockchip I2C 개발 가이드 V1.0-20170220-수정 후"></a>Rockchip I2C 개발 가이드 V1.0-20170220-수정 후</h1><ul>
+<li>I2C 기능 설명</li>
+<li>DTS 설정법</li>
+<li>코드 <code>drivers/i2c/busses/i2c-rk3x.c</code></li>
+<li>FQA</li>
+</ul>
+<h1 id="Rockchip-IO-Domain-개발-가이드-V0-1-20170220"><a href="#Rockchip-IO-Domain-개발-가이드-V0-1-20170220" class="headerlink" title="Rockchip IO-Domain 개발 가이드 V0.1-20170220"></a>Rockchip IO-Domain 개발 가이드 V0.1-20170220</h1><ul>
+<li>IO 파워 도메인 소개 및 역할<br><br>io 전원 도메인의 레지스터 구성을 설정하는 것<br><br>새 dts 파일을 작성할 때 실제 하드웨어 상황에 따라 올바른 구성을 만들어야</li>
+<li>전원 도메인을 구성하는 방법<br></li>
+</ul>
+<h1 id="Rockchip-PINCTRL-개발-안내서-V0-1-20170220"><a href="#Rockchip-PINCTRL-개발-안내서-V0-1-20170220" class="headerlink" title="Rockchip PINCTRL 개발 안내서 V0.1-20170220"></a>Rockchip PINCTRL 개발 안내서 V0.1-20170220</h1><p>RK3328 / RK3228H Soc에는 핀 컨트롤러가 내장되어 있으며 핀 레지스터를 구성하여 하나 또는 여러 핀 그룹의 기능과 특성을 구성 할 수 있습니다.<br>소프트웨어 측면에서 pinctrl 서브 시스템은 Linux 커널에서 제공되며 pinregister 드라이버는 pinctrl 드라이버로 작동 할 수 있으며 Linux 일반 인터페이스 사용법은 RK3328 / RK3228H pinctrl 드라이버가 다음 작업을 완료합니다.<br>A. 모든 핀 열거 및 이름 지정<br>B. 스위칭 핀 멀티플렉싱 기능<br>C. 핀의 구동 강도 구성<br>D. 핀의 풀다운 기능 구성<br>E. 핀의 슈미터 트리거 기능 구성</p>
+<h2 id="드라이브-파일-및-DTS-구성"><a href="#드라이브-파일-및-DTS-구성" class="headerlink" title="드라이브 파일 및 DTS 구성"></a>드라이브 파일 및 DTS 구성</h2><ul>
+<li><code>drivers/pinctrl/pinctrl-rk3368.c</code></li>
+<li>예 - hdmi pinctrl</li>
+<li>GPIO 등등</li>
+</ul>
+<h1 id="Rockchip-pwm-ir-개발-가이드-V1-00"><a href="#Rockchip-pwm-ir-개발-가이드-V1-00" class="headerlink" title="Rockchip pwm ir 개발 가이드 V1.00"></a>Rockchip pwm ir 개발 가이드 V1.00</h1><p>적외선 리모컨 관련 자료/DTS등</p>
+<h1 id="Rockchip-PWM-백라이트-개발-가이드-20170220"><a href="#Rockchip-PWM-백라이트-개발-가이드-20170220" class="headerlink" title="Rockchip PWM 백라이트 개발 가이드 -20170220"></a>Rockchip PWM 백라이트 개발 가이드 -20170220</h1><ul>
+<li>펄스주기 파형으로 생성되거나 일부 외부 구성 요소와 디지털 시뮬레이션을위한 변환기로 생성되는 제어 방법을 제공합니다.</li>
+<li>드라이버 파일 및 DTS 노드</li>
+</ul>
+<h1 id="Rockchip-Recovery-사용자-안내서-V1-00"><a href="#Rockchip-Recovery-사용자-안내서-V1-00" class="headerlink" title="Rockchip Recovery 사용자 안내서 V1.00"></a>Rockchip Recovery 사용자 안내서 V1.00</h1><ul>
+<li>복구 모드 소개<br><br>복구 모드는 Android 시스템 내부의 데이터 또는 시스템을 수정할 수있는 모드를 말합니다 (Windows pe 또는 DOS와 유사). 이 모드에서는 새로운 Android 시스템으로 스 와이프하거나 기존 시스템을 백업 또는 업그레이드 할 수 있으며 여기에서 공장 설정을 복원 할 수도 있습니다.</li>
+<li>OTA 패키지 컴파일</li>
+<li>RK 플랫폼 파티션 업그레이드 지침</li>
+<li>Update.img 업그레이드 방법</li>
+<li>SecureBoot 서명 도구</li>
+<li>Block 업그레이드 방법</li>
+</ul>
+<h1 id="Rockchip-RK805-개발-안내서-V1-0-20170220"><a href="#Rockchip-RK805-개발-안내서-V1-0-20170220" class="headerlink" title="Rockchip RK805 개발 안내서 V1.0-20170220"></a>Rockchip RK805 개발 안내서 V1.0-20170220</h1><p>이 문서는 Rockchip RK805의 다양한 하위 모듈에 중점을 둡니다. 관련 개념, 기능, dts 구성, 몇 가지 일반적인 문제의 분석 및 위치 지정을 소개합니다.</p>
+<p>RK805는 4 개의 고전류 DCDC, 3 개의 LDO, RTC 및 조정 가능한 파워 업 타이밍을 통합 한 고성능 PMIC입니다.<br>시스템에는 DCDC와 LDO의 두 가지 유형의 전원이 있습니다. 두 전원 공급 장치의 전체 특성은 다음과 같습니다. 자세한 내용을 검색하십시오.</p>
+<ol>
+<li>DCDC : 입출력 전압 차가 크면 효율이 높지만, 리플이 크고 비용이 비싸다는 문제가있어 큰 전류에서 큰 전압 차가 사용된다. 일반적으로 두 가지 작동 모드가 있습니다. PWM : 리플 과도 응답이 양호하고 효율이 낮습니다. PFM : 고효율이지만 부하 용량이 낮습니다.</li>
+<li>LDO : 입력 / 출력 전압 차이가 크면 효율이 낮고 비용이 낮습니다 LDO의 변환 효율을 향상시키기 위해 시스템은 LDO 출력 전압이 1.1V와 같은 관련 최적화를 수행합니다. 효율을 향상시키기 위해 입력 전압은 VCCIO_3에서 나올 수 있습니다. 3V DCDC가 제공됩니다. 따라서 회로가 LDO를 DCDC 출력 루프에 가능한 많이 연결하도록 허용 된 경우 전원 켜기 순서에주의하십시오.</li>
+</ol>
+<p>특징<br>RK805의 기능은 네 부분으로 나눌 수 있습니다 :</p>
+<ol>
+<li>레귤레이터 기능 : 각 DCDC, LDO 전원 상태 등을 제어합니다.</li>
+<li>rtc 기능 : 프로세서에 클럭 타이밍, 타이밍 및 기타 기능을 제공합니다.</li>
+<li>gpio 기능 : out1과 out2 (출력 전용)의 2 개의 푸시 풀 출력 핀이 있으며 일반 GPio로 사용할 수 있으며 AP에 2 개의 GPIO를 저장합니다.</li>
+<li>pwrkey 기능 : 전원 버튼의 누름 / 해제를 감지하면 AP의 GPIO를 저장할 수 있습니다.</li>
+</ol>
+<ul>
+<li>드라이버 및 메뉴 구성</li>
+<li>DTS 구성</li>
+<li>디버그 모드</li>
+</ul>
+<h1 id="Rockchip-SDMMC-SDIO-eMMC-개발-가이드-V1-0-20170215"><a href="#Rockchip-SDMMC-SDIO-eMMC-개발-가이드-V1-0-20170215" class="headerlink" title="Rockchip SDMMC SDIO eMMC 개발 가이드 V1.0-20170215"></a>Rockchip SDMMC SDIO eMMC 개발 가이드 V1.0-20170215</h1><ul>
+<li>DMMC DTS 구성 지침</li>
+<li>eMMC DTS 구성</li>
+</ul>
+<h1 id="Rockchip-보안-부팅-응용-프로그램-Note-v1-6-20170215"><a href="#Rockchip-보안-부팅-응용-프로그램-Note-v1-6-20170215" class="headerlink" title="Rockchip 보안 부팅 응용 프로그램 Note_v1.6_20170215"></a>Rockchip 보안 부팅 응용 프로그램 Note_v1.6_20170215</h1><h1 id="Rockchip-보안-부팅-응용-프로그램-Note-v1-7-20170519"><a href="#Rockchip-보안-부팅-응용-프로그램-Note-v1-7-20170519" class="headerlink" title="Rockchip 보안 부팅 응용 프로그램 Note_v1.7_20170519"></a>Rockchip 보안 부팅 응용 프로그램 Note_v1.7_20170519</h1><p>→ secure boot는 논외</p>
+<h1 id="Rockchip-SPI-개발-안내서-V1-0-20170217"><a href="#Rockchip-SPI-개발-안내서-V1-0-20170217" class="headerlink" title="Rockchip SPI 개발 안내서 V1.0-20170217"></a>Rockchip SPI 개발 안내서 V1.0-20170217</h1><p>SPI (직렬 주변 장치 인터페이스), 다음은 Linux 3.10 spi 드라이버에서 지원되는 기능 중 일부입니다.</p>
+<ul>
+<li><p>Motorola SPI 프로토콜이 기본적으로 사용됩니다.</p>
+</li>
+<li><p>8 비트 및 16 비트 지원</p>
+</li>
+<li><p>소프트웨어 프로그래밍 가능 클록 주파수 및 최대 50MHz의 전송 속도</p>
+</li>
+<li><p>SPI 4 전송 모드 구성 지원</p>
+</li>
+<li><p>SPI 컨트롤러 당 하나의 칩 선택 만 지원</p>
+<br>
+<br>
+</li>
+<li><p>DTS 노드 구성</p>
+</li>
+<li><p>SPI 인터페이스 코드</p>
+</li>
+</ul>
+<h1 id="Rockchip-Thermal-개발-가이드-3-10-코어-V1-0-20170220"><a href="#Rockchip-Thermal-개발-가이드-3-10-코어-V1-0-20170220" class="headerlink" title="Rockchip Thermal 개발 가이드 (3.10 코어) V1.0-20170220"></a>Rockchip Thermal 개발 가이드 (3.10 코어) V1.0-20170220</h1><p>Linux 커널에는 열 프레임 워크 세트가 정의되어 있으며 3.10 커널의 arm64 버전에서는 열 프레임 워크의 sysfs 인터페이스를 사용하여 현재 온도를 읽습니다. 온도 제어 전략은 다음과 같은 맞춤형 방법입니다.</p>
+<p> 성능 전략 : 현재 온도가 목표 온도를 초과하고 CPU가 고정 주파수로 설정되며 특정 값이 칩 레벨 dtsi 파일에 구성됩니다.</p>
+<p> 일반 전략 : 현재 온도가 목표 온도를 초과하면 CPU가 해당 주파수를 낮추고 특정 값은 칩 레벨 dtsi 파일에 구성됩니다.</p>
+<ul>
+<li>Menuconfig 구성</li>
+<li>DTS 구성</li>
+<li>정책 구성</li>
+<li>디버그 인터페이스</li>
+</ul>
+<h1 id="Rockchip-Uart-개발-가이드-V1-0-20170220"><a href="#Rockchip-Uart-개발-가이드-V1-0-20170220" class="headerlink" title="Rockchip Uart 개발 가이드 V1.0-20170220"></a>Rockchip Uart 개발 가이드 V1.0-20170220</h1><ul>
+<li>DTS 노드 구성</li>
+<li>Linux 직렬 포트 인쇄 끄기</li>
+<li>인쇄 로그의 직렬 포트 변경</li>
+</ul>
+<h1 id="Rockchip-U-Boot-개발-안내서-V3-8-20170214"><a href="#Rockchip-U-Boot-개발-안내서-V3-8-20170214" class="headerlink" title="Rockchip U-Boot 개발 안내서 V3.8-20170214"></a>Rockchip U-Boot 개발 안내서 V3.8-20170214</h1><p>Rockchip U-Boot는 다음을 지원하는 오픈 소스 UBoot 2014.10 공식 버전을 기반으로합니다.</p>
+<ul>
+<li>지원 칩 : RK3288, RK3036, RK312X, RK3368, RK322X, RK3366, RK3399, RK3328, RK322XH 등</li>
+<li>Android 플랫폼의 펌웨어 시작을 지원합니다.</li>
+<li>프로그램에 ROCKUSB 및 Google Fastboot 지원;</li>
+<li>보안 부팅 펌웨어 서명 암호화 보호 메커니즘을 지원합니다.</li>
+<li>LVDS, EDP, MIPI, HDMI, CVBS와 같은 디스플레이 장치 지원;</li>
+<li>SDCard, Emmc, Nand Flash 및 U 디스크와 같은 저장 장치를 지원합니다.</li>
+<li>부팅 로고 디스플레이, 충전 애니메이션 디스플레이, 저전력 관리, 전원 관리를 지원합니다.</li>
+<li>I2C, SPI, PMIC, CHARGE, GUAGE, USB, GPIO, PWM, DMA, GMAC, EMMC, NAND 인터럽트 및 기타 드라이버 지원;</li>
+</ul>
+<br>
+
+<ul>
+<li>플랫폼 아키텍처 지원</li>
+<li>캐시 메커니즘</li>
+<li>드라이버 지원</li>
+<li>Google Fastboot</li>
+<li>펌웨어 로딩</li>
+<li>Boot_merger 도구</li>
+<li>Resource_tool 도구</li>
+<li>Trust_merger 도구</li>
+<li>SDCard 및 U 디스크 부팅 업그레이드</li>
+</ul>
+<h1 id="Rockchip-USB-개발-가이드-V1-0-20170220"><a href="#Rockchip-USB-개발-가이드-V1-0-20170220" class="headerlink" title="Rockchip USB 개발 가이드 V1.0-20170220"></a>Rockchip USB 개발 가이드 V1.0-20170220</h1><ul>
+<li>하드웨어 회로 및 신호</li>
+<li>커널 모듈 구성</li>
+<li>DTS</li>
+<li>드라이버</li>
+<li>Android Gadget 구성</li>
+<li>일반적인 문제 분석</li>
+</ul>
+<h1 id="Rockchip-Vendor-Storage-Application-Note"><a href="#Rockchip-Vendor-Storage-Application-Note" class="headerlink" title="Rockchip Vendor Storage Application Note"></a>Rockchip Vendor Storage Application Note</h1><ul>
+<li>Vendor storage 관련?</li>
+<li>u-boot, 리눅스등 api 설명</li>
+</ul>
+<h1 id="Rockchip-대량-생산-프로그래밍-안내서-V1-1-20170214"><a href="#Rockchip-대량-생산-프로그래밍-안내서-V1-1-20170214" class="headerlink" title="Rockchip 대량 생산 프로그래밍 안내서 V1.1-20170214"></a>Rockchip 대량 생산 프로그래밍 안내서 V1.1-20170214</h1><h2 id="솔루션-1-USB-업그레이드-솔루션"><a href="#솔루션-1-USB-업그레이드-솔루션" class="headerlink" title="솔루션 1 (USB 업그레이드 솔루션)"></a>솔루션 1 (USB 업그레이드 솔루션)</h2><p>1 단계 : update.img 업그레이드 펌웨어 만들기</p>
+<p>2 단계 : 배치 레코딩에 FactoryTool 사용</p>
+<h2 id="옵션-2-SD-업그레이드-계획"><a href="#옵션-2-SD-업그레이드-계획" class="headerlink" title="옵션 2 (SD 업그레이드 계획)"></a>옵션 2 (SD 업그레이드 계획)</h2><p>1 단계 : update.img 업그레이드 펌웨어 만들기</p>
+<p>2 단계 : SD_Firmware_Tool 도구를 사용하여 펌웨어 업그레이드 SD 카드 만들기</p>
+<p>3 단계 : 업그레이드 SD 카드를 넣고 다시 켠 다음 펌웨어 굽기를 수행합니다.</p>
+<h2 id="옵션-3-작성자-업그레이드-계획"><a href="#옵션-3-작성자-업그레이드-계획" class="headerlink" title="옵션 3 (작성자 업그레이드 계획)"></a>옵션 3 (작성자 업그레이드 계획)</h2><p>1 단계 : update.img 업그레이드 펌웨어 만들기</p>
+<p>2 단계 : SpiImageTool 도구를 사용하여 버너 용 굽기 파일 만들기</p>
+<p>3 단계 : 펌웨어 레코딩을 위해 메모리 칩이 프로그래머에 연결됩니다.</p>
+<h1 id="Rockchip-Media-Center-사용-지침-V1-0-20170222"><a href="#Rockchip-Media-Center-사용-지침-V1-0-20170222" class="headerlink" title="Rockchip Media Center 사용 지침 _V1.0_20170222"></a>Rockchip Media Center 사용 지침 _V1.0_20170222</h1><p>개요<br>Media Center는 하나의 Box TV에 설치된 내부 저장소, SD 카드, U 디스크, 모바일 하드 디스크, Samba 저장소, NFS 저장소, DLNA 서비스 및 기타 장치 검색, 파일 탐색, 비디오 재생, 음악 재생, 사진 탐색, APK 모음입니다 신청. 이 애플리케이션은 RK 시리즈 칩 플랫폼과 호환되며 Android 4.4 이상을 지원합니다.<br>-&gt; 어플리 케이션 관련 내용</p>
+<h1 id="Rockchip-Clock-하위-모듈-개발-안내서-V1-1-20170220"><a href="#Rockchip-Clock-하위-모듈-개발-안내서-V1-1-20170220" class="headerlink" title="Rockchip Clock 하위 모듈 개발 안내서 V1.1-20170220"></a>Rockchip Clock 하위 모듈 개발 안내서 V1.1-20170220</h1><ul>
+<li>Clock의 서브 모듈관련</li>
+<li>dts</li>
+<li>API</li>
+<li>디버깅</li>
+</ul>
+<h1 id="Rockchip-Android7-1-WiFi-구성-설명-V1-4"><a href="#Rockchip-Android7-1-WiFi-구성-설명-V1-4" class="headerlink" title="Rockchip_Android7.1_WiFi_ 구성 설명 V1.4"></a>Rockchip_Android7.1_WiFi_ 구성 설명 V1.4</h1><ul>
+<li>wifi, bt관련 자동호환이 가능하도록 설정 방법 제공</li>
+</ul>
+<h1 id="VR-ver3-0에-대한-스트레스-테스트-스트레스-테스트-문서"><a href="#VR-ver3-0에-대한-스트레스-테스트-스트레스-테스트-문서" class="headerlink" title="VR_ver3.0에 대한 스트레스 테스트 스트레스 테스트 문서"></a>VR_ver3.0에 대한 스트레스 테스트 스트레스 테스트 문서</h1><ul>
+<li>스트레스 테스트 관련</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2019/10/30/Android-rk3328-관련문서정리/" data-id="ckzfaqfs500m6dyuokkmeqpa4" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "Android rk3328 관련 문서 정리",
+        "image": "http://jung-max.github.io",
+        "keywords": "Android Platform Kernel Linux",
+        "genre": "Android Platform 개발 환경",
+        "datePublished": "2019-10-30",
+        "dateCreated": "2019-10-30",
+        "dateModified": "2022-02-08",
+        "url": "http://jung-max.github.io/2019/10/30/Android-rk3328-관련문서정리/",
+        "description": "Camera_for_RockChipSDK 참조 _v4.1
+카메라 관련 드라이버위치 : drivers/media/video
+현재 카메라는 관심외이므로 일단 스킵하기로 한다.
+
+RealTek WiFi 드라이버 포팅 지침 _V1.1
+RealTek wifi 드라이버 입력 기능 수정SDIO 또는 USB 방식
+RealTek wifi 드라이버 Makefile 수정   "
+        "wordCount": 1321
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/11/06/Rockchip_uBoot_분석/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            Rockchip U-Boot 분석
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/10/22/Device_Tree_문법/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">Device Tree 문법</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2019/10/30/Android-rk3328-관련문서정리/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+

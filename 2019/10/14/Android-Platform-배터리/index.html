@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>Android Platform 배터리 개발 방법(rk816을 기준으로) | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="Android,Battery,DTS">
+    
+    <meta name="description" content="RK805에 관련된 배터리의 포팅이 필요한 일이 생겼다. 인터넷에서 RK805에 대한 배터리 부분을 찾아봤지만 찾을 수 없었다.검색 결과 RK805는 RK816드라이버를 사용한다는 것을 찾아냈다. 그에 따라 RK816의 배터리 관련된 메뉴얼을 번역했다. 원문 링크 1 개요 RK818 / RK816 연료 게이지RK818 / RK816은 여러 개의 고전류 DC">
+<meta name="keywords" content="Android,Battery,DTS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Platform 배터리 개발 방법(rk816을 기준으로)">
+<meta property="og:url" content="http://jung-max.github.io/2019/10/14/Android-Platform-배터리/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="RK805에 관련된 배터리의 포팅이 필요한 일이 생겼다. 인터넷에서 RK805에 대한 배터리 부분을 찾아봤지만 찾을 수 없었다.검색 결과 RK805는 RK816드라이버를 사용한다는 것을 찾아냈다. 그에 따라 RK816의 배터리 관련된 메뉴얼을 번역했다. 원문 링크 1 개요 RK818 / RK816 연료 게이지RK818 / RK816은 여러 개의 고전류 DC">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/Thumbnail/android-battery.jpg">
+<meta property="og:updated_time" content="2022-02-08T02:11:11.773Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Platform 배터리 개발 방법(rk816을 기준으로)">
+<meta name="twitter:description" content="RK805에 관련된 배터리의 포팅이 필요한 일이 생겼다. 인터넷에서 RK805에 대한 배터리 부분을 찾아봤지만 찾을 수 없었다.검색 결과 RK805는 RK816드라이버를 사용한다는 것을 찾아냈다. 그에 따라 RK816의 배터리 관련된 메뉴얼을 번역했다. 원문 링크 1 개요 RK818 / RK816 연료 게이지RK818 / RK816은 여러 개의 고전류 DC">
+<meta name="twitter:image" content="http://jung-max.github.io/images/Thumbnail/android-battery.jpg">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2019/10/14/android-platform-배터리/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Android/">Android</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Android/Platform-DTS/">Platform DTS</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Android-Platform-배터리" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Android Platform 배터리 개발 방법(rk816을 기준으로)
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/10/14/Android-Platform-배터리/" class="article-date">
+            <time datetime="2019-10-13T23:44:34.000Z" itemprop="datePublished">2019-10-14</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Android/">Android</a>, <a class="tag-link" href="/tags/Battery/">Battery</a>, <a class="tag-link" href="/tags/DTS/">DTS</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>RK805에 관련된 배터리의 포팅이 필요한 일이 생겼다. 인터넷에서 RK805에 대한 배터리 부분을 찾아봤지만 찾을 수 없었다.<br>검색 결과 RK805는 RK816드라이버를 사용한다는 것을 찾아냈다.</p>
+<p>그에 따라 RK816의 배터리 관련된 메뉴얼을 번역했다.</p>
+<p><a href="https://usermanual.wiki/Document/RockchipDeveloperGuideRK8186FuelGauge.1665816614/view" rel="external nofollow noopener noreferrer" target="_blank">원문 링크</a></p>
+<h1 id="1-개요-RK818-RK816-연료-게이지"><a href="#1-개요-RK818-RK816-연료-게이지" class="headerlink" title="1 개요 RK818 / RK816 연료 게이지"></a>1 개요 RK818 / RK816 연료 게이지</h1><p>RK818 / RK816은 여러 개의 고전류 DCDC, 여러 개의 LDO, 1 개의 선형 스위치, 1 개의 USB 5V 및 부스트 출력, 스위치 충전, 지능형 전력 경로 관리, 쿨롱 카운터, RTC 및 조정 가능한 전원 켜기 타이밍 및 기타 기능. 그중에서 “스위치 충전, 지능형 전력 경로 관리, 연료 게이지 (쿨롱 미터)”가이 문서에서 다루는 기능입니다.</p>
+<ol>
+<li><p>충전 관리 : 입력 전류 제한, 세류 충전, 정전류 / 정전압 충전, 충전 종료, 충전 시간 초과 보안 보호 및 기타 기능 포함.</p>
+</li>
+<li><p>지능형 전력 경로 관리 : 배터리를 충전하는 동안 시스템 부하에 필요한 전력을 공급하도록 출력 전압을 조정할 수 있습니다. 입력 전류 제한 상태에 들어가면 입력 전원이 우선적으로 시스템 부하에 공급되고 나머지 전원은 충전을 위해 배터리에 공급됩니다. 또한 시스템 부하에 필요한 전원이 지정된 입력 전원을 초과하거나 전원 입력이 연결 해제되면 지능형 전원 경로 관리 기능이 배터리와 시스템 부하 사이의 스위치를 자동으로 켜서 배터리가 시스템 부하에 동시에 추가 전원을 공급할 수 있습니다.</p>
+</li>
+<li><p>연료 게이지 (쿨롱 카운터) : 자체 기술 알고리즘을 사용하여 연료 게이지는 다양한 배터리의 충전 및 방전 특성에 따라 배터리 전력을 정확하게 측정하고 I2C 인터페이스를 통해 시스템 메인 칩에 배터리 전력 정보를 제공 할 수 있습니다. . 동시에 과방 전 된 배터리를위한 소 전류 충전, 배터리 온도 감지, 충전 안전 타이머 및 칩 열 보호와 같은 기능이 있습니다.</p>
+</li>
+</ol>
+<h1 id="2-연료-게이지-원리"><a href="#2-연료-게이지-원리" class="headerlink" title="2 연료 게이지 원리"></a>2 연료 게이지 원리</h1><ol>
+<li><p>세 가지 기본 원칙 : </p>
+<ol>
+<li>배터리의 개방 회로 전압과 배터리 전력의 백분율 (OCV-SOC) 곡선은 주로 배터리의 재료와 프로세스에 따라 달라지며 온도, 노화 등에 의해, 즉 배터리가 생산 된 후 영향을받습니다. SOC-OCV의 곡선은 기본적으로 변경되지 않습니다.</li>
+<li>배터리는 작동 중 배터리 분극의 영향을 받기 때문에 배터리 포트 전압에서 배터리의 OCV 전압을 추정하기 어렵 기 때문에 배터리가 분극되지 않은 경우 (예 : 장시간 종료 또는 저 전류 작동 시간이 긴 경우) 얻을 수 있습니다. OCV 전압을 사용할 수 있으며 SOC는 OCV에서 파생됩니다.</li>
+<li>쿨롱 미터는 실제로 배터리로 들어 오거나 나가는 전기의 양을 측정 할 수 있습니다. 배터리의 총 용량을 알면 SOC 값을 쉽게 얻을 수 있지만 쿨롱 미터의 누적 오류는 크며 배터리의 총 용량은 온도와 노화에 영향을받습니다. 동일한 영향으로 쿨롱 방식은 단시간에 더 나은 정확도를 보장 할 수 있으며 전체 배터리 용량을 정기적으로 업데이트해야합니다.</li>
+<li>현재의 성능이 좋은 연료 게이지는 실시간 연료 게이지 잔여 용량 상태를 얻기 위해 위의 OCV 추정치 및 쿨롱 계산을 기반으로합니다.</li>
+</ol>
+</li>
+<li><p>쿨롱 방법<br>배터리의 양극과 음극 단자 사이에 전류 체크 저항이 직렬로 연결되어 저항을 통해 전류가 흐르면 V_delta가 발생하고 V_delta를 감지하여 배터리에 흐르는 전류를 계산할 수 있습니다. 따라서 배터리의 전력 변화를 정확하게 추적하고 정확도를 1 %에 도달 할 수 있으며, 배터리 전압과 온도를 일치시킴으로써 배터리 노화와 같은 요인이 측정 결과에 미치는 영향을 크게 줄일 수 있습니다.</p>
+</li>
+<li><p>현재 신호 컨디셔닝<br>전류는 20 또는 10 밀리 옴 저항으로 샘플링되고 정전류 소스에 의해 바이어스가 제공되어 네거티브 전류 신호를 양의 값으로 증가시킨 다음 op 앰프에 의해 기준 전압 Vref로 증폭되고 ADC 모듈에 의해 디지털 값으로 변환됩니다.</p>
+</li>
+<li><p>전압 획득<br>배터리 전압은 전압 분배 회로 (부분 전압 비율 0.5)를 Vref 범위로 나누고 ADC 모듈에 의해 디지털 출력으로 변환합니다.</p>
+</li>
+<li><p>평균 전류 수집<br>디지털 부분은 정정 된 전류 값 및 다중 자리 누산기를 초당 256 회 중첩한다. 1 초가 지난 후 어큐뮬레이터의 값을 256으로 나누어 평균 전류 값을 얻습니다.</p>
+</li>
+<li><p>쿨롱 카운터 업데이트<br>쿨롱 카운터는 평균 전류가 업데이트 될 때 자동으로 한 번 추가됩니다.</p>
+</li>
+</ol>
+<h1 id="3-중요한-개념"><a href="#3-중요한-개념" class="headerlink" title="3 중요한 개념"></a>3 중요한 개념</h1><ul>
+<li><code>ocv 전압</code> 개방 회로 전압. 이 시점의 부하는 개방 상태와 매우 유사하여이 시점의 전압이 정확하기 때문에 전원 켜기 시퀀스 중에 PMIC가 획득됩니다. 사용 : 최소 30 분 동안 셧다운이 충족되면 배터리의 분극이 기본적으로 제거된다고 생각합니다.이 시점에서 얻은 OCV 전압은 실제로 유효하므로 전압은 <code>ocv_table</code>을 쿼리하여 쿨롱 카운터의 값을 업데이트하는 새로운 전원을 얻는 데 사용됩니다. 쿨롱 카운터의 수정.</li>
+<li>ocv 테이블의 각 배터리는 자체 배터리 특성 곡선을 가지고 있습니다. ocv 특정 전압이 특정 전력에 해당한다는 원리에 따라 0 % ~ 100 %의 전력을 21 포인트로 5 % 씩 나누어 조각을 얻습니다. / Group “Voltage &lt;-&gt; Battery”양식. 이 표의 목적은 배터리 전원을 켠 후, 긴 종료 후 및 긴 절전 모드에서 처음으로 쿨롱 카운터를 수정하는 것입니다. 예를 들면 다음과 같습니다.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ocv_table = &lt;3400 3599 3671 3701 3728 3746 3762  ......  4088 4132 4183&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>해당 : 3400mv : 0 %, 3599mv : 5 %, 3671mv : 10 %, …. 4183mv : 100 %;</p>
+<ul>
+<li><p>최대 입력 전류 및 최대 충전 전류는 소프트웨어에서 “최대 입력 전류”라고하는 어댑터에서 가져올 수있는 최대 전류를 얻도록 구성됩니다. 예를 들어, 일반적인 소프트웨어 구성 최대 입력 전류 인 5V / 2A 어댑터는 2A입니다 (1.8A로 설정 가능). RK818 / 816에는 지능적인 전원 경로 관리 기능, 즉 어댑터의 전원이 우선적으로 시스템에 공급되고 배터리 잔량이 충전됩니다. 배터리 충전을 허용하기 위해 소프트웨어에서 구성되는 최대 잔류 전류 값을 “최대 충전 전류”라고합니다.</p>
+</li>
+<li><p>입력 전류 한계의 발생은 배터리 및 시스템에 대한 공급 전류 요구가 최대 입력 전류를 초과 할 때, 이러한 “불충분 한 사용”조건을 “입력 전류 한계 발생”이라고하는 것으로 이해 될 수있다. 또는, 입력 전류 제한은 배터리의 요구 조건 하에서 배터리가 최대 충전 전류 상태로 충전 될 수 없을 때 발생한다는 것을 이해할 수있다. 이 기능은 주로 전하 차단을위한 세 가지 조건 중 하나로 사용됩니다 (다른 두 가지는 전하 차단 전압 및 오프 전류).</p>
+</li>
+<li><p>슬랙 모드는 매우 낮은 부하 조건 (현재 2 차 대기의 경우에만)에 있고 시스템의 부하 전류가 특정 임계 값 미만으로 특정 임계 값 (소프트웨어 구성 가능)을 계속 초과하면 연료 게이지 모듈이 슬랙 모드로 들어갑니다.</p>
+</li>
+<li><p>이완 전압 이완 모드에서 연료 게이지는 8 분마다 일련의 전압을 수집하여 이완 전압이라고합니다. 사용 : 2 차 대기의 부하가 매우 작습니다 슬랙 전압이 개방 회로 전압에 근접한 것으로 추정되므로 드라이브 처리는 ocv_table 테이블을 사용하여 시스템이 2 차 대기에서 깨어나 특정 조건을 충족 할 때 쿨롱 카운터를 확인합니다.</p>
+</li>
+<li><p>완료 충전 차단 신호 배터리 충전 차단이 발생하면 레지스터는 완료 신호라는 상태 신호를 생성합니다. 사용 : 소프트웨어는이 신호 만 실제 하드웨어 충전 차단으로 간주 한 다음 해당 알고리즘 흐름을 입력하여 표시된 전력을 조정합니다.</p>
+</li>
+<li><p>칩 열 보호 PMIC의 자체 보호 메커니즘은 실제로 피드백 메커니즘입니다. 칩 온도가 설정된 임계 값보다 높으면 입력 전류가 점차 감소하여 PMIC 워크로드가 감소하고 칩 열이 줄어 듭니다. 이 피드백 프로세스는 하드웨어에 의해 자동으로 수행되며 소프트웨어가 참여할 수 없으며 극한 조건에서도 충전 및 중지가 엄격한 온도와 전류 크기 비율이 없습니다.</p>
+</li>
+<li><p>충전 차단 조건 충전 전류가 차단 전류에 도달하면 전압이 차단 전압에 도달하고 입력 전류 제한없이 충전 차단 신호가 생성되어 더 이상 충전이 계속되지 않으므로 배터리가 가득 찬 것으로 판단됩니다. (해석하기 위해 전류 제한 조건에 들어갈 필요가 있습니다. 그렇지 않으면 충전 전류가 작아 지는지 또는 현재 시스템 부하가 크고 배터리의 충전 전류가 작은 지 여부를 알 수 없습니다)</p>
+</li>
+</ul>
+<h1 id="4-드라이버-및-menuconfig"><a href="#4-드라이버-및-menuconfig" class="headerlink" title="4 드라이버 및 menuconfig"></a>4 드라이버 및 menuconfig</h1><h2 id="4-1-연료-게이지-구동-기능"><a href="#4-1-연료-게이지-구동-기능" class="headerlink" title="4.1 연료 게이지 구동 기능"></a>4.1 연료 게이지 구동 기능</h2><ol>
+<li>배터리 전원 통계 및 디스플레이; </li>
+<li>충전 전류 및 전압 설정 (배터리 및 충전기 유형에 따라), 단일 / 이중 포트 충전 지원; </li>
+<li>OTG 장치 5V 전원 공급 장치; </li>
+<li>배터리 온도 감지</li>
+</ol>
+<h2 id="4-2-커널-4-4"><a href="#4-2-커널-4-4" class="headerlink" title="4.2 커널 4.4"></a>4.2 커널 4.4</h2><p>Rk818 드라이버 및 매크로 구성 (기능이 너무 커서 두 개의 드라이버로 분할 됨) :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">drivers/power/rk818_battery.c         //전원 디스플레이 처리를 담당 함 </span><br><span class="line">drivers/power/rk818_charger.c         //충전기 감지, 충전 전압, 전류 설정 처리를 담당</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CONFIG_BATTERY_RK818</span><br><span class="line">CONFIG_CHARGER_RK818</span><br></pre></td></tr></table></figure>
+
+<p>Rk816 드라이버 및 매크로 구성 :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drivers/power/rk816_battery.c           //전원 디스플레이 + 충전기 감지, 충전 전압, 전류 설정 처리 책임</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONFIG_BATTERY_RK816</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-3-커널-3-10"><a href="#4-3-커널-3-10" class="headerlink" title="4.3 커널 3.10"></a>4.3 커널 3.10</h2><p>Rk818 드라이버 및 매크로 구성 :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drivers/power/rk818_battery.c          //전원 표시 + 충전기 감지, 충전 전압, 전류 설정 처리</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONFIG_BATTERY_RK818</span><br></pre></td></tr></table></figure>
+
+<p>Rk816 드라이버 및 매크로 구성 :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drivers/power/rk816_battery.c           //전원 표시 + 충전기 감지, 충전 전압, 전류 설정 처리</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONFIG_BATTERY_RK816</span><br></pre></td></tr></table></figure>
+
+<h1 id="DTS-구성"><a href="#DTS-구성" class="headerlink" title="DTS 구성"></a>DTS 구성</h1><h2 id="커널-4-4"><a href="#커널-4-4" class="headerlink" title="커널 4.4"></a>커널 4.4</h2><p>DTS 구성은 두 부분으로 구성됩니다.</p>
+<ol>
+<li>배터리 부분 : 필수.<br>전체 배터리 노드 정보는 다음과 같습니다. 노드는 RK818 노드 안에 위치합니다 .RKRK의 배터리 및 충전기 하위 장치 드라이버는 배터리 노드의 정보를 사용합니다. 여기서 ntc_table, ntc_degree_from, dc_det_gpio는 선택 사항이며 나머지는 필수입니다.</li>
+</ol>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">battery </span>&#123;</span><br><span class="line">    compatible = “rk818‐battery”</span><br><span class="line">    ocv_table = <span class="params">&lt;<span class="number">3400</span> <span class="number">3599</span> <span class="number">3671</span> <span class="number">3701</span> <span class="number">3728</span> <span class="number">3746</span> <span class="number">3762</span></span></span><br><span class="line"><span class="params">                <span class="number">3772</span> <span class="number">3781</span> <span class="number">3792</span> <span class="number">38163836</span> <span class="number">3866</span> <span class="number">3910</span></span></span><br><span class="line"><span class="params">                <span class="number">3942</span> <span class="number">39714002</span> <span class="number">4050</span> <span class="number">4088</span> <span class="number">4132</span> <span class="number">4183</span>&gt;</span>;</span><br><span class="line">    ntc_table = <span class="params">&lt;<span class="number">43662</span> <span class="number">41676</span> <span class="number">39793</span> <span class="number">38005</span> <span class="number">36308</span> <span class="number">34696</span> <span class="number">33164</span></span></span><br><span class="line"><span class="params">                <span class="number">31709</span> <span class="number">30326</span> <span class="number">29011</span> <span class="number">27760</span> <span class="number">26570</span> <span class="number">25438</span> <span class="number">24361</span></span></span><br><span class="line"><span class="params">                <span class="number">23335</span> <span class="number">22358</span> <span class="number">21427</span> <span class="number">20540</span> <span class="number">19695</span> <span class="number">18890</span> <span class="number">18121</span></span></span><br><span class="line"><span class="params">                <span class="number">17389</span> <span class="number">16690</span> <span class="number">16022</span> <span class="number">14778</span> <span class="number">14197</span> <span class="number">13642</span> <span class="number">13113</span></span></span><br><span class="line"><span class="params">                <span class="number">12606</span> <span class="number">12122</span> <span class="number">11659</span> <span class="number">11216</span> <span class="number">10793</span> <span class="number">10388</span> <span class="number">10000</span></span></span><br><span class="line"><span class="params">                <span class="number">9629</span> <span class="number">9273</span> <span class="number">8933</span> <span class="number">8607</span> <span class="number">8295</span>&gt;</span>;</span><br><span class="line">    ntc_degree_from = <span class="params">&lt;<span class="number">1</span> <span class="number">10</span>&gt;</span>;</span><br><span class="line">    design_capacity = <span class="params">&lt;<span class="number">4000</span>&gt;</span>;</span><br><span class="line">    design_qmax = <span class="params">&lt;<span class="number">4100</span>&gt;</span>;</span><br><span class="line">    bat_res = <span class="params">&lt;<span class="number">120</span>&gt;</span>;</span><br><span class="line">    max_input_current = <span class="params">&lt;<span class="number">2000</span>&gt;</span>;</span><br><span class="line">    max_chrg_current = <span class="params">&lt;<span class="number">1800</span>&gt;</span>;</span><br><span class="line">    max_chrg_voltage = <span class="params">&lt;<span class="number">4200</span>&gt;</span>;</span><br><span class="line">    sleep_enter_current = <span class="params">&lt;<span class="number">300</span>&gt;</span>;</span><br><span class="line">    sleep_exit_current = <span class="params">&lt;<span class="number">300</span>&gt;</span>;</span><br><span class="line">    power_off_thresd = <span class="params">&lt;<span class="number">3400</span>&gt;</span>;</span><br><span class="line">    zero_algorithm_vol = <span class="params">&lt;<span class="number">3850</span>&gt;</span>;</span><br><span class="line">    energy_mode = <span class="params">&lt;<span class="number">0</span>&gt;</span>;</span><br><span class="line">    fb_temperature = <span class="params">&lt;<span class="number">105</span>&gt;</span>;</span><br><span class="line">    sample_res = <span class="params">&lt;<span class="number">10</span>&gt;</span>;</span><br><span class="line">    max_soc_offset = <span class="params">&lt;<span class="number">60</span>&gt;</span>;</span><br><span class="line">    monitor_sec = <span class="params">&lt;<span class="number">5</span>&gt;</span>;</span><br><span class="line">    virtual_power = <span class="params">&lt;<span class="number">0</span>&gt;</span>;</span><br><span class="line">    power_dc2otg = <span class="params">&lt;<span class="number">1</span>&gt;</span>;</span><br><span class="line">    dc_det_gpio = <span class="params">&lt;<span class="variable">&amp;gpio0</span> GPIO_C1 GPIO_ACTIVE_LOW&gt;</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>충전기 부분 : 옵션</li>
+</ol>
+<p>typec 포트가 지원되지 않으면이 구성 부분이 필요하지 않습니다. typec 충전 포트를 지원하는 시스템의 경우 아래에 표시된대로 rk818의 루트 노드 아래에 “extcon = &lt;&amp; fusbn&gt;”노드를 추가하십시오 (여기서 n = 0,1 .., 특정 참조는 실제 하드웨어를 참조하십시오). rk818_charger.c는 typec의 충전기 유형 감지 정보를 얻기 위해 참조에 따라 typec 알림 체인을 등록해야하기 때문에.</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">rk818:</span> <span class="class">pmic@1c </span>&#123;</span><br><span class="line">    compatible= <span class="string">"rockchip,rk818"</span>;</span><br><span class="line">    status= <span class="string">"okay"</span>;</span><br><span class="line">    reg= <span class="params">&lt;<span class="number">0x1c</span>&gt;</span>;</span><br><span class="line">    clock‐output‐names= <span class="string">"xin32k"</span>, <span class="string">"wifibt_32kin"</span>;</span><br><span class="line">    interrupt‐parent= <span class="params">&lt;<span class="variable">&amp;gpio1</span>&gt;</span>;</span><br><span class="line">    interrupts = <span class="params">&lt;<span class="number">21</span>IRQ_TYPE_LEVEL_LOW&gt;</span>;</span><br><span class="line">    pinctrl‐names= <span class="string">"default"</span>;</span><br><span class="line">    pinctrl‐<span class="number">0</span>= <span class="params">&lt;<span class="variable">&amp;pmic_int_l</span>&gt;</span>;</span><br><span class="line">    rockchip,system‐power‐controller;</span><br><span class="line">    rk818,support_dc_chg= <span class="params">&lt;<span class="number">1</span>&gt;</span>;<span class="comment">/*1: dc chg; 0:usb chg*/</span></span><br><span class="line">    wakeup‐source;</span><br><span class="line">    extcon = <span class="params">&lt;<span class="variable">&amp;fusb0</span>&gt;</span>; <span class="comment">// 중요!!!</span></span><br><span class="line">    <span class="meta">#clock‐cells= &lt;1&gt;;</span></span><br><span class="line"></span><br><span class="line">    <span class="class">battery </span>&#123;</span><br><span class="line">            ...........</span><br><span class="line">            ...........</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-2-커널-3-10"><a href="#5-2-커널-3-10" class="headerlink" title="5.2 커널 3.10"></a>5.2 커널 3.10</h2><p>RK816과 RK818의 노드 정보는 기본적으로 동일하며 개별 속성 만 다릅니다. 다음은 RK818의 예입니다.</p>
+<p>완전한 배터리 노드 정보가 아래에 표시되며 노드는 RK818 노드 안에 있습니다. 그 중 ntc_table, ntc_degree_from, dc_det_gpio, dc_det_adc는 선택적 부분이며 나머지는 필수 부분입니다.</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">battery </span>&#123;</span><br><span class="line">    compatible = <span class="string">"rk818‐battery"</span> <span class="comment">//rk816 인 경우 "rk816- 배터리"로 변경하십시오.</span></span><br><span class="line">    ocv_table = <span class="params">&lt;<span class="number">3400</span> <span class="number">3599</span> <span class="number">3671</span> <span class="number">3701</span> <span class="number">3728</span> <span class="number">3746</span> <span class="number">3762</span></span></span><br><span class="line"><span class="params">                <span class="number">3772</span> <span class="number">3781</span> <span class="number">3792</span> <span class="number">38163836</span> <span class="number">3866</span> <span class="number">3910</span></span></span><br><span class="line"><span class="params">                <span class="number">3942</span> <span class="number">39714002</span> <span class="number">4050</span> <span class="number">4088</span> <span class="number">4132</span> <span class="number">4183</span>&gt;</span>;</span><br><span class="line">    ntc_table = <span class="params">&lt;<span class="number">43662</span> <span class="number">41676</span> <span class="number">39793</span> <span class="number">38005</span> <span class="number">36308</span> <span class="number">34696</span> <span class="number">33164</span></span></span><br><span class="line"><span class="params">                <span class="number">31709</span> <span class="number">30326</span> <span class="number">29011</span> <span class="number">27760</span> <span class="number">26570</span> <span class="number">25438</span> <span class="number">24361</span></span></span><br><span class="line"><span class="params">                <span class="number">23335</span> <span class="number">22358</span> <span class="number">21427</span> <span class="number">20540</span> <span class="number">19695</span> <span class="number">18890</span> <span class="number">18121</span></span></span><br><span class="line"><span class="params">                <span class="number">17389</span> <span class="number">16690</span> <span class="number">16022</span> <span class="number">14778</span> <span class="number">14197</span> <span class="number">13642</span> <span class="number">13113</span></span></span><br><span class="line"><span class="params">                <span class="number">12606</span> <span class="number">12122</span> <span class="number">11659</span> <span class="number">11216</span> <span class="number">10793</span> <span class="number">10388</span> <span class="number">10000</span></span></span><br><span class="line"><span class="params">                <span class="number">9629</span> <span class="number">9273</span> <span class="number">8933</span> <span class="number">8607</span> <span class="number">8295</span>&gt;</span>;</span><br><span class="line">    ntc_degree_from = <span class="params">&lt;<span class="number">1</span> <span class="number">10</span>&gt;</span>;</span><br><span class="line">    design_capacity = <span class="params">&lt;<span class="number">4000</span>&gt;</span>;</span><br><span class="line">    design_qmax = <span class="params">&lt;<span class="number">4100</span>&gt;</span>;</span><br><span class="line">    bat_res = <span class="params">&lt;<span class="number">120</span>&gt;</span>;</span><br><span class="line">    max_input_current = <span class="params">&lt;<span class="number">2000</span>&gt;</span>;</span><br><span class="line">    max_chrg_current = <span class="params">&lt;<span class="number">1800</span>&gt;</span>;</span><br><span class="line">    max_chrg_voltage = <span class="params">&lt;<span class="number">4200</span>&gt;</span>;</span><br><span class="line">    sleep_enter_current = <span class="params">&lt;<span class="number">300</span>&gt;</span>;</span><br><span class="line">    sleep_exit_current = <span class="params">&lt;<span class="number">300</span>&gt;</span>;</span><br><span class="line">    sleep_filter_current = <span class="params">&lt;<span class="number">100</span>&gt;</span>; <span class="comment">//Rk818에는 이 속성이 필요하지 않습니다</span></span><br><span class="line">    power_off_thresd = <span class="params">&lt;<span class="number">3400</span>&gt;</span>;</span><br><span class="line">    zero_algorithm_vol = <span class="params">&lt;<span class="number">3850</span>&gt;</span>;</span><br><span class="line">    energy_mode = <span class="params">&lt;<span class="number">0</span>&gt;</span>;</span><br><span class="line">    fb_temperature = <span class="params">&lt;<span class="number">105</span>&gt;</span>;</span><br><span class="line">    max_soc_offset = <span class="params">&lt;<span class="number">60</span>&gt;</span>;</span><br><span class="line">    monitor_sec = <span class="params">&lt;<span class="number">5</span>&gt;</span>;</span><br><span class="line">    virtual_power = <span class="params">&lt;<span class="number">0</span>&gt;</span>;</span><br><span class="line">    power_dc2otg = <span class="params">&lt;<span class="number">1</span>&gt;</span>;</span><br><span class="line">    dc_det_gpio = <span class="params">&lt;<span class="variable">&amp;gpio0</span> GPIO_C1 GPIO_ACTIVE_LOW&gt;</span>;</span><br><span class="line">    dc_det_adc = <span class="params">&lt;<span class="number">1</span>&gt;</span>; <span class="comment">// Rk818은이 속성이 필요하지 않습니다. Rk816은 필요한 것만</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>ocv_table</code><br>  개방 회로 전압-전기 계량기. 즉, “전력량에 상응하는 전압”, 총 21 개의 전압 값, 각각 0 %-&gt; 100 %에 해당하는 전압 값 스테핑 사이의 전압은 5 %이다. 데이터 시트는 원래 배터리 제조업체에서 제공하거나 RK Shenzhen Branch 또는 RK에서 제공 한 측정 도구로 측정 할 수 있습니다. 자세한 내용은 Shenzhen Branch 관련 엔지니어에게 문의하십시오.<br></p>
+</li>
+<li><p><code>ntc_table</code><br>  배터리 NTC 테이블, 단위 : 옴. 배터리 온도를 확인해야하는 경우 해당 ntc 값을 입력하십시오. 값은 온도를 나타내며 인접한 값 사이의 온도는 왼쪽에서 오른쪽으로 1 도씩 증가합니다. 배터리 온도를 감지 할 필요가 없으면이 속성 필드를 제거하십시오. 위의 예는 섭씨 -10 ~ 30도에 해당하는 ntc 값을 나타냅니다.<br></p>
+</li>
+<li><p><code>ntc_degree_from</code><br>  시작 온도 값인 ntc_table [0]에 해당하는 온도입니다. 따라서 ntc_table을 구성한 경우이 특성을 추가하십시오. DTS는 음수를 전달할 수 없으므로 ntc_degree_from은 두 개의 필드로 구성되며, 첫 번째는 양수 및 음수 부호를 나타냅니다. 예를 들어, ntc_degree_from = &lt;1, 10&gt;은 -10도를 의미합니다.</p>
+</li>
+<li><p><code>design_capacity</code><br>  실제 배터리 용량. 실제 측정 후 사용 가능한 실제 용량. 예를 들어, 공칭 4000mah이지만 실제 측정 값은 3850mah에 불과합니다.이 값으로 3850을 입력하십시오.</p>
+</li>
+<li><p><code>design_qmax</code><br>  최대 용량 값은 주로 소프트웨어 처리를위한 오류 수정 조건 중 하나로 사용됩니다. 공칭 용량의 1.1 배인 공칭 용량 * 1.1을 입력하십시오.</p>
+</li>
+<li><p><code>bat_res</code><br>  배터리 내부 저항. 방전 알고리즘에서 주로 사용되며 매우 중요합니다! 이 값은 ocv_table을 측정 할 때 함께 얻어 지므로이 매개 변수의 측정에주의하십시오.</p>
+</li>
+<li><p><code>max_input_current</code><br>  최대 입력 전류. 현재 다음 기어가 있습니다 (단위 : mA) :</p>
+</li>
+</ul>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">RK818:</span> <span class="params">&lt;<span class="number">450</span>, <span class="number">80</span>, <span class="number">850</span>, <span class="number">1000</span>, <span class="number">1250</span>, <span class="number">1500</span>, <span class="number">1750</span>, <span class="number">2000</span>, <span class="number">2250</span>, <span class="number">2500</span>, <span class="number">2750</span>, <span class="number">3000</span>&gt;</span></span><br><span class="line"><span class="symbol">RK816:</span> <span class="params">&lt;<span class="number">450</span>, <span class="number">80</span>, <span class="number">850</span>, <span class="number">1000</span>, <span class="number">1250</span>, <span class="number">1500</span>, <span class="number">1750</span>, <span class="number">2000</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>두 번째 기어는 800이 아니라 80입니다. 일반적으로 80ma 기어 위치는 사용 중에 설정되지 않습니다.</p>
+<ul>
+<li><code>max_chrg_current</code><br>  최대 충전 전류. 현재 다음 기어가 있습니다 (단위 : mA) :</li>
+</ul>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">RK818:</span> <span class="params">&lt;<span class="number">1000</span>, <span class="number">1200</span>, <span class="number">1400</span>, <span class="number">1600</span>, <span class="number">1800</span>, <span class="number">2000</span>, <span class="number">2250</span>, <span class="number">2400</span>, <span class="number">2600</span>, <span class="number">2800</span>, <span class="number">3000</span>&gt;</span></span><br><span class="line"><span class="symbol">RK816:</span> <span class="params">&lt;<span class="number">1000</span>, <span class="number">1200</span>, <span class="number">1400</span>, <span class="number">1600</span>, <span class="number">1800</span>, <span class="number">2000</span>, <span class="number">2250</span>, <span class="number">2400</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>max_chrg_voltage</code><br>  최대 충전 전압, 즉 배터리 완전 충전의 차단 전압. 현재 다음 장비가 있습니다 (단위 : mV) : </li>
+</ul>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">RK818:</span> <span class="params">&lt;<span class="number">4050</span>, <span class="number">4100</span>, <span class="number">4150</span>, <span class="number">4200</span>, <span class="number">4250</span>, <span class="number">4300</span>, <span class="number">4350</span>&gt;</span></span><br><span class="line"><span class="symbol">RK816:</span> <span class="params">&lt;<span class="number">4050</span>, <span class="number">4100</span>, <span class="number">4150</span>, <span class="number">4200</span>, <span class="number">4250</span>, <span class="number">4300</span>, <span class="number">4350</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>sleep_enter_current</code><br>슬립 모드로 들어가기위한 조건 중 하나입니다. 현재 300, 변경 사항 없음</p>
+</li>
+<li><p><code>sleep_exit_current</code><br>슬립 모드를 종료하기위한 조건 중 하나입니다. 현재 300, 변경 사항 없음</p>
+</li>
+<li><p><code>sleep_filter_current</code><br>유효하지 않은 슬립 전류를 필터링합니다. 현재 100, 변경하지 마십시오.</p>
+</li>
+<li><p><code>power_off_thresd</code> 주의 깊게 읽고 이해하십시오<br>예상되는 시스템 종료 전압, 단위 : mV. 특별 참고 사항 :이 값은 vbat 터미널의 전압이 아니라 VSYS의 순간 전압을 나타냅니다 (그러나 연료 게이지는 vbat 터미널의 전압을 수집합니다)!</p>
+</li>
+</ul>
+<p>원리 : Vbat 터미널의 전압은 VSYS 공급 시스템으로 변환되는 약 50 밀리 옴 (PCB 트레이스의 임피던스 제외)의 저항을 가진 모스 튜브를 통과해야하므로 VSYS가 셧다운 지점으로 사용됩니다. 맞습니다. 이것으로부터 우리는 알 수 있습니다 : 동일한 vbat 터미널 전압, 전류 부하 전류가 더 크고 vsys 터미널의 전압이 낮습니다. 반대로 동일한 vsys에서 전류 부하 전류가 클수록 해당 vbat 전압이 높습니다.</p>
+<p>RK의 플랫폼은 vsys 터미널의 전압이 3.4v보다 낮을 것을 권장하지 않으므로 VCC_IO (3.3v)와 같은 DCDC / LDO의 전원 공급이 불안정하게됩니다.</p>
+<ul>
+<li><p><code>zero_algorithm_vol</code><br>전압 + 쿨롱 방전 모드 전압 값을 입력하십시오 (단위 : mV). 이 값 아래에 전압 + 쿨롱 미터 결합 소프트웨어 방전 알고리즘을 입력하십시오. 권장 사항 : 4.2v 배터리는 3850mv로 설정되고 4.3v 이상 배터리는 3950mv로 설정됩니다.</p>
+</li>
+<li><p><code>energy_mode</code><br>일부 고객은 곡선의 매끄러움에 대해 걱정하는 반면, 다른 고객은 배터리가 완전히 방전 될 수 있는지와 두 사람이 균형을 맞추기가 어려운지에 대해 더 우려하고 있습니다. 따라서이 속성은 선택하도록 예약되어 있습니다. 값이 1이면 배터리 전원을 최대한 많이 꺼냅니다 .0이면 커브 스무딩의 합리성을 고려하는 것입니다 (예 : 3.4v 종료 설정, 때로는 3.5v 종료)에서 드라이버가 곡선 평활도와 종료 전압 포인트의 균형을 맞추려고했기 때문에 0으로 설정하는 것이 좋습니다. 테스트에서 종료 전압 포인트가 요구를 충족 할 수없는 것으로 확인되면 드라이버와 관리자에게 직접 연락하여 최적화를 시도하거나 시도하도록 1로 설정할 수 있습니다.</p>
+</li>
+<li><p><code>fb_temperature</code><br>칩 열 보호 온도 임계 값에는 현재 4 개의 온도 기어가 있습니다 (단위 : 섭씨).</p>
+</li>
+</ul>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">&lt; <span class="number">85</span>, <span class="number">95</span>, <span class="number">105</span>, <span class="number">115</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>현재 VR에서 115가 선택되고 나머지는 105로 선택됩니다. 0으로 설정하면 온도 피드백 기능이 꺼지고이 값은 일반적으로 문제 설정의 문제 해결에만 사용됩니다 ( “1.5 일반적인 문제 분석 및 위치 지정”참조). 정상적인 사용 중에는 온도 피드백 기능을 끄지 마십시오.</p>
+<ul>
+<li><code>sample_res</code><br>배터리 끝 근처의 샘플링 저항 크기 (밀리 옴)입니다. 쿨롱 카운터는이 저항을 사용하여 현재 시스템의 전류 레벨을 알고 있으므로 실제 하드웨어의 저항을 입력하십시오. 현재 저항의 크기는 10mR 또는 20mR 만 지원합니다.</li>
+</ul>
+<p>참고 : 4.4 커널의 rk818 연료 게이지 드라이버 만 지원됩니다. 3.10 커널은 지원되지 않으며 기본값은 20mR입니다.</p>
+<ul>
+<li><p><code>max_soc_offset</code><br>전원 켜기 교정 중에 허용되는 최대 전원 오류. 최소 30 분 동안 전원을 끄면 전원을 켤 때 ocv 테이블의 전원 쿼리가 수행되고 종료 전의 전원이 비교되고 편차가 max_soc_offset을 초과하면 강제 수정이 수행되고 전원이 ocv 테이블에 해당하는 실제 값으로 설정됩니다. 예를 들어, 현재 디스플레이 전력은 20 %이지만 ocv 전압을 기반으로 계산 된 실제 전력은 80 %이며 표시된 전력은 직접 80 %로 표시됩니다. 일반적으로 이러한 종류의 전력 편차는 충돌이 발생한 후 매우 큽니다.이 값의 값은 고객의 승인 여부에 따라 고객이 설정하므로이 값은 60보다 작지 않는 것이 좋습니다.</p>
+</li>
+<li><p><code>monitor_sec</code><br>폴링 시간 (초) 연료 게이지 드라이버는 정상 작동을 위해 지속적으로 폴링해야하며이 기간 동안 많은 I2C 읽기 및 쓰기 작업이 필요하지만 플랫폼에 따라 I2C 견고성이 다른 정도를 고려하면 구성 옵션이 예약됩니다. 현재 5 ~ 10 초가 적합하며 5 초로 설정하는 것이 가장 좋습니다.</p>
+</li>
+<li><p><code>virtual_power</code><br>테스트 모드. 때로는 복사 과정에서 전원, 충전 전류 등으로 인해 시스템의 전원이 꺼질 것으로 예상되지 않습니다. 이 값을 1로 설정하면 충전 전류 제한이 해제되고 시스템 입력 전류는 항상 max_input_current로되어 전원 공급 장치를 충족시킵니다. 이때, 드라이버는 항상 android, 현재 충전 상태, 전력은 66 %로보고됩니다.</p>
+</li>
+<li><p><code>power_dc2otg</code><br>DC에서 5V 전력을 공급하기 위해 otg 장치를 지원할지 여부 듀얼 포트 충전을 지원하는 기계의 경우, 하드웨어 회로에서 dc가 지원 될 때 otg 장치의 5v 전원 공급 장치는 dc에 의해 직접 공급되며 RK818은 추가 5v 출력을 제공하지 않습니다. 지원이 1로 설정되었습니다. 지원되지 않거나 dc 포트가없는 경우 0을 설정하십시오.</p>
+</li>
+<li><p><code>dc_det_gpio</code><br>dc 핀에 해당하는 gpio를 지정하십시오. 이 기능이 없으면이 속성을 제거하십시오.</p>
+</li>
+<li><p><code>dc_det_adc</code><br>saradc를 사용하여 dc 피트를 감지할지 여부, 1 : 지원, 0 : 지원되지 않습니다. 일반적으로이 속성과 “dc_det_gpio”는 두 가지 옵션입니다.</p>
+</li>
+</ul>
+<h1 id="6-연료-계-관련-개발-시작"><a href="#6-연료-계-관련-개발-시작" class="headerlink" title="6 연료 계 관련 개발 시작"></a>6 연료 계 관련 개발 시작</h1><h2 id="준비"><a href="#준비" class="headerlink" title="준비"></a>준비</h2><ol>
+<li>배터리의 ocv 곡선 및 배터리 내부 저항 측정 : 각 배터리에는 전압 전기 특성 곡선 (ocv_table)과 내부 저항이 있으며 RK Shenzhen에서이 측정을 수행 할 수 있습니다.</li>
+<li>DTS 파라미터를 채우고 1.5 절을 참조하여 올바르게 구성하십시오.</li>
+<li>배터리 보정에 대해서는 1.7 단원을 참조하십시오.</li>
+<li>정상적인 사용을 시작하십시오.</li>
+</ol>
+<h2 id="문제-처리"><a href="#문제-처리" class="headerlink" title="문제 처리"></a>문제 처리</h2><ol>
+<li>사용 중 이상이 발생한 경우 사이트의 로그를 캡처하고 분석하기 위해 디버그 정보를여십시오.</li>
+<li>점프와 같은 충전 / 방전 곡선에 문제가 있다고 생각되면 너무 빠르거나 너무 느립니다. 그런 다음 완전한 (0100 % 또는 100 % 0 %, 원칙 : 큰 전력 범위를 커버하려고하십시오) 충전 / 방전 로그를 잡으십시오.</li>
+<li>이유를 직접 분석 할 수없는 경우, 현장 또는 반복되는 로그를 잡고 레드 마인을 언급하십시오.<br><br>참고 : 캡처 된 로그는 연료 게이지의 디버그 정보를 열어야합니다! ! 몇 가지 일반적인 질문은 섹션 8에서 찾을 수 있습니다.</li>
+</ol>
+<h1 id="7-배터리-보정"><a href="#7-배터리-보정" class="headerlink" title="7 배터리 보정"></a>7 배터리 보정</h1><h2 id="7-1-배터리-보정-원리"><a href="#7-1-배터리-보정-원리" class="headerlink" title="7.1 배터리 보정 원리"></a>7.1 배터리 보정 원리</h2><ol>
+<li><p>기계를 끈 후에는 PMIC 만 DCDC / LDO를 끄지 만 완전히 꺼진 것은 아니지만 매우 낮은 부하로 전원이 켜진 상태로 유지됩니다. PMIC 자체는 연료 게이지의 데이터를 저장하는 데 사용할 수있는 일부 빈 데이터 레지스터를 제공합니다. 현재 저장된 정보는 연료 게이지 드라이버 초기화를 위해 전원을 켤 때마다 전력, 쿨롱 용량, 배터리 완전 충전 용량 (예 : design_capacity)과 같이 장비 전면과 관련됩니다. 이 값이 DTS의 영향을받지 않으면 종료 전의 데이터를 읽고 계속 사용합니다.</p>
+</li>
+<li><p>위의 세 가지 정보를 수정해야 할 경우 데이터를 지우려면 PMIC의 전원을 완전히 꺼야합니다. 전원을 완전히 껐다가 켜면 배터리 GGSTS_REG [4]의 상태 비트 ( “첫 번째 전원 켜기”)가 설정됩니다. 따라서 배터리를 제거하여이를 달성해야합니다.</p>
+</li>
+<li><p>배터리가 다시 연결되면, 운전자는 현재 “처음으로 전원을 켰다”고 판단한 후 DTS에서 모든 관련 데이터를 검색하여 관련 배터리 용량, 전원 등을 계산합니다. 이러한 방식으로 수정 후 정확한 상태를 얻습니다.</p>
+</li>
+<li><p>세 번째로, 배터리를 제거한 후 다시 연결하기 전에 기본적으로 분극이 제거되었는지 확인해야합니다 (분극이 제거 될 때까지 배터리를 그대로 둘 수 있음). 그렇지 않으면 부팅의 ocv 전압이 정확하지 않습니다. 예를 들어, 큰 부하가 방전되면 배터리가 제거되고, 이때 배터리는 실제로 분극 상태가되어 배터리 전압이 서서히 상승하게되며, 이때 다시 연결되면 이때 수집 된 ocv 전압은 그렇지 않습니다. 정확한!</p>
+</li>
+</ol>
+<p>교정이 수행 될 때 배터리가 분극이 기본적으로 제거 된 상태에 있어야 정확한 전력을 얻기 위해 첫 번째 부팅의 ocv 전압이 정확해야합니다.</p>
+<h2 id="7-2-배터리-수정-방법"><a href="#7-2-배터리-수정-방법" class="headerlink" title="7.2 배터리 수정 방법"></a>7.2 배터리 수정 방법</h2><p>현재 배터리를 수정하는 두 가지 방법이 있습니다. 2는 1을 선택합니다.</p>
+<ol>
+<li><p>하드웨어 방법 : 약 10 초 동안 배터리를 분리했다가 다시 연결하십시오.</p>
+</li>
+<li><p>소프트웨어 방법 : 직렬 포트를 사용하여 다음 작업을 수행하십시오.</p>
+<ol>
+<li>bat 노드 경로를 찾으십시오. busybox find /sys/ -name bat, 예를 들어 경로는 “/sys/rk818/bat”; (rk816 인 경우 경로는 “/sys/rk816/bat”, 아래 동일)</li>
+<li>실행 : <code>echo m &gt; /sys/rk818/bat;</code></li>
+<li><code>echo r &gt; /sys/rk818/bat</code>를 다시 읽으십시오. BIT(4)의 리턴 값은 1이어야합니다.</li>
+<li>그런 다음 정상적으로 종료하고 최소 30 분 동안 전원을 끈 다음 다시 켜십시오 (정확한 ocv 전압을 얻음).</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>보충 : 2 단계에서 조작을 지우려면 다음을 실행하십시오. <code>echo c &gt; /sys/rk818/bat;</code></p>
+</blockquote>
+<h2 id="7-3-언제-수정해야합니까"><a href="#7-3-언제-수정해야합니까" class="headerlink" title="7.3 언제 수정해야합니까?"></a>7.3 언제 수정해야합니까?</h2><ol>
+<li>DTS 구성의 배터리 용량이 변경된 경우</li>
+<li>전원이 허용되지 않는 것이 분명합니다 (기계 충돌, 특수 비 연료 게이지 압력 테스트 등일 수 있음).</li>
+<li>연료 게이지는 배터리가 정확한 상황에서 테스트되도록하기 위해 특수 기계 전에 보정됩니다. 이는 의미가 있습니다 (모든 테스트 항목의 첫 번째 보정 만 필요하며 테스트 전에 각 사례를 수정할 필요는 없습니다).</li>
+</ol>
+<h1 id="8-일반적인-문제-분석-및-위치"><a href="#8-일반적인-문제-분석-및-위치" class="headerlink" title="8 일반적인 문제 분석 및 위치"></a>8 일반적인 문제 분석 및 위치</h1><ol>
+<li>디버깅 정보를 열고 로그를 얻는 방법?<br> 방법 1 : 컴파일하기 전에 드라이버 첫 줄의 static int dbg_enable = 0을 1로 변경하십시오.<br> 방법 2 : 펌웨어가 dbg_enable을 열지 않으면 직렬 포트에서 다음 명령을 입력하여 작업을 수행 할 수도 있습니다. <ul>
+<li>Open : <code>echo 1&gt; /sys/module/rk818_battery/parameters/dbg_level</code></li>
+<li>닫기 : <code>echo 0 &gt;/sys/module/rk818_battery/parameters/dbg_level</code></li>
+</ul>
+</li>
+<li>왜 어댑터 또는 USB를 연결하고 종료 직후에 다시 시작하면 종료 할 수 없습니까? PMIC 칩은 원래 충전기가 연결되어있는 한 종료되도록 설계되었습니다.</li>
+<li>전원을 켠 후에 배터리가 핫 플러깅되고 레지스터 GGSTS[4] (배터리가 있음)로 표시된 상태가 실제 상황과 다른 이유는 무엇입니까? PMIC는 배터리의 핫 스왑 감지를 지원하지 않으며 전원이 켜져있을 때만 테스트를 수행합니다.</li>
+<li>셧다운 후 전압이 DTS 구성의 셧다운 지점과 다른 이유는 무엇이며 고전압이 꺼 집니까? 셧다운 전압은 마지막 로그에 인쇄 된 실시간 전압을 기준으로하며 셧다운 전압은 vsys 전압입니다 (자세한 내용은 섹션 1.5.2 참조) 실시간 전압이 사전 설정된 셧다운 지점보다 낮아서는 안됩니다. 그리고 시스템의 전원이 꺼지면 리튬 배터리의 분극이 천천히 사라지고 전압 상승 과정이 생겨 리튬 배터리의 특성이됩니다.</li>
+<li>기기를 켜거나 재부팅하거나 보조 대기 상태 일 때 전원이 바뀌지 않는 이유는 무엇입니까? 이 시점에서 드라이버는 정상적으로 폴링 할 수없고 작동 상태로 들어갈 수 없으므로 이러한 유형의 복사 테스트는 지원되지 않습니다. 연료 게이지 테스트를 수행 할 때 품질 부서와 고객이이 세 가지 항목을 테스트 할 필요는 없습니다.</li>
+<li>왜 배터리 충전기를 사용하지만 충전 전류가 매우 작습니까?<ol>
+<li>충전 라인의 품질이 낮고 임피던스가 높아 버스의 전압이 5V보다 훨씬 낮은 지 확인하십시오. 외부 조정 전원 공급 장치로 전원을 공급하고 전압을 적절히 높이며 전류가 증가 할 수 있는지 관찰 할 수 있습니다.</li>
+<li>오프 스크린 상태 (레벨 1 대기)로 들어가서 충전 전류가 증가하는지 관찰하여 작동 전력 소비와 관련이 있는지 확인하십시오.</li>
+<li>빨리 채워진 배터리는 충전 전류가 작으므로 배터리 전압에주의하십시오.</li>
+<li>고온 및 고부하 조건에서 PMIC 온도 상승이 입력 전류 제한을 트리거 할 수 있습니다. 따라서 피드백 온도 (fb_temperature)를 높이고 그것이 유효한지 확인하십시오. 그렇지 않은 경우 온도 제어 테스트를 직접 끄십시오 (fb_temperature가 0으로 설정 됨).</li>
+</ol>
+</li>
+<li>배터리를 분리하고 전원을 켜면 배터리는 어떻게됩니까? 우리는 배터리를 분해 한 후에도 배터리가 튀지 않도록 요구합니다. <ol>
+<li>배터리의 플러그를 뽑은 후 PMIC의 전원이 완전히 꺼졌습니다.이 시점에서 ocv 전압은 ovv_table 만 가능하므로 전원을 반대로 할 수 있습니다. 정상적인 경우 배터리 재 교정입니다 .</li>
+<li>분해 후 배터리 전원이 뛰지 않기를 바랍니다. 소프트웨어를 우회하지 않는 한 거의 불가능합니다. 시스템을 종료하기 전에 전원을 파일에 쓴 다음 전원을 켠 후 읽습니다. 고객이 요청한 경우 처리를 피하기 위해 고객에게 코드의이 부분을 추가하도록 요청하십시오.</li>
+</ol>
+</li>
+<li>PMIC에는 입력 전류를 조절하는 온도 피드백 기능이 있습니다.이 시점에서 PMIC의 내부 온도를 어떻게 알 수 있습니까? 이 기능이 디자인에 남아 있지 않다는 것을 알 방법이 없습니다.</li>
+<li>왜 통나무에 인쇄 된 전류가 너무 터무니없고 부호가 반전되거나 전류와 실제 차이가 너무 큰가? 20/10 밀리 옴의 샘플링 저항이 선택되고 저항 정확도가 충분히 높은지 확인한 다음, 솔더 조인트가 깨끗하고 샘플링 저항이 BAT와 GND 사이에 있는지 확인하십시오.</li>
+<li>전력이 충분하지 않은 이유는 무엇입니까, 예를 들어 3.9v 만 완료됩니까? 일반적으로 배터리 품질이 좋지 않고 최대 충전 전류가 너무 크게 설정되어 패널이 자체 보호되어 PMIC가 마무리 상태를 잘못보고하게됩니다.</li>
+<li>완료 상태의 현재 값이 양수 및 음수 (소수)로 변동하는 이유는 무엇입니까? 이것은 최대 전원 공급 후의 현재 제로 오류이므로 중요하지 않습니다.</li>
+<li>왜 마감을보고합니까, 전기의 표시가 100 %가 아닌 90 % 이상입니까? 쿨롱 카운터에 오류가 누적되고 하드웨어에 의해 충전 종료가 완료되므로이 둘 사이에 약간의 오류가 발생하며 완료 보고서의 타이밍을 정확하게 파악할 수 없으므로이 상황은 정상입니다. 이 경우 소프트웨어는 프로세스를 수행합니다. 즉, 최종 사용자가이를 알지 못하기 때문에 전력을 100 %에 가깝게 천천히 놓아두면 사용에 문제가 없습니다.</li>
+<li>작동중인 공정 연료 계량기의 전기량이 왜 부정확하고 ocv_table의 값이 그렇게 다른가? 개념 혼란. Ocv_table은 부하 조건이없는 개방 회로의 전압 대 충전 비율이며,이 표는 전원 공급 보정 및 절전 보정에만 사용합니다. 따라서 이러한 종류의 비교는 의미가 없으며 원칙적으로 의미가 없습니다.</li>
+<li>다른 사양의 배터리 교체를 지원합니까? 지원되지 않습니다. 배터리를 교체 한 다음 ocv 곡선, 내부 저항, 용량 및 기타 매개 변수를 다시 테스트해야합니다.</li>
+<li>PMIC가 배터리가 꽉 찼다 고 판단하는 조건은 무엇입니까? 전압이 차단 전압에 도달하고 전류가 마무리 전류에 도달하며 입력 전류 제한이 발생하지 않는 세 가지 조건을 동시에 충족해야합니다.</li>
+<li>배터리 아이콘에 항상 50 %가 충전 중임을 표시하는 이유는 무엇입니까? test_power 드라이버를 비활성화하십시오.</li>
+<li>배터리 아이콘에 항상 66 % 충전이 표시되는 이유는 무엇입니까? 현재 배터리가 연결되어 있지 않거나 DTS의 virtual_power가 1로 구성되어 있습니다. 0으로 구성하십시오.</li>
+<li>충전기가 왜 연결되어 있습니까?<ol>
+<li>커널 4.4 : rk818_charger.c는 충전기 감지를 담당합니다 USB 포트 충전기 및 otg 장치 플러그 앤 플레이는 USB 알림 체인에 따라 다르므로 직렬 포트 로그에 “rk818-charger : recieve xxx notifier event : xxx”등이 표시되는지 확인하십시오. 직렬 포트 정보가 아닌 경우, USB 알림 체인이 성공적으로 등록되지 않았거나 (아마도 작음) USB 드라이버에 문제가 있습니다. Rk818_charger.c는 충전기 감지를 담당하며 USB 포트 충전기 및 otg 장치 플러그 앤 플레이는 USB 알림 체인에 따라 다르므로 직렬 포트 로그에 “rk818-charger : recieve xxxnotifier event : xxx”와 같은 직렬 포트 정보가 인쇄되는지 확인하십시오. 그렇지 않은 경우, USB 알림 체인이 성공적으로 등록되지 않았거나 (아마도 작음) USB 드라이버에 문제가 있습니다.</li>
+<li>커널 3.10 : rk818_battery.c는 충전기 (배터리 전원 포함), USB 포트 충전기 및 otg 장치 플러그 앤 플레이의 감지는 USB 알림 체인에 따라 다릅니다. 직렬 포트 로그에 “rk818-bat : recieve xxx notifier”가 표시되는지 확인하십시오. 이벤트 : xxx “및 기타 직렬 정보 (그렇지 않은 경우) USB 알림 체인이 성공적으로 등록되지 않았거나 (아마도 작음) USB 드라이버에 문제가 있습니다.</li>
+</ol>
+</li>
+</ol>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2019/10/14/Android-Platform-배터리/" data-id="ckzfaqfuj00pydyuormasecog" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "Android Platform 배터리 개발 방법(rk816을 기준으로)",
+        "image": "http://jung-max.github.io/images/Thumbnail/android-battery.jpg",
+        "keywords": "Android Battery DTS",
+        "genre": "Android Platform DTS",
+        "datePublished": "2019-10-14",
+        "dateCreated": "2019-10-14",
+        "dateModified": "2022-02-08",
+        "url": "http://jung-max.github.io/2019/10/14/Android-Platform-배터리/",
+        "description": "RK805에 관련된 배터리의 포팅이 필요한 일이 생겼다. 인터넷에서 RK805에 대한 배터리 부분을 찾아봤지만 찾을 수 없었다.검색 결과 RK805는 RK816드라이버를 사용한다는 것을 찾아냈다.
+그에 따라 RK816의 배터리 관련된 메뉴얼을 번역했다.
+원문 링크
+1 개요 RK818 / RK816 연료 게이지RK818 / RK816은 여러 개의 고전류 DC"
+        "wordCount": 4906
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/10/21/오픈소스라이센스/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            오픈소스 라이센스 소개
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/09/27/Web-Javascript-MarkDown구현/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">Javascript로 Markdown 파서 구현하기</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl URL API/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl URL API" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl URL API/" class="title">libcurl URL API</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 핸들 간에 데이터 공유" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/" class="title">libcurl 핸들 간에 데이터 공유</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl for C++ programmers" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl for C++ programmers/" class="title">libcurl for C++ programmers</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl 이름 확인/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl 이름 확인" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl 이름 확인/" class="title">libcurl 이름 확인</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T04:02:00.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">22</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">22</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 17.14px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.71px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.57px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.71px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.57px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12.14px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.71px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12.14px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.43px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.71px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 15px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 19.29px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.86px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.57px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.71px;">VScode</a> <a href="/tags/Web/" style="font-size: 14.29px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 17.86px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.86px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.86px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16.43px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.71px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.43px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.71px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.71px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.43px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2019/10/14/Android-Platform-배터리/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+
