@@ -8,8 +8,16 @@
     </url>
 
     <url>
-        <loc>http://jung-max.github.io/2022/02/08/Linux-libcurl/</loc>
-        <lastmod>2022-02-09T07:56:25.582Z</lastmod>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20%EC%9D%B4%EB%A6%84%20%ED%99%95%EC%9D%B8/</loc>
+        <lastmod>2022-02-09T08:49:04.653Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20%ED%95%B8%EB%93%A4%20%EA%B0%84%EC%97%90%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EA%B3%B5%EC%9C%A0/</loc>
+        <lastmod>2022-02-09T08:48:12.075Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -17,7 +25,15 @@
 
     <url>
         <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20example/</loc>
-        <lastmod>2022-02-09T07:47:19.971Z</lastmod>
+        <lastmod>2022-02-09T08:47:55.291Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jung-max.github.io/2022/02/08/Linux-libcurl/</loc>
+        <lastmod>2022-02-09T08:47:16.701Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -34,14 +50,6 @@
     <url>
         <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20%EC%9E%90%EC%84%B8%ED%95%9C%20%EC%9E%91%EC%97%85/</loc>
         <lastmod>2022-02-09T07:27:04.900Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20%ED%95%B8%EB%93%A4%20%EA%B0%84%EC%97%90%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EA%B3%B5%EC%9C%A0/</loc>
-        <lastmod>2022-02-09T07:17:51.946Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -130,14 +138,6 @@
     <url>
         <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20Proxies/</loc>
         <lastmod>2022-02-09T04:31:32.988Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20%EC%9D%B4%EB%A6%84%20%ED%99%95%EC%9D%B8/</loc>
-        <lastmod>2022-02-09T04:18:24.935Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

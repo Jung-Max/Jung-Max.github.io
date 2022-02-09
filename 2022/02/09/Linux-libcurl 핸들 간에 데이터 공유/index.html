@@ -13,19 +13,19 @@
         <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
         <meta name="keywords" content="Linux,buildroot,http,cURL">
     
-    <meta name="description" content="핸들 간에 데이터 공유때때로 응용 프로그램은 전송 간에 데이터를 공유해야 합니다. 동일한 다중 핸들에 추가된 모든 쉬운 핸들은 동일한 다중 핸들의 핸들 간에 많은 공유가 자동으로 수행되지만 때로는 정확히 원하는 것이 아닙니다. 멀티 핸들동일한 다중 핸들에 추가된 모든 간편 핸들은 [연결 캐시](https://jung-max.github.io/2022/02/">
+    <meta name="description" content="핸들 간에 데이터 공유때때로 응용 프로그램은 전송 간에 데이터를 공유해야 합니다. 동일한 다중 핸들에 추가된 모든 쉬운 핸들은 동일한 다중 핸들의 핸들 간에 많은 공유가 자동으로 수행되지만 때로는 정확히 원하는 것이 아닙니다. 멀티 핸들동일한 다중 핸들에 추가된 모든 간편 핸들은 연결 캐시와 DNS 캐시를 자동으로 공유합니다. 쉬운 핸들 간 공유libcur">
 <meta name="keywords" content="Linux,buildroot,http,cURL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="libcurl 핸들 간에 데이터 공유">
 <meta property="og:url" content="http://jung-max.github.io/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/index.html">
 <meta property="og:site_name" content="Max&#39;s Blog">
-<meta property="og:description" content="핸들 간에 데이터 공유때때로 응용 프로그램은 전송 간에 데이터를 공유해야 합니다. 동일한 다중 핸들에 추가된 모든 쉬운 핸들은 동일한 다중 핸들의 핸들 간에 많은 공유가 자동으로 수행되지만 때로는 정확히 원하는 것이 아닙니다. 멀티 핸들동일한 다중 핸들에 추가된 모든 간편 핸들은 [연결 캐시](https://jung-max.github.io/2022/02/">
+<meta property="og:description" content="핸들 간에 데이터 공유때때로 응용 프로그램은 전송 간에 데이터를 공유해야 합니다. 동일한 다중 핸들에 추가된 모든 쉬운 핸들은 동일한 다중 핸들의 핸들 간에 많은 공유가 자동으로 수행되지만 때로는 정확히 원하는 것이 아닙니다. 멀티 핸들동일한 다중 핸들에 추가된 모든 간편 핸들은 연결 캐시와 DNS 캐시를 자동으로 공유합니다. 쉬운 핸들 간 공유libcur">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/Thumbnail/curl.png">
-<meta property="og:updated_time" content="2022-02-09T07:17:51.946Z">
+<meta property="og:updated_time" content="2022-02-09T08:48:12.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="libcurl 핸들 간에 데이터 공유">
-<meta name="twitter:description" content="핸들 간에 데이터 공유때때로 응용 프로그램은 전송 간에 데이터를 공유해야 합니다. 동일한 다중 핸들에 추가된 모든 쉬운 핸들은 동일한 다중 핸들의 핸들 간에 많은 공유가 자동으로 수행되지만 때로는 정확히 원하는 것이 아닙니다. 멀티 핸들동일한 다중 핸들에 추가된 모든 간편 핸들은 [연결 캐시](https://jung-max.github.io/2022/02/">
+<meta name="twitter:description" content="핸들 간에 데이터 공유때때로 응용 프로그램은 전송 간에 데이터를 공유해야 합니다. 동일한 다중 핸들에 추가된 모든 쉬운 핸들은 동일한 다중 핸들의 핸들 간에 많은 공유가 자동으로 수행되지만 때로는 정확히 원하는 것이 아닙니다. 멀티 핸들동일한 다중 핸들에 추가된 모든 간편 핸들은 연결 캐시와 DNS 캐시를 자동으로 공유합니다. 쉬운 핸들 간 공유libcur">
 <meta name="twitter:image" content="http://jung-max.github.io/images/Thumbnail/curl.png">
     
     <link rel="canonical" href="http://jung-max.github.io/2022/02/09/linux-libcurl 핸들 간에 데이터 공유/">
@@ -192,7 +192,7 @@ ga('send', 'pageview');
         
         <div class="article-entry" itemprop="articleBody">
             <h1 id="핸들-간에-데이터-공유"><a href="#핸들-간에-데이터-공유" class="headerlink" title="핸들 간에 데이터 공유"></a>핸들 간에 데이터 공유</h1><p>때때로 응용 프로그램은 전송 간에 데이터를 공유해야 합니다. 동일한 다중 핸들에 추가된 모든 쉬운 핸들은 동일한 다중 핸들의 핸들 간에 많은 공유가 자동으로 수행되지만 때로는 정확히 원하는 것이 아닙니다.</p>
-<h2 id="멀티-핸들"><a href="#멀티-핸들" class="headerlink" title="멀티 핸들"></a>멀티 핸들</h2><p>동일한 다중 핸들에 추가된 모든 간편 핸들은 [연결 캐시](<a href="https://jung-max.github.io/2022/02/08/Linux-libcurl">https://jung-max.github.io/2022/02/08/Linux-libcurl</a> 연결 재사용)와 [DNS 캐시](<a href="https://jung-max.github.io/2022/02/09/Linux-libcurl">https://jung-max.github.io/2022/02/09/Linux-libcurl</a> 이름 확인)를 자동으로 공유합니다.</p>
+<h2 id="멀티-핸들"><a href="#멀티-핸들" class="headerlink" title="멀티 핸들"></a>멀티 핸들</h2><p>동일한 다중 핸들에 추가된 모든 간편 핸들은 <a href="https://jung-max.github.io/2022/02/08/Linux-libcurl%20연결%20재사용">연결 캐시</a>와 <a href="https://jung-max.github.io/2022/02/09/Linux-libcurl%20이름%20확인">DNS 캐시</a>를 자동으로 공유합니다.</p>
 <h2 id="쉬운-핸들-간-공유"><a href="#쉬운-핸들-간-공유" class="headerlink" title="쉬운 핸들 간 공유"></a>쉬운 핸들 간 공유</h2><p>libcurl에는 일반 “공유 인터페이스”가 있으며, 여기서 응용 프로그램은 “공유 개체”를 생성한 다음 여러 손쉬운 핸들에서 공유할 수 있는 데이터를 보유합니다. 그런 다음 데이터를 공유하는 핸들 내에 보관하는 대신 공유 개체에서 데이터를 저장하고 읽습니다.</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CURLSH *share = curl_share_init();</span><br></pre></td></tr></table></figure>
 
@@ -307,8 +307,9 @@ ga('send', 'pageview');
         "dateModified": "2022-02-09",
         "url": "http://jung-max.github.io/2022/02/09/Linux-libcurl 핸들 간에 데이터 공유/",
         "description": "핸들 간에 데이터 공유때때로 응용 프로그램은 전송 간에 데이터를 공유해야 합니다. 동일한 다중 핸들에 추가된 모든 쉬운 핸들은 동일한 다중 핸들의 핸들 간에 많은 공유가 자동으로 수행되지만 때로는 정확히 원하는 것이 아닙니다.
-멀티 핸들동일한 다중 핸들에 추가된 모든 간편 핸들은 [연결 캐시](https://jung-max.github.io/2022/02/"
-        "wordCount": 624
+멀티 핸들동일한 다중 핸들에 추가된 모든 간편 핸들은 연결 캐시와 DNS 캐시를 자동으로 공유합니다.
+쉬운 핸들 간 공유libcur"
+        "wordCount": 620
     }
 </script>
 

@@ -13,19 +13,19 @@
         <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
         <meta name="keywords" content="Linux,buildroot,http,cURL">
     
-    <meta name="description" content="이름 확인libcurl이 수행할 수 있는 대부분의 전송에는 먼저 인터넷 주소로 변환되어야 하는 이름이 포함됩니다. 그것은 “이름 확인”입니다. URL에서 직접 숫자 IP 주소를 사용하면 일반적으로 이름 확인 단계를 피할 수 있지만 대부분의 경우 이름을 IP 주소로 수동으로 바꾸는 것이 쉽지 않습니다. libcurl은 새로운 연결을 생성하기 보다는 [기존 연">
+    <meta name="description" content="이름 확인libcurl이 수행할 수 있는 대부분의 전송에는 먼저 인터넷 주소로 변환되어야 하는 이름이 포함됩니다. 그것은 “이름 확인”입니다. URL에서 직접 숫자 IP 주소를 사용하면 일반적으로 이름 확인 단계를 피할 수 있지만 대부분의 경우 이름을 IP 주소로 수동으로 바꾸는 것이 쉽지 않습니다. libcurl은 새로운 연결을 생성하기 보다는 기존 연결">
 <meta name="keywords" content="Linux,buildroot,http,cURL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="libcurl 이름 확인">
 <meta property="og:url" content="http://jung-max.github.io/2022/02/09/Linux-libcurl 이름 확인/index.html">
 <meta property="og:site_name" content="Max&#39;s Blog">
-<meta property="og:description" content="이름 확인libcurl이 수행할 수 있는 대부분의 전송에는 먼저 인터넷 주소로 변환되어야 하는 이름이 포함됩니다. 그것은 “이름 확인”입니다. URL에서 직접 숫자 IP 주소를 사용하면 일반적으로 이름 확인 단계를 피할 수 있지만 대부분의 경우 이름을 IP 주소로 수동으로 바꾸는 것이 쉽지 않습니다. libcurl은 새로운 연결을 생성하기 보다는 [기존 연">
+<meta property="og:description" content="이름 확인libcurl이 수행할 수 있는 대부분의 전송에는 먼저 인터넷 주소로 변환되어야 하는 이름이 포함됩니다. 그것은 “이름 확인”입니다. URL에서 직접 숫자 IP 주소를 사용하면 일반적으로 이름 확인 단계를 피할 수 있지만 대부분의 경우 이름을 IP 주소로 수동으로 바꾸는 것이 쉽지 않습니다. libcurl은 새로운 연결을 생성하기 보다는 기존 연결">
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="http://jung-max.github.io/images/Thumbnail/curl.png">
-<meta property="og:updated_time" content="2022-02-09T04:18:24.935Z">
+<meta property="og:updated_time" content="2022-02-09T08:49:04.653Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="libcurl 이름 확인">
-<meta name="twitter:description" content="이름 확인libcurl이 수행할 수 있는 대부분의 전송에는 먼저 인터넷 주소로 변환되어야 하는 이름이 포함됩니다. 그것은 “이름 확인”입니다. URL에서 직접 숫자 IP 주소를 사용하면 일반적으로 이름 확인 단계를 피할 수 있지만 대부분의 경우 이름을 IP 주소로 수동으로 바꾸는 것이 쉽지 않습니다. libcurl은 새로운 연결을 생성하기 보다는 [기존 연">
+<meta name="twitter:description" content="이름 확인libcurl이 수행할 수 있는 대부분의 전송에는 먼저 인터넷 주소로 변환되어야 하는 이름이 포함됩니다. 그것은 “이름 확인”입니다. URL에서 직접 숫자 IP 주소를 사용하면 일반적으로 이름 확인 단계를 피할 수 있지만 대부분의 경우 이름을 IP 주소로 수동으로 바꾸는 것이 쉽지 않습니다. libcurl은 새로운 연결을 생성하기 보다는 기존 연결">
 <meta name="twitter:image" content="http://jung-max.github.io/images/Thumbnail/curl.png">
     
     <link rel="canonical" href="http://jung-max.github.io/2022/02/09/linux-libcurl 이름 확인/">
@@ -192,7 +192,7 @@ ga('send', 'pageview');
         
         <div class="article-entry" itemprop="articleBody">
             <h1 id="이름-확인"><a href="#이름-확인" class="headerlink" title="이름 확인"></a>이름 확인</h1><p>libcurl이 수행할 수 있는 대부분의 전송에는 먼저 인터넷 주소로 변환되어야 하는 이름이 포함됩니다. 그것은 “이름 확인”입니다. URL에서 직접 숫자 IP 주소를 사용하면 일반적으로 이름 확인 단계를 피할 수 있지만 대부분의 경우 이름을 IP 주소로 수동으로 바꾸는 것이 쉽지 않습니다.</p>
-<p>libcurl은 새로운 연결을 생성하기 보다는 [기존 연결을 재사용](<a href="https://jung-max.github.io/2022/02/09/Linux-libcurl">https://jung-max.github.io/2022/02/09/Linux-libcurl</a> 연결 재사용)하기 위해 열심히 노력합니다. 사용할 기존 연결을 확인하는 기능은 순전히 이름을 기반으로 하며 이름 확인이 시도되기 전에 수행됩니다. 이것이 재사용이 훨씬 더 빠른 이유 중 하나입니다. 재사용된 연결을 사용하는 전송은 호스트 이름을 다시 확인하지 않습니다.</p>
+<p>libcurl은 새로운 연결을 생성하기 보다는 <a href="https://jung-max.github.io/2022/02/09/Linux-libcurl%20연결%20재사용">기존 연결을 재사용</a>하기 위해 열심히 노력합니다. 사용할 기존 연결을 확인하는 기능은 순전히 이름을 기반으로 하며 이름 확인이 시도되기 전에 수행됩니다. 이것이 재사용이 훨씬 더 빠른 이유 중 하나입니다. 재사용된 연결을 사용하는 전송은 호스트 이름을 다시 확인하지 않습니다.</p>
 <p>연결을 재사용할 수 없는 경우 libcurl은 확인하려는 주소 집합으로 호스트 이름을 확인합니다. 일반적으로 이것은 IPv4 및 IPv6 주소를 모두 요청한다는 것을 의미하며 libcurl에 반환된 전체 집합이 있을 수 있습니다. 그런 다음 해당 주소 집합이 작동하거나 실패를 반환할 때까지 시도됩니다.</p>
 <p>응용 프로그램은 CURLOPT_IPRESOLVE를 기본 값으로 설정하여 libcurl이 IPv4 또는 IPv6 확인 주소만 사용하도록 할 수 있습니다. 예를 들어 IPv6 주소만 사용하도록 요청합니다.</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl_easy_setopt(easy, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V6);</span><br></pre></td></tr></table></figure>
@@ -209,7 +209,7 @@ ga('send', 'pageview');
 
 <p>이 옵션에 전달되는 URL은 <code>https://</code>를 사용해야 하며 일반적으로 libcurl이 DoH 서버에 대한 연결을 통해 다중 DoH 요청을 수행할 수 있도록 HTTP/2 지원을 활성화하는 것이 좋습니다.</p>
 <h2 id="캐싱"><a href="#캐싱" class="headerlink" title="캐싱"></a>캐싱</h2><p>이름이 확인되면 결과는 libcurl의 메모리 내 캐시에 저장되어 이름이 DNS 캐시에 유지되는 한 동일한 이름에 대한 후속 확인이 거의 즉시 이루어집니다. 기본적으로 각 항목은 캐시에 60초 동안 유지되지만 해당 값은 <code>CURLOPT_DNS_CACHE_TIMEOUT</code>으로 변경할 수 있습니다.</p>
-<p>DNS 캐시는 <code>curl_easy_perform</code>을 사용하는 경우 easy 핸들 내에, 멀티 인터페이스를 사용하는 경우 멀티 핸들 내에 유지됩니다. 또한 [공유 인터페이스](<a href="https://jung-max.github.io/2022/02/09/Linux-libcurl">https://jung-max.github.io/2022/02/09/Linux-libcurl</a> 핸들 간에 데이터 공유)를 사용하여 여러 개의 쉬운 핸들 간에 공유할 수 있습니다.</p>
+<p>DNS 캐시는 <code>curl_easy_perform</code>을 사용하는 경우 easy 핸들 내에, 멀티 인터페이스를 사용하는 경우 멀티 핸들 내에 유지됩니다. 또한 <a href="https://jung-max.github.io/2022/02/09/Linux-libcurl%20핸들%20간에%20데이터%20공유">공유 인터페이스</a>를 사용하여 여러 개의 쉬운 핸들 간에 공유할 수 있습니다.</p>
 <h2 id="호스트에-대한-사용자-지정-주소"><a href="#호스트에-대한-사용자-지정-주소" class="headerlink" title="호스트에 대한 사용자 지정 주소"></a>호스트에 대한 사용자 지정 주소</h2><p>때로는 실제 호스트 이름에 “가짜” 주소를 제공하여 libcurl이 실제 이름 확인이 제안하는 주소 대신 다른 주소에 연결하도록 하는 것이 편리합니다.</p>
 <p><a href="https://curl.se/libcurl/c/CURLOPT_RESOLVE.html" rel="external nofollow noopener noreferrer" target="_blank">CURLOPT_RESOLVE</a> 옵션의 도움으로 응용 프로그램은 libcurl의 DNS 캐시를 지정된 호스트 이름 및 포트 번호에 대한 사용자 지정 주소로 미리 채울 수 있습니다.</p>
 <p>포트 443의 example.com이 요청될 때 libcurl이 127.0.0.1에 연결되도록 하려면 애플리케이션에서 다음을 수행할 수 있습니다.</p>
@@ -309,8 +309,8 @@ ga('send', 'pageview');
         "dateModified": "2022-02-09",
         "url": "http://jung-max.github.io/2022/02/09/Linux-libcurl 이름 확인/",
         "description": "이름 확인libcurl이 수행할 수 있는 대부분의 전송에는 먼저 인터넷 주소로 변환되어야 하는 이름이 포함됩니다. 그것은 “이름 확인”입니다. URL에서 직접 숫자 IP 주소를 사용하면 일반적으로 이름 확인 단계를 피할 수 있지만 대부분의 경우 이름을 IP 주소로 수동으로 바꾸는 것이 쉽지 않습니다.
-libcurl은 새로운 연결을 생성하기 보다는 [기존 연"
-        "wordCount": 631
+libcurl은 새로운 연결을 생성하기 보다는 기존 연결"
+        "wordCount": 625
     }
 </script>
 
