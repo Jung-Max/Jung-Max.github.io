@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>http://jung-max.github.io/2022/02/08/Linux-libcurl/</loc>
+        <lastmod>2022-02-09T08:53:00.769Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20%EC%9D%B4%EB%A6%84%20%ED%99%95%EC%9D%B8/</loc>
         <lastmod>2022-02-09T08:49:04.653Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -26,14 +34,6 @@
     <url>
         <loc>http://jung-max.github.io/2022/02/09/Linux-libcurl%20example/</loc>
         <lastmod>2022-02-09T08:47:55.291Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jung-max.github.io/2022/02/08/Linux-libcurl/</loc>
-        <lastmod>2022-02-09T08:47:16.701Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
