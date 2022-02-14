@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>rk-roc3308b-plus 보드 wifi config | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="Linux,buildroot">
+    
+    <meta name="description" content="네트워크 구성무선 네트워크 구성‘wpa_supplicant’ 도구는 무선 네트워크 구성에 사용됩니다.주로 wpa_supplicant 및 wpa_cli의 두 가지 프로그램을 포함하는 WIFI 연결 및 구성을 위한 도구입니다. 커맨드 라인와이파이 활성화12echo 1 &amp;gt;/sys/class/rkwifi/driverifconfig wlan0 up  완료되면">
+<meta name="keywords" content="Linux,buildroot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rk-roc3308b-plus 보드 wifi config">
+<meta property="og:url" content="http://jung-max.github.io/2022/02/10/Linux-rk-roc3308b-plus-보드-wifi-config/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="네트워크 구성무선 네트워크 구성‘wpa_supplicant’ 도구는 무선 네트워크 구성에 사용됩니다.주로 wpa_supplicant 및 wpa_cli의 두 가지 프로그램을 포함하는 WIFI 연결 및 구성을 위한 도구입니다. 커맨드 라인와이파이 활성화12echo 1 &amp;gt;/sys/class/rkwifi/driverifconfig wlan0 up  완료되면">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/Thumbnail/roc-rk3308b-cc-plus.jpg">
+<meta property="og:updated_time" content="2022-02-14T08:15:20.721Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="rk-roc3308b-plus 보드 wifi config">
+<meta name="twitter:description" content="네트워크 구성무선 네트워크 구성‘wpa_supplicant’ 도구는 무선 네트워크 구성에 사용됩니다.주로 wpa_supplicant 및 wpa_cli의 두 가지 프로그램을 포함하는 WIFI 연결 및 구성을 위한 도구입니다. 커맨드 라인와이파이 활성화12echo 1 &amp;gt;/sys/class/rkwifi/driverifconfig wlan0 up  완료되면">
+<meta name="twitter:image" content="http://jung-max.github.io/images/Thumbnail/roc-rk3308b-cc-plus.jpg">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2022/02/10/linux-rk-roc3308b-plus-보드-wifi-config/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/buildroot/">buildroot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Linux/buildroot/">buildroot</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Linux-rk-roc3308b-plus-보드-wifi-config" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        rk-roc3308b-plus 보드 wifi config
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2022/02/10/Linux-rk-roc3308b-plus-보드-wifi-config/" class="article-date">
+            <time datetime="2022-02-10T07:57:17.000Z" itemprop="datePublished">2022-02-10</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/buildroot/">buildroot</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="네트워크-구성"><a href="#네트워크-구성" class="headerlink" title="네트워크 구성"></a>네트워크 구성</h1><h2 id="무선-네트워크-구성"><a href="#무선-네트워크-구성" class="headerlink" title="무선 네트워크 구성"></a>무선 네트워크 구성</h2><p>‘wpa_supplicant’ 도구는 무선 네트워크 구성에 사용됩니다.<br>주로 <code>wpa_supplicant</code> 및 <code>wpa_cli</code>의 두 가지 프로그램을 포함하는 WIFI 연결 및 구성을 위한 도구입니다.</p>
+<h2 id="커맨드-라인"><a href="#커맨드-라인" class="headerlink" title="커맨드 라인"></a>커맨드 라인</h2><h3 id="와이파이-활성화"><a href="#와이파이-활성화" class="headerlink" title="와이파이 활성화"></a>와이파이 활성화</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 1 &gt;/sys/class/rkwifi/driver</span><br><span class="line">ifconfig wlan0 up</span><br></pre></td></tr></table></figure>
+
+<p>완료되면 <code>ifconfig</code> 명령을 실행하면 <code>wlan0</code> 노드를 볼 수 있습니다.</p>
+<h3 id="wpa-supplicant-프로세스-시작"><a href="#wpa-supplicant-프로세스-시작" class="headerlink" title="wpa_supplicant 프로세스 시작"></a>wpa_supplicant 프로세스 시작</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wpa_supplicant -B -i wlan0 -c /data/cfg/wpa_supplicant.conf</span><br></pre></td></tr></table></figure>
+
+<p>파일 생성: /data/cfg/wpa_supplicant.conf 파일이 없으면 다음 구성을 추가해야 합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi /data/cfg/wpa_supplicant.conf</span><br><span class="line">ctrl_interface=/var/run/wpa_supplicant</span><br><span class="line">ap_scan=1</span><br></pre></td></tr></table></figure>
+
+<h3 id="wpa-cli로-WIFI-구성"><a href="#wpa-cli로-WIFI-구성" class="headerlink" title="wpa_cli로 WIFI 구성"></a>wpa_cli로 WIFI 구성</h3><p>일반적인 명령:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wpa_cli -i wlan0 scan             // Search wifi network nearby</span><br><span class="line">wpa_cli -i wlan0 scan_result      // Print the searched WiFi network</span><br><span class="line">wpa_cli -i wlan0 add_network      // Add a network connection</span><br></pre></td></tr></table></figure>
+
+<p>무선 네트워크가 [WPA-PSK-CCMP+TKIP] [WPA2-PSK-CCMP+TKIP] [ESS](wpa 암호화)로 암호화되고 Wi-Fi 이름: 이름, Wi-Fi 암호: psk. 연결 작업은 다음과 같습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wpa_cli -i wlan0 set_network 0 ssid &apos;&quot;name&quot;&apos;</span><br><span class="line">wpa_cli -i wlan0 set_network 0 psk &apos;&quot;psk&quot;&apos;</span><br><span class="line">wpa_cli -i wlan0 enable_network 0    //Enable WiFi</span><br></pre></td></tr></table></figure>
+
+<p>무선 네트워크가 [WEP] [ESS](wep 암호화)로 암호화되어 있고 wifi 이름: 이름, wifi 암호: psk. 연결 작업은 다음과 같습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wpa_cli -i wlan0 set_network 0 ssid &apos;&quot;name&quot;&apos;</span><br><span class="line">wpa_cli -i wlan0 set_network 0 key_mgmt NONE</span><br><span class="line">wpa_cli -i wlan0 set_network 0 wep_key0 &apos;&quot;psk&quot;&apos;</span><br><span class="line">wpa_cli -i wlan0 enable_network 0</span><br></pre></td></tr></table></figure>
+
+<p>무선 네트워크가 [ESS](암호화 없음)로 암호화되어 있고 Wi-Fi 이름: 이름인 경우 연결 작업은 다음과 같습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wpa_cli -i wlan0 set_network 0 ssid &apos;&quot;name&quot;&apos;</span><br><span class="line">wpa_cli -i wlan0 set_network 0 key_mgmt NONE</span><br><span class="line">wpa_cli -i wlan0 enable_network 0</span><br></pre></td></tr></table></figure>
+
+<p>WIFI 연결 정보 저장:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wpa_cli -i wlan0 save_config</span><br></pre></td></tr></table></figure>
+
+<p>저장된 연결 재개:저장된 연결 재개:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wpa_cli -i wlan0 list_network        // List all saved connections</span><br><span class="line">wpa_cli -i wlan0 select_network 0     // Connect the first saved connection</span><br><span class="line">wpa_cli -i wlan0 enable_network 0      // Enable the first saved connection</span><br></pre></td></tr></table></figure>
+
+<p>WiFi 끄기:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig wlan0 down</span><br></pre></td></tr></table></figure>
+
+<h2 id="WIFI-구성-파일"><a href="#WIFI-구성-파일" class="headerlink" title="WIFI 구성 파일"></a>WIFI 구성 파일</h2><p>다음 파일을 수정합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi /data/cfg/wpa_supplicant.conf</span><br><span class="line">ctrl_interface=/var/run/wpa_supplicant</span><br><span class="line">ap_scan=1</span><br></pre></td></tr></table></figure>
+
+<p>다음 항목을 추가합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">network=&#123;</span><br><span class="line">ssid=&quot;WiFi-AP&quot;		// WiFi name</span><br><span class="line">psk=&quot;12345678&quot;		// WiFi password</span><br><span class="line">key_mgmt=WPA-PSK	// Encryption</span><br><span class="line"># key_mgmt=NONE		// No encryption</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>위의 구성을 다시 로드합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wpa_cli reconfigure</span><br></pre></td></tr></table></figure>
+
+<p>재접속:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wpa_cli reconnect</span><br></pre></td></tr></table></figure>
+
+<h2 id="휴대폰으로-WIFI-구성"><a href="#휴대폰으로-WIFI-구성" class="headerlink" title="휴대폰으로 WIFI 구성"></a>휴대폰으로 WIFI 구성</h2><p>휴대폰을 사용하여 Softap 또는 Bluetooth를 통해 WiFi 네트워크를 구성하는 방법에는 여러 가지가 있습니다. 통합 음성 인식 SDK에는 “小度之家 SDK”와 같은 자체 방법도 포함될 것입니다.</p>
+<p>여기에서는 ROC-RK3308B-CC의 내장 네트워크 구성 방법을 소개합니다.</p>
+<h3 id="SoftAP로-WIFI-네트워크-구성"><a href="#SoftAP로-WIFI-네트워크-구성" class="headerlink" title="SoftAP로 WIFI 네트워크 구성"></a>SoftAP로 WIFI 네트워크 구성</h3><p>Download the APP: <a href="http://en.t-firefly.com/doc/download/page/id/67.html#other_298" rel="external nofollow noopener noreferrer" target="_blank">RkEcho.apk</a>, 또는 SDK:<code>SDK/external/app/RkEcho.apk</code>에서 찾을 수 있습니다.</p>
+<p>빌드루트 구성:</p>
+<p><img src="https://wiki.t-firefly.com/en/Core-3308Y/_images/softapserver_config.png" alt="빌드루트구성"></p>
+<p>softapServer의 소스 디렉토리:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/external/softapServer/ -- operations related to WIFI and APK </span><br><span class="line">/external/softapDemo/ -- operations related to WiFi</span><br></pre></td></tr></table></figure>
+
+<p>apk <a href="http://en.t-firefly.com/doc/download/page/id/67.html#other_298" rel="external nofollow noopener noreferrer" target="_blank">RkEcho.apk</a>를 설치하려면 휴대폰을 준비하세요. 필수입니다.</p>
+<p>그런 다음 wpa_supplicant 프로세스가 시작되었는지 확인합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wpa_supplicant -B -i wlan0 -c /data/cfg/wpa_supplicant.conf</span><br></pre></td></tr></table></figure>
+
+<p>다음과 같이 WIFI 네트워크를 구성합니다.</p>
+<ul>
+<li>다음 명령 실행:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">softapServer Rockchip-Echo-123</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://wiki.t-firefly.com/en/Core-3308Y/_images/wifi_server.png" alt="wifi-server"></p>
+<p>참고: Wi-Fi AP는 Rockchip-Echo-xxx 형식으로 이름을 지정해야 합니다.</p>
+<ul>
+<li>AP를 켠 후, 휴대폰의 WiFi 설정을 열고 Rckchip-Echo-123과 같이 방금 설정한 AP로의 연결을 클릭합니다.</li>
+<li>연결이 완료되면 휴대폰에 설치된 apk를 열고 다음 작업을 수행합니다.</li>
+<li>APK를 열고 와이파이 설정 클릭 -&gt; 확인 -&gt; 确认 -&gt; 와이파이 목록 -&gt; 연결할 네트워크 클릭 -&gt; 비밀번호 입력 -&gt; 확인 클릭.</li>
+</ul>
+<p><img src="https://wiki.t-firefly.com/en/Core-3308Y/_images/network_conf.png" alt="network_conf"></p>
+<ul>
+<li>네트워크에 알리라는 음성 안내가 연결되면 사용 시작!</li>
+<li>네트워크가 연결되어 있는지 확인:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping www.google.com</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>주의사항:</li>
+</ul>
+<ol>
+<li><p><code>softspServer Rockchip-Echo-123</code> 명령이 실행되면 네트워크 구성이 완료될 때까지 철회할 수 없습니다.</p>
+</li>
+<li><p>잘못된 AP 이름을 설정하지 마십시오. 그렇지 않으면 apk가 확인 인터페이스(Rockchip-Echo-xxx)에 들어가지 않습니다.</p>
+</li>
+<li><p>이 기능은 현재 안드로이드 폰만 지원합니다.</p>
+</li>
+</ol>
+<h2 id="Ethernet"><a href="#Ethernet" class="headerlink" title="Ethernet"></a>Ethernet</h2><h3 id="이더넷-사용"><a href="#이더넷-사용" class="headerlink" title="이더넷 사용"></a>이더넷 사용</h3><ul>
+<li>eth0</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 up</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>eth1</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth1 up</span><br></pre></td></tr></table></figure>
+
+<h2 id="IP-주소-설정"><a href="#IP-주소-설정" class="headerlink" title="IP 주소 설정"></a>IP 주소 설정</h2><h3 id="동적으로-IP-주소-얻기"><a href="#동적으로-IP-주소-얻기" class="headerlink" title="동적으로 IP 주소 얻기"></a>동적으로 IP 주소 얻기</h3><p>WIFI는 동적으로 IP 주소를 획득하고 다음 명령을 실행합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">udhcpc -i wlan0 -R</span><br></pre></td></tr></table></figure>
+
+<p>이더넷은 동적으로 IP 주소를 획득하고 다음 명령을 실행합니다.</p>
+<ul>
+<li>eth0</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">udhcpc -i eth0 -R</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>eth1</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">udhcpc -i eth1 -R</span><br></pre></td></tr></table></figure>
+
+<h3 id="고정-IP-주소-설정"><a href="#고정-IP-주소-설정" class="headerlink" title="고정 IP 주소 설정"></a>고정 IP 주소 설정</h3><p>eth0에 대한 고정 IP 주소 설정 단계는 다음과 같습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ip addr add 168.168.100.78/255.255.0.0 dev eth0 #ip address/subnet mask</span><br><span class="line">ip route flush dev eth0</span><br><span class="line">ip route add 168.168.0.1 dev eth0		#gateway</span><br><span class="line">ip route add default via 168.168.0.1 dev eth0 #add default router</span><br><span class="line">echo -e &quot;nameserver 114.114.114.114\nnameserver 8.8.8.8&quot; &gt; /userdata/resolv.conf #set DNS</span><br></pre></td></tr></table></figure>
+
+<p>WIFI 또는 eth1의 고정 IP 주소 단계는 위와 동일합니다.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2022/02/10/Linux-rk-roc3308b-plus-보드-wifi-config/" data-id="ckzmfacph000131uoj5jw7f2g" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "rk-roc3308b-plus 보드 wifi config",
+        "image": "http://jung-max.github.io/images/Thumbnail/roc-rk3308b-cc-plus.jpg",
+        "keywords": "Linux buildroot",
+        "genre": "Linux buildroot",
+        "datePublished": "2022-02-10",
+        "dateCreated": "2022-02-10",
+        "dateModified": "2022-02-14",
+        "url": "http://jung-max.github.io/2022/02/10/Linux-rk-roc3308b-plus-보드-wifi-config/",
+        "description": "네트워크 구성무선 네트워크 구성‘wpa_supplicant’ 도구는 무선 네트워크 구성에 사용됩니다.주로 wpa_supplicant 및 wpa_cli의 두 가지 프로그램을 포함하는 WIFI 연결 및 구성을 위한 도구입니다.
+커맨드 라인와이파이 활성화12echo 1 &gt;/sys/class/rkwifi/driverifconfig wlan0 up
+
+완료되면 "
+        "wordCount": 830
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2022/02/10/Linux-rk-roc3308b-plus-cross-complie/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">새로운</strong>
+        <p class="article-nav-title">
+        
+            rk-roc3308b-plus cross compile
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2022/02/09/Linux-libcurl example/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">libcurl example</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/14/Linux-libcurl 우분투에서 libcurl 사용/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="우분투에서 libcurl 사용" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/14/Linux-libcurl 우분투에서 libcurl 사용/" class="title">우분투에서 libcurl 사용</a></p>
+                            <p class="item-date"><time datetime="2022-02-14T08:04:16.000Z" itemprop="datePublished">2022-02-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/10/Linux-buildroot-보드-ssh설정/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/roc-rk3308b-cc-plus.jpg)" alt="buildroot 보드 ssh 설정" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/buildroot/">buildroot</a></p>
+                            <p class="item-title"><a href="/2022/02/10/Linux-buildroot-보드-ssh설정/" class="title">buildroot 보드 ssh 설정</a></p>
+                            <p class="item-date"><time datetime="2022-02-10T07:57:17.000Z" itemprop="datePublished">2022-02-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/10/Linux-rk-roc3308b-plus-cross-complie/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/roc-rk3308b-cc-plus.jpg)" alt="rk-roc3308b-plus cross compile" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/buildroot/">buildroot</a></p>
+                            <p class="item-title"><a href="/2022/02/10/Linux-rk-roc3308b-plus-cross-complie/" class="title">rk-roc3308b-plus cross compile</a></p>
+                            <p class="item-date"><time datetime="2022-02-10T07:57:17.000Z" itemprop="datePublished">2022-02-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/10/Linux-rk-roc3308b-plus-보드-wifi-config/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/roc-rk3308b-cc-plus.jpg)" alt="rk-roc3308b-plus 보드 wifi config" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/buildroot/">buildroot</a></p>
+                            <p class="item-title"><a href="/2022/02/10/Linux-rk-roc3308b-plus-보드-wifi-config/" class="title">rk-roc3308b-plus 보드 wifi config</a></p>
+                            <p class="item-date"><time datetime="2022-02-10T07:57:17.000Z" itemprop="datePublished">2022-02-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/09/Linux-libcurl example/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="libcurl example" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/09/Linux-libcurl example/" class="title">libcurl example</a></p>
+                            <p class="item-date"><time datetime="2022-02-09T07:31:07.000Z" itemprop="datePublished">2022-02-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">26</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/buildroot/">buildroot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">23</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">39</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 19.33px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 16.67px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.67px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.67px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.67px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.33px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.67px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.33px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.33px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.67px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 14.67px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.67px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.67px;">VScode</a> <a href="/tags/Web/" style="font-size: 14px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 18px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.33px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.33px;">http</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.33px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.33px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.67px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.67px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.33px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2022/02/10/Linux-rk-roc3308b-plus-보드-wifi-config/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+
