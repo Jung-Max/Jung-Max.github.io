@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+
+    
+
+    
+    <title>cJSON 사용법 | Max&#39;s Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="naver-site-verification" content="000ea7de66e3dddb62de099ee3dc02156c6f9d64">
+        <meta name="keywords" content="Linux,buildroot,json">
+    
+    <meta name="description" content="개요cJSON은 c에서 JSON을 다루기 위한 라이브러리입니다. 해당 라이브러리가 좋은 점은 단일 파일과 단일 헤더로 이루어져 있어서 importing이 매우 간단하다는 점입니다. 해당 파일은 여기에서 다운받을 수 있습니다. 해당 라이브러리는 MIT 라이센스로 누구나 자유롭게 사용 가능합니다. 설치cmake를 통해서도 설치가 가능합니다. 하지만 라이브러리가">
+<meta name="keywords" content="Linux,buildroot,json">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cJSON 사용법">
+<meta property="og:url" content="http://jung-max.github.io/2022/02/17/Linux-cJSON 사용법/index.html">
+<meta property="og:site_name" content="Max&#39;s Blog">
+<meta property="og:description" content="개요cJSON은 c에서 JSON을 다루기 위한 라이브러리입니다. 해당 라이브러리가 좋은 점은 단일 파일과 단일 헤더로 이루어져 있어서 importing이 매우 간단하다는 점입니다. 해당 파일은 여기에서 다운받을 수 있습니다. 해당 라이브러리는 MIT 라이센스로 누구나 자유롭게 사용 가능합니다. 설치cmake를 통해서도 설치가 가능합니다. 하지만 라이브러리가">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="http://jung-max.github.io/images/Thumbnail/cjson.png">
+<meta property="og:updated_time" content="2022-02-17T06:07:17.001Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cJSON 사용법">
+<meta name="twitter:description" content="개요cJSON은 c에서 JSON을 다루기 위한 라이브러리입니다. 해당 라이브러리가 좋은 점은 단일 파일과 단일 헤더로 이루어져 있어서 importing이 매우 간단하다는 점입니다. 해당 파일은 여기에서 다운받을 수 있습니다. 해당 라이브러리는 MIT 라이센스로 누구나 자유롭게 사용 가능합니다. 설치cmake를 통해서도 설치가 가능합니다. 하지만 라이브러리가">
+<meta name="twitter:image" content="http://jung-max.github.io/images/Thumbnail/cjson.png">
+    
+    <link rel="canonical" href="http://jung-max.github.io/2022/02/17/linux-cjson 사용법/">
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-146054180-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+    
+    
+
+
+<link rel="alternate" href="/feed.xml" title="Max's Blog" type="application/rss+xml">
+</head>
+</html>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">개발시 정리사항 끄적끄적</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="/">홈</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/">Android</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/App/">App</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/BLE/">BLE</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/HID/">HID</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-boot/">Platform boot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/개발환경/">개발환경</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Android/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/">Linux</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/buildroot/">buildroot</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/http/">http</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Linux/library/">library</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/">Web</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/Javascript/">Javascript</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/">openCV</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/openCV/지식/">지식</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/">python</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/GUI/">GUI</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/setting/">setting</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/python/통신/">통신</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/">기타</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Git/">Git</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/Markdown/">Markdown</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/기타/">기타</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item">
+                                    <a class="main-nav-list-link" href="https://about.me/jung-max" rel="external nofollow noopener noreferrer" target="_blank">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="검색">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '포스트',
+            PAGES: 'Pages',
+            CATEGORIES: '카테고리',
+            TAGS: '태그',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/Linux/library/">library</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-Linux-cJSON 사용법" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        cJSON 사용법
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2022/02/17/Linux-cJSON 사용법/" class="article-date">
+            <time datetime="2022-02-17T03:05:13.000Z" itemprop="datePublished">2022-02-17</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/buildroot/">buildroot</a>, <a class="tag-link" href="/tags/json/">json</a>
+    </div>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h1><p>cJSON은 c에서 JSON을 다루기 위한 라이브러리입니다. 해당 라이브러리가 좋은 점은 단일 파일과 단일 헤더로 이루어져 있어서 importing이 매우 간단하다는 점입니다.</p>
+<p>해당 파일은 <a href="https://github.com/DaveGamble/cJSON" rel="external nofollow noopener noreferrer" target="_blank">여기</a>에서 다운받을 수 있습니다.</p>
+<p>해당 라이브러리는 MIT 라이센스로 누구나 자유롭게 사용 가능합니다.</p>
+<h3 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h3><p>cmake를 통해서도 설치가 가능합니다. 하지만 라이브러리가 단일 파일로 되어있으므로 프로젝트에 직접 넣는 것이 더 간편합니다.</p>
+<p><a href="https://github.com/DaveGamble/cJSON" rel="external nofollow noopener noreferrer" target="_blank">사이트</a>에서 다운받은 파일 중 <code>cJSON.c</code>와 <code>cJSON.h</code>를 직접 프로젝트에 넣어주면 됩니다.</p>
+<p>추후 <code>#include &quot;cjson/cJSON.h&quot;</code>와 같은 형식으로 include해주면 됩니다.</p>
+<h3 id="데이터-구조"><a href="#데이터-구조" class="headerlink" title="데이터 구조"></a>데이터 구조</h3><p>CJSON은 CJSON struct 데이터 유형을 사용하여 JSON 데이터를 나타냅니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* The cJSON structure: */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">cJSON</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">cJSON</span> *<span class="title">next</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">cJSON</span> *<span class="title">prev</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">cJSON</span> *<span class="title">child</span>;</span></span><br><span class="line">    <span class="keyword">int</span> type;</span><br><span class="line">    <span class="keyword">char</span> *valuestring;</span><br><span class="line">    <span class="comment">/* writing to valueint is DEPRECATED, use cJSON_SetNumberValue instead */</span></span><br><span class="line">    <span class="keyword">int</span> valueint;</span><br><span class="line">    <span class="keyword">double</span> valuedouble;</span><br><span class="line">    <span class="keyword">char</span> *<span class="built_in">string</span>;</span><br><span class="line">&#125; cJSON;</span><br></pre></td></tr></table></figure>
+
+<p>이 유형의 항목은 JSON 값을 나타냅니다. 유형은<code>type</code>에 저장됩니다. 비트 플래그로 저장됩니다 (** 이것은<code>type</code> **의 값을 비교하여 유형을 찾을 수 없음을 의미합니다).</p>
+<p>항목의 유형을 확인하려면 해당<code>cjson_is ...</code>기능을 사용하십시오. <code>null</code> 검사가 뒤 따른 다음 항목 이이 유형의 항목 인 경우 부울 값을 반환합니다.</p>
+<p>유형은 다음 중 하나 일 수 있습니다.</p>
+<ul>
+<li><code>cjson_invalid</code> (<code>cjson_isinvalid</code>으로 확인) : 값이없는 유효하지 않은 항목을 나타냅니다. 항목을 모두 0 바이트로 설정하면 자동 으로이 유형이 있습니다.</li>
+<li><code>cjson_false</code> (<code>cjson_isfalse</code>에 체크) :<code>false</code>부울 값을 나타냅니다. <code>cjson_isboool</code>로 Boolean 값을 확인할 수도 있습니다.</li>
+<li><code>cjson_true</code> (<code>cjson_istreue</code>로 확인) :<code>true</code> Boolean 값을 나타냅니다. <code>cjson_isboool</code>로 Boolean 값을 확인할 수도 있습니다.</li>
+<li><code>cjson_null</code> (<code>cjson_isnull</code>로 확인) :<code>null</code> 값을 나타냅니다.</li>
+<li><code>cjson_number</code> (<code>cjson_isnumber</code>와 함께 확인) : 숫자 값을 나타냅니다. 값은<code>ValueDouble</code>의 두 배로 저장되고<code>Validint</code>에도 저장됩니다. 숫자가 정수 범위를 벗어나면<code>int_max</code> 또는<code>int_min</code>가<code>Validint</code>에 사용된다.</li>
+<li><code>CJSON_String</code> (<code>cjson_isstring</code>에 확인) : 문자열 값을 나타냅니다. <code>valuestring</code>의 0 종단 문자열 형태로 저장됩니다.</li>
+<li><code>cjson_array</code> (<code>cjson_isarray</code>로 확인) : 배열 값을 나타냅니다. 이는<code>자식</code>을 배열의 값을 나타내는<code>cjson</code> 항목의 링크 된 목록으로 가리키는 것으로 구현됩니다. 요소는<code>next</code> 및<code>prev</code>를 사용하여<code>pref.next == null</code>와 마지막 요소가<code>null == null&#39;를 갖는</code>next<code>와</code>prev`를 사용하여 링크됩니다.</li>
+<li><code>cjson_object</code> (<code>cjson_isobject</code>에 확인) : 객체 값을 나타냅니다. 객체는 배열과 동일한 방식으로 저장되며, 유일한 차이점은 객체의 항목이<code>string</code>의 키를 저장한다는 것입니다.</li>
+<li><code>CJSON_RAW</code> (<code>cjson_israw</code>에 체크) :<code>valuestring</code>의 문자의 제로 종료 배열로 저장된 모든 종류의 JSON을 나타냅니다. 예를 들어, 성능을 절약하기 위해 동일한 정적 JSON을 반복해서 반복해서 인쇄하지 않도록 사용할 수 있습니다. cjson은 구문 분석 할 때이 유형을 만들지 않습니다. 또한 CJSON은 유효한 JSON인지 확인하지 않습니다.</li>
+</ul>
+<p>또한 다음 두 가지 플래그가 있습니다.</p>
+<ul>
+<li><code>cjson_isreference</code> :<code>자녀</code>가 가리키는 항목과 / 또는<code>valuestring</code>항목 이이 항목에 의해 소유되지 않는 항목을 지정하여 참조 일뿐입니다. 따라서 <code>CJSON_DELETE</code> 및 다른 기능은<code>vehild</code> /<code>valuestring</code>이 아닌이 항목 만 할당 해제합니다.</li>
+<li><code>cjson_stringisconst</code> : 이것은<code>string</code>가 일정한 문자열을 가리킨다는 것을 의미합니다. 즉,<code>cjson_delete</code> 및 다른 함수는<code>string</code>을 할당 해제하려고하지 않는다는 것을 의미합니다.</li>
+</ul>
+<h3 id="데이터-구조로-작동합니다"><a href="#데이터-구조로-작동합니다" class="headerlink" title="데이터 구조로 작동합니다"></a>데이터 구조로 작동합니다</h3><p>모든 값 유형에 대해 해당 유형의 항목을 만드는 데 사용할 수있는<code>cjson_create ...</code>함수가 있습니다.</p>
+<p>이 모든 것은 나중에<code>cjson_delete</code>로 삭제 될 수있는<code>cjson</code> struct를 할당 할 것입니다.</p>
+<p>어떤 시점에서 삭제해야합니다. 그렇지 않으면 메모리 누수가 발생합니다.</p>
+<p><strong>중요</strong> : 배열이나 오브젝트에 항목을 추가 한 경우 <code>cjson_delete</code>로 삭제해서는 안됩니다. 배열이나 오브젝트에 추가하면 소유권을 전송하여 해당 배열이나 개체가 삭제되면 삭제됩니다.</p>
+<p> <code>cjson_setvalueString</code>을 사용하여<code>cjson_string</code>의’valuestring<code>을 변경하고 이전</code>valuestring`를 수동으로 해제 할 필요는 없습니다.</p>
+<h4 id="기본-유형"><a href="#기본-유형" class="headerlink" title="기본 유형"></a>기본 유형</h4><ul>
+<li><strong>NULL</strong>은<code>cjson_createnull</code>로 생성됩니다</li>
+<li><strong>booleans</strong><code>cjson_creaTeetRue</code>,<code>cjson_createfalse</code> 또는<code>cjson_createbool</code>으로 생성된다</li>
+<li><strong>numbers</strong>는<code>cjson_createNumber</code>로 생성됩니다. 이것은<code>ValueDouble</code>와<code>ValueInt</code> 둘 다 설정됩니다. 숫자가 정수 범위를 벗어나면<code>int_max</code> 또는<code>int_min</code>가<code>Validint</code>에 사용된다.</li>
+<li><strong>strings</strong>는<code>cjson_createString</code> (문자열 복사) 또는<code>cjson_createStringReference</code> (직접 문자열을 가리키는 것을 의미합니다. <code>valuestring</code>는<code>cjson_delete</code>에 의해 삭제되지 않고 수명, 상수에 유용합니다.)</li>
+</ul>
+<h4 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h4><p><code>cjson_createarray</code>가있는 빈 배열을 만들 수 있습니다. <code>CJSON_CreateArrayRayference</code>는 콘텐츠를 “소유”하지 않는 배열을 만드는 데 사용할 수 있으므로 콘텐츠가<code>cjson_delete</code>에 의해 삭제되지 않습니다.</p>
+<p>항목을 배열에 추가하려면<code>cjson_additemtoarray</code>를 사용하여 항목을 끝까지 추가합니다.<br><code>cjson_additemreferencetoarray</code>를 사용하여 요소는 다른 항목, 배열 또는 문자열에 대한 참조로 추가 할 수 있습니다. 즉,<code>CJSON_DELETE</code>는<code>자식</code>또는<code>VALUESTRING&#39;속성을 삭제하지 않으므로 이미 다른 곳에서 이미 사용되는 경우 이중 해제가 발생하지 않습니다.
+중간에 항목을 삽입하려면</code>cjson_insertiteminarray`를 사용하십시오. 주어진 0 기반 인덱스에 항목을 삽입하고 기존 항목을 오른쪽으로 이동합니다.</p>
+<p>주어진 인덱스에서 배열에서 항목을 꺼내고 계속 사용하려면<code>cjson_detachitemfromarray</code>를 사용하여 분리 된 항목을 반환하므로 포인터에 할당해야합니다. 그렇지 않으면 메모리 누수가 발생합니다.</p>
+<p>삭제 항목은<code>cjson_deleteItemFromArray</code>로 수행됩니다. 그것은<code>cjson_detachitemfromarray</code>와 같이 작동하지만<code>cjson_delete</code>를 통해 분리 된 항목을 삭제합니다.</p>
+<p>배열의 항목을 대체 할 수도 있습니다. 색인을 사용하여<code>cjson_replaceItemInarray</code> 또는<code>cjson_replaceItemViApointer</code>로<code>cjson_replaceItemViApointer&#39;를 사용하여</code>cjson_replaceItemViApointer<code></code>cjson_replaceItemViaPointer<code>가 실패하면</code>0`을 반환합니다. 이게 내부적으로 오래된 항목을 분리하고 삭제하고 새 항목을 그 자리에 삽입하는 것입니다.</p>
+<p>배열의 크기를 얻으려면<code>cjson_getArraysize</code>를 사용하십시오. <code>cjson_getArrayItem</code>를 사용하여 주어진 인덱스에서 요소를 구할 수 있습니다.</p>
+<p>배열은 링크 된 목록으로 저장되므로 인덱스를 통해 반복하는 것은 비효율적입니다 (<code>o (n²)</code>)<code>cojson_arrayforeach</code> 매크로를 사용하여 배열을 반복 할 수 있습니다.</p>
+<h4 id="object"><a href="#object" class="headerlink" title="object"></a>object</h4><p><code>cjson_createobject</code>가있는 빈 객체를 만들 수 있습니다. <code>CJSON_CreateObjectReference</code>는 콘텐츠를 “소유”하지 않는 개체를 만드는 데 사용할 수 있으므로 콘텐츠가<code>cjson_delete</code>에 의해 삭제되지 않습니다.</p>
+<p>객체에 항목을 추가하려면<code>cjson_additemtoobject</code>를 사용하십시오. <code>cjson_additemtoobjectcs</code>를 사용하여 상수 또는 참조 인 이름을 가진 객체에 항목을 추가하여<code>cjson_delete</code>에 의해 해제되지 않도록 아이템 (<code>cjson</code> struct)의 키,<code>string</code>).</p>
+<p><code>cjson_additemreferencetoarray</code>를 사용하여 요소는 다른 객체, 배열 또는 문자열에 대한 참조로 추가 할 수 있습니다. 즉,<code>CJSON_DELETE</code>는<code>자식</code>또는<code>VALUESTRING</code>속성을 삭제하지 않으므로 이미 다른 곳에서 이미 사용되는 경우 이중 해제가 발생하지 않습니다.</p>
+<p>객체에서 항목을 꺼내려면<code>cjson_detachitemfromobobjectcasesensitive</code>를 사용하여 분리 된 항목을 반환하므로 포인터에 할당해야합니다. 그렇지 않으면 메모리 누수가 발생합니다.</p>
+<p>항목을 삭제하면<code>cjson_deleteItemFromObjectCasEnitive</code>로 수행됩니다. 그것은<code>cjson_detachitemfromobobjectcasesensitive</code>와 같은 일이 뒤 따른다.</p>
+<p>객체의 항목을 제자리에서 바꿀 수도 있습니다. <code>cjson_replaceItemInoBjectCasEnitive</code> 키를 사용하여<code>cjson_replaceItemViApointer</code>를 사용하여<code>cjson_replaceItemViApointer</code> <code>cjson_replaceItemViaPointer</code>가 실패하면<code>0</code>을 반환합니다. 이게 내부적으로 오래된 항목을 분리하고 삭제하고 새 항목을 그 자리에 삽입하는 것입니다.</p>
+<p>객체의 크기를 가져 오려면<code>cjson_getArraysize</code>, 내부 오브젝트가 배열로 저장되기 때문에 작동합니다.</p>
+<p>객체의 항목에 액세스하려면<code>cjson_getobjectItemCasensitive</code>를 사용하십시오.</p>
+<p>객체를 반복하려면 배열과 동일한 방식으로<code>cjson_arrayforeach</code> 매크로를 사용할 수 있습니다.</p>
+<p>CJSON은 또한 새로운 항목을 빠르게 만들고<code>cjson_addnulltoobject</code>와 같은 객체에 추가하기위한 편리한 도우미 기능을 제공합니다. 그들은 실패한 경우 새 항목이나<code>null</code>에 대한 포인터를 반환합니다.</p>
+<h3 id="JSON-파싱"><a href="#JSON-파싱" class="headerlink" title="JSON 파싱"></a>JSON 파싱</h3><p>JSON이 0 종료 문자열에 주어지면<code>cjson_parse</code>로 파싱 할 수 있습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cJSON *json = cJSON_Parse(<span class="built_in">string</span>);</span><br></pre></td></tr></table></figure>
+
+<p>일부 JSON은 문자열에 (0을 종료했는지 여부)<code>cjson_parsewithLength</code>로 구문 분석 할 수 있습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cJSON *json = cJSON_ParseWithLength(<span class="built_in">string</span>, buffer_length);</span><br></pre></td></tr></table></figure>
+
+<p>그것은 JSON을 구문 분석하고<code>CJSON</code> 항목의 tree를 할당 할 것입니다. 반환되면<code>cjson_delete</code>와 함께 사용한 후에 그것을 할당 해제 할 책임이 있습니다.</p>
+<p><code>cjson_parse</code>에서 사용하는 할당자는<code>malloc</code>와<code>free</code>이지만,<code>cjson_inithooks</code>으로 변경 될 수 있습니다 (전역으로).</p>
+<p>오류가 발생하면<code>cjson_geterrorptr</code>를 사용하여 입력 문자열의 오류 위치에 대한 포인터를 액세스 할 수 있습니다. 주는이 경우 멀티 스레딩 시나리오에서 경쟁 조건을 생성 할 수 있지만이 경우<code>return_parse_end</code>로<code>cjson_parsewithopts</code>를 사용하는 것이 좋습니다.<br>기본적으로 파싱 된 JSON을 따르는 입력 문자열의 문자는 오류로 간주되지 않습니다.</p>
+<p>더 많은 옵션을 원한다면<code>cjson_parsewithopts (const char *value, const char **return_parse_end, cjson_bool requal_null_terminated)</code>를 사용하십시오.<br><code>return_parse_end</code>는 입력 문자열의 JSON 끝이나 오류가 발생한 위치에있는 포인터를 반환합니다 (<code>cjson_geterrorptr</code>을 스레드 안전 방식으로 대체 함). <code>1</code>으로 설정하면 입력 문자열에 JSON 이후의 데이터가 포함되어 있으면 오류가 발생합니다.</p>
+<p>버퍼 길이를 제공하는 옵션을 더 원하면<code>cjson_parsewithlengthOpts (const char *value, size_t buffer_length, const char **return_parse_end, cjson_bool requy_null_terminated)</code>를 사용하십시오.</p>
+<h3 id="JSON-printing"><a href="#JSON-printing" class="headerlink" title="JSON printing"></a>JSON printing</h3><p><code>cjson</code> 항목의 tree가 주어지면<code>cjson_print</code>를 사용하여 문자열로 인쇄 할 수 있습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *<span class="built_in">string</span> = cJSON_Print(json);</span><br></pre></td></tr></table></figure>
+
+<p>문자열을 할당하고 트리의 JSON 표현을 인쇄합니다. 일단 반환되면 할당 자와 함께 사용한 후에 할당 해제 할 책임이 있습니다. (일반적으로<code>무료&#39;는</code>cjson_inithooks`로 설정된 것에 달려 있습니다.)</p>
+<p><code>cjson_print</code>는 포맷을 위해 공백으로 인쇄됩니다. 서식을 지정하지 않고 인쇄하려면<code>cjson_printUnformatted</code>를 사용하십시오.</p>
+<p>결과 문자열이 얼마나 큰지에 대한 대략적인 아이디어가있는 경우<code>cjson_printbuffered (const cjson * item, int prebuffer, cjson_bool fmt)</code>를 사용할 수 있습니다. <code>fmt</code>는 공백을 켜고 끌 수있는 포맷을 켜는 부울입니다. <code>Prebuffer</code>는 인쇄에 사용할 첫 번째 버퍼 크기를 지정합니다. <code>cjson_print</code>는 현재 첫 번째 버퍼 크기를 위해 256 바이트를 사용합니다. 인쇄가 공간이 부족하면 새 버퍼가 할당되고 인쇄가 계속되기 전에 이전 버퍼가 복사됩니다.</p>
+<p>이러한 동적 버퍼 할당은<code>cjson_printpreallocated (cjson * 항목, char * 버퍼, const int length, const cjson_bool 형식)</code>를 사용하여 완전히 피할 수 있습니다. 인쇄 할 포인터와 그 길이의 버퍼가 필요합니다. 길이에 도달하면 인쇄가 실패하고<code>0</code>을 반환합니다. 성공의 경우,<code>1</code>가 반환됩니다. CJSON은 제공된 메모리가 충분할 경우 추정 할 때 100 % 정확하지 않기 때문에 실제로 5 바이트를 더 많이 제공해야합니다.</p>
+<h3 id="예졔"><a href="#예졔" class="headerlink" title="예졔"></a>예졔</h3><p>이 예에서는 다음 JSON을 구축하고 구문 분석하려고합니다.</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"Awesome 4K"</span>,</span><br><span class="line">    <span class="attr">"resolutions"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"width"</span>: <span class="number">1280</span>,</span><br><span class="line">            <span class="attr">"height"</span>: <span class="number">720</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"width"</span>: <span class="number">1920</span>,</span><br><span class="line">            <span class="attr">"height"</span>: <span class="number">1080</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"width"</span>: <span class="number">3840</span>,</span><br><span class="line">            <span class="attr">"height"</span>: <span class="number">2160</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="printing"><a href="#printing" class="headerlink" title="printing"></a>printing</h4><p>위의 JSON을 작성하고 문자열로 printing합시다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//create a monitor with a list of supported resolutions</span></span><br><span class="line"><span class="comment">//<span class="doctag">NOTE:</span> Returns a heap allocated string, you are required to free it after use.</span></span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">create_monitor</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> resolution_numbers[<span class="number">3</span>][<span class="number">2</span>] = &#123;</span><br><span class="line">        &#123;<span class="number">1280</span>, <span class="number">720</span>&#125;,</span><br><span class="line">        &#123;<span class="number">1920</span>, <span class="number">1080</span>&#125;,</span><br><span class="line">        &#123;<span class="number">3840</span>, <span class="number">2160</span>&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">char</span> *<span class="built_in">string</span> = <span class="literal">NULL</span>;</span><br><span class="line">    cJSON *name = <span class="literal">NULL</span>;</span><br><span class="line">    cJSON *resolutions = <span class="literal">NULL</span>;</span><br><span class="line">    cJSON *resolution = <span class="literal">NULL</span>;</span><br><span class="line">    cJSON *<span class="built_in">width</span> = <span class="literal">NULL</span>;</span><br><span class="line">    cJSON *<span class="built_in">height</span> = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">size_t</span> index = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    cJSON *monitor = cJSON_CreateObject();</span><br><span class="line">    <span class="keyword">if</span> (monitor == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">goto</span> <span class="built_in">end</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    name = cJSON_CreateString(<span class="string">"Awesome 4K"</span>);</span><br><span class="line">    <span class="keyword">if</span> (name == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">goto</span> <span class="built_in">end</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* after creation was successful, immediately add it to the monitor,</span></span><br><span class="line"><span class="comment">     * thereby transferring ownership of the pointer to it */</span></span><br><span class="line">    cJSON_AddItemToObject(monitor, <span class="string">"name"</span>, name);</span><br><span class="line"></span><br><span class="line">    resolutions = cJSON_CreateArray();</span><br><span class="line">    <span class="keyword">if</span> (resolutions == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">goto</span> <span class="built_in">end</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cJSON_AddItemToObject(monitor, <span class="string">"resolutions"</span>, resolutions);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (index = <span class="number">0</span>; index &lt; (<span class="keyword">sizeof</span>(resolution_numbers) / (<span class="number">2</span> * <span class="keyword">sizeof</span>(<span class="keyword">int</span>))); ++index)</span><br><span class="line">    &#123;</span><br><span class="line">        resolution = cJSON_CreateObject();</span><br><span class="line">        <span class="keyword">if</span> (resolution == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">goto</span> <span class="built_in">end</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cJSON_AddItemToArray(resolutions, resolution);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">width</span> = cJSON_CreateNumber(resolution_numbers[index][<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">width</span> == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">goto</span> <span class="built_in">end</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cJSON_AddItemToObject(resolution, <span class="string">"width"</span>, <span class="built_in">width</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">height</span> = cJSON_CreateNumber(resolution_numbers[index][<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">height</span> == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">goto</span> <span class="built_in">end</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cJSON_AddItemToObject(resolution, <span class="string">"height"</span>, <span class="built_in">height</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">string</span> = cJSON_Print(monitor);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">string</span> == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Failed to print monitor.\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">end</span>:</span><br><span class="line">    cJSON_Delete(monitor);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>또는 우리는 <code>cJSON_Add...ToObject</code> 도우미 기능을 사용하여 조금 더 쉽게 만들 수 있습니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//<span class="doctag">NOTE:</span> Returns a heap allocated string, you are required to free it after use.</span></span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">create_monitor_with_helpers</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> resolution_numbers[<span class="number">3</span>][<span class="number">2</span>] = &#123;</span><br><span class="line">        &#123;<span class="number">1280</span>, <span class="number">720</span>&#125;,</span><br><span class="line">        &#123;<span class="number">1920</span>, <span class="number">1080</span>&#125;,</span><br><span class="line">        &#123;<span class="number">3840</span>, <span class="number">2160</span>&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">char</span> *<span class="built_in">string</span> = <span class="literal">NULL</span>;</span><br><span class="line">    cJSON *resolutions = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">size_t</span> index = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    cJSON *monitor = cJSON_CreateObject();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (cJSON_AddStringToObject(monitor, <span class="string">"name"</span>, <span class="string">"Awesome 4K"</span>) == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">goto</span> <span class="built_in">end</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    resolutions = cJSON_AddArrayToObject(monitor, <span class="string">"resolutions"</span>);</span><br><span class="line">    <span class="keyword">if</span> (resolutions == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">goto</span> <span class="built_in">end</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (index = <span class="number">0</span>; index &lt; (<span class="keyword">sizeof</span>(resolution_numbers) / (<span class="number">2</span> * <span class="keyword">sizeof</span>(<span class="keyword">int</span>))); ++index)</span><br><span class="line">    &#123;</span><br><span class="line">        cJSON *resolution = cJSON_CreateObject();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cJSON_AddNumberToObject(resolution, <span class="string">"width"</span>, resolution_numbers[index][<span class="number">0</span>]) == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">goto</span> <span class="built_in">end</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cJSON_AddNumberToObject(resolution, <span class="string">"height"</span>, resolution_numbers[index][<span class="number">1</span>]) == <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">goto</span> <span class="built_in">end</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        cJSON_AddItemToArray(resolutions, resolution);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">string</span> = cJSON_Print(monitor);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">string</span> == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Failed to print monitor.\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">end</span>:</span><br><span class="line">    cJSON_Delete(monitor);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Parsing"><a href="#Parsing" class="headerlink" title="Parsing"></a>Parsing</h4><p>이 예제에서는 위의 형식으로 JSON을 구문 분석하고 일부 진단 출력을 인쇄하는 동안 모니터가 전체 HD 해상도를 지원하는지 확인합니다.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* return 1 if the monitor supports full hd, 0 otherwise */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">supports_full_hd</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> * <span class="keyword">const</span> monitor)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> cJSON *resolution = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">const</span> cJSON *resolutions = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">const</span> cJSON *name = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">int</span> status = <span class="number">0</span>;</span><br><span class="line">    cJSON *monitor_json = cJSON_Parse(monitor);</span><br><span class="line">    <span class="keyword">if</span> (monitor_json == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">char</span> *error_ptr = cJSON_GetErrorPtr();</span><br><span class="line">        <span class="keyword">if</span> (error_ptr != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Error before: %s\n"</span>, error_ptr);</span><br><span class="line">        &#125;</span><br><span class="line">        status = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">goto</span> <span class="built_in">end</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    name = cJSON_GetObjectItemCaseSensitive(monitor_json, <span class="string">"name"</span>);</span><br><span class="line">    <span class="keyword">if</span> (cJSON_IsString(name) &amp;&amp; (name-&gt;valuestring != <span class="literal">NULL</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Checking monitor \"%s\"\n"</span>, name-&gt;valuestring);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    resolutions = cJSON_GetObjectItemCaseSensitive(monitor_json, <span class="string">"resolutions"</span>);</span><br><span class="line">    cJSON_ArrayForEach(resolution, resolutions)</span><br><span class="line">    &#123;</span><br><span class="line">        cJSON *<span class="built_in">width</span> = cJSON_GetObjectItemCaseSensitive(resolution, <span class="string">"width"</span>);</span><br><span class="line">        cJSON *<span class="built_in">height</span> = cJSON_GetObjectItemCaseSensitive(resolution, <span class="string">"height"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!cJSON_IsNumber(<span class="built_in">width</span>) || !cJSON_IsNumber(<span class="built_in">height</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            status = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">goto</span> <span class="built_in">end</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ((<span class="built_in">width</span>-&gt;valuedouble == <span class="number">1920</span>) &amp;&amp; (<span class="built_in">height</span>-&gt;valuedouble == <span class="number">1080</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            status = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">goto</span> <span class="built_in">end</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">end</span>:</span><br><span class="line">    cJSON_Delete(monitor_json);</span><br><span class="line">    <span class="keyword">return</span> status;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>cjson_getobjectItemcasensitive</code>가 이미<code>null</code> 입력에 대한 검사가<code>null</code>값이 전파되고<code>cjson_isnumber</code>와<code>chjson_isstring</code> <code>0</code>이면<code>cjson_getobjectItemcasensitive</code>가<code>cjson_parse</code>의 결과를 제외하고는 null 검사가 없다는 것을 유의하십시오. 입력은<code>null</code>입니다.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://jung-max.github.io/2022/02/17/Linux-cJSON 사용법/" data-id="ckzqjunss00002suosjf9zmbv" class="article-share-link"><i class="fa fa-share"></i>공유하기</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Jung Max"
+        },
+        "headline": "cJSON 사용법",
+        "image": "http://jung-max.github.io/images/Thumbnail/cjson.png",
+        "keywords": "Linux buildroot json",
+        "genre": "Linux library",
+        "datePublished": "2022-02-17",
+        "dateCreated": "2022-02-17",
+        "dateModified": "2022-02-17",
+        "url": "http://jung-max.github.io/2022/02/17/Linux-cJSON 사용법/",
+        "description": "개요cJSON은 c에서 JSON을 다루기 위한 라이브러리입니다. 해당 라이브러리가 좋은 점은 단일 파일과 단일 헤더로 이루어져 있어서 importing이 매우 간단하다는 점입니다.
+해당 파일은 여기에서 다운받을 수 있습니다.
+해당 라이브러리는 MIT 라이센스로 누구나 자유롭게 사용 가능합니다.
+설치cmake를 통해서도 설치가 가능합니다. 하지만 라이브러리가"
+        "wordCount": 3160
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>팔로우:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/Jung-Max" target="_blank" rel="external nofollow noopener noreferrer">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2022/02/14/Linux-libcurl 우분투에서 libcurl 사용/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">오래된</strong>
+        <p class="article-nav-title">우분투에서 libcurl 사용</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">최근 글</h3>
+        <div class="widget">
+            <ul id="recent-post" class>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/17/Linux-cJSON 사용법/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/cjson.png)" alt="cJSON 사용법" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/library/">library</a></p>
+                            <p class="item-title"><a href="/2022/02/17/Linux-cJSON 사용법/" class="title">cJSON 사용법</a></p>
+                            <p class="item-date"><time datetime="2022-02-17T03:05:13.000Z" itemprop="datePublished">2022-02-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/14/Linux-libcurl 우분투에서 libcurl 사용/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/curl.png)" alt="우분투에서 libcurl 사용" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/http/">http</a></p>
+                            <p class="item-title"><a href="/2022/02/14/Linux-libcurl 우분투에서 libcurl 사용/" class="title">우분투에서 libcurl 사용</a></p>
+                            <p class="item-date"><time datetime="2022-02-14T08:04:16.000Z" itemprop="datePublished">2022-02-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/10/Linux-rk-roc3308b-plus-보드-wifi-config/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/roc-rk3308b-cc-plus.jpg)" alt="rk-roc3308b-plus 보드 wifi config" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/buildroot/">buildroot</a></p>
+                            <p class="item-title"><a href="/2022/02/10/Linux-rk-roc3308b-plus-보드-wifi-config/" class="title">rk-roc3308b-plus 보드 wifi config</a></p>
+                            <p class="item-date"><time datetime="2022-02-10T07:57:17.000Z" itemprop="datePublished">2022-02-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/10/Linux-rk-roc3308b-plus-cross-complie/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/roc-rk3308b-cc-plus.jpg)" alt="rk-roc3308b-plus cross compile" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/buildroot/">buildroot</a></p>
+                            <p class="item-title"><a href="/2022/02/10/Linux-rk-roc3308b-plus-cross-complie/" class="title">rk-roc3308b-plus cross compile</a></p>
+                            <p class="item-date"><time datetime="2022-02-10T07:57:17.000Z" itemprop="datePublished">2022-02-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/02/10/Linux-buildroot-보드-ssh설정/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Thumbnail/roc-rk3308b-cc-plus.jpg)" alt="buildroot 보드 ssh 설정" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/Linux/buildroot/">buildroot</a></p>
+                            <p class="item-title"><a href="/2022/02/10/Linux-buildroot-보드-ssh설정/" class="title">buildroot 보드 ssh 설정</a></p>
+                            <p class="item-date"><time datetime="2022-02-10T07:57:17.000Z" itemprop="datePublished">2022-02-10</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">카테고리</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">57</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/App/">App</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/BLE/">BLE</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/HID/">HID</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/MediaPlayer/">MediaPlayer</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Architecture/">Platform Architecture</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-DTS/">Platform DTS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-JNI/">Platform JNI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-Kernel/">Platform Kernel</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SEAndroid/">Platform SEAndroid</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-SurfaceFlinger/">Platform SurfaceFlinger</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-U-Boot/">Platform U-Boot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-boot/">Platform boot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Platform-개발-환경/">Platform 개발 환경</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/개발환경/">개발환경</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android/지식/">지식</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/buildroot/">buildroot</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/http/">http</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/library/">library</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Javascript/">Javascript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/SpringBoot/">SpringBoot</a><span class="category-list-count">8</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/">openCV</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/pageDewarp/">pageDewarp</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/openCV/지식/">지식</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/GUI/">GUI</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/setting/">setting</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/통신/">통신</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/">기타</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/GitHub-Pages/">GitHub Pages</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/기타/">기타</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/기타/라즈베리파이/">라즈베리파이</a><span class="category-list-count">5</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">아카이브</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">2월 2022</a><span class="archive-list-count">27</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">1월 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">4월 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">8월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">7월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">6월 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">4월 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">3월 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">2월 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">1월 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">12월 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">11월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">10월 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">9월 2019</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">8월 2019</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">태그</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Platform/">Android Platform</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-raspberry-pi/">Android raspberry pi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/App/">App</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architecture/">Architecture</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BLE/">BLE</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Battery/">Battery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bluetooth/">Bluetooth</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Booting/">Booting</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Contours/">Contours</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DTS/">DTS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Device-Tree/">Device Tree</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPIO/">GPIO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github-Pages/">Github Pages</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HID/">HID</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Script/">Java Script</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kernel/">Kernel</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">40</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/">MariaDB</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaPlayer/">MediaPlayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NDK/">NDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SEAndroid/">SEAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/">Service</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/">SpringBoot</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurfaceFlinger/">SurfaceFlinger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TabLayout/">TabLayout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/">Thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Toast/">Toast</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/U-Boot/">U-Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VScode/">VScode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/boot/">boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/buildroot/">buildroot</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cURL/">cURL</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gui/">gui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/licence/">licence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openCV/">openCV</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opensource/">opensource</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pageDewarp/">pageDewarp</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyqt5/">pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberry-pi/">raspberry pi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/serial/">serial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setting/">setting</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/submodule/">submodule</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/개발환경/">개발환경</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운/">마크다운</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/마크다운-문법/">마크다운 문법</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/부분빌드/">부분빌드</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">태그 클라우드</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Android/" style="font-size: 19.33px;">Android</a> <a href="/tags/Android-Platform/" style="font-size: 16.67px;">Android Platform</a> <a href="/tags/Android-raspberry-pi/" style="font-size: 10.67px;">Android raspberry pi</a> <a href="/tags/App/" style="font-size: 18.67px;">App</a> <a href="/tags/Architecture/" style="font-size: 10.67px;">Architecture</a> <a href="/tags/BLE/" style="font-size: 13.33px;">BLE</a> <a href="/tags/Battery/" style="font-size: 10px;">Battery</a> <a href="/tags/Bluetooth/" style="font-size: 12px;">Bluetooth</a> <a href="/tags/Booting/" style="font-size: 10px;">Booting</a> <a href="/tags/Contours/" style="font-size: 10px;">Contours</a> <a href="/tags/DTS/" style="font-size: 10.67px;">DTS</a> <a href="/tags/Device-Tree/" style="font-size: 10px;">Device Tree</a> <a href="/tags/GPIO/" style="font-size: 10px;">GPIO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Github-Pages/" style="font-size: 12px;">Github Pages</a> <a href="/tags/HID/" style="font-size: 11.33px;">HID</a> <a href="/tags/Hexo/" style="font-size: 11.33px;">Hexo</a> <a href="/tags/JNI/" style="font-size: 10px;">JNI</a> <a href="/tags/Java-Script/" style="font-size: 10.67px;">Java Script</a> <a href="/tags/Kernel/" style="font-size: 14.67px;">Kernel</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/MariaDB/" style="font-size: 12.67px;">MariaDB</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MediaPlayer/" style="font-size: 10px;">MediaPlayer</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/SEAndroid/" style="font-size: 10px;">SEAndroid</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SurfaceFlinger/" style="font-size: 10px;">SurfaceFlinger</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Thread/" style="font-size: 10px;">Thread</a> <a href="/tags/Toast/" style="font-size: 10px;">Toast</a> <a href="/tags/U-Boot/" style="font-size: 10px;">U-Boot</a> <a href="/tags/VScode/" style="font-size: 10.67px;">VScode</a> <a href="/tags/Web/" style="font-size: 14px;">Web</a> <a href="/tags/boot/" style="font-size: 10px;">boot</a> <a href="/tags/buildroot/" style="font-size: 18px;">buildroot</a> <a href="/tags/cURL/" style="font-size: 17.33px;">cURL</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/http/" style="font-size: 17.33px;">http</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/licence/" style="font-size: 10px;">licence</a> <a href="/tags/openCV/" style="font-size: 16px;">openCV</a> <a href="/tags/opensource/" style="font-size: 10px;">opensource</a> <a href="/tags/pageDewarp/" style="font-size: 15.33px;">pageDewarp</a> <a href="/tags/pyqt5/" style="font-size: 10px;">pyqt5</a> <a href="/tags/python/" style="font-size: 11.33px;">python</a> <a href="/tags/raspberry-pi/" style="font-size: 10px;">raspberry pi</a> <a href="/tags/raspberryPi/" style="font-size: 10.67px;">raspberryPi</a> <a href="/tags/serial/" style="font-size: 10px;">serial</a> <a href="/tags/setting/" style="font-size: 10.67px;">setting</a> <a href="/tags/submodule/" style="font-size: 10px;">submodule</a> <a href="/tags/개발환경/" style="font-size: 11.33px;">개발환경</a> <a href="/tags/마크다운/" style="font-size: 10px;">마크다운</a> <a href="/tags/마크다운-문법/" style="font-size: 10px;">마크다운 문법</a> <a href="/tags/부분빌드/" style="font-size: 10px;">부분빌드</a>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2022 Jung Max</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_shortname = 'maxs-blog-5';
+    
+    
+    var disqus_url = 'http://jung-max.github.io/2022/02/17/Linux-cJSON 사용법/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+
